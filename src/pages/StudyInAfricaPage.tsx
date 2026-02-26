@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Layout } from "@/components/layout";
-
+import transcriptHero from "@/assets/about-conference.jpg";
 const upcomingFeatures = [
   "Cross-border student mobility programs",
   "University exchange partnerships",
@@ -29,21 +29,58 @@ export default function StudyInAfricaPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-primary/90 text-primary-foreground section-padding">
-        <div className="container-section">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-2 rounded-full text-sm font-medium mb-6">
+<section className="relative overflow-hidden min-h-[400px]">
+  <div className="absolute inset-0">
+    <img
+      src={transcriptHero}
+      alt="Transcript Advisory"
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-primary/85" />
+  </div>
+  <div className="absolute inset-0 opacity-10">
+    <svg
+      className="w-full h-full"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <pattern
+          id="transcript-grid"
+          width="8"
+          height="8"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle
+            cx="1"
+            cy="1"
+            r="0.4"
+            fill="currentColor"
+            className="text-primary-foreground"
+          />
+        </pattern>
+      </defs>
+      <rect width="100" height="100" fill="url(#transcript-grid)" />
+    </svg>
+  </div>
+  <div className="container-section relative section-padding">
+    <div className="max-w-3xl mx-auto text-center text-primary-foreground">
+ 
+      <div className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Bell className="h-4 w-4" />
               Coming Soon
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Study in Africa</h1>
-            <p className="text-xl text-primary-foreground/80">
-              Explore academic opportunities across the African continent. Study abroad 
+
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
+     Study in Africa
+      </h1>
+      <p className="text-xl text-primary-foreground/80">
+                 Explore academic opportunities across the African continent. Study abroad 
               without leaving Africa.
-            </p>
-          </div>
-        </div>
-      </section>
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* What's Coming */}
       <section className="section-padding">

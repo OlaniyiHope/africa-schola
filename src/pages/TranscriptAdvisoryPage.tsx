@@ -32,6 +32,8 @@ import {
   type University 
 } from "@/data/universities";
 
+  import transcriptHero from "@/assets/about-conference.jpg";
+
 export default function TranscriptAdvisoryPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [stateFilter, setStateFilter] = useState<string>("all");
@@ -79,19 +81,57 @@ export default function TranscriptAdvisoryPage() {
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-primary/90 text-primary-foreground py-12">
-        <div className="container-section">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Transcript Advisory</h1>
-            <p className="text-xl text-primary-foreground/80">
-              Navigate the transcript request process at Nigerian universities with our 
-              comprehensive guide and institution-specific information.
-            </p>
-          </div>
-        </div>
-      </section>
 
+{/* Hero Section */}
+<section className="relative overflow-hidden min-h-[400px]">
+  <div className="absolute inset-0">
+    <img
+      src={transcriptHero}
+      alt="Transcript Advisory"
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-primary/85" />
+  </div>
+  <div className="absolute inset-0 opacity-10">
+    <svg
+      className="w-full h-full"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <pattern
+          id="transcript-grid"
+          width="8"
+          height="8"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle
+            cx="1"
+            cy="1"
+            r="0.4"
+            fill="currentColor"
+            className="text-primary-foreground"
+          />
+        </pattern>
+      </defs>
+      <rect width="100" height="100" fill="url(#transcript-grid)" />
+    </svg>
+  </div>
+  <div className="container-section relative section-padding">
+    <div className="max-w-3xl mx-auto text-center text-primary-foreground">
+      <p className="text-sm uppercase tracking-wider text-accent font-semibold mb-4">
+         Transcript Advisory
+      </p>
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
+             Transcript Advisory
+      </h1>
+      <p className="text-xl text-primary-foreground/80">
+           Navigate the transcript request process at Nigerian universities with our
+        comprehensive guide and institution-specific information.
+      </p>
+    </div>
+  </div>
+</section>
       {/* Process Steps */}
       <section className="section-padding">
         <div className="container-section">
