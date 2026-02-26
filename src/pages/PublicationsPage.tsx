@@ -118,29 +118,35 @@ export default function PublicationsPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Header */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={pubImage} alt="Academic journals" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-primary/85" />
-        </div>
-        <div className="absolute inset-0 opacity-10">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              <pattern id="pub-grid" width="8" height="8" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="0.4" fill="currentColor" className="text-primary-foreground" />
-              </pattern>
-            </defs>
-            <rect width="100" height="100" fill="url(#pub-grid)" />
-          </svg>
-        </div>
-        <div className="container-section relative py-16 text-primary-foreground">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-up">Publications</h1>
-          <p className="text-xl text-primary-foreground/80 max-w-2xl">
-            Explore peer-reviewed research from across Africa. Access open-access articles, journals, and special issues.
-          </p>
-        </div>
-      </section>
+ <section className="relative overflow-hidden min-h-[400px]">
+  <div className="absolute inset-0">
+    <img src={pubImage} alt="Academic journals" className="w-full h-full object-cover" />
+    <div className="absolute inset-0 bg-primary/85" />
+  </div>
+  <div className="absolute inset-0 opacity-10">
+    <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <defs>
+        <pattern id="pub-grid" width="8" height="8" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="0.4" fill="currentColor" className="text-primary-foreground" />
+        </pattern>
+      </defs>
+      <rect width="100" height="100" fill="url(#pub-grid)" />
+    </svg>
+  </div>
+  <div className="container-section relative section-padding">
+    <div className="max-w-3xl mx-auto text-center text-primary-foreground">
+      <p className="text-sm uppercase tracking-wider text-accent font-semibold mb-4">
+        Afrika Scholar
+      </p>
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
+        Publications
+      </h1>
+      <p className="text-xl text-primary-foreground/80">
+        Explore peer-reviewed research from across Africa. Access open-access articles, journals, and special issues.
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* Search & Filters */}
       <section className="sticky top-16 z-40 bg-background border-b py-4">

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Layout } from "@/components/layout";
-
+import advisoryHero from "@/assets/about-conference.jpg";
 const advisoryAreas = [
   {
     icon: FileText,
@@ -45,19 +45,57 @@ export default function AdvisoryPage() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary to-primary/90 text-primary-foreground section-padding">
-        <div className="container-section">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Educational & University Advisory
-            </h1>
-            <p className="text-xl text-primary-foreground/80">
-              Expert guidance to navigate African university systems—transcripts, degrees, 
-              mobility, and institutional engagement.
-            </p>
-          </div>
-        </div>
-      </section>
+
+
+<section className="relative overflow-hidden min-h-[400px]">
+  <div className="absolute inset-0">
+    <img
+      src={advisoryHero}
+      alt="Advisory"
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-primary/85" />
+  </div>
+  <div className="absolute inset-0 opacity-10">
+    <svg
+      className="w-full h-full"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <pattern
+          id="advisory-grid"
+          width="8"
+          height="8"
+          patternUnits="userSpaceOnUse"
+        >
+          <circle
+            cx="1"
+            cy="1"
+            r="0.4"
+            fill="currentColor"
+            className="text-primary-foreground"
+          />
+        </pattern>
+      </defs>
+      <rect width="100" height="100" fill="url(#advisory-grid)" />
+    </svg>
+  </div>
+  <div className="container-section relative section-padding">
+    <div className="max-w-3xl mx-auto text-center text-primary-foreground">
+      <p className="text-sm uppercase tracking-wider text-accent font-semibold mb-4">
+        Advisory Services
+      </p>
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
+        Educational & University Advisory
+      </h1>
+      <p className="text-xl text-primary-foreground/80">
+        Expert guidance to navigate African university systems—transcripts, degrees,
+        mobility, and institutional engagement.
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* Overview */}
       <section className="section-padding">
