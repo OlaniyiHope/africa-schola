@@ -124,7 +124,7 @@ export default function SubmitManuscriptPage() {
                   asChild
                 >
                   <a
-                    href="https://afrika-scholar-author.vercel.app/"
+                    href="/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
