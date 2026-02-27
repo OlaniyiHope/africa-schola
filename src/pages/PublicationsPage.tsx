@@ -389,6 +389,17 @@ interface FilterPanelProps {
 function FilterPanel({ disciplines, regions, years, selectedDisciplines, selectedRegions, selectedYears, selectedAccessType, setSelectedDisciplines, setSelectedRegions, setSelectedYears, setSelectedAccessType, toggleFilter }: FilterPanelProps) {
   return (
     <div className="space-y-6 mt-4">
+         <div>
+        <h4 className="font-medium mb-3">Year</h4>
+        <div className="space-y-2">
+          {years.map((y) => (
+            <div key={y} className="flex items-center gap-2">
+              <Checkbox id={`y-${y}`} checked={selectedYears.includes(y)} onCheckedChange={() => toggleFilter(y, selectedYears, setSelectedYears)} />
+              <Label htmlFor={`y-${y}`} className="text-sm cursor-pointer">{y}</Label>
+            </div>
+          ))}
+        </div>
+      </div>
       <div>
         <h4 className="font-medium mb-3">Discipline</h4>
         <div className="space-y-2">
@@ -411,17 +422,7 @@ function FilterPanel({ disciplines, regions, years, selectedDisciplines, selecte
           ))}
         </div>
       </div>
-      <div>
-        <h4 className="font-medium mb-3">Year</h4>
-        <div className="space-y-2">
-          {years.map((y) => (
-            <div key={y} className="flex items-center gap-2">
-              <Checkbox id={`y-${y}`} checked={selectedYears.includes(y)} onCheckedChange={() => toggleFilter(y, selectedYears, setSelectedYears)} />
-              <Label htmlFor={`y-${y}`} className="text-sm cursor-pointer">{y}</Label>
-            </div>
-          ))}
-        </div>
-      </div>
+   
       <div>
         <h4 className="font-medium mb-3">Access Type</h4>
         <div className="space-y-2">
