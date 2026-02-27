@@ -270,7 +270,7 @@ export default function HomePage() {
               What Afrika Scholar Enables
             </p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Academic Publishing, Research & Institutional Enablement — Built
+              Academic Publishing, Research & Institutional Enablement <br></br>Built
               for Africa
             </h2>
           </div>
