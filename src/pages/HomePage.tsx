@@ -442,7 +442,7 @@ export default function HomePage() {
                   Join our network of academic reviewers
                 </p>
                 <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                  <Link to="/network/apply">Apply Now</Link>
+                  <Link to="/network#who-can-join">Apply Now</Link>
                 </Button>
               </CardContent>
             </Card>

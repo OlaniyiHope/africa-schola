@@ -344,7 +344,7 @@ export default function NetworkPage() {
       </section>
 
       {/* Who Can Join & How to Join */}
-      <section className="section-padding">
+      <section className="section-padding" id="who-can-join"> 
         <div className="container-section">
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             <div>
