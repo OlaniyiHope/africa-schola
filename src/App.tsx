@@ -28,6 +28,8 @@ import Start from "./pages/Start";
 import Propose from "./pages/Propose";
 import { JournalProvider } from "./context/JournalContext";
 import Gov from "./pages/Gov";
+import Standards from "./pages/Standards";
+import AuthorGuidelinesPage from "./pages/AuthorGuidelinesPage";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +66,8 @@ const App = () => (
           <Route path="/start-publishing" element={<Start />} />
           <Route path="/propose" element={<Propose />} />
           <Route path="/governance" element={<Gov />} />
+          <Route path="/standards" element={<Standards />} />
+          <Route path="/framework/author-guidelines" element={<AuthorGuidelinesPage />} />
           <Route
             path="/publishing/start-journal"
             element={<StartJournalPage />}
