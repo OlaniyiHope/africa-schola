@@ -25,12 +25,17 @@ import BlogDetailPage from "./pages/BlogDetailPage";
 import { ScrollToTop } from "./components/ScrollToTop";
 import SubmitForm from "./pages/SubmitForm";
 import Start from "./pages/Start";
+import Propose from "./pages/Propose";
+import { JournalProvider } from "./context/JournalContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+            <JournalProvider>
+
+
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -56,6 +61,7 @@ const App = () => (
           <Route path="/publishing/submit" element={<SubmitManuscriptPage />} />
           <Route path="/submit-form" element={<SubmitForm />} />
           <Route path="/start-publishing" element={<Start />} />
+          <Route path="/propose" element={<Propose />} />
           <Route
             path="/publishing/start-journal"
             element={<StartJournalPage />}
@@ -66,6 +72,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+                  </JournalProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
