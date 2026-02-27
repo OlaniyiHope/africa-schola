@@ -118,8 +118,8 @@ Launch a peer-reviewed academic journal with Afrika Scholar's publishing infrast
                   asChild
                 >
                   <a
-                    href="https://afrika-scholar-publishing-site.vercel.app/"
-                    target="_blank"
+                    href="/start-publishing"
+               
                     rel="noopener noreferrer"
                   >
                     Start Proposal

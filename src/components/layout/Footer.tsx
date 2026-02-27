@@ -207,7 +207,7 @@ export function Footer() {
               </span>
               <a
                 href="https://cyclebreeze.com"
-                target="_blank"
+              
                 rel="noopener noreferrer"
                 className="text-sm font-medium hover:text-accent transition-colors"
               >

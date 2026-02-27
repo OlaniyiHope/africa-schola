@@ -425,7 +425,7 @@ export default function AboutPage() {
             <Button variant="outline" asChild>
               <a
                 href="https://cyclebreeze.com"
-                target="_blank"
+      
                 rel="noopener noreferrer"
               >
                 Learn More About CycleBreeze{" "}

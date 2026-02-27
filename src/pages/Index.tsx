@@ -9,7 +9,7 @@ const Index = () => {
         <h1 className="mb-4 text-4xl font-bold">Welcome to Afrika Scholar</h1>
         <a
           href="https://afrika-scholar-publishing-site.vercel.app/"
-          target="_blank"
+
           rel="noopener noreferrer"
         >
           <p className="text-xl text-muted-foreground">Afrika-scholar</p>
