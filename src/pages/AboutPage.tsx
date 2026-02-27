@@ -84,6 +84,20 @@ const pillars = [
     ],
     link: "/about#enablement",
   },
+  {
+    icon: Puzzle,
+    title: "Publeesh(AI tool)",
+    image: null,
+    description:
+      "AI-powered publishing/research tool to help with writing, research, data sets",
+    details: [
+      "Applied and professional research publishing",
+      "Collaboration between industry, policy, and academia",
+      "Academic governance, validation, and compliance for EdTech platforms",
+      "Curriculum, content, and research alignment to global standards",
+    ],
+    link: "/about#enablement",
+  },
 ];
 
 const gaps = [

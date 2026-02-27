@@ -17,7 +17,7 @@ const footerLinks = {
   platform: [
     { label: "About Us", href: "/about" },
     { label: "Our Mission", href: "/about#mission" },
-    { label: "Four Pillars", href: "/about#pillars" },
+    { label: "Five Pillars", href: "/about#pillars" },
     { label: "Blog", href: "/blog" },
     { label: "Publish", href: "/publish" },
    
