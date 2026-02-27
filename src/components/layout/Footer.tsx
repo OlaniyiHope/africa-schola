@@ -19,7 +19,7 @@ const footerLinks = {
     { label: "Our Mission", href: "/about#mission" },
     { label: "Five Pillars", href: "/about#pillars" },
     { label: "Blog", href: "/blog" },
-    { label: "Publish", href: "/publish" },
+    { label: "Publeesh", href: "/publish" },
    
   ],
   publications: [
