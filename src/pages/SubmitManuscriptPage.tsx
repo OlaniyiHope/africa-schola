@@ -160,7 +160,7 @@ export default function SubmitManuscriptPage() {
                 >
                   <a
                     href="/submit-form"
-                    target="_blank"
+    
                     rel="noopener noreferrer"
                   >
                     Begin Submission
