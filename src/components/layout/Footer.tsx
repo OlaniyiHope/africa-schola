@@ -7,6 +7,7 @@ import {
   Twitter,
   Linkedin,
   Youtube,
+  Instagram
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -242,6 +243,15 @@ export function Footer() {
               >
                 <Youtube className="h-5 w-5" />
               </a>
+              <a
+              href="https://instagram.com/afrika_scholar"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="p-2 hover:bg-primary-foreground/10 rounded-full transition-colors"
+  aria-label="Instagram"
+>
+  <Instagram className="h-5 w-5" />
+</a>
             </div>
           </div>
         </div>
