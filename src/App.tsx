@@ -27,6 +27,7 @@ import SubmitForm from "./pages/SubmitForm";
 import Start from "./pages/Start";
 import Propose from "./pages/Propose";
 import { JournalProvider } from "./context/JournalContext";
+import Gov from "./pages/Gov";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const App = () => (
           <Route path="/submit-form" element={<SubmitForm />} />
           <Route path="/start-publishing" element={<Start />} />
           <Route path="/propose" element={<Propose />} />
+          <Route path="/governance" element={<Gov />} />
           <Route
             path="/publishing/start-journal"
             element={<StartJournalPage />}
