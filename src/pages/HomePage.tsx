@@ -64,7 +64,7 @@ const pillars = [
   },
   {
     icon: Puzzle,
-    title: "Knowledge Enablement & Integration",
+    title: "Academic Engagement Enablement & Integration",
     description:
       "APIs and tools enabling EdTech platforms and institutions to access verified African academic content.",
     linkLabel: "Learn More",
