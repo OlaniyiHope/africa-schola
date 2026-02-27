@@ -468,13 +468,13 @@ export default function HomePage() {
                   <GraduationCap className="h-7 w-7 text-accent" />
                 </div>
                 <h3 className="text-lg font-bold text-primary-foreground mb-2">
-                  Collaborate With Us
+            Request Advisory
                 </h3>
                 <p className="text-primary-foreground/70 text-sm mb-4">
                   Join us as professional and academic collaborator
                 </p>
                 <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                  <Link to="/network">Collaborate With Us</Link>
+                  <Link to="/network">    Request Advisory</Link>
                 </Button>
               </CardContent>
             </Card>
