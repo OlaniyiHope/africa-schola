@@ -91,10 +91,11 @@ const pillars = [
     description:
       "AI-powered publishing/research tool to help with writing, research, data sets",
     details: [
-      "Applied and professional research publishing",
-      "Collaboration between industry, policy, and academia",
-      "Academic governance, validation, and compliance for EdTech platforms",
-      "Curriculum, content, and research alignment to global standards",
+      "Structured drafting assistance",
+      "Literature review organization",
+      "Citation guidance and formatting",
+      "Global instituitional dataset access",
+      "Comparative research intelligence tool",
     ],
     link: "/about#enablement",
   },
