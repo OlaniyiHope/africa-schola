@@ -23,6 +23,7 @@ import NotFound from "./pages/NotFound";
 import BlogPage from "./pages/BlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import { ScrollToTop } from "./components/ScrollToTop";
+import SubmitForm from "./pages/SubmitForm";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => (
           />
           <Route path="/publishing/calls" element={<CallForPapersPage />} />
           <Route path="/publishing/submit" element={<SubmitManuscriptPage />} />
+          <Route path="/submit-form" element={<SubmitForm />} />
           <Route
             path="/publishing/start-journal"
             element={<StartJournalPage />}

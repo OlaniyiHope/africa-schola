@@ -159,7 +159,7 @@ export default function SubmitManuscriptPage() {
                   asChild
                 >
                   <a
-                    href="/"
+                    href="/submit-form"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
