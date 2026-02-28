@@ -158,14 +158,14 @@ export default function SubmitManuscriptPage() {
                   className="bg-accent hover:bg-accent/90"
                   asChild
                 >
-                  <a
-                    href="/submit-form"
+                  <Link
+                    to="/submit-form"
     
                     rel="noopener noreferrer"
                   >
                     Begin Submission
                     <ArrowRight className="ml-2 h-5 w-5" />
-                  </a>
+                  </Link>
                 </Button>
                 <p className="text-sm text-muted-foreground mt-4">
                   Need help?{" "}
