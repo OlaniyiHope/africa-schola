@@ -307,12 +307,16 @@ export default function HomePage() {
       </section>
 <PubleeshSection />
       {/* Counting Stats Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      {/* <section className="py-16 bg-primary text-primary-foreground">
         <div className="container-section">
           <CountUpStats variant="dark" />
         </div>
-      </section>
-
+      </section> */}
+<section className="py-16 bg-background">
+  <div className="container-section">
+    <CountUpStats variant="light" />
+  </div>
+</section>
       {/* Recent Publications with Tabs */}
       <section className="section-padding bg-secondary/30">
         <div className="container-section">
