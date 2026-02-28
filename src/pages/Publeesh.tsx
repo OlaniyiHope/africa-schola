@@ -12,6 +12,11 @@ import {
   Sparkles,
   Newspaper,
   Lock,
+  PenLine,
+  Quote,
+  Database,
+  BarChart2,
+  Globe
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -181,7 +186,7 @@ Integrated within Afrika Scholar, Publeesh AI enhances research workflows throug
                   asChild
                 >
                   <Link to="/publications">
-                    Explore Journals
+               Enhancing Research
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
@@ -191,7 +196,7 @@ Integrated within Afrika Scholar, Publeesh AI enhances research workflows throug
                   className=" bg-white text-accent hover:border-accent hover:bg-primary-foreground/10 border hover:border-white"
                   asChild
                 >
-                  <Link to="/publishing/submit">Publish With Us</Link>
+                  <Link to="/publishing/submit">Strengthening Scholarship</Link>
                 </Button>
                 <Button
                   size="lg"
@@ -199,7 +204,7 @@ Integrated within Afrika Scholar, Publeesh AI enhances research workflows throug
                   className="border border-white hover:border-accent hover:bg-primary-foreground/10 text-primary-foreground"
                   asChild
                 >
-                  <Link to="/network/apply">Explore Research Intelligence</Link>
+                  <Link to="/network/apply">Preserving Integrity</Link>
                 </Button>
               </div>
             </div>
@@ -210,56 +215,176 @@ Integrated within Afrika Scholar, Publeesh AI enhances research workflows throug
         </div>
       </section>
 
-      {/* Featured Research - 3 Cards */}
+          {/* What Is Publeesh Section */}
       <section className="section-padding bg-secondary/30">
         <div className="container-section">
-          <div className="text-center mb-12">
+          {/* Header */}
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Featured Research
+              What is Publeesh?
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Highlighting impactful research from across the African continent
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              A research enablement tool integrated within Afrika Scholar's academic infrastructure — built for serious academic use, not automated academic substitution.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {featuredPublications.map((pub) => (
-              <Card key={pub.id} className="card-hover flex flex-col group">
-                <CardHeader className="flex-1">
-                  <div className="flex items-center gap-2 text-sm text-accent font-medium mb-2">
-                    <FileText className="h-4 w-4" />
-                    {pub.journal}
-                  </div>
-                  <CardTitle className="text-lg line-clamp-2 group-hover:text-accent transition-colors">
-                    {pub.title}
-                  </CardTitle>
-                  <CardDescription className="line-clamp-1">
-                    {pub.authors.join(", ")} • {pub.year}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
-                    {pub.abstract}
-                  </p>
-                  <div className="flex gap-2">
-                    <Button size="sm" asChild>
-                      <Link to={`/article?id=${pub.id}`}>
-                        Read Full Article
-                      </Link>
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleCite(pub)}
-                    >
-                      Cite
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+
+          {/* Intro Pillars */}
+          <div className="grid md:grid-cols-5 gap-4 max-w-5xl mx-auto mb-20 text-center">
+            {[
+              { icon: PenLine, label: "Structured Drafting Assistance" },
+              { icon: BookOpen, label: "Literature Review Organization" },
+              { icon: Quote, label: "Citation Guidance & Formatting" },
+              { icon: Database, label: "Global Institutional Dataset Access" },
+              { icon: BarChart2, label: "Comparative Research Intelligence" },
+            ].map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center gap-3 p-5 rounded-xl bg-background border border-border hover:border-accent/50 transition-colors"
+              >
+                <div className="p-3 rounded-full bg-accent/10 text-accent">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <p className="text-sm font-medium leading-snug">{label}</p>
+              </div>
             ))}
+          </div>
+
+          {/* Feature Blocks */}
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+            {/* Block 1: Structured Drafting */}
+            <Card className="flex flex-col border-border hover:border-accent/40 transition-colors">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 rounded-lg bg-accent/10 text-accent">
+                    <PenLine className="h-5 w-5" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Research Drafting</span>
+                </div>
+                <CardTitle className="text-xl">Structured Research Drafting Support</CardTitle>
+                <CardDescription>
+                  Help scholars think clearly, structure better, and refine faster.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex-1">
+                <ul className="space-y-2">
+                  {[
+                    "Research outlines",
+                    "Thesis & dissertation frameworks",
+                    "Literature review structures",
+                    "Methodology templates",
+                    "Research question refinements",
+                    "Hypothesis framing assistance",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Block 2: Literature & Referencing */}
+            <Card className="flex flex-col border-border hover:border-accent/40 transition-colors">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 rounded-lg bg-accent/10 text-accent">
+                    <BookOpen className="h-5 w-5" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Literature & Referencing</span>
+                </div>
+                <CardTitle className="text-xl">Literature & Referencing Enhancement</CardTitle>
+                <CardDescription>
+                  Strengthen your academic credibility with properly structured referencing.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex-1">
+                <ul className="space-y-2 mb-5">
+                  {[
+                    "Published research references",
+                    "Citation-ready formatting support",
+                    "Reference structuring tools",
+                    "Bibliography compilation assistance",
+                    "Source comparison insights",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-2">
+                  {["APA", "MLA", "Chicago", "Harvard"].map((style) => (
+                    <span
+                      key={style}
+                      className="px-2.5 py-1 rounded-full text-xs font-semibold bg-accent/10 text-accent border border-accent/20"
+                    >
+                      {style}
+                    </span>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Block 3: Global Data Access */}
+            <Card className="flex flex-col border-border hover:border-accent/40 transition-colors">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 rounded-lg bg-accent/10 text-accent">
+                    <Globe className="h-5 w-5" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Global Intelligence</span>
+                </div>
+                <CardTitle className="text-xl">Global Research Data Access</CardTitle>
+                <CardDescription>
+                  Structured access to datasets from leading global institutions.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex-1">
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {["WHO", "World Bank", "IMF", "UNESCO", "OECD", "FAO"].map((org) => (
+                    <span
+                      key={org}
+                      className="px-2.5 py-1 rounded-full text-xs font-medium bg-secondary text-secondary-foreground border border-border"
+                    >
+                      {org}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground mb-3 font-medium uppercase tracking-wider">Comparative data across:</p>
+                <ul className="space-y-2">
+                  {[
+                    "Public health & climate change",
+                    "Economics & education",
+                    "Infrastructure & agriculture",
+                    "Development indicators",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center mt-14">
+            <p className="text-muted-foreground mb-5 max-w-xl mx-auto">
+              Publeesh transforms the research process — from a writing assistant into a global research intelligence platform.
+            </p>
+            <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+              <Link to="/publications">
+                Explore Publeesh
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
+
 
       {/* What Afrika Scholar Enables */}
       <section className="section-padding">
