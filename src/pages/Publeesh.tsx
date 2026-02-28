@@ -140,87 +140,88 @@ export default function Publeesh() {
       </Dialog>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[600px]">
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="African scholars collaborating"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-primary/85" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-transparent" />
-        </div>
-        {/* Geometric pattern overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <svg
-            className="w-full h-full"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <pattern
-                id="hero-grid"
-                width="10"
-                height="10"
-                patternUnits="userSpaceOnUse"
+   
+    <section className="relative overflow-hidden min-h-[600px]">
+      {/* Background image + overlays */}
+      <div className="absolute inset-0">
+        <img
+          src={heroImage}
+          alt="Publeesh AI Research Intelligence"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-primary/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-transparent" />
+      </div>
+
+      {/* Dot grid overlay */}
+      <div className="absolute inset-0 opacity-10">
+        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <pattern id="publeesh-hero-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="0.5" fill="white" />
+            </pattern>
+          </defs>
+          <rect width="100" height="100" fill="url(#publeesh-hero-grid)" />
+        </svg>
+      </div>
+
+      {/* Content */}
+      <div className="container-section relative py-24 md:py-36">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+          {/* Left — Text */}
+          <div className="animate-fade-up text-primary-foreground">
+            {/* Eyebrow */}
+            <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">
+              Publeesh
+            </p>
+
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              AI-Powered Research Intelligence{" "}
+              <span className="text-accent">by Afrika Scholar</span>
+            </h1>
+
+            <p className="text-lg text-primary-foreground/80 mb-4 max-w-xl leading-relaxed">
+              <span className="font-semibold text-primary-foreground">
+                Enhancing Research. Strengthening Scholarship. Preserving Integrity.
+              </span>
+            </p>
+
+            <p className="text-base text-primary-foreground/75 mb-10 max-w-xl leading-relaxed">
+              Publeesh is Afrika Scholar's AI-powered research intelligence platform, designed to
+              support scholars, students, researchers, and institutions with structured research
+              workflows, global data access, and responsible AI-assisted drafting tools.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2"
+                asChild
               >
-                <circle
-                  cx="1"
-                  cy="1"
-                  r="0.5"
-                  fill="currentColor"
-                  className="text-primary-foreground"
-                />
-              </pattern>
-            </defs>
-            <rect width="100" height="100" fill="url(#hero-grid)" />
-          </svg>
-        </div>
-        <div className="container-section relative py-24 md:py-36">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-up text-primary-foreground">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Research Intelligence, Powered by Responsible AI
-              </h1>
-              <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-xl">
-Integrated within Afrika Scholar, Publeesh AI enhances research workflows through structured drafting support, citation guidance, and global dataset access that empowers scholars while preserving academic integrity.
-              </p>
-              {/* <div className="flex md:flex-row flex-col  gap-4">
-                <Button
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90"
-                  asChild
-                >
-                  <Link to="/publications">
-               Enhancing Research
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="default"
-                  className=" bg-white text-accent hover:border-accent hover:bg-primary-foreground/10 border hover:border-white"
-                  asChild
-                >
-                  <Link to="/publishing/submit">Strengthening Scholarship</Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="default"
-                  className="border border-white hover:border-accent hover:bg-primary-foreground/10 text-primary-foreground"
-                  asChild
-                >
-                  <Link to="/network/apply">Preserving Integrity</Link>
-                </Button>
-              </div> */}
-            </div>
-            <div className="hidden lg:flex justify-center">
-              <AnimatedHeroVisual />
+                <Link to="/publeesh/access">
+                  Access Research Intelligence <ArrowRight className="h-5 w-5" />
+                </Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white/40 text-primary-foreground hover:bg-primary-foreground/10 hover:border-white"
+                asChild
+              >
+                <Link to="/publeesh/pricing" style={{color: "black"}}>View Subscription Plans</Link>
+              </Button>
             </div>
           </div>
-        </div>
-      </section>
 
+          {/* Right — Animated visual (keep existing) */}
+          <div className="hidden lg:flex justify-center">
+            <AnimatedHeroVisual />
+          </div>
+
+        </div>
+      </div>
+    </section>
           {/* What Is Publeesh Section */}
       <section className="section-padding bg-secondary/30">
         <div className="container-section">
