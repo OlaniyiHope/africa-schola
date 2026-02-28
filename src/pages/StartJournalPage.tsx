@@ -117,14 +117,13 @@ Launch a peer-reviewed academic journal with Afrika Scholar's publishing infrast
                   className="w-full mt-6 bg-accent hover:bg-accent/90"
                   asChild
                 >
-                  <a
-                    href="/start-publishing"
+                 <Link to="/start-publishing"
                
                     rel="noopener noreferrer"
                   >
                     Start Proposal
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
