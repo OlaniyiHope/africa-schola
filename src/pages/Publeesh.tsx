@@ -185,7 +185,7 @@ export default function Publeesh() {
               <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-xl">
 Integrated within Afrika Scholar, Publeesh AI enhances research workflows through structured drafting support, citation guidance, and global dataset access that empowers scholars while preserving academic integrity.
               </p>
-              <div className="flex md:flex-row flex-col  gap-4">
+              {/* <div className="flex md:flex-row flex-col  gap-4">
                 <Button
                   size="lg"
                   className="bg-accent hover:bg-accent/90"
@@ -212,7 +212,7 @@ Integrated within Afrika Scholar, Publeesh AI enhances research workflows throug
                 >
                   <Link to="/network/apply">Preserving Integrity</Link>
                 </Button>
-              </div>
+              </div> */}
             </div>
             <div className="hidden lg:flex justify-center">
               <AnimatedHeroVisual />
