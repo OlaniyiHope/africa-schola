@@ -34,6 +34,8 @@ import Publeesh from "./pages/Publeesh";
 import PeerReviewPage from "./pages/PeerReview";
 import EditorialIndependencePage from "./pages/EditorialIndependence";
 import EthicsPage from "./pages/Ethics";
+import OpenAccessPage from "./pages/OpenAccess";
+import RetractionPolicyPage from "./pages/RetractionPolicy";
 
 const queryClient = new QueryClient();
 
@@ -76,6 +78,8 @@ const App = () => (
           <Route path="/framework/peer-review" element={<PeerReviewPage />} />
           <Route path="/framework/editorial-independence" element={<EditorialIndependencePage />} />
           <Route path="/framework/ethics" element={<EthicsPage />} />
+          <Route path="/framework/open-access" element={<OpenAccessPage />} />
+          <Route path="/framework/retraction-policy" element={<RetractionPolicyPage />} />
           <Route
             path="/publishing/start-journal"
             element={<StartJournalPage />}
