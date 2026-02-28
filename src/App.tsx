@@ -36,6 +36,7 @@ import EditorialIndependencePage from "./pages/EditorialIndependence";
 import EthicsPage from "./pages/Ethics";
 import OpenAccessPage from "./pages/OpenAccess";
 import RetractionPolicyPage from "./pages/RetractionPolicy";
+import CompliancePage from "./pages/Compliance";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,7 @@ const App = () => (
             element={<TranscriptAdvisoryPage />}
           />
           <Route path="/advisory/degrees" element={<DegreeProgramsPage />} />
+          <Route path="/compliance" element={<CompliancePage />} />
           <Route
             path="/advisory/study-in-africa"
             element={<StudyInAfricaPage />}
