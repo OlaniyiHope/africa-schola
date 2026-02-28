@@ -72,7 +72,7 @@ const pillars = [
   },
 ];
 
-export default function HomePage() {
+export default function Publeesh() {
   const featuredPublications = publications.slice(0, 3);
   const recentPublications = publications.slice(0, 6);
   const [email, setEmail] = useState("");
@@ -169,11 +169,10 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-up text-primary-foreground">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                Pan-African Academic Publishing, Research & University
-                Enablement with AI-Powered Research Intelligence
+              Research Intelligence, Powered by Responsible AI
               </h1>
               <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-xl">
-          Afrika Scholar is a journal-first academic infrastructure platform designed to publish, validate, preserve, and amplify African scholarship to global standards. It is strengthened by responsible AI-powered research intelligence tools that enhance productivity without compromising academic integrity.
+Integrated within Afrika Scholar, Publeesh AI enhances research workflows through structured drafting support, citation guidance, and global dataset access that empowers scholars while preserving academic integrity.
               </p>
               <div className="flex md:flex-row flex-col  gap-4">
                 <Button
@@ -200,7 +199,7 @@ export default function HomePage() {
                   className="border border-white hover:border-accent hover:bg-primary-foreground/10 text-primary-foreground"
                   asChild
                 >
-                  <Link to="/publeesh">Explore Research Intelligence</Link>
+                  <Link to="/network/apply">Explore Research Intelligence</Link>
                 </Button>
               </div>
             </div>

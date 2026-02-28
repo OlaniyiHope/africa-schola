@@ -30,6 +30,7 @@ import { JournalProvider } from "./context/JournalContext";
 import Gov from "./pages/Gov";
 import Standards from "./pages/Standards";
 import AuthorGuidelinesPage from "./pages/AuthorGuidelinesPage";
+import Publeesh from "./pages/Publeesh";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/publeesh" element={<Publeesh />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/network" element={<NetworkPage />} />
