@@ -31,6 +31,9 @@ import Gov from "./pages/Gov";
 import Standards from "./pages/Standards";
 import AuthorGuidelinesPage from "./pages/AuthorGuidelinesPage";
 import Publeesh from "./pages/Publeesh";
+import PeerReviewPage from "./pages/PeerReview";
+import EditorialIndependencePage from "./pages/EditorialIndependence";
+import EthicsPage from "./pages/Ethics";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +73,9 @@ const App = () => (
           <Route path="/governance" element={<Gov />} />
           <Route path="/standards" element={<Standards />} />
           <Route path="/framework/author-guidelines" element={<AuthorGuidelinesPage />} />
+          <Route path="/framework/peer-review" element={<PeerReviewPage />} />
+          <Route path="/framework/editorial-independence" element={<EditorialIndependencePage />} />
+          <Route path="/framework/ethics" element={<EthicsPage />} />
           <Route
             path="/publishing/start-journal"
             element={<StartJournalPage />}
