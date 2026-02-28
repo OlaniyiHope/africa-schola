@@ -193,25 +193,6 @@ export default function Publeesh() {
               workflows, global data access, and responsible AI-assisted drafting tools.
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              <Button
-                size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2"
-                asChild
-              >
-                <Link to="/publeesh/access">
-                  Access Research Intelligence <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white/40 text-primary-foreground hover:bg-primary-foreground/10 hover:border-white"
-                asChild
-              >
-                <Link to="/publeesh/pricing" style={{color: "black"}}>View Subscription Plans</Link>
-              </Button>
-            </div>
           </div>
 
           {/* Right — Animated visual (keep existing) */}
