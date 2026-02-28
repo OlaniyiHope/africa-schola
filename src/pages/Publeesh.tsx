@@ -16,7 +16,12 @@ import {
   Quote,
   Database,
   BarChart2,
-  Globe
+  Globe,
+  Layers,
+  ShieldCheck,
+  X,
+  CreditCard,
+  LayoutDashboard
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -386,48 +391,156 @@ Integrated within Afrika Scholar, Publeesh AI enhances research workflows throug
       </section>
 
 
-      {/* What Afrika Scholar Enables */}
+      {/* How Publeesh Fits Into Afrika Scholar */}
       <section className="section-padding">
         <div className="container-section">
-          <div className="text-center mb-4">
+
+          {/* Header */}
+          <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-wider text-accent font-semibold mb-2">
-              What Afrika Scholar Enables
+              How Publeesh Fits Into Afrika Scholar
             </p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Academic Publishing, Research & Institutional Enablement <br></br>Built
-              for Africa
+              Pan-African Academic Publishing, Research &<br className="hidden md:block" /> University Enablement Infrastructure
             </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              with AI-Powered Research Intelligence. Publishing remains the primary pillar — Publeesh strengthens it.
+            </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            {pillars.map((pillar, index) => (
-              <Card
-                key={pillar.title}
-                className="card-hover group"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardHeader>
-                  <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                    <pillar.icon className="h-6 w-6 text-accent group-hover:text-accent-foreground transition-colors" />
+
+          {/* Two-column: How Publeesh strengthens + Who it's for */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+
+            {/* How Publeesh Strengthens Publishing */}
+            <Card className="border-border">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-1">
+                  <div className="p-2 rounded-lg bg-accent/10 text-accent">
+                    <Layers className="h-5 w-5" />
                   </div>
-                  <CardTitle className="text-xl">{pillar.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">
-                    {pillar.description}
-                  </p>
-                  <Link
-                    to={pillar.link}
-                    className="inline-flex items-center text-accent font-medium hover:underline"
-                  >
-                    {pillar.linkLabel}
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardTitle className="text-xl">Publeesh Strengthens Publishing</CardTitle>
+                </div>
+                <CardDescription>
+                  AI enhances scholarship — it does not replace it.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  {[
+                    "Improving manuscript quality before submission",
+                    "Supporting clearer structuring and argumentation",
+                    "Enhancing data-backed research",
+                    "Supporting academic productivity",
+                    "Enabling comparative and cross-country scholarship",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
+                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Who Publeesh Is For */}
+            <Card className="border-border">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-1">
+                  <div className="p-2 rounded-lg bg-accent/10 text-accent">
+                    <Users className="h-5 w-5" />
+                  </div>
+                  <CardTitle className="text-xl">Who Publeesh Is For</CardTitle>
+                </div>
+                <CardDescription>
+                  Designed for every stage of academic research.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  {[
+                    { emoji: "🎓", label: "Students", desc: "preparing research papers, dissertations, and theses" },
+                    { emoji: "👩🏽‍🏫", label: "Academics", desc: "developing manuscripts for publication" },
+                    { emoji: "📊", label: "Researchers", desc: "conducting comparative policy and data studies" },
+                    { emoji: "🏛", label: "Institutions", desc: "seeking research productivity tools" },
+                    { emoji: "🌍", label: "Professionals", desc: "translating practice into credible research output" },
+                  ].map(({ emoji, label, desc }) => (
+                    <li key={label} className="flex items-start gap-3 text-sm">
+                      <span className="text-base leading-none mt-0.5">{emoji}</span>
+                      <span className="text-muted-foreground">
+                        <span className="font-semibold text-foreground">{label}</span> {desc}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
           </div>
+
+          {/* Academic Integrity Banner */}
+          <div className="max-w-5xl mx-auto rounded-2xl border border-border bg-secondary/40 p-8 md:p-10">
+            <div className="grid md:grid-cols-[auto_1fr] gap-6 md:gap-10 items-start">
+              <div className="p-3 rounded-xl bg-accent/10 text-accent w-fit">
+                <ShieldCheck className="h-8 w-8" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-1">Academic Integrity & Responsible Use</h3>
+                <p className="text-muted-foreground mb-5 text-sm">
+                  Publeesh is designed as a research support system. Users are responsible for ensuring compliance with university academic integrity policies, journal submission standards, and ethical research guidelines.
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Publeesh does not:</p>
+                    <ul className="space-y-2">
+                      {[
+                        "Replace independent scholarship",
+                        "Guarantee publication",
+                        "Substitute peer review",
+                        "Bypass institutional supervision",
+                      ].map((item) => (
+                        <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <span className="h-4 w-4 rounded-full border border-muted-foreground/40 flex items-center justify-center flex-shrink-0">
+                            <X className="h-2.5 w-2.5" />
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Users must comply with:</p>
+                    <ul className="space-y-2">
+                      {[
+                        "University academic integrity policies",
+                        "Journal submission standards",
+                        "Ethical research guidelines",
+                      ].map((item) => (
+                        <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <span className="h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <p className="text-sm text-muted-foreground mb-4">
+                  Afrika Scholar promotes responsible AI usage aligned with global academic norms.
+                </p>
+
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/about#integrity" className="inline-flex items-center gap-2">
+                    Read Full Academic Integrity Policy
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
+
 
       {/* Counting Stats Section */}
       <section className="py-16 bg-primary text-primary-foreground">
@@ -436,173 +549,194 @@ Integrated within Afrika Scholar, Publeesh AI enhances research workflows throug
         </div>
       </section>
 
-      {/* Recent Publications with Tabs */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-section">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">
-                Recent Publications
-              </h2>
-              <p className="text-muted-foreground">
-                Latest research across disciplines
-              </p>
-            </div>
-            <Button variant="outline" asChild>
-              <Link to="/publications">
-                View All Publications
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-
-          <Tabs defaultValue="all" className="w-full">
-            <TabsList className="mb-6 flex-wrap h-auto gap-2">
-              <TabsTrigger value="all">All</TabsTrigger>
-              {disciplines.slice(0, 5).map((discipline) => (
-                <TabsTrigger key={discipline} value={discipline}>
-                  {discipline}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            <TabsContent value="all">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recentPublications.map((pub) => (
-                  <PublicationCard
-                    key={pub.id}
-                    publication={pub}
-                    onCite={handleCite}
-                  />
-                ))}
-              </div>
-            </TabsContent>
-
-            {disciplines.slice(0, 5).map((discipline) => (
-              <TabsContent key={discipline} value={discipline}>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {publications
-                    .filter((p) => p.discipline === discipline)
-                    .slice(0, 6)
-                    .map((pub) => (
-                      <PublicationCard
-                        key={pub.id}
-                        publication={pub}
-                        onCite={handleCite}
-                      />
-                    ))}
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </div>
-      </section>
-
-      {/* Get Involved Section */}
+ 
+      {/* How It Works + Dashboard + Subscription + Why Publeesh */}
       <section className="section-padding relative overflow-hidden">
         <div className="absolute inset-0 bg-primary" />
         <div className="absolute inset-0 opacity-10">
-          <svg
-            className="w-full h-full"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
+          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <defs>
-              <pattern
-                id="involve-pattern"
-                width="20"
-                height="20"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M0 10 L10 0 L20 10 L10 20Z"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="0.3"
-                  className="text-primary-foreground"
-                />
+              <pattern id="involve-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M0 10 L10 0 L20 10 L10 20Z" fill="none" stroke="currentColor" strokeWidth="0.3" className="text-primary-foreground" />
               </pattern>
             </defs>
             <rect width="100" height="100" fill="url(#involve-pattern)" />
           </svg>
         </div>
+
         <div className="container-section relative text-primary-foreground">
+
+          {/* ── How It Works ── */}
           <div className="max-w-3xl mx-auto text-center mb-12">
             <Sparkles className="h-10 w-10 text-accent mx-auto mb-4" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Get Involved
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
             <p className="text-primary-foreground/80 text-lg">
-              Join Africa's growing academic community. Whether you're a
-              researcher, educator, or institution, there's a place for you.
+              All within a unified academic dashboard.
             </p>
           </div>
-          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            <Card className="bg-primary-foreground/10 border-primary-foreground/20 backdrop-blur-sm card-hover">
-              <CardContent className="p-6 text-center">
-                <div className="h-14 w-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
-                  <FileText className="h-7 w-7 text-accent" />
+
+          <div className="max-w-4xl mx-auto mb-20">
+            <div className="grid md:grid-cols-5 gap-3">
+              {[
+                { step: "1", label: "Create or log in to your Afrika Scholar account" },
+                { step: "2", label: "Subscribe to Research Intelligence Access" },
+                { step: "3", label: "Start a Research Project Workspace" },
+                { step: "4", label: "Generate structured drafts & retrieve global datasets" },
+                { step: "5", label: "Export structured documents for refinement and supervision" },
+              ].map(({ step, label }, i, arr) => (
+                <div key={step} className="flex flex-col items-center text-center gap-3 relative">
+                  <div className="h-12 w-12 rounded-full bg-accent flex items-center justify-center text-accent-foreground font-bold text-lg flex-shrink-0 z-10">
+                    {step}
+                  </div>
+                  {i < arr.length - 1 && (
+                    <div className="hidden md:block absolute top-6 left-[calc(50%+24px)] w-[calc(100%-48px)] h-px bg-primary-foreground/20" />
+                  )}
+                  <p className="text-primary-foreground/80 text-sm leading-snug">{label}</p>
                 </div>
-                <h3 className="text-lg font-bold text-primary-foreground mb-2">
-                  Submit Research
-                </h3>
-                <p className="text-primary-foreground/70 text-sm mb-4">
-                  Submit your research for peer-reviewed publication
-                </p>
-                <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                  <Link to="/publishing/submit">Submit Manuscript</Link>
-                </Button>
+              ))}
+            </div>
+          </div>
+
+          {/* ── Dashboard + Subscription ── */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
+
+            {/* Dashboard Features */}
+            <Card className="bg-primary-foreground/10 border-primary-foreground/20 backdrop-blur-sm">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-1">
+                  <div className="h-10 w-10 rounded-lg bg-accent/20 flex items-center justify-center">
+                    <LayoutDashboard className="h-5 w-5 text-accent" />
+                  </div>
+                  <CardTitle className="text-primary-foreground text-xl">Publeesh Dashboard Features</CardTitle>
+                </div>
+                <CardDescription className="text-primary-foreground/60">
+                  Designed for structured workflow, not chaos.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2.5">
+                  {[
+                    "Project Workspace Management",
+                    "Structured Outline Generator",
+                    "Literature Review Assistant",
+                    "Citation Formatter",
+                    "Global Dataset Explorer",
+                    "Saved References Library",
+                    "Comparative Analysis Builder",
+                    "Export to Word / PDF",
+                    "Academic Integrity Reminder",
+                  ].map((feature) => (
+                    <li key={feature} className="flex items-center gap-3 text-sm text-primary-foreground/80">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </CardContent>
             </Card>
-            <Card className="bg-primary-foreground/10 border-primary-foreground/20 backdrop-blur-sm card-hover">
-              <CardContent className="p-6 text-center">
-                <div className="h-14 w-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-7 w-7 text-accent" />
+
+            {/* Subscription Access */}
+            <Card className="bg-primary-foreground/10 border-primary-foreground/20 backdrop-blur-sm">
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-1">
+                  <div className="h-10 w-10 rounded-lg bg-accent/20 flex items-center justify-center">
+                    <CreditCard className="h-5 w-5 text-accent" />
+                  </div>
+                  <CardTitle className="text-primary-foreground text-xl">Subscription Access</CardTitle>
                 </div>
-                <h3 className="text-lg font-bold text-primary-foreground mb-2">
-                  Join Reviewers Network
-                </h3>
-                <p className="text-primary-foreground/70 text-sm mb-4">
-                  Join our network of academic reviewers
-                </p>
-                <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                  <Link to="/network#who-can-join">Apply Now</Link>
-                </Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-primary-foreground/10 border-primary-foreground/20 backdrop-blur-sm card-hover">
-              <CardContent className="p-6 text-center">
-                <div className="h-14 w-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
-                  <GraduationCap className="h-7 w-7 text-accent" />
+                <CardDescription className="text-primary-foreground/60">
+                  Research Intelligence access is available through subscription plans.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-primary-foreground/60 text-xs uppercase tracking-wider font-semibold mb-3">Plans may include:</p>
+                <ul className="space-y-2.5 mb-8">
+                  {[
+                    "Writing & Structuring Access",
+                    "Global Dataset Access",
+                    "Advanced Comparative Intelligence",
+                    "Institutional Licenses",
+                  ].map((plan) => (
+                    <li key={plan} className="flex items-center gap-3 text-sm text-primary-foreground/80">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                      {plan}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-col gap-3">
+                  <Button className="w-full bg-accent hover:bg-accent/90" asChild>
+                    <Link to="/publishing/subscribe">
+                      View Subscription Plans
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                    asChild
+                  >
+                    <Link to="/advisory">
+                      Request Institutional Access
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                 </div>
-                <h3 className="text-lg font-bold text-primary-foreground mb-2">
-                  Partner With Us
-                </h3>
-                <p className="text-primary-foreground/70 text-sm mb-4">
-                  Partner with us to expand African scholarship
-                </p>
-                <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                  <Link to="/network">Explore Partnership</Link>
-                </Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-primary-foreground/10 border-primary-foreground/20 backdrop-blur-sm card-hover">
-              <CardContent className="p-6 text-center">
-                <div className="h-14 w-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
-                  <GraduationCap className="h-7 w-7 text-accent" />
-                </div>
-                <h3 className="text-lg font-bold text-primary-foreground mb-2">
-            Request Advisory
-                </h3>
-                <p className="text-primary-foreground/70 text-sm mb-4">
-                  Join us as professional and academic collaborator
-                </p>
-                <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                  <Link to="/network">    Request Advisory</Link>
-                </Button>
               </CardContent>
             </Card>
           </div>
+
+          {/* ── Why Publeesh Matters ── */}
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-10">
+              <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground mb-3">Why Publeesh Matters</h3>
+              <p className="text-primary-foreground/70 max-w-xl mx-auto">
+                Without compromising academic integrity.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Challenges */}
+              <div className="rounded-xl bg-primary-foreground/10 border border-primary-foreground/20 p-6">
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary-foreground/50 mb-4">African scholars often face:</p>
+                <ul className="space-y-3">
+                  {[
+                    "Limited access to structured research tools",
+                    "Difficulty accessing consolidated global datasets",
+                    "Fragmented research workflow systems",
+                    "Time inefficiencies in drafting and structuring",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-primary-foreground/75">
+                      <span className="mt-1.5 h-4 w-4 rounded-full border border-primary-foreground/30 flex items-center justify-center flex-shrink-0">
+                        <X className="h-2.5 w-2.5" />
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {/* Empowerment */}
+              <div className="rounded-xl bg-accent/10 border border-accent/30 p-6">
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-4">Publeesh empowers scholars to:</p>
+                <ul className="space-y-3">
+                  {[
+                    { verb: "Work smarter", rest: "with structured AI-assisted workflows" },
+                    { verb: "Structure better", rest: "through guided drafting and outlining" },
+                    { verb: "Cite responsibly", rest: "with multi-format referencing tools" },
+                    { verb: "Compare globally", rest: "using institutional datasets" },
+                    { verb: "Publish confidently", rest: "with stronger, cleaner manuscripts" },
+                  ].map(({ verb, rest }) => (
+                    <li key={verb} className="flex items-start gap-3 text-sm text-primary-foreground/80">
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0 mt-1.5" />
+                      <span>
+                        <span className="font-semibold text-primary-foreground">{verb}</span>{" "}
+                        <span className="text-primary-foreground/60">{rest}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
