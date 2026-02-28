@@ -41,7 +41,7 @@ const governanceBlocks = [
       "Open Access & Licensing",
     ],
     cta: "View Publishing Standards",
-    ctaLink: "/publishing-standards",
+    ctaLink: "/standards",
   },
   {
     icon: Brain,
