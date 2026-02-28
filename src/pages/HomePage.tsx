@@ -36,6 +36,7 @@ import { AnimatedHeroVisual } from "@/components/home/AnimatedHeroVisual";
 import { CountUpStats } from "@/components/home/CountUpStats";
 import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/hero-scholars.jpg";
+import { PubleeshSection } from "./PubleeshSection";
 
 const pillars = [
   {
@@ -304,7 +305,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+<PubleeshSection />
       {/* Counting Stats Section */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container-section">
