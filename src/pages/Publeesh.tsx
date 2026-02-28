@@ -381,12 +381,7 @@ Integrated within Afrika Scholar, Publeesh AI enhances research workflows throug
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto">
               Publeesh transforms the research process — from a writing assistant into a global research intelligence platform.
             </p>
-            <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
-              <Link to="/publications">
-                Explore Publeesh
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+          
           </div>
         </div>
       </section>
