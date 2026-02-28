@@ -21,7 +21,8 @@ import {
   ShieldCheck,
   X,
   CreditCard,
-  LayoutDashboard
+  LayoutDashboard,
+  TrendingUp
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -739,119 +740,167 @@ Integrated within Afrika Scholar, Publeesh AI enhances research workflows throug
 
         </div>
       </section>
-
-      {/* Blog & Insights */}
+      {/* The Future of Research Intelligence + CTA */}
       <section className="section-padding bg-secondary/30">
         <div className="container-section">
+
+          {/* Future Roadmap */}
           <div className="text-center mb-12">
             <p className="text-sm uppercase tracking-wider text-accent font-semibold mb-2">
-              Insights & Updates
+              What's Coming
             </p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              From the Afrika Scholar Knowledge Desk
+              The Future of Research Intelligence in Africa
             </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              As Afrika Scholar expands its publishing infrastructure and institutional partnerships, Publeesh will evolve.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
             {[
               {
-                title:
-                  "Why Africa Needs Its Own Academic Publishing Infrastructure",
-                excerpt:
-                  "Exploring the critical need for localized publishing platforms to ensure African research is prioritized...",
-                date: "May 15, 2024",
-                slug: "africa-publishing",
+                icon: LayoutDashboard,
+                title: "Institutional Research Dashboards",
+                desc: "University-level dashboards for tracking research output, productivity, and publication pipelines.",
               },
               {
-                title: "Improving Global Visibility of African Research",
-                excerpt:
-                  "Strategies and tools for researchers to increase the impact and reach of their academic work...",
-                date: "June 2, 2024",
-                slug: "global-visibility",
+                icon: Users,
+                title: "Cross-Institutional Collaboration",
+                desc: "Tools enabling structured academic partnerships and co-authorship coordination across institutions.",
               },
               {
-                title: "Peer Review and Research Integrity in Africa",
-                excerpt:
-                  "Maintaining high ethical standards and robust peer-review processes in the evolving landscape...",
-                date: "June 20, 2024",
-                slug: "peer-review",
+                icon: TrendingUp,
+                title: "Research Trend Analytics",
+                desc: "Real-time analytics surfacing emerging research areas, citation trends, and knowledge gaps across Africa.",
               },
-            ].map((post) => (
-              <Card
-                key={post.slug}
-                className="card-hover flex flex-col h-full bg-background border-border/50"
-              >
-                <CardHeader>
-                  <div className="text-xs text-muted-foreground mb-2">
-                    {post.date}
+              {
+                icon: BarChart2,
+                title: "Impact Tracking Tools",
+                desc: "Monitor research visibility, citations, and scholarly reach across global academic platforms.",
+              },
+              {
+                icon: ShieldCheck,
+                title: "AI-Assisted Peer Review Support",
+                desc: "Ethical and structured assistance to improve review quality — not to replace reviewers.",
+              },
+              {
+                icon: GraduationCap,
+                title: "Research Supervision Assist",
+                desc: "Modules supporting academic supervisors and postgraduate students through structured research workflows.",
+              },
+            ].map(({ icon: Icon, title, desc }) => (
+              <Card key={title} className="card-hover flex flex-col group bg-background border-border/50">
+                <CardHeader className="pb-3">
+                  <div className="h-10 w-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+                    <Icon className="h-5 w-5 text-accent group-hover:text-accent-foreground transition-colors" />
                   </div>
-                  <CardTitle className="text-xl leading-tight">
-                    {post.title}
-                  </CardTitle>
+                  <CardTitle className="text-base leading-snug">{title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1">
-                  <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
-                    {post.excerpt}
-                  </p>
-                  <Link
-                    to={`/blog`}
-                    className="text-accent font-medium text-sm hover:underline inline-flex items-center"
-                  >
-                    Read More
-                    <ArrowRight className="ml-1 h-3 w-3" />
-                  </Link>
+                  <p className="text-sm text-muted-foreground">{desc}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          <div className="flex justify-center mb-16">
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/blog">
-                View All Insights <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
+          {/* Built for... tagline */}
+          <div className="flex flex-wrap justify-center gap-4 mb-20">
+            {["Built responsibly.", "Built institutionally.", "Built for long-term scholarly infrastructure."].map((tag) => (
+              <span
+                key={tag}
+                className="px-5 py-2 rounded-full border border-accent/30 text-accent text-sm font-semibold bg-accent/5"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
 
+          {/* CTA Card */}
           <div className="max-w-4xl mx-auto">
-            <Card className="bg-gradient-to-br from-primary to-primary/90 text-primary-foreground border-none">
-              <CardContent className="p-8 md:p-12">
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <Mail className="h-6 w-6 text-accent" />
-                      <h3 className="text-2xl font-bold">Stay Updated</h3>
-                    </div>
-                    <p className="text-primary-foreground/80">
-                      Get research insights, calls for papers, and platform
-                      updates delivered to your inbox.
-                    </p>
-                  </div>
-                  <form
-                    onSubmit={handleSubscribe}
-                    className="flex flex-col sm:flex-row gap-3"
+            <Card className="bg-gradient-to-br from-primary to-primary/90 text-primary-foreground border-none overflow-hidden relative">
+              <div className="absolute inset-0 opacity-10">
+                <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <defs>
+                    <pattern id="cta-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                      <circle cx="1" cy="1" r="0.5" fill="currentColor" className="text-primary-foreground" />
+                    </pattern>
+                  </defs>
+                  <rect width="100" height="100" fill="url(#cta-grid)" />
+                </svg>
+              </div>
+              <CardContent className="p-8 md:p-12 relative">
+                <div className="text-center mb-8">
+                  <Sparkles className="h-9 w-9 text-accent mx-auto mb-4" />
+                  <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground mb-3">
+                    Ready to Enhance Your Research Workflow?
+                  </h3>
+                  <p className="text-primary-foreground/70 max-w-lg mx-auto">
+                    Join scholars and institutions already building smarter, more credible research with Publeesh.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+                  <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+                    <Link to="/publications">
+                      Access Research Intelligence
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                    asChild
                   >
-                    <Input
-                      type="email"
-                      placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                    />
-                    <Button
-                      type="submit"
-                      className="bg-accent hover:bg-accent/90 text-white border-none whitespace-nowrap"
-                    >
-                      Subscribe Now
-                    </Button>
-                  </form>
+                    <Link to="/publishing/subscribe">Subscribe to Publeesh</Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                    asChild
+                  >
+                    <Link to="/advisory">Request Institutional Demo</Link>
+                  </Button>
+                </div>
+
+                {/* Newsletter strip */}
+                <div className="border-t border-primary-foreground/20 pt-8">
+                  <div className="grid md:grid-cols-2 gap-6 items-center max-w-2xl mx-auto">
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <Mail className="h-5 w-5 text-accent" />
+                        <h4 className="font-semibold text-primary-foreground">Stay Updated</h4>
+                      </div>
+                      <p className="text-primary-foreground/70 text-sm">
+                        Research insights, calls for papers, and platform updates to your inbox.
+                      </p>
+                    </div>
+                    <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+                      <Input
+                        type="email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                      />
+                      <Button
+                        type="submit"
+                        className="bg-accent hover:bg-accent/90 text-white border-none whitespace-nowrap"
+                      >
+                        Subscribe
+                      </Button>
+                    </form>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </div>
+
         </div>
       </section>
+
     </Layout>
   );
 }
