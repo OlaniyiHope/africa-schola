@@ -37,6 +37,7 @@ import EthicsPage from "./pages/Ethics";
 import OpenAccessPage from "./pages/OpenAccess";
 import RetractionPolicyPage from "./pages/RetractionPolicy";
 import CompliancePage from "./pages/Compliance";
+import AcademicIntegrityPage from "./pages/AcademicIntegrity";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ const App = () => (
           />
           <Route path="/advisory/degrees" element={<DegreeProgramsPage />} />
           <Route path="/compliance" element={<CompliancePage />} />
+          <Route path="/framework/academic-integrity" element={<AcademicIntegrityPage />} />
           <Route
             path="/advisory/study-in-africa"
             element={<StudyInAfricaPage />}
