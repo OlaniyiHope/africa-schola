@@ -170,7 +170,7 @@ export default function SubmitManuscriptPage() {
                 <p className="text-sm text-muted-foreground mt-4">
                   Need help?{" "}
                   <Link
-                    to="/framework/author-guidelines"
+                    to="/standards"
                     className="text-accent hover:underline"
                   >
                     View our submission guidelines
