@@ -457,10 +457,10 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
                   <Users className="h-7 w-7 text-accent" />
                 </div>
                 <h3 className="text-lg font-bold text-primary-foreground mb-2">
-                  Join Reviewers Network
+                  Join Network
                 </h3>
                 <p className="text-primary-foreground/70 text-sm mb-4">
-                  Join our network of academic reviewers
+                  Join our network for global academic opportunities
                 </p>
                 <Button className="w-full bg-accent hover:bg-accent/90" asChild>
                   <Link to="/network/apply">Apply Now</Link>
