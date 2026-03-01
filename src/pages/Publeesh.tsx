@@ -379,7 +379,16 @@ export default function Publeesh() {
           </div>
         </div>
       </section>
-
+<div className="flex md:flex-row flex-col gap-4 justify-center items-center">
+  <Button
+    size="lg"
+    variant="default"
+    className="border border-white hover:border-accent hover:bg-primary-foreground/10 text-primary-foreground"
+    asChild
+  >
+    <Link to="/publeesh">Explore Research Intelligence</Link>
+  </Button>
+</div>
 
       {/* How Publeesh Fits Into Afrika Scholar */}
       <section className="section-padding">
