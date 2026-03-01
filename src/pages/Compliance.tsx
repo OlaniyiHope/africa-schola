@@ -376,24 +376,24 @@ export default function CompliancePage() {
                 <Flag className="h-4 w-4" /> Report Misconduct
               </Link>
             </Button>
-            <Button
-              variant="outline"
-              className="border-primary-foreground/30 text-black text-primary-foreground hover:bg-primary-foreground/10 gap-2"
-              asChild
-            >
-              <Link to="/appeals">
-                <MessageSquare className="h-4 w-4" /> Appeal Editorial Decision
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 gap-2"
-              asChild
-            >
-              <Link to="/contact">
-                <PhoneCall className="h-4 w-4" /> Contact Governance Team
-              </Link>
-            </Button>
+     <Button
+  variant="outline"
+  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 gap-2"
+  asChild
+>
+  <Link to="/appeals">
+    <MessageSquare className="h-4 w-4" /> Appeal Editorial Decision
+  </Link>
+</Button>
+<Button
+  variant="outline"
+  className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 gap-2"
+  asChild
+>
+  <Link to="/contact">
+    <PhoneCall className="h-4 w-4" /> Contact Governance Team
+  </Link>
+</Button>
           </div>
         </div>
       </section>
