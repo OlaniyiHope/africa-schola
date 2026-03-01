@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.png";
 
 const navItems = [
-  { label: "Home", href: "/" },
+
   { label: "About", href: "/about" },
   { label: "Publications", href: "/publications" },
   { label: "Network", href: "/network" },
@@ -120,6 +120,9 @@ export function Header() {
           <Button className="bg-accent hover:bg-accent/90" asChild>
             <Link to="/publishing/submit">Publish Paper</Link>
           </Button>
+            <Button className="bg-accent hover:bg-accent/90" asChild>
+    <Link to="/publeesh">Publeesh</Link>
+  </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -175,6 +178,11 @@ export function Header() {
                   Publish Paper
                 </Link>
               </Button>
+                <Button className="w-full bg-accent hover:bg-accent/90" asChild>
+    <Link to="/publeesh" onClick={() => setMobileMenuOpen(false)}>
+      Publeesh
+    </Link>
+  </Button>
             </div>
           </nav>
         </div>
