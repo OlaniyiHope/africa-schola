@@ -133,7 +133,7 @@ export default function RetractionPolicyPage() {
           <p className="text-lg text-primary-foreground/80 max-w-2xl mb-8">
             Transparent procedures for corrections, retractions, and expressions of concern — fully compliant with COPE retraction guidelines.
           </p>
-          <Button variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 gap-2">
+          <Button variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 gap-2">
             <Download className="h-4 w-4" /> Download PDF
           </Button>
         </div>
