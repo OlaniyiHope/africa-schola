@@ -192,7 +192,19 @@ export default function Publeesh() {
               support scholars, students, researchers, and institutions with structured research
               workflows, global data access, and responsible AI-assisted drafting tools.
             </p>
-
+ <div className="flex md:flex-row flex-col  gap-4">
+                <Button
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90"
+                  asChild
+                >
+                  <Link to="/publications">
+                    Explore Publeesh
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+             
+              </div>
           </div>
 
           {/* Right — Animated visual (keep existing) */}
