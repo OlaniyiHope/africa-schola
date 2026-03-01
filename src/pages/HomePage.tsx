@@ -576,43 +576,6 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
             </Button>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-gradient-to-br from-primary to-primary/90 text-primary-foreground border-none">
-              <CardContent className="p-8 md:p-12">
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <Mail className="h-6 w-6 text-accent" />
-                      <h3 className="text-2xl font-bold">Stay Updated</h3>
-                    </div>
-                    <p className="text-primary-foreground/80">
-                      Get research insights, calls for papers, and platform
-                      updates delivered to your inbox.
-                    </p>
-                  </div>
-                  <form
-                    onSubmit={handleSubscribe}
-                    className="flex flex-col sm:flex-row gap-3"
-                  >
-                    <Input
-                      type="email"
-                      placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                    />
-                    <Button
-                      type="submit"
-                      className="bg-accent hover:bg-accent/90 text-white border-none whitespace-nowrap"
-                    >
-                      Subscribe Now
-                    </Button>
-                  </form>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </section>
     </Layout>
