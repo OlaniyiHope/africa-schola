@@ -12,6 +12,8 @@ import {
   Sparkles,
   Newspaper,
   Lock,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -102,7 +104,9 @@ export default function HomePage() {
     navigator.clipboard.writeText(citationText);
     toast({ title: "Copied!", description: "Citation copied to clipboard." });
   };
-
+const [tabOffset, setTabOffset] = useState(0);
+const VISIBLE_TABS = 4;
+const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS);
   return (
     <Layout>
       {/* Citation Dialog */}
@@ -337,45 +341,57 @@ export default function HomePage() {
             </Button>
           </div>
 
-          <Tabs defaultValue="all" className="w-full">
-            <TabsList className="mb-6 flex-wrap h-auto gap-2">
-              <TabsTrigger value="all">All</TabsTrigger>
-              {disciplines.slice(0, 5).map((discipline) => (
-                <TabsTrigger key={discipline} value={discipline}>
-                  {discipline}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+ <Tabs defaultValue="all" className="w-full">
+  <div className="flex items-center gap-2 mb-6">
+    <TabsList className="flex-wrap h-auto gap-2">
+      <TabsTrigger value="all">All</TabsTrigger>
+      {visibleDisciplines.map((discipline) => (
+        <TabsTrigger key={discipline} value={discipline}>
+          {discipline}
+        </TabsTrigger>
+      ))}
+    </TabsList>
+    <div className="flex items-center gap-1 ml-2">
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => setTabOffset((o) => Math.max(0, o - 1))}
+        disabled={tabOffset === 0}
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => setTabOffset((o) => Math.min(disciplines.length - VISIBLE_TABS, o + 1))}
+        disabled={tabOffset >= disciplines.length - VISIBLE_TABS}
+      >
+        <ChevronRight className="h-4 w-4" />
+      </Button>
+    </div>
+  </div>
 
-            <TabsContent value="all">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recentPublications.map((pub) => (
-                  <PublicationCard
-                    key={pub.id}
-                    publication={pub}
-                    onCite={handleCite}
-                  />
-                ))}
-              </div>
-            </TabsContent>
+  <TabsContent value="all">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {recentPublications.map((pub) => (
+        <PublicationCard key={pub.id} publication={pub} onCite={handleCite} />
+      ))}
+    </div>
+  </TabsContent>
 
-            {disciplines.slice(0, 5).map((discipline) => (
-              <TabsContent key={discipline} value={discipline}>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {publications
-                    .filter((p) => p.discipline === discipline)
-                    .slice(0, 6)
-                    .map((pub) => (
-                      <PublicationCard
-                        key={pub.id}
-                        publication={pub}
-                        onCite={handleCite}
-                      />
-                    ))}
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+  {disciplines.map((discipline) => (
+    <TabsContent key={discipline} value={discipline}>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {publications
+          .filter((p) => p.discipline === discipline)
+          .slice(0, 6)
+          .map((pub) => (
+            <PublicationCard key={pub.id} publication={pub} onCite={handleCite} />
+          ))}
+      </div>
+    </TabsContent>
+  ))}
+</Tabs>
         </div>
       </section>
 
