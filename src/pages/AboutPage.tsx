@@ -314,7 +314,7 @@ export default function AboutPage() {
         <div className="container-section">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Our Four Core Pillars
+              Our Five Core Pillars
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Afrika Scholar is structured around four equally important
