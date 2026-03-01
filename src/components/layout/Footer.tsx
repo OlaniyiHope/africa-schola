@@ -32,13 +32,13 @@ const footerLinks = {
     { label: "Transcript Advisory", href: "/advisory/transcripts" },
     { label: "Degree Programs", href: "/advisory/degrees" },
     { label: "Study in Africa", href: "/advisory/study-in-africa" },
-    { label: "Request Advisory", href: "/advisory" },
+ 
   ],
-  network: [
-    { label: "Explore Network", href: "/network" },
+  QuickLinks: [
+
     { label: "Join Network", href: "/network/apply" },
     { label: "For Institutions", href: "/network#institutions" },
-    { label: "Partnerships", href: "/network#partnerships" },
+    { label: "Publish", href: "/publish" },
   ],
 };
 
