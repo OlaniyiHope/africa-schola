@@ -382,14 +382,13 @@ export default function Publeesh() {
 <div className="flex md:flex-row flex-col gap-4 justify-center items-center">
   <Button
     size="lg"
-    variant="default"
-    className="border border-white hover:border-accent hover:bg-primary-foreground/10 text-primary-foreground"
+    variant="outline"
+    className="bg-accent border-accent text-white hover:bg-accent/80 hover:border-accent hover:text-white"
     asChild
   >
     <Link to="/publeesh">Explore Research Intelligence</Link>
   </Button>
 </div>
-
       {/* How Publeesh Fits Into Afrika Scholar */}
       <section className="section-padding">
         <div className="container-section">
@@ -436,8 +435,10 @@ export default function Publeesh() {
                       <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
                       {item}
                     </li>
+                    
                   ))}
                 </ul>
+                
               </CardContent>
             </Card>
 
@@ -455,22 +456,33 @@ export default function Publeesh() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-3">
-                  {[
-                    { emoji: "🎓", label: "Students", desc: "preparing research papers, dissertations, and theses" },
-                    { emoji: "👩🏽‍🏫", label: "Academics", desc: "developing manuscripts for publication" },
-                    { emoji: "📊", label: "Researchers", desc: "conducting comparative policy and data studies" },
-                    { emoji: "🏛", label: "Institutions", desc: "seeking research productivity tools" },
-                    { emoji: "🌍", label: "Professionals", desc: "translating practice into credible research output" },
-                  ].map(({ emoji, label, desc }) => (
-                    <li key={label} className="flex items-start gap-3 text-sm">
-                      <span className="text-base leading-none mt-0.5">{emoji}</span>
-                      <span className="text-muted-foreground">
-                        <span className="font-semibold text-foreground">{label}</span> {desc}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+       <ul className="space-y-3">
+  {[
+    { emoji: ".", label: "Students", desc: "preparing research papers, dissertations, and theses" },
+    { emoji: ".", label: "Academics", desc: "developing manuscripts for publication" },
+    { emoji: ".", label: "Researchers", desc: "conducting comparative policy and data studies" },
+    { emoji: ".", label: "Institutions", desc: "seeking research productivity tools" },
+    { emoji: ".", label: "Professionals", desc: "translating practice into credible research output" },
+  ].map(({ emoji, label, desc }) => (
+    <li key={label} className="flex items-start gap-3 text-sm">
+      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+      <span className="text-muted-foreground">
+        <span className="font-semibold text-foreground">{label}</span> {desc}
+      </span>
+    </li>
+  ))}
+</ul>
+
+<div className="flex justify-center items-center mt-6">
+  <Button
+    size="lg"
+    variant="outline"
+    className="bg-transparent border-accent text-accent hover:bg-accent hover:text-white"
+    asChild
+  >
+    <Link to="/publeesh">Explore Research Intelligence</Link>
+  </Button>
+</div>
               </CardContent>
             </Card>
           </div>
