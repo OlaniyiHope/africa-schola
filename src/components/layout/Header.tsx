@@ -61,7 +61,7 @@ export function Header() {
           <NavigationMenuList>
             {navItems.map((item) =>
               item.children ? (
-                <NavigationMenuItem key={item.label}>
+                <NavigationMenuItem key={item.label}  className="relative">
                   <NavigationMenuTrigger
                     className={cn(
                       "bg-transparent",

@@ -396,7 +396,7 @@ useEffect(() => {
       </section>
 
       {/* For Researchers & Institutions */}
-      <section className="section-padding bg-secondary/30">
+      {/* <section className="section-padding bg-secondary/30">
         <div className="container-section">
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Card className="card-hover border-l-4 border-l-accent">
@@ -432,7 +432,7 @@ useEffect(() => {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Bottom CTA */}
       <section className="relative overflow-hidden section-padding">
