@@ -173,9 +173,9 @@ export default function HomePage() {
   Pan-African Academic Publishing, Research & University
   Enablement with AI-Powered Research Intelligence
 </h1>
-              <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-xl">
-          Afrika Scholar is a journal-first academic infrastructure platform designed to publish, validate, preserve, and amplify African scholarship to global standards. It is strengthened by responsible AI-powered research intelligence tools that enhance productivity without compromising academic integrity.
-              </p>
+   <p className="text-base md:text-lg text-primary-foreground/80 mb-10 max-w-3xl">
+  Afrika Scholar is a journal-first academic infrastructure platform designed to publish, validate, preserve, and amplify African scholarship to global standards. It is strengthened by responsible AI-powered research intelligence tools that enhance productivity without compromising academic integrity.
+</p>
               <div className="flex md:flex-row flex-col  gap-4">
                 <Button
                   size="lg"
