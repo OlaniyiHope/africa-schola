@@ -211,7 +211,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+<section className="py-16 bg-background">
+  <div className="container-section">
+    <CountUpStats variant="light" />
+  </div>
+</section>
       {/* Featured Research - 3 Cards */}
       <section className="section-padding bg-secondary/30">
         <div className="container-section">
@@ -312,11 +316,7 @@ export default function HomePage() {
           <CountUpStats variant="dark" />
         </div>
       </section> */}
-<section className="py-16 bg-background">
-  <div className="container-section">
-    <CountUpStats variant="light" />
-  </div>
-</section>
+
       {/* Recent Publications with Tabs */}
       <section className="section-padding bg-secondary/30">
         <div className="container-section">
