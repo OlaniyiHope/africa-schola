@@ -176,10 +176,10 @@ export default function Publeesh() {
               Publeesh
             </p>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              AI-Powered Research Intelligence{" "}
-              <span className="text-accent">by Afrika Scholar</span>
-            </h1>
+  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6">
+  AI-Powered Research Intelligence{" "}
+  <span className="text-accent">by Afrika Scholar</span>
+</h1>
 
             <p className="text-lg text-primary-foreground/80 mb-4 max-w-xl leading-relaxed">
               <span className="font-semibold text-primary-foreground">

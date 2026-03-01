@@ -169,10 +169,10 @@ export default function HomePage() {
         <div className="container-section relative py-24 md:py-36">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-up text-primary-foreground">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                Pan-African Academic Publishing, Research & University
-                Enablement with AI-Powered Research Intelligence
-              </h1>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6">
+  Pan-African Academic Publishing, Research & University
+  Enablement with AI-Powered Research Intelligence
+</h1>
               <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-xl">
           Afrika Scholar is a journal-first academic infrastructure platform designed to publish, validate, preserve, and amplify African scholarship to global standards. It is strengthened by responsible AI-powered research intelligence tools that enhance productivity without compromising academic integrity.
               </p>

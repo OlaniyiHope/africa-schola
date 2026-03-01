@@ -369,7 +369,7 @@ export default function CompliancePage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button
-              className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2"
+              className="bg-accent hover:bg-accent/90  text-accent-foreground gap-2"
               asChild
             >
               <Link to="/report-misconduct">
@@ -378,7 +378,7 @@ export default function CompliancePage() {
             </Button>
             <Button
               variant="outline"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 gap-2"
+              className="border-primary-foreground/30 text-black text-primary-foreground hover:bg-primary-foreground/10 gap-2"
               asChild
             >
               <Link to="/appeals">
