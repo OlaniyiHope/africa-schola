@@ -328,7 +328,7 @@ useEffect(() => {
       </section>
 
       {/* Featured & Special Collections */}
-      <section className="section-padding bg-secondary/30">
+      {/* <section className="section-padding bg-secondary/30">
         <div className="container-section">
           <div className="text-center mb-12">
             <p className="text-sm uppercase tracking-wider text-accent font-semibold mb-2">Featured & Special Collections</p>
@@ -362,7 +362,7 @@ useEffect(() => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Why Publish */}
       {/* <section className="section-padding">
