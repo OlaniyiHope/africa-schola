@@ -1,8 +1,8 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { 
   Search, Filter, Grid, List, Download, FileText, Quote, 
-  X, BookOpen, Calendar, MapPin, Building2, ArrowRight, CheckCircle, Star, Lock
+  X, BookOpen, Calendar, MapPin, Building2, ArrowRight, CheckCircle, Star, Lock, ChevronLeft, ChevronRight 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -100,7 +100,19 @@ export default function PublicationsPage() {
     navigator.clipboard.writeText(citationText);
     toast({ title: "Copied!", description: "Citation copied to clipboard." });
   };
+const [currentPage, setCurrentPage] = useState(1);
+const ITEMS_PER_PAGE = 10;
 
+const totalPages = Math.ceil(filteredPublications.length / ITEMS_PER_PAGE);
+const paginatedPublications = filteredPublications.slice(
+  (currentPage - 1) * ITEMS_PER_PAGE,
+  currentPage * ITEMS_PER_PAGE
+);
+
+// Reset to page 1 when filters/search change
+useEffect(() => {
+  setCurrentPage(1);
+}, [searchQuery, selectedDisciplines, selectedRegions, selectedYears, selectedAccessType, sortBy]);
   return (
     <Layout>
       {/* Citation Dialog */}
@@ -209,29 +221,108 @@ export default function PublicationsPage() {
                 <FilterPanel disciplines={disciplines} regions={regions} years={years} selectedDisciplines={selectedDisciplines} selectedRegions={selectedRegions} selectedYears={selectedYears} selectedAccessType={selectedAccessType} setSelectedDisciplines={setSelectedDisciplines} setSelectedRegions={setSelectedRegions} setSelectedYears={setSelectedYears} setSelectedAccessType={setSelectedAccessType} toggleFilter={toggleFilter} />
               </div>
             </aside>
-            <div className="flex-1">
-              <div className="mb-6">
-                <p className="text-muted-foreground">Showing <span className="font-medium text-foreground">{filteredPublications.length}</span> publications</p>
-              </div>
-              {filteredPublications.length === 0 ? (
-                <Card className="text-center py-12">
-                  <CardContent>
-                    <BookOpen className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-semibold mb-2">No publications found</h3>
-                    <p className="text-muted-foreground mb-4">Try adjusting your search or filters</p>
-                    <Button variant="outline" onClick={clearFilters}>Clear filters</Button>
-                  </CardContent>
-                </Card>
-              ) : viewMode === "grid" ? (
-                <div className="grid md:grid-cols-2 gap-6">
-                  {filteredPublications.map((pub) => (<PublicationGridCard key={pub.id} publication={pub} onCite={handleCite} />))}
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {filteredPublications.map((pub) => (<PublicationListCard key={pub.id} publication={pub} onCite={handleCite} />))}
-                </div>
-              )}
-            </div>
+  <div className="flex-1">
+  {/* Top bar: showing count + prev/next */}
+  <div className="mb-6 flex items-center justify-between">
+    <p className="text-muted-foreground">
+      Showing{" "}
+      <span className="font-medium text-foreground">
+        {(currentPage - 1) * ITEMS_PER_PAGE + 1}–{Math.min(currentPage * ITEMS_PER_PAGE, filteredPublications.length)}
+      </span>{" "}
+      of{" "}
+      <span className="font-medium text-foreground">{filteredPublications.length}</span>{" "}
+      publications
+    </p>
+    <div className="flex items-center gap-2">
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+        disabled={currentPage === 1}
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
+      <span className="text-sm text-muted-foreground">
+        {currentPage} / {totalPages}
+      </span>
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+        disabled={currentPage === totalPages}
+      >
+        <ChevronRight className="h-4 w-4" />
+      </Button>
+    </div>
+  </div>
+
+  {/* Publications */}
+  {filteredPublications.length === 0 ? (
+    <Card className="text-center py-12">
+      <CardContent>
+        <BookOpen className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+        <h3 className="text-lg font-semibold mb-2">No publications found</h3>
+        <p className="text-muted-foreground mb-4">Try adjusting your search or filters</p>
+        <Button variant="outline" onClick={clearFilters}>Clear filters</Button>
+      </CardContent>
+    </Card>
+  ) : viewMode === "grid" ? (
+    <div className="grid md:grid-cols-2 gap-6">
+      {paginatedPublications.map((pub) => (
+        <PublicationGridCard key={pub.id} publication={pub} onCite={handleCite} />
+      ))}
+    </div>
+  ) : (
+    <div className="space-y-4">
+      {paginatedPublications.map((pub) => (
+        <PublicationListCard key={pub.id} publication={pub} onCite={handleCite} />
+      ))}
+    </div>
+  )}
+
+  {/* Bottom pagination */}
+  {totalPages > 1 && (
+    <div className="mt-8 flex items-center justify-center gap-2">
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+        disabled={currentPage === 1}
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
+      {Array.from({ length: totalPages }, (_, i) => i + 1)
+        .filter((page) => page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1)
+        .reduce<(number | "...")[]>((acc, page, idx, arr) => {
+          if (idx > 0 && page - (arr[idx - 1] as number) > 1) acc.push("...");
+          acc.push(page);
+          return acc;
+        }, [])
+        .map((item, idx) =>
+          item === "..." ? (
+            <span key={`ellipsis-${idx}`} className="px-2 text-muted-foreground">...</span>
+          ) : (
+            <Button
+              key={item}
+              variant={currentPage === item ? "default" : "outline"}
+              size="icon"
+              onClick={() => setCurrentPage(item as number)}
+            >
+              {item}
+            </Button>
+          )
+        )}
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+        disabled={currentPage === totalPages}
+      >
+        <ChevronRight className="h-4 w-4" />
+      </Button>
+    </div>
+  )}
+</div>
           </div>
         </div>
       </section>
