@@ -198,7 +198,7 @@ export default function Publeesh() {
                   className="bg-accent hover:bg-accent/90"
                   asChild
                 >
-                  <Link to="/publications">
+                  <Link to="https://publeesh.ng/">
                     Explore Publeesh
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
@@ -386,7 +386,7 @@ export default function Publeesh() {
     className="bg-accent border-accent text-white hover:bg-accent/80 hover:border-accent hover:text-white"
     asChild
   >
-    <Link to="/publeesh">Explore Research Intelligence</Link>
+    <Link to="https://publeesh.ng/">Explore Research Intelligence</Link>
   </Button>
 </div>
       {/* How Publeesh Fits Into Afrika Scholar */}
@@ -480,7 +480,7 @@ export default function Publeesh() {
     className="bg-transparent border-accent text-accent hover:bg-accent hover:text-white"
     asChild
   >
-    <Link to="/publeesh">Explore Research Intelligence</Link>
+    <Link to="https://publeesh.ng/">Explore Research Intelligence</Link>
   </Button>
 </div>
               </CardContent>
