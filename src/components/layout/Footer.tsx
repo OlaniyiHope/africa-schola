@@ -34,7 +34,7 @@ const footerLinks = {
     { label: "Study in Africa", href: "/advisory/study-in-africa" },
  
   ],
-  QuickLinks: [
+  network: [
 
     { label: "Join Network", href: "/network/apply" },
     { label: "For Institutions", href: "/network#institutions" },
@@ -164,7 +164,7 @@ export function Footer() {
 
           {/* Network Links */}
           <div>
-            <h4 className="font-semibold mb-4">Network</h4>
+            <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {footerLinks.network.map((link) => (
                 <li key={link.href}>
