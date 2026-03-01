@@ -447,7 +447,7 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
                   Submit your research for peer-reviewed publication
                 </p>
                 <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                  <Link to="/publishing/submit">Submit Manuscript</Link>
+                  <Link to="/submit-form">Submit Manuscript</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -463,7 +463,7 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
                   Join our network of academic reviewers
                 </p>
                 <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                  <Link to="/network#who-can-join">Apply Now</Link>
+                  <Link to="/network/apply">Apply Now</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -495,7 +495,7 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
                   Join us as professional and academic collaborator
                 </p>
                 <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                  <Link to="/network">    Request Advisory</Link>
+                  <Link to="/advisory/request">    Request Advisory</Link>
                 </Button>
               </CardContent>
             </Card>
