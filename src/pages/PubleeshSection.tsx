@@ -48,7 +48,7 @@ export function PubleeshSection() {
               {/* <Button variant="outline" className="border-foreground/20 text-foreground hover:bg-secondary" asChild>
                 <Link to="/publeesh/access">Access Research Intelligence</Link>
               </Button> */}
-              <Button variant="outline" className="border-foreground/20 text-foreground hover:bg-secondary" asChild>
+              <Button variant="outline" className="border-foreground/20 bg-transparent text-foreground hover:bg-secondary"style={{color: "black"}}  asChild>
                 <Link to="/publeesh/pricing">View Subscription Plans</Link>
               </Button>
             </div>
