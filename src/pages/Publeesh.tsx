@@ -507,7 +507,7 @@ export default function Publeesh() {
                 </p>
 
                 <Button variant="outline" size="sm" asChild>
-                  <Link to="/about#integrity" className="inline-flex items-center gap-2">
+                  <Link to="/framework/academic-integrity" className="inline-flex items-center gap-2">
                     Read Full Academic Integrity Policy
                     <ArrowRight className="h-4 w-4" />
                   </Link>
