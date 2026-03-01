@@ -178,11 +178,11 @@ export function Header() {
                   Publish Paper
                 </Link>
               </Button>
-                <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-    <Link to="/publeesh" onClick={() => setMobileMenuOpen(false)}>
-      Publeesh
-    </Link>
-  </Button>
+<Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
+  <Link to="/publeesh" onClick={() => setMobileMenuOpen(false)}>
+    Publeesh
+  </Link>
+</Button>
             </div>
           </nav>
         </div>
