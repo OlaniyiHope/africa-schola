@@ -14,6 +14,7 @@ const pathways = [
     description: "Earn your bachelor's degree while maintaining your career. Flexible schedules designed for working professionals.",
     duration: "4-6 years",
     format: "Evening & Weekend Classes",
+        link: "/advisory/request",
     features: [
       "Flexible class schedules",
       "Same qualification as full-time programs",
@@ -26,6 +27,7 @@ const pathways = [
     description: "Advance your expertise with postgraduate education. Specialized programs across disciplines.",
     duration: "18-24 months",
     format: "Full-time, Part-time, or Hybrid",
+        link: "/advisory/request",
     features: [
       "Research and coursework options",
       "Industry-relevant specializations",
@@ -38,6 +40,7 @@ const pathways = [
     description: "Contribute original research to your field. Join the academic community as a researcher and educator.",
     duration: "3-5 years",
     format: "Research-focused",
+        link: "/advisory/request",
     features: [
       "Original research contribution",
       "Publication opportunities",
@@ -132,52 +135,59 @@ export default function DegreeProgramsPage() {
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {pathways.map((pathway, index) => (
-              <Card key={pathway.title} className="card-hover flex flex-col">
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="h-10 w-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                      <GraduationCap className="h-5 w-5 text-accent" />
-                    </div>
-                    <div className="h-6 w-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
-                      {index + 1}
-                    </div>
-                  </div>
-                  <CardTitle className="text-xl">{pathway.title}</CardTitle>
-                  <CardDescription>{pathway.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col">
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-muted-foreground" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Duration</p>
-                        <p className="text-sm font-medium">{pathway.duration}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Building2 className="h-4 w-4 text-muted-foreground" />
-                      <div>
-                        <p className="text-xs text-muted-foreground">Format</p>
-                        <p className="text-sm font-medium">{pathway.format}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-auto">
-                    <h4 className="text-sm font-semibold mb-3">Key Features:</h4>
-                    <ul className="space-y-2">
-                      {pathway.features.map((feature) => (
-                        <li key={feature} className="flex items-start gap-2 text-sm">
-                          <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+
+  {pathways.map((pathway, index) => (
+    <Card key={pathway.title} className="card-hover flex flex-col">
+      <CardHeader>
+        <div className="flex items-center gap-2 mb-4">
+          <div className="h-10 w-10 rounded-lg bg-accent/10 flex items-center justify-center">
+            <GraduationCap className="h-5 w-5 text-accent" />
           </div>
+          <div className="h-6 w-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
+            {index + 1}
+          </div>
+        </div>
+        <CardTitle className="text-xl">{pathway.title}</CardTitle>
+        <CardDescription>{pathway.description}</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-1 flex flex-col">
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="flex items-center gap-2">
+            <Clock className="h-4 w-4 text-muted-foreground" />
+            <div>
+              <p className="text-xs text-muted-foreground">Duration</p>
+              <p className="text-sm font-medium">{pathway.duration}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Building2 className="h-4 w-4 text-muted-foreground" />
+            <div>
+              <p className="text-xs text-muted-foreground">Format</p>
+              <p className="text-sm font-medium">{pathway.format}</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-auto">
+          <h4 className="text-sm font-semibold mb-3">Key Features:</h4>
+          <ul className="space-y-2 mb-6">
+            {pathway.features.map((feature) => (
+              <li key={feature} className="flex items-start gap-2 text-sm">
+                <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+          <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
+            <Link to={pathway.link}>
+              Apply Now <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  ))}
+</div>
+
         </div>
       </section>
 
