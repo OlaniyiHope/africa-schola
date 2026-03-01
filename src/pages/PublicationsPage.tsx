@@ -365,7 +365,7 @@ useEffect(() => {
       </section>
 
       {/* Why Publish */}
-      <section className="section-padding">
+      {/* <section className="section-padding">
         <div className="container-section">
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div>
@@ -393,7 +393,7 @@ useEffect(() => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* For Researchers & Institutions */}
       {/* <section className="section-padding bg-secondary/30">
