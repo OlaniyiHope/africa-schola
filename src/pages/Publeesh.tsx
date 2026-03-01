@@ -842,35 +842,7 @@ export default function Publeesh() {
                 </div>
 
                 {/* Newsletter strip */}
-                <div className="border-t border-primary-foreground/20 pt-8">
-                  <div className="grid md:grid-cols-2 gap-6 items-center max-w-2xl mx-auto">
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <Mail className="h-5 w-5 text-accent" />
-                        <h4 className="font-semibold text-primary-foreground">Stay Updated</h4>
-                      </div>
-                      <p className="text-primary-foreground/70 text-sm">
-                        Research insights, calls for papers, and platform updates to your inbox.
-                      </p>
-                    </div>
-                    <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
-                      <Input
-                        type="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                      />
-                      <Button
-                        type="submit"
-                        className="bg-accent hover:bg-accent/90 text-white border-none whitespace-nowrap"
-                      >
-                        Subscribe
-                      </Button>
-                    </form>
-                  </div>
-                </div>
+           
               </CardContent>
             </Card>
           </div>
