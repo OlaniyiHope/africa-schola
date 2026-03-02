@@ -39,7 +39,9 @@ import { CountUpStats } from "@/components/home/CountUpStats";
 import { useToast } from "@/hooks/use-toast";
 import heroImage from "@/assets/hero-scholars.jpg";
 import { PubleeshSection } from "./PubleeshSection";
-
+import blog1 from "@/assets/blog1.png";
+import blog2 from "@/assets/blog2.png";
+import blog3 from "@/assets/blog3.png";
 const pillars = [
   {
     icon: BookOpen,
@@ -524,6 +526,7 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
                   "Exploring the critical need for localized publishing platforms to ensure African research is prioritized...",
                 date: "May 15, 2024",
                 slug: "africa-publishing",
+                    image: blog1,
               },
               {
                 title: "Improving Global Visibility of African Research",
@@ -531,6 +534,7 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
                   "Strategies and tools for researchers to increase the impact and reach of their academic work...",
                 date: "June 2, 2024",
                 slug: "global-visibility",
+                    image: blog2,
               },
               {
                 title: "Peer Review and Research Integrity in Africa",
@@ -538,12 +542,22 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
                   "Maintaining high ethical standards and robust peer-review processes in the evolving landscape...",
                 date: "June 20, 2024",
                 slug: "peer-review",
+                    image: blog3,
               },
             ].map((post) => (
               <Card
                 key={post.slug}
                 className="card-hover flex flex-col h-full bg-background border-border/50"
               >
+                   {post.image && (
+      <div className="overflow-hidden rounded-t-lg h-48">
+        <img
+          src={post.image}
+          alt={post.title}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+    )}
                 <CardHeader>
                   <div className="text-xs text-muted-foreground mb-2">
                     {post.date}
