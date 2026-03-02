@@ -891,7 +891,7 @@ const inputStyle: React.CSSProperties = {
             <div style={{ textAlign: "center", paddingTop: "1rem" }}>
 
                       <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
-              <Link to="/network/apply">
+              <Link to="/request-submitted">
                Submit Academic Support Request 
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

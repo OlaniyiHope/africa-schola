@@ -41,6 +41,7 @@ import AcademicIntegrityPage from "./pages/AcademicIntegrity";
 import GovernancePage from "./pages/Governance";
 import PubleeshResearch from "./pages/PubleeshResearch";
 import Institution from "./pages/Instituition";
+import Thanks from "./pages/Thanks";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/request-submitted" element={<Thanks />} />
           <Route path="/publeesh" element={<Publeesh />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/publications" element={<PublicationsPage />} />
