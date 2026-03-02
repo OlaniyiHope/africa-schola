@@ -76,13 +76,32 @@ const serviceBlocks = [
 ];
 
 const differentiators = [
-  { icon: Shield,    label: "Verified, not open marketplace" },
-  { icon: Briefcase, label: "Structured deployment model (matching + contracting + oversight)" },
-  { icon: Scale,     label: "Governance & compliance alignment (accreditation/licensing/reporting-ready)" },
-  { icon: Building,  label: "Escrow-based financial protection" },
-  { icon: Globe,     label: "Pan-African talent access" },
+  {
+    icon: Shield,
+    label: "Verified Academic Credentials",
+    sub: "All lecturers and researchers are vetted and verified before inclusion in the network.",
+  },
+  {
+    icon: Briefcase,
+    label: "Structured Academic Deployment",
+    sub: "We do not simply connect — we coordinate, structure, and align engagements.",
+  },
+  {
+    icon: Scale,
+    label: "Governance & Compliance Alignment",
+    sub: "Our model supports accreditation, licensing, and academic integrity requirements.",
+  },
+  {
+    icon: Building,
+    label: "Pan-African Reach",
+    sub: "Access expertise across disciplines and countries within Africa.",
+  },
+  {
+    icon: Globe,
+    label: "Ethical & Professional Framework",
+    sub: "We protect both institutions and academics through structured engagement protocols.",
+  },
 ];
-
 const engagementSteps = [
   "Define your academic requirement",
   "Align scope, level, and timeline",
@@ -464,39 +483,56 @@ export default function Institution() {
   </div>
 </section>
       {/* ── D) DIFFERENTIATORS ────────────────────────────────────────────── */}
-      <section className="section-padding">
-        <div className="section-container">
-          <div className="text-center mb-12">
-            <p className="text-xs uppercase tracking-widest font-semibold text-accent mb-3">
-              Our Difference
-            </p>
-            <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground">
-              What Makes Afrika Scholar Different
-            </h2>
-          </div>
+   {/* ── D) DIFFERENTIATORS ────────────────────────────────────────────── */}
+<section className="section-padding">
+  <div className="section-container">
+    <div className="text-center mb-12">
+      <p className="text-xs uppercase tracking-widest font-semibold text-accent mb-3">
+        Our Difference
+      </p>
+      <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground">
+        What Makes Afrika Scholar Different
+      </h2>
+    </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
-            {differentiators.map((d, i) => (
-              <div key={i} className="governance-card flex flex-col items-center text-center p-6 gap-3">
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <d.icon className="w-5 h-5 text-accent" />
-                </div>
-                <span className="text-sm font-semibold text-foreground leading-snug">{d.label}</span>
-              </div>
-            ))}
-          </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+      {differentiators.map((d, i) => (
+        <div
+          key={i}
+          className="flex flex-col items-center text-center p-6 gap-3"
+          style={{
+            borderRadius: "12px",
+            border: "1px solid rgba(0,0,0,0.08)",
+            boxShadow: "0 1px 6px rgba(0,0,0,0.06)",
+            background: "#fff",
+          }}
+        >
+          {/* Bare icon — no background circle, matches screenshot */}
+          <d.icon className="w-8 h-8 text-accent mb-1" />
 
-          <div className="text-center">
-             <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
-              <Link to="/network/apply">
-See How engagements works
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-          </div>
+          {/* Label */}
+          <span className="text-sm font-semibold text-foreground leading-snug">
+            {d.label}
+          </span>
+
+          {/* Subtext */}
+          <span className="text-xs text-muted-foreground leading-relaxed">
+            {d.sub}
+          </span>
         </div>
-      </section>
+      ))}
+    </div>
 
+    <div className="text-center">
+      <button
+        onClick={() => document.getElementById("how-engagement")?.scrollIntoView({ behavior: "smooth" })}
+        className="btn-outline inline-flex items-center gap-2"
+      >
+        See How Engagement Works <ArrowRight className="w-4 h-4" />
+      </button>
+    </div>
+  </div>
+</section>
       {/* ── E) HOW ENGAGEMENT WORKS ───────────────────────────────────────── */}
       <section id="how-engagement" className="section-alt-bg section-padding">
         <div className="section-container">
