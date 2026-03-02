@@ -802,14 +802,14 @@ const inputStyle: React.CSSProperties = {
             {/* 5 — Governance & Compliance */}
             <FormSection num={5} title="Governance & Compliance Context">
               <FGrid>
-                <FField label="Linked to accreditation/licensing?">
+                <FField label="Is this Linked to accreditation/licensing?">
                   <select style={inputStyle} value={formData.accreditationLinked || ""} onChange={e => handleChange("accreditationLinked", e.target.value)}>
                     <option value="">Select...</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                   </select>
                 </FField>
-                <FField label="Regulatory Body">
+                <FField label="Any Regulatory Body Involved">
                   <input style={inputStyle} value={formData.regulatoryBody || ""} onChange={e => handleChange("regulatoryBody", e.target.value)} placeholder="e.g. NUC, CUE, HEQSF" />
                 </FField>
                 <FField label="Named academic leads required?">
