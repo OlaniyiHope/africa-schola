@@ -111,12 +111,11 @@ const engagementSteps = [
 ];
 
 const audiences = [
-  "Universities expanding capacity",
-  "EdTech platforms scaling programs",
-  "Professional certification bodies",
-  "Corporate training divisions",
-  "Research and policy institutions",
-  "International organizations operating in Africa",
+  "Universities and Higher Education Institutions",
+  "EdTech Platforms & Online Universities",
+  "Professional & Certification Bodies",
+  "Research & Policy Organizations",
+  "International Institutions operating in Africa"
 ];
 
 const orgTypes = [
