@@ -9,12 +9,15 @@ export interface BlogPost {
   slug: string;
   readTime: string;
   tags: string[];
+  image?: string;
 }
+import blog1 from "../assets/blog1.png";
 
 export const blogPosts: BlogPost[] = [
   {
     id: 1,
     title: "Why Africa Needs Its Own Academic Publishing Infrastructure",
+    image: blog1,
     excerpt:
       "Exploring the critical need for localized publishing platforms to ensure African research is prioritized and accessible. We examine how current global gatekeeping mechanisms often overlook regional nuances and the economic impact of local knowledge ownership.",
     content: `

@@ -15,6 +15,7 @@ import {
   Clock,
   Tag,
   Sparkles,
+  Newspaper,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
@@ -147,6 +148,19 @@ export default function BlogPage() {
                       </div>
                     </div>
                   </div>
+                  <div className="mt-8 lg:mt-0 lg:w-1/3 flex justify-center">
+  {featuredPost.image ? (
+    <img
+      src={featuredPost.image}
+      alt={featuredPost.title}
+      className="w-full h-64 object-cover rounded-xl shadow-md group-hover:scale-105 transition-transform duration-300"
+    />
+  ) : (
+    <div className="h-48 w-48 rounded-2xl bg-accent/5 flex items-center justify-center border-2 border-dashed border-accent/20 group-hover:bg-accent/10 transition-colors">
+      <Newspaper className="h-24 w-24 text-accent/20" />
+    </div>
+  )}
+</div>
                   {/* <div className="mt-8 lg:mt-0 lg:w-1/3 flex justify-center">
                     <div className="h-48 w-48 rounded-2xl bg-accent/5 flex items-center justify-center border-2 border-dashed border-accent/20 group-hover:bg-accent/10 transition-colors">
                       <Newspaper className="h-24 w-24 text-accent/20" />
