@@ -120,7 +120,7 @@ export function Header() {
           <Button className="bg-accent hover:bg-accent/90" asChild>
             <Link to="/publishing/submit">Publish Paper</Link>
           </Button>
-            <Button className="bg-accent hover:bg-accent/90" asChild>
+            <Button className="bg-accent hover:bg-accent/90" style={{ backgroundColor: "#381b92" }} asChild>
     <Link to="/publeesh">Publeesh</Link>
   </Button>
         </div>
@@ -178,7 +178,7 @@ export function Header() {
                   Publish Paper
                 </Link>
               </Button>
-<Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
+<Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" style={{ backgroundColor: "#381b92" }} asChild>
   <Link to="/publeesh" onClick={() => setMobileMenuOpen(false)}>
     Publeesh
   </Link>
