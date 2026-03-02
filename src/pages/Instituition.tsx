@@ -380,7 +380,7 @@ export default function Institution() {
               Challenges We Solve
             </p>
             <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground mb-4">
-              Why Institutions Choose Afrika Scholar
+WHY INSTITUTIONS PARTNER WITH AFRIKA SCHOLAR
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto text-sm">
               Common institutional challenges our deployment infrastructure is built to address.
