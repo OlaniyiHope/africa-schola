@@ -406,14 +406,10 @@ WHY INSTITUTIONS PARTNER WITH AFRIKA SCHOLAR
           </div>
         </div>
       </section>
-
- {/* ── C) WHAT YOU CAN ACCESS ────────────────────────────────────────── */}
+{/* ── C) WHAT YOU CAN ACCESS ────────────────────────────────────────── */}
 <section className="section-alt-bg section-padding">
-  <div className="section-container mx-auto max-w-5xl px-6">
+  <div className="section-container max-w-5xl mx-auto">
     <div className="text-center mb-12">
-      <p className="text-xs uppercase tracking-widest font-semibold text-accent mb-3">
-        Our Services
-      </p>
       <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground mb-4">
         What You Can Access Through Our Network
       </h2>
@@ -424,34 +420,33 @@ WHY INSTITUTIONS PARTNER WITH AFRIKA SCHOLAR
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {serviceBlocks.map((block, i) => (
-        <div key={i} className="governance-card flex flex-col">
-          {/* Card header: icon + title inline */}
-          <div className="flex flex-row items-center gap-3 mb-5">
-            <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
-              <block.icon className="w-5 h-5 text-accent" />
-            </div>
-            <h3 className="text-base font-bold font-serif text-foreground leading-snug">
-              {block.title}
-            </h3>
-          </div>
+        <div key={i} className="governance-card flex flex-col bg-white">
+
+          {/* Large bare icon — no box, no background */}
+          <block.icon className="w-10 h-10 text-accent mb-4" />
+
+          {/* Title on its own line below icon */}
+          <h3 className="text-lg font-bold font-serif text-foreground mb-4">
+            {block.title}
+          </h3>
 
           {/* Items list */}
-          <ul className="space-y-2.5 mb-6 flex-1">
+          <ul className="space-y-2 mb-6 flex-1">
             {block.items.map((item, j) => (
-              <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                <span>{item}</span>
+              <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
+                <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+                {item}
               </li>
             ))}
           </ul>
 
-          {/* CTA — full-width, centered */}
-          <button
-            onClick={() => scrollToForm(block.formValue)}
-            className="btn-primary w-full flex flex-row items-center justify-center gap-2 text-sm"
-          >
-            {block.ctaLabel} <ArrowRight className="w-4 h-4" />
-          </button>
+          {/* CTA — full-width orange button */}
+     
+        <Button size="lg"  className="bg-accent w-full flex items-center justify-center gap-2 text-sm" asChild           onClick={() => scrollToForm(block.formValue)}>
+              <Link to="/network/apply">
+              {block.ctaLabel} <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
         </div>
       ))}
     </div>
