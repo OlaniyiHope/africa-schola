@@ -12,6 +12,11 @@ export interface BlogPost {
   image?: string;
 }
 import blog1 from "../assets/blog1.png";
+import blog2 from "../assets/blog2.png";
+import blog3 from "../assets/blog3.png";
+import blog4 from "../assets/blog4.png";
+import blog5 from "../assets/blog5.png";
+import blog6 from "../assets/blog6.png";
 
 export const blogPosts: BlogPost[] = [
   {
@@ -46,6 +51,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 2,
     title: "Improving Global Visibility of African Research",
+        image: blog2,
     excerpt:
       "Strategies and tools for researchers to increase the impact and reach of their academic work on the global stage. From digital identifiers to strategic collaboration with international repositories, we map out the path to global research recognition.",
     content: `
@@ -74,6 +80,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 3,
     title: "Peer Review and Research Integrity in Africa",
+        image: blog3,
     excerpt:
       "Maintaining high ethical standards and robust peer-review processes in the evolving African academic landscape. This article discusses the challenges of double-blind review and the rise of predatory journals.",
     content: `

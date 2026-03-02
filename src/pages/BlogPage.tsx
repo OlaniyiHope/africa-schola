@@ -191,6 +191,16 @@ export default function BlogPage() {
                 key={post.id}
                 className="flex flex-col h-full card-hover bg-background border-border/50 group"
               >
+
+                  {post.image && (
+    <div className="overflow-hidden rounded-t-lg h-48">
+      <img
+        src={post.image}
+        alt={post.title}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+    </div>
+  )}
                 <CardHeader>
                   <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground mb-4">
                     <div className="flex items-center gap-1 bg-accent/10 text-accent px-2 py-0.5 rounded font-bold uppercase tracking-wider">
