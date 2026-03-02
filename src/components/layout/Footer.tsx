@@ -38,7 +38,7 @@ const footerLinks = {
 
     { label: "Join Network", href: "/network/apply" },
     { label: "For Institutions", href: "/network#institutions" },
-    { label: "Publish", href: "/publish" },
+    { label: "Publish", href: "/publishing/submit" },
   ],
 };
 
