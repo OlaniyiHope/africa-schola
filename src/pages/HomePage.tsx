@@ -56,7 +56,7 @@ const pillars = [
     title: "Institutional Enablement & Support",
     description:
       "Access to verified lecturers and researchers for teaching, adjunct roles, research and policy advisory, peer review, curriculum development, and accreditation or licensing support for universities and EdTech platforms. ",
-    linkLabel: "University Enablement",
+    linkLabel: "Instituitional Enablement",
     link: "/instituition",
   },
   {
