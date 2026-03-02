@@ -546,7 +546,7 @@ export default function Institution() {
               Process
             </p>
             <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground mb-4">
-         HOW THE PARTNERSHIP WORKS
+         How the Partnership Works
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto text-sm">
               A transparent, structured process from first contact to active deployment.
