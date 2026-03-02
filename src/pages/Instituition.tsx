@@ -892,7 +892,7 @@ const inputStyle: React.CSSProperties = {
 
                       <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
               <Link to="/network/apply">
-               Submit Academic Deployment Request 
+               Submit Academic Support Request 
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
