@@ -524,12 +524,13 @@ export default function Institution() {
     </div>
 
     <div className="text-center">
-      <button
-        onClick={() => document.getElementById("how-engagement")?.scrollIntoView({ behavior: "smooth" })}
-        className="btn-outline inline-flex items-center gap-2"
-      >
-        See How Engagement Works <ArrowRight className="w-4 h-4" />
-      </button>
+
+         <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+              <Link to="/network/apply">
+                 See How Engagement Works 
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
     </div>
   </div>
 </section>
