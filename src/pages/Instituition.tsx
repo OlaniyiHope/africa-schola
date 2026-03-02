@@ -347,7 +347,7 @@ export default function Institution() {
            ACADEMIC DEPLOYMENT & INSTITUTIONAL PARTNERSHIPS
             </h1>
             <p className="text-lg text-primary-foreground/80 mb-4 max-w-2xl">
-             Access Verified African Academic Expertise — Structured, Ethical, Reliable
+            Empowering institutions, EdTech platforms, research organizations, and professional bodies with verified academic talent, structured deployment, and governance-aligned academic support
             </p>
             <p className="text-sm text-primary-foreground/60 italic mb-8">
               We are not a staffing agency. We are an academic coordination and deployment infrastructure.
