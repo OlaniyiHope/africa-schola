@@ -116,13 +116,13 @@ export function Header() {
         {/* CTA Buttons */}
         <div className="hidden lg:flex items-center gap-3">
           <Button variant="outline" asChild>
-            <Link to="/network/apply">Join Network</Link>
-          </Button>
-          <Button className="bg-accent hover:bg-accent/90" asChild>
             <Link to="/publishing/submit">Publish Paper</Link>
           </Button>
+          <Button className="bg-accent hover:bg-accent/90" asChild>
+            <Link to="/publeesh">Publeesh</Link>
+          </Button>
             <Button className="bg-accent hover:bg-accent/90" style={{ backgroundColor: "#381b92" }} asChild>
-    <Link to="/publeesh">Publeesh</Link>
+    <Link to="/login">Sign In</Link>
   </Button>
         </div>
 
@@ -170,18 +170,18 @@ export function Header() {
             </ul>
             <div className="mt-4 flex flex-col gap-2">
               <Button variant="outline" asChild className="w-full">
-                <Link to="/network/apply" onClick={() => setMobileMenuOpen(false)}>
-                  Join Network
+                <Link to="/publishing/submit" onClick={() => setMobileMenuOpen(false)}>
+               Publish Paper
                 </Link>
               </Button>
               <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                <Link to="/publishing/submit" onClick={() => setMobileMenuOpen(false)}>
-                  Publish Paper
+                <Link to="/publeesh" onClick={() => setMobileMenuOpen(false)}>
+                  Publeesh
                 </Link>
               </Button>
 <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" style={{ backgroundColor: "#381b92" }} asChild>
-  <Link to="/publeesh" onClick={() => setMobileMenuOpen(false)}>
-    Publeesh
+  <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+    Sign in
   </Link>
 </Button>
             </div>
