@@ -699,7 +699,7 @@ export default function Institution() {
                 <FField label="Organization Website">
                   <input style={inputStyle} type="url" value={formData.website || ""} onChange={e => handleChange("website", e.target.value)} placeholder="https://..." />
                 </FField>
-                <FField label="Primary Contact Person" required>
+                <FField label="Contact Person Name" required>
                   <input style={inputStyle} value={formData.contactPerson || ""} onChange={e => handleChange("contactPerson", e.target.value)} required placeholder="Full name" />
                 </FField>
                 <FField label="Title / Position">
