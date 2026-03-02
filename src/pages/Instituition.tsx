@@ -364,11 +364,9 @@ export default function Institution() {
                                 className="border border-white hover:border-accent hover:bg-primary-foreground/10 text-primary-foreground"
                                 asChild
                               >
-                                <Link to="/publeesh"> Schedule a Partnership Call </Link>
+                                <Link to="/publeesh">  Become an Institutional Partner </Link>
                               </Button><br></br>
-              <Link to="/network" className="text-sm text-accent hover:underline inline-flex items-center gap-1 mt-1 md:mt-0">
-                Explore the Lecturer Network <ChevronRight className="w-3 h-3" />
-              </Link>
+          
             </div>
           </div>
         </div>
