@@ -616,7 +616,7 @@ export default function Institution() {
               Get Started
             </p>
             <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground mb-3">
-              Submit Academic Deployment Request
+              Request Academic Deployment
             </h2>
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
               Complete the form below to begin the engagement process.
@@ -624,53 +624,53 @@ export default function Institution() {
           </div>
 
           {/* Auto-fill toggle */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "0.75rem",
-              background: "var(--card, #fff)",
-              border: "1px solid var(--border, #e5e7eb)",
-              borderRadius: "10px",
-              padding: "0.75rem 1.25rem",
-              maxWidth: "280px",
-              margin: "0 auto 2rem",
-            }}
-          >
-            <span className="text-sm font-semibold text-foreground">Auto-fill demo data</span>
-            <button
-              type="button"
-              onClick={handleAutoFillToggle}
-              style={{
-                position: "relative",
-                display: "inline-flex",
-                height: "24px",
-                width: "44px",
-                alignItems: "center",
-                borderRadius: "9999px",
-                border: "none",
-                cursor: "pointer",
-                flexShrink: 0,
-                backgroundColor: autoFill ? "var(--accent)" : "var(--muted, #e5e7eb)",
-                transition: "background-color 0.2s",
-              }}
-            >
-              <span
-                style={{
-                  display: "inline-block",
-                  height: "16px",
-                  width: "16px",
-                  borderRadius: "50%",
-                  backgroundColor: "#fff",
-                  boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-                  transform: autoFill ? "translateX(22px)" : "translateX(4px)",
-                  transition: "transform 0.2s",
-                }}
-              />
-            </button>
-            <span className="text-xs text-muted-foreground">{autoFill ? "Demo loaded" : "Cleared"}</span>
-          </div>
+        <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.75rem",
+    background: "var(--card, #fff)",
+    border: "1px solid var(--border, #e5e7eb)",
+    borderRadius: "10px",
+    padding: "0.75rem 1.25rem",
+    maxWidth: "280px",
+    margin: "0 auto 2rem",
+  }}
+>
+  <span className="text-sm font-semibold text-foreground">Auto-fill demo data</span>
+  <button
+    type="button"
+    onClick={handleAutoFillToggle}
+    style={{
+      position: "relative",
+      display: "inline-flex",
+      height: "24px",
+      width: "44px",
+      alignItems: "center",
+      borderRadius: "9999px",
+      border: "none",
+      cursor: "pointer",
+      flexShrink: 0,
+      backgroundColor: autoFill ? "#ea580c" : "#d1d5db",
+      transition: "background-color 0.2s",
+    }}
+  >
+    <span
+      style={{
+        display: "inline-block",
+        height: "16px",
+        width: "16px",
+        borderRadius: "50%",
+        backgroundColor: "#fff",
+        boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+        transform: autoFill ? "translateX(22px)" : "translateX(4px)",
+        transition: "transform 0.2s",
+      }}
+    />
+  </button>
+  <span className="text-xs text-muted-foreground">{autoFill ? "On" : "Off"}</span>
+</div>
 
           <form
             onSubmit={(e) => { e.preventDefault(); window.location.href = "/university-enablement/request-submitted"; }}
