@@ -519,9 +519,12 @@ See How engagements works
           </div>
 
           <div className="text-center">
-            <button onClick={() => scrollToForm()} className="btn-primary">
-              Start Request <ArrowRight className="w-4 h-4" />
-            </button>
+           <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+              <Link to="/network/apply">
+            Start Request
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -820,9 +823,14 @@ See How engagements works
 
             {/* Submit */}
             <div style={{ textAlign: "center", paddingTop: "1rem" }}>
-              <button type="submit" className="btn-primary text-base px-10 py-4">
-                Submit Academic Deployment Request <ArrowRight className="w-4 h-4" />
-              </button>
+
+                      <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+              <Link to="/network/apply">
+               Submit Academic Deployment Request 
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+           
               <p style={{ fontSize: "0.75rem", color: "var(--muted-foreground)", marginTop: "0.75rem" }}>
                 Our coordination team will respond within 24–48 hours.
               </p>
