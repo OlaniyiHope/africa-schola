@@ -146,7 +146,7 @@ const engagementTypes = [
 
 const engagementModes = ["Fully Remote", "Hybrid", "In-Person", "Flexible"];
 
-const budgetRanges = ["Under $500", "$500–$2,000", "$2,000–$5,000", "$5,000+", "Prefer to discuss"];
+const budgetRanges = ["Under ₦500", "₦500–₦2,000", "₦2,000–₦5,000", "₦5,000+", "Prefer to discuss"];
 
 const nextSteps = [
   "Schedule Introductory Call", "Receive Proposal via Email", "Urgent—Contact Immediately",
