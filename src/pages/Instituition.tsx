@@ -125,10 +125,10 @@ const orgTypes = [
 ];
 
 const supportTypes = [
-  "Teaching & Faculty Deployment",     "Online / Blended Teaching Support",
+  "Teaching & Academic Delivery",     "Online / Blended Teaching Support",
   "Short-Term Academic Delivery",       "Research & Scholarly Engagement",
   "Peer Review & Editorial Support",    "Academic Validation / Quality Assurance",
-  "Curriculum & Program Development",   "Accreditation / Licensing Support",
+  "Curriculum & Content Development",   "Accreditation / Licensing Support",
   "Ongoing Academic Advisory",          "Other (Specify)",
 ];
 
