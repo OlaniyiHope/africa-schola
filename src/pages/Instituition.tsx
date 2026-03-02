@@ -344,11 +344,10 @@ export default function Institution() {
               Institution Enablement
             </p>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
-              Institutional Academic Deployment
+           ACADEMIC DEPLOYMENT & INSTITUTIONAL PARTNERSHIPS
             </h1>
             <p className="text-lg text-primary-foreground/80 mb-4 max-w-2xl">
-              Strengthen your programs, meet licensing requirements, and deploy qualified academic
-              expertise — without uncertainty, delays, or compliance risk.
+             Access Verified African Academic Expertise — Structured, Ethical, Reliable
             </p>
             <p className="text-sm text-primary-foreground/60 italic mb-8">
               We are not a staffing agency. We are an academic coordination and deployment infrastructure.
@@ -357,12 +356,16 @@ export default function Institution() {
               <Button size="lg" className="bg-accent hover:bg-accent/90" onClick={() => scrollToForm()}>
                 Request Academic Support <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline"
-                className="border-white/40 text-white hover:bg-white/10 hover:text-white"
-                onClick={() => document.getElementById("how-engagement")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                Schedule a Partnership Call <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+          
+      
+                          <Button
+                                size="lg"
+                                variant="default"
+                                className="border border-white hover:border-accent hover:bg-primary-foreground/10 text-primary-foreground"
+                                asChild
+                              >
+                                <Link to="/publeesh"> Schedule a Partnership Call </Link>
+                              </Button><br></br>
               <Link to="/network" className="text-sm text-accent hover:underline inline-flex items-center gap-1 mt-1 md:mt-0">
                 Explore the Lecturer Network <ChevronRight className="w-3 h-3" />
               </Link>
