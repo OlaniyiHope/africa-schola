@@ -103,11 +103,11 @@ const differentiators = [
   },
 ];
 const engagementSteps = [
-  "Define your academic requirement",
-  "Align scope, level, and timeline",
-  "Receive structured candidate matches",
-  "Approve & formalize engagement",
-  "Deploy with ongoing oversight",
+  "Submit Your Academic Requirement",
+  "Define Scope, Duration & Expertise Needed",
+  "We Match Verified Academic Partners",
+  "Structured Coordination & Engagement",
+  "Ongoing Oversight & Quality Assurance",
 ];
 
 const audiences = [
@@ -546,7 +546,7 @@ export default function Institution() {
               Process
             </p>
             <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground mb-4">
-              How Engagement Works
+         HOW THE PARTNERSHIP WORKS
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto text-sm">
               A transparent, structured process from first contact to active deployment.
