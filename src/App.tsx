@@ -39,6 +39,8 @@ import RetractionPolicyPage from "./pages/RetractionPolicy";
 import CompliancePage from "./pages/Compliance";
 import AcademicIntegrityPage from "./pages/AcademicIntegrity";
 import GovernancePage from "./pages/Governance";
+import PubleeshResearch from "./pages/PubleeshResearch";
+import Institution from "./pages/Instituition";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +63,7 @@ const App = () => (
           <Route path="/network/apply" element={<NetworkApplicationPage />} />
           <Route path="/advisory" element={<AdvisoryPage />} />
           <Route path="/advisory/request" element={<AdvisoryRequestPage />} />
+          <Route path="/instituition" element={<Institution />} />
           <Route
             path="/advisory/transcripts"
             element={<TranscriptAdvisoryPage />}
@@ -74,6 +77,7 @@ const App = () => (
             element={<StudyInAfricaPage />}
           />
           <Route path="/publishing/calls" element={<CallForPapersPage />} />
+          <Route path="/publish-research" element={<PubleeshResearch />} />
           <Route path="/publishing/submit" element={<SubmitManuscriptPage />} />
           <Route path="/submit-form" element={<SubmitForm />} />
           <Route path="/start-publishing" element={<Start />} />

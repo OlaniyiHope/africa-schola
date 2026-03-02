@@ -18,6 +18,7 @@ const navItems = [
   { label: "About", href: "/about" },
   { label: "Publications", href: "/publications" },
   { label: "Network", href: "/network" },
+  { label: "Instituition", href: "/instituition" },
   {
     label: "Advisory",
     href: "/advisory",
