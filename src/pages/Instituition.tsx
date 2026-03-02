@@ -809,7 +809,7 @@ const inputStyle: React.CSSProperties = {
                     <option value="No">No</option>
                   </select>
                 </FField>
-                <FField label="Any Regulatory Body Involved">
+                <FField label="Any Regulatory Body Involved?">
                   <input style={inputStyle} value={formData.regulatoryBody || ""} onChange={e => handleChange("regulatoryBody", e.target.value)} placeholder="e.g. NUC, CUE, HEQSF" />
                 </FField>
                 <FField label="Named academic leads required?">
