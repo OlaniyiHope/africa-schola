@@ -619,7 +619,8 @@ export default function Institution() {
               Request Academic Deployment
             </h2>
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
-              Complete the form below to begin the engagement process.
+           If you require lecturers, researchers, reviewers, or academic validation support, complete the request form below.
+
             </p>
           </div>
 
