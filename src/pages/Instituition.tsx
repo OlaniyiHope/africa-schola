@@ -589,7 +589,7 @@ export default function Institution() {
               Our Partners
             </p>
             <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground">
-              Who We Work With
+              Who this is For
             </h2>
           </div>
 
