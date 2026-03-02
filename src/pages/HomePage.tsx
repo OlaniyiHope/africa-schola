@@ -47,31 +47,31 @@ const pillars = [
     icon: BookOpen,
     title: "Journal Publishing",
     description:
-      "Peer-reviewed, open-access journals aligned with international publishing, ethical, and editorial standards.",
+      "End-to-end journal creation, hosting, and management including article submission, peer review workflows, editorial governance, call for papers, DOI & citation readiness, article analytics, and optional revenue-sharing models.",
     linkLabel: "Publishing Standards",
-    link: "/publications",
+    link: "/standards",
   },
   {
     icon: GraduationCap,
-    title: "University & Academic Enablement",
+    title: "Institutional Enablement & Support",
     description:
-      "University-led research dissemination, publishing support, and academic coordination.",
+      "Access to verified lecturers and researchers for teaching, adjunct roles, research and policy advisory, peer review, curriculum development, and accreditation or licensing support for universities and EdTech platforms. ",
     linkLabel: "University Enablement",
-    link: "/advisory",
+    link: "/instituition",
   },
   {
     icon: Users,
-    title: "Academic Engagement & Network",
+    title: "Academic Advisory",
     description:
-      "Lecturers, researchers, and scholars publish, review, collaborate, and participate in a curated academic ecosystem.",
+      "University transcript facilitation, part-time and postgraduate program advisory, cross-border “Study in Africa” coordination, academic documentation support, and structured partnerships with selected universities.",
     linkLabel: "How Academics Engage",
-    link: "/network",
+    link: "/advisory",
   },
   {
     icon: Puzzle,
-    title: "Academic Engagement Enablement & Integration",
+    title: "Academic Engagement and Network",
     description:
-      "APIs and tools enabling EdTech platforms and institutions to access verified African academic content.",
+      "A structured platform connecting verified academics to part-time lecturing roles, EdTech delivery, research and industry-linked projects, peer review and editorial work, curriculum development, and income-generating academic engagements.",
     linkLabel: "Learn More",
     link: "/about#enablement",
   },
