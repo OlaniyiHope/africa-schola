@@ -159,6 +159,8 @@ const countries = [
   "DR Congo", "Angola", "Other",
 ];
 
+
+
 const demoData = {
   orgName: "Pan-African Digital University",
   orgType: "Online University",
@@ -315,7 +317,19 @@ export default function Institution() {
   const [selectedSupport, setSelectedSupport] = useState<string[]>(
     autoFill ? demoData.supportTypes : []
   );
-
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  borderRadius: "8px",
+  border: "1.5px solid #d1d5db",
+  background: "#ffffff",
+  padding: "0.65rem 0.875rem",
+  fontSize: "0.875rem",
+  color: "var(--foreground)",
+  outline: "none",
+  fontFamily: "inherit",
+  boxSizing: "border-box",
+  appearance: "auto",
+};
   const handleAutoFillToggle = () => {
     const next = !autoFill;
     setAutoFill(next);
@@ -625,7 +639,7 @@ export default function Institution() {
           </div>
 
           {/* Auto-fill toggle */}
-        <div
+        {/* <div
   style={{
     display: "flex",
     alignItems: "center",
@@ -671,7 +685,7 @@ export default function Institution() {
     />
   </button>
   <span className="text-xs text-muted-foreground">{autoFill ? "On" : "Off"}</span>
-</div>
+</div> */}
 
           <form
             onSubmit={(e) => { e.preventDefault(); window.location.href = "/university-enablement/request-submitted"; }}
@@ -681,16 +695,16 @@ export default function Institution() {
             {/* 1 — Organization Information */}
             <FormSection num={1} title="Organization Information">
               <FGrid>
-                <FField label="Organization Name" required>
+                <FField label="Organization Name">
                   <input style={inputStyle} value={formData.orgName || ""} onChange={e => handleChange("orgName", e.target.value)} required placeholder="e.g. University of Lagos" />
                 </FField>
-                <FField label="Organization Type" required>
+                <FField label="Organization Type" >
                   <select style={inputStyle} value={formData.orgType || ""} onChange={e => handleChange("orgType", e.target.value)} required>
                     <option value="">Select type...</option>
                     {orgTypes.map(t => <option key={t} value={t}>{t}</option>)}
                   </select>
                 </FField>
-                <FField label="Country of Operation" required>
+                <FField label="Country of Operation" >
                   <select style={inputStyle} value={formData.country || ""} onChange={e => handleChange("country", e.target.value)} required>
                     <option value="">Select country...</option>
                     {countries.map(c => <option key={c} value={c}>{c}</option>)}
@@ -699,13 +713,13 @@ export default function Institution() {
                 <FField label="Organization Website Url">
                   <input style={inputStyle} type="url" value={formData.website || ""} onChange={e => handleChange("website", e.target.value)} placeholder="https://..." />
                 </FField>
-                <FField label="Contact Person Name" required>
+                <FField label="Contact Person Name" >
                   <input style={inputStyle} value={formData.contactPerson || ""} onChange={e => handleChange("contactPerson", e.target.value)} required placeholder="Full name" />
                 </FField>
                 <FField label="Title / Position">
                   <input style={inputStyle} value={formData.title || ""} onChange={e => handleChange("title", e.target.value)} placeholder="e.g. Academic Registrar" />
                 </FField>
-                <FField label="Official Email Address" required>
+                <FField label="Official Email Address" >
                   <input style={inputStyle} type="email" value={formData.email || ""} onChange={e => handleChange("email", e.target.value)} required placeholder="you@institution.ac" />
                 </FField>
                 <FField label="Phone Number">
