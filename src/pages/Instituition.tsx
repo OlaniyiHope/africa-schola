@@ -696,7 +696,7 @@ export default function Institution() {
                     {countries.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </FField>
-                <FField label="Organization Website">
+                <FField label="Organization Website Url">
                   <input style={inputStyle} type="url" value={formData.website || ""} onChange={e => handleChange("website", e.target.value)} placeholder="https://..." />
                 </FField>
                 <FField label="Contact Person Name" required>
