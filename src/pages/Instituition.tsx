@@ -418,38 +418,49 @@ WHY INSTITUTIONS PARTNER WITH AFRIKA SCHOLAR
       </p>
     </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {serviceBlocks.map((block, i) => (
-        <div key={i} className="governance-card flex flex-col bg-white">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {serviceBlocks.map((block, i) => (
+    <div
+      key={i}
+      className="flex flex-col bg-white p-6"
+      style={{
+        borderRadius: "16px",
+        boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+        border: "1px solid rgba(0,0,0,0.06)",
+      }}
+    >
+      {/* Large bare icon */}
+      <block.icon className="w-10 h-10 text-accent mb-4" />
 
-          {/* Large bare icon — no box, no background */}
-          <block.icon className="w-10 h-10 text-accent mb-4" />
+      {/* Title */}
+      <h3 className="text-lg font-bold font-serif text-foreground mb-4">
+        {block.title}
+      </h3>
 
-          {/* Title on its own line below icon */}
-          <h3 className="text-lg font-bold font-serif text-foreground mb-4">
-            {block.title}
-          </h3>
+      {/* Items list */}
+      <ul className="space-y-2 mb-6 flex-1">
+        {block.items.map((item, j) => (
+          <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
+            <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+            {item}
+          </li>
+        ))}
+      </ul>
 
-          {/* Items list */}
-          <ul className="space-y-2 mb-6 flex-1">
-            {block.items.map((item, j) => (
-              <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          {/* CTA — full-width orange button */}
-     
-        <Button size="lg"  className="bg-accent w-full flex items-center justify-center gap-2 text-sm" asChild           onClick={() => scrollToForm(block.formValue)}>
-              <Link to="/network/apply">
-              {block.ctaLabel} <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-        </div>
-      ))}
+      {/* CTA — smaller button */}
+      <Button
+        size="sm"
+        className="bg-accent hover:bg-accent/90 text-white w-full flex items-center justify-center gap-2 text-xs py-2"
+        asChild
+        onClick={() => scrollToForm(block.formValue)}
+      >
+        <Link to="/network/apply">
+          {block.ctaLabel} <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
+      </Button>
     </div>
+  ))}
+</div>
   </div>
 </section>
       {/* ── D) DIFFERENTIATORS ────────────────────────────────────────────── */}
