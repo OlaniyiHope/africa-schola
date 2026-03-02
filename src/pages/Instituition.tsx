@@ -395,10 +395,13 @@ export default function Institution() {
             ))}
           </div>
 
-          <div className="text-center">
-            <button onClick={() => scrollToForm()} className="btn-primary">
-              Request Support Now <ArrowRight className="w-4 h-4" />
-            </button>
+         <div className="text-center mt-8">
+            <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+              <Link to="/network/apply">
+              Request Support Now
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
