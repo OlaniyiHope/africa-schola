@@ -429,12 +429,14 @@ const inputStyle: React.CSSProperties = {
           </div>
 
          <div className="text-center mt-8">
-            <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
-              <Link to="/network/apply">
-              Request Support Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
+    <Button
+  size="lg"
+  className="bg-accent hover:bg-accent/90"
+  onClick={() => scrollToForm()}
+>
+  Request Support Now
+  <ArrowRight className="ml-2 h-5 w-5" />
+</Button>
           </div>
         </div>
       </section>
@@ -479,17 +481,13 @@ const inputStyle: React.CSSProperties = {
         ))}
       </ul>
 
-      {/* CTA — smaller button */}
-      <Button
-        size="sm"
-        className="bg-accent hover:bg-accent/90 text-white w-full flex items-center justify-center gap-2 text-xs py-2"
-        asChild
-        onClick={() => scrollToForm(block.formValue)}
-      >
-        <Link to="/network/apply">
-          {block.ctaLabel} <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
-      </Button>
+<Button
+  size="sm"
+  className="bg-accent hover:bg-accent/90 text-white w-full flex items-center justify-center gap-2 text-xs py-2"
+  onClick={() => scrollToForm(block.formValue)}
+>
+  {block.ctaLabel} <ArrowRight className="w-3.5 h-3.5" />
+</Button>
     </div>
   ))}
 </div>
@@ -584,12 +582,14 @@ const inputStyle: React.CSSProperties = {
           </div>
 
           <div className="text-center">
-           <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
-              <Link to="/network/apply">
-            Start Request
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
+       <Button
+  size="lg"
+  className="bg-accent hover:bg-accent/90"
+  onClick={() => scrollToForm()}
+>
+  Start Request
+  <ArrowRight className="ml-2 h-5 w-5" />
+</Button>
           </div>
         </div>
       </section>
