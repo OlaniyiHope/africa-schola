@@ -26,7 +26,7 @@ export default function Confirm() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="flex items-center gap-2" asChild>
-              <Link to="/university-enablement">
+              <Link to="/instituition">
                 Back to Enablement
               </Link>
             </Button>
