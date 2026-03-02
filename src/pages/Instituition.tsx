@@ -406,57 +406,56 @@ export default function Institution() {
         </div>
       </section>
 
-      {/* ── C) WHAT YOU CAN ACCESS ────────────────────────────────────────── */}
-      <section className="section-alt-bg section-padding">
-        <div className="section-container">
-          <div className="text-center mb-12">
-            <p className="text-xs uppercase tracking-widest font-semibold text-accent mb-3">
-              Our Services
-            </p>
-            <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground mb-4">
-              What You Can Access Through Our Network
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
-              Structured academic services designed for institutional deployment.
-            </p>
+ {/* ── C) WHAT YOU CAN ACCESS ────────────────────────────────────────── */}
+<section className="section-alt-bg section-padding">
+  <div className="section-container mx-auto max-w-5xl px-6">
+    <div className="text-center mb-12">
+      <p className="text-xs uppercase tracking-widest font-semibold text-accent mb-3">
+        Our Services
+      </p>
+      <h2 className="text-2xl md:text-3xl font-bold font-serif text-foreground mb-4">
+        What You Can Access Through Our Network
+      </h2>
+      <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
+        Structured academic services designed for institutional deployment.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {serviceBlocks.map((block, i) => (
+        <div key={i} className="governance-card flex flex-col">
+          {/* Card header: icon + title inline */}
+          <div className="flex flex-row items-center gap-3 mb-5">
+            <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+              <block.icon className="w-5 h-5 text-accent" />
+            </div>
+            <h3 className="text-base font-bold font-serif text-foreground leading-snug">
+              {block.title}
+            </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {serviceBlocks.map((block, i) => (
-              <div key={i} className="governance-card flex flex-col">
-                {/* Card header: icon + title inline */}
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
-                    <block.icon className="w-5 h-5 text-accent" />
-                  </div>
-                  <h3 className="text-base font-bold font-serif text-foreground leading-snug">
-                    {block.title}
-                  </h3>
-                </div>
-
-                {/* Items list */}
-                <ul className="space-y-2.5 mb-6 flex-1">
-                  {block.items.map((item, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA — full-width, justified center */}
-                <button
-                  onClick={() => scrollToForm(block.formValue)}
-                  className="btn-primary w-full justify-center text-sm"
-                >
-                  {block.ctaLabel} <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
+          {/* Items list */}
+          <ul className="space-y-2.5 mb-6 flex-1">
+            {block.items.map((item, j) => (
+              <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <CheckCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                <span>{item}</span>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
 
+          {/* CTA — full-width, centered */}
+          <button
+            onClick={() => scrollToForm(block.formValue)}
+            className="btn-primary w-full flex flex-row items-center justify-center gap-2 text-sm"
+          >
+            {block.ctaLabel} <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
       {/* ── D) DIFFERENTIATORS ────────────────────────────────────────────── */}
       <section className="section-padding">
         <div className="section-container">
