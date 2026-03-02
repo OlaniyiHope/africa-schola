@@ -536,7 +536,7 @@ export default function Institution() {
 </section>
       {/* ── E) HOW ENGAGEMENT WORKS ───────────────────────────────────────── */}
       <section id="how-engagement" className="section-alt-bg section-padding">
-        <div className="section-container">
+<div className="section-container max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-xs uppercase tracking-widest font-semibold text-accent mb-3">
               Process
