@@ -42,6 +42,8 @@ import GovernancePage from "./pages/Governance";
 import PubleeshResearch from "./pages/PubleeshResearch";
 import Institution from "./pages/Instituition";
 import Thanks from "./pages/Thanks";
+import Schedule from "./pages/Schedule";
+import Confirm from "./pages/Confirm";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +61,8 @@ const App = () => (
           <Route path="/" element={<HomePage />} />
           <Route path="/request-submitted" element={<Thanks />} />
           <Route path="/publeesh" element={<Publeesh />} />
+          <Route path="/schedule-a-call" element={<Schedule />} />
+          <Route path="/schedule-a-call/confirm" element={<Confirm />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/network" element={<NetworkPage />} />

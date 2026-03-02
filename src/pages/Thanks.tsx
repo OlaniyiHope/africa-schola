@@ -85,7 +85,7 @@ export default function Thanks() {
               className="bg-accent hover:bg-accent/90 flex items-center gap-2"
               asChild
             >
-              <Link to="/schedule-call">
+              <Link to="/schedule-a-call">
                 <Calendar className="w-4 h-4" /> Schedule a Call Now
               </Link>
             </Button>
