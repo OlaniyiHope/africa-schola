@@ -485,7 +485,7 @@ export default function Institution() {
       {/* ── D) DIFFERENTIATORS ────────────────────────────────────────────── */}
    {/* ── D) DIFFERENTIATORS ────────────────────────────────────────────── */}
 <section className="section-padding">
-  <div className="section-container">
+<div className="section-container max-w-4xl mx-auto">
     <div className="text-center mb-12">
       <p className="text-xs uppercase tracking-widest font-semibold text-accent mb-3">
         Our Difference
@@ -495,7 +495,7 @@ export default function Institution() {
       </h2>
     </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
       {differentiators.map((d, i) => (
         <div
           key={i}
