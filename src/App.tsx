@@ -45,12 +45,19 @@ import Thanks from "./pages/Thanks";
 import Schedule from "./pages/Schedule";
 import Confirm from "./pages/Confirm";
 import InstituitionApply from "./pages/InstituitionApply";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import { AuthProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <AuthProvider>
+
+
+
             <JournalProvider>
 
 
@@ -72,6 +79,8 @@ const App = () => (
           <Route path="/advisory" element={<AdvisoryPage />} />
           <Route path="/advisory/request" element={<AdvisoryRequestPage />} />
           <Route path="/instituition" element={<Institution />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route
             path="/advisory/transcripts"
             element={<TranscriptAdvisoryPage />}
@@ -109,6 +118,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
                   </JournalProvider>
+                        </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
