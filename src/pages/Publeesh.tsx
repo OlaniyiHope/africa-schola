@@ -683,13 +683,13 @@ export default function Publeesh() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="w-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                    className="w-full border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
                     asChild
                   >
-                    <Link to="/advisory">
-                      Request Institutional Access
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
+          <Link to="/publeesh/institutional-access">
+  Request Institutional Access
+  <ArrowRight className="ml-2 h-4 w-4" />
+</Link>
                   </Button>
                 </div>
               </CardContent>
