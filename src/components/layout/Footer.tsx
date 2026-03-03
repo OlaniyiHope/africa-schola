@@ -7,7 +7,8 @@ import {
   Twitter,
   Linkedin,
   Youtube,
-  Instagram
+  Instagram,
+  MessageCircle
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -96,12 +97,14 @@ export function Footer() {
                 info@afrikascholar.org
               </a>
               <a
-                href="tel:+2341234567890"
-                className="flex items-center gap-2 hover:text-accent transition-colors"
-              >
-                <Phone className="h-4 w-4" />
-                +234 123 456 7890
-              </a>
+          href="https://wa.me/2348109976152"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center gap-2 hover:text-accent transition-colors"
+>
+  <MessageCircle className="h-4 w-4" />
+  +234 810 997 6152
+</a>
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 mt-0.5" />
                 <span className="text-primary-foreground/80">
