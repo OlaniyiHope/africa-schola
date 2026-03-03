@@ -113,7 +113,7 @@ const App = () => (
             element={<StartJournalPage />}
           />
           <Route path="/article" element={<ArticlePreviewPage />} />
-          <Route path="/existing-journal" element={<ExistingJournal />} />
+          <Route path="/existing-journals" element={<ExistingJournal />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogDetailPage />} />
           <Route path="*" element={<NotFound />} />
