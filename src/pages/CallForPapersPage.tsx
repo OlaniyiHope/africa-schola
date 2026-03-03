@@ -100,7 +100,7 @@ export default function CallForPapersPage() {
                     </div>
                   </div>
                   <Button className="mt-auto" asChild>
-                    <Link to="/publishing/submit">
+                    <Link to="/calls-for-paper">
                       Submit Paper
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
