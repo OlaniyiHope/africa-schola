@@ -48,6 +48,7 @@ import InstituitionApply from "./pages/InstituitionApply";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { AuthProvider } from "./context/AuthContext";
+import ExistingJournal from "./pages/ExistingJournal";
 
 const queryClient = new QueryClient();
 
@@ -112,6 +113,7 @@ const App = () => (
             element={<StartJournalPage />}
           />
           <Route path="/article" element={<ArticlePreviewPage />} />
+          <Route path="/existing-journal" element={<ExistingJournal />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogDetailPage />} />
           <Route path="*" element={<NotFound />} />
