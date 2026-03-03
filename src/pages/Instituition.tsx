@@ -579,13 +579,10 @@ const inputStyle: React.CSSProperties = {
           </div>
 
           <div className="text-center">
-       <Button
-  size="lg"
-  className="bg-accent hover:bg-accent/90"
-  onClick={() => scrollToForm()}
->
-  Start Request
-  <ArrowRight className="ml-2 h-5 w-5" />
+ <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+  <Link to="/instituition/apply">
+    Start Request <ArrowRight className="ml-2 h-5 w-5" />
+  </Link>
 </Button>
           </div>
         </div>
