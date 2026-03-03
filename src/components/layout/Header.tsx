@@ -57,61 +57,58 @@ export function Header() {
           <img src={logo} alt="Afrika Scholar" className="h-10 w-auto" />
         </Link>
 
-        {/* Desktop Navigation */}
-        <NavigationMenu className="hidden lg:flex">
-          <NavigationMenuList>
-            {navItems.map((item) =>
-              item.children ? (
-                <NavigationMenuItem key={item.label}  className="relative">
-                  <NavigationMenuTrigger
-                    className={cn(
-                      "bg-transparent",
-                      isActive(item.href) && "text-accent"
-                    )}
-                  >
-                    {item.label}
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4">
-                      {item.children.map((child) => (
-                        <li key={child.href}>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={child.href}
-                              className={cn(
-                                "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent",
-                                isActive(child.href) && "bg-accent/10 text-accent"
-                              )}
-                            >
-                              <div className="text-sm font-medium leading-none">
-                                {child.label}
-                              </div>
-                              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                {child.description}
-                              </p>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              ) : (
-                <NavigationMenuItem key={item.label}>
-                  <Link
-                    to={item.href}
-                    className={cn(
-                      "group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent focus:outline-none",
-                      isActive(item.href) && "text-accent"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                </NavigationMenuItem>
-              )
-            )}
-          </NavigationMenuList>
-        </NavigationMenu>
+{/* Desktop Navigation */}
+<nav className="hidden lg:flex items-center gap-1">
+  {navItems.map((item) =>
+    item.children ? (
+      <div key={item.label} className="relative group">
+        <button
+          className={cn(
+            "inline-flex h-10 items-center gap-1 rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent/10 hover:text-accent",
+            isActive(item.href) && "text-accent"
+          )}
+        >
+          {item.label}
+          <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
+        </button>
+
+        {/* Dropdown — directly under trigger */}
+        <div className="absolute left-0 top-full z-50 hidden group-hover:block pt-1">
+          <ul
+            className="w-[340px] rounded-lg border bg-white p-2 shadow-lg"
+            style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.12)" }}
+          >
+            {item.children.map((child) => (
+              <li key={child.href}>
+                <Link
+                  to={child.href}
+                  className={cn(
+                    "block rounded-md p-3 transition-colors hover:bg-accent/10 hover:text-accent",
+                    isActive(child.href) && "bg-accent/10 text-accent"
+                  )}
+                >
+                  <div className="text-sm font-semibold leading-none mb-1">{child.label}</div>
+                  <p className="text-xs text-muted-foreground leading-snug">{child.description}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    ) : (
+      <Link
+        key={item.label}
+        to={item.href}
+        className={cn(
+          "inline-flex h-10 items-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent/10 hover:text-accent",
+          isActive(item.href) && "text-accent"
+        )}
+      >
+        {item.label}
+      </Link>
+    )
+  )}
+</nav>
 
         {/* CTA Buttons */}
         <div className="hidden lg:flex items-center gap-3">
