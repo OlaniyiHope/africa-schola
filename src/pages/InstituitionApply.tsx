@@ -433,7 +433,7 @@ const inputStyle: React.CSSProperties = {
       <div className="bg-secondary/30 border-b">
         <div className="container-section py-3">
           <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link to="/network" className="hover:text-foreground">Network</Link>
+            <Link to="/instituition" className="hover:text-foreground">Instituition</Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-foreground">Apply</span>
           </nav>
