@@ -49,6 +49,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { AuthProvider } from "./context/AuthContext";
 import ExistingJournal from "./pages/ExistingJournal";
+import InstitutionAccess from "./pages/InstituitionAccess";
 
 const queryClient = new QueryClient();
 
@@ -99,6 +100,7 @@ const App = () => (
           <Route path="/publishing/submit" element={<SubmitManuscriptPage />} />
           <Route path="/submit-form" element={<SubmitForm />} />
           <Route path="/start-publishing" element={<Start />} />
+          <Route path="/instituitional-access" element={<InstitutionAccess />} />
           <Route path="/propose" element={<Propose />} />
           <Route path="/governance" element={<Gov />} />
           <Route path="/standards" element={<Standards />} />
