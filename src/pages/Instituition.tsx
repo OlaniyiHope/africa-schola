@@ -385,9 +385,11 @@ const inputStyle: React.CSSProperties = {
               We are not a staffing agency. We are an academic coordination and deployment infrastructure.
             </p>
             <div className="flex flex-row flex-wrap gap-3 items-center">
-              <Button size="lg" className="bg-accent hover:bg-accent/90" onClick={() => scrollToForm()}>
-                Request Academic Support <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+           <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+  <Link to="/instituition/apply">
+    Request Academic Support <ArrowRight className="ml-2 h-5 w-5" />
+  </Link>
+</Button>
           
       
                           <Button
@@ -429,13 +431,10 @@ const inputStyle: React.CSSProperties = {
           </div>
 
          <div className="text-center mt-8">
-    <Button
-  size="lg"
-  className="bg-accent hover:bg-accent/90"
-  onClick={() => scrollToForm()}
->
-  Request Support Now
-  <ArrowRight className="ml-2 h-5 w-5" />
+<Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
+  <Link to="/instituition/apply">
+    Request Support Now <ArrowRight className="ml-2 h-5 w-5" />
+  </Link>
 </Button>
           </div>
         </div>
@@ -481,12 +480,10 @@ const inputStyle: React.CSSProperties = {
         ))}
       </ul>
 
-<Button
-  size="sm"
-  className="bg-accent hover:bg-accent/90 text-white w-full flex items-center justify-center gap-2 text-xs py-2"
-  onClick={() => scrollToForm(block.formValue)}
->
-  {block.ctaLabel} <ArrowRight className="w-3.5 h-3.5" />
+<Button size="sm" className="bg-accent hover:bg-accent/90 text-white w-full flex items-center justify-center gap-2 text-xs py-2" asChild>
+  <Link to="/instituition/apply">
+    {block.ctaLabel} <ArrowRight className="w-3.5 h-3.5" />
+  </Link>
 </Button>
     </div>
   ))}
@@ -618,7 +615,6 @@ const inputStyle: React.CSSProperties = {
           </div>
         </div>
       </section>
-
 
 
     </Layout>
