@@ -44,6 +44,7 @@ import Institution from "./pages/Instituition";
 import Thanks from "./pages/Thanks";
 import Schedule from "./pages/Schedule";
 import Confirm from "./pages/Confirm";
+import InstituitionApply from "./pages/InstituitionApply";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +68,7 @@ const App = () => (
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/network" element={<NetworkPage />} />
           <Route path="/network/apply" element={<NetworkApplicationPage />} />
+          <Route path="/instituition/apply" element={<InstituitionApply />} />
           <Route path="/advisory" element={<AdvisoryPage />} />
           <Route path="/advisory/request" element={<AdvisoryRequestPage />} />
           <Route path="/instituition" element={<Institution />} />
