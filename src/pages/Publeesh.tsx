@@ -686,7 +686,7 @@ export default function Publeesh() {
                     className="w-full border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
                     asChild
                   >
-          <Link to="/publeesh/institutional-access">
+          <Link to="/institutional-access">
   Request Institutional Access
   <ArrowRight className="ml-2 h-4 w-4" />
 </Link>
