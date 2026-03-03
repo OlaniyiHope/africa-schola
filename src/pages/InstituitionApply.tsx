@@ -488,7 +488,7 @@ If you require lecturers, researchers, reviewers, or academic validation support
     </div>
   </div>
 </section>
-
+<div style={{ maxWidth: "720px", margin: "0 auto", padding: "2rem 1rem" }}>
     <form
              onSubmit={(e) => { e.preventDefault(); window.location.href = "/university-enablement/request-submitted"; }}
              style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
@@ -705,6 +705,9 @@ If you require lecturers, researchers, reviewers, or academic validation support
              </div>
  
            </form>
+
+</div>
+
     </Layout>
   );
 }
