@@ -31,6 +31,125 @@ import {
 import { Layout } from "@/components/layout";
 import { toast } from "@/hooks/use-toast";
 import transcriptHero from "@/assets/about-conference.jpg";
+
+const painPoints = [
+  "Accreditation requirements demanding qualified lecturers",
+  "Urgent program expansion without faculty capacity",
+  "EdTech licensing needing named academic leads",
+  "Inconsistent teaching quality across modules",
+  "Research capacity gaps",
+  "Curriculum requiring validation or redesign",
+];
+
+
+
+
+const engagementSteps = [
+  "Submit Your Academic Requirement",
+  "Define Scope, Duration & Expertise Needed",
+  "We Match Verified Academic Partners",
+  "Structured Coordination & Engagement",
+  "Ongoing Oversight & Quality Assurance",
+];
+
+const audiences = [
+  "Universities and Higher Education Institutions",
+  "EdTech Platforms & Online Universities",
+  "Professional & Certification Bodies",
+  "Research & Policy Organizations",
+  "International Institutions operating in Africa"
+];
+
+const orgTypes = [
+  "University", "EdTech Platform", "Online University",
+  "Professional/Certification Body", "Research Organization",
+  "Corporate Training Division", "Policy/Government Institution", "Other",
+];
+
+const supportTypes = [
+  "Teaching & Academic Delivery",     "Online / Blended Teaching Support",
+  "Short-Term Academic Delivery",       "Research & Scholarly Engagement",
+  "Peer Review & Editorial Support",    "Academic Validation / Quality Assurance",
+  "Curriculum & Content Development",   "Accreditation / Licensing Support",
+  "Ongoing Academic Advisory",          "Other (Specify)",
+];
+
+const expertiseLevels = [
+  "Lecturer", "Senior Lecturer", "Associate Professor", "Professor",
+  "Research Fellow", "Subject-Matter Expert", "Multiple Levels Required",
+];
+
+const academicsNeeded = ["1", "2–3", "4–6", "7+"];
+
+const engagementTypes = [
+  "Short-Term (<3 months)", "Part-Time (Ongoing)", "Project-Based",
+  "Advisory/Validation Only", "Long-Term Structured Engagement",
+];
+
+const engagementModes = ["Fully Remote", "Hybrid", "In-Person", "Flexible"];
+
+const budgetRanges = ["Under ₦500", "₦500–₦2,000", "₦2,000–₦5,000", "₦5,000+", "Prefer to discuss"];
+
+const nextSteps = [
+  "Schedule Introductory Call", "Receive Proposal via Email", "Urgent—Contact Immediately",
+];
+
+
+const demoData = {
+  orgName: "Pan-African Digital University",
+  orgType: "Online University",
+  country: "Kenya",
+  website: "https://www.padu.ac.ke",
+  contactPerson: "Dr. Amara Okonkwo",
+  title: "Vice Chancellor — Academic Affairs",
+  email: "a.okonkwo@padu.ac.ke",
+  phone: "+254 700 123 456",
+  supportTypes: ["Teaching & Faculty Deployment", "Curriculum & Program Development"],
+  discipline: "Data Science & Artificial Intelligence",
+  expertiseLevel: "Senior Lecturer",
+  academicsNeeded: "2–3",
+  engagementType: "Part-Time (Ongoing)",
+  engagementMode: "Fully Remote",
+  startDate: "2026-04-15",
+  duration: "6 months (renewable)",
+  accreditationLinked: "Yes",
+  regulatoryBody: "Commission for University Education (CUE)",
+  namedLeads: "Yes",
+  backgroundDocs: "Yes",
+  description:
+    "We are launching a new BSc in Data Science and require two senior lecturers to deliver core modules in machine learning and statistical analysis. The program must meet CUE accreditation standards and includes a blended delivery model.",
+  budget: "$2,000–$5,000",
+  nextStep: "Schedule Introductory Call",
+  hearAbout: "Referred by the Association of African Universities",
+};
+
+// ─── SHARED FIELD STYLES ─────────────────────────────────────────────────────
+
+const inputCls =
+  "w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/40";
+const labelCls = "block text-sm font-semibold text-foreground mb-1.5";
+
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  borderRadius: "8px",
+  border: "1.5px solid var(--border, #e5e7eb)",
+  background: "var(--background, #fff)",
+  padding: "0.65rem 0.875rem",
+  fontSize: "0.875rem",
+  color: "var(--foreground)",
+  outline: "none",
+  fontFamily: "inherit",
+  boxSizing: "border-box",
+  appearance: "auto",
+};
+
+const labelStyle: React.CSSProperties = {
+  display: "block",
+  fontSize: "0.8rem",
+  fontWeight: "600",
+  color: "var(--foreground)",
+  marginBottom: "0.375rem",
+};
 const formSchema = z.object({
   // Personal Info
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -84,11 +203,137 @@ const degrees = [
   "Doctoral Degree (PhD)",
   "Professional Degree (MD, JD, etc.)",
 ];
+function FormSection({
+  num, title, children,
+}: { num: number; title: string; children: React.ReactNode }) {
+  return (
+    <div
+      style={{
+        background: "var(--card, #ffffff)",
+        border: "1px solid var(--border, #e5e7eb)",
+        borderRadius: "12px",
+        padding: "1.5rem",
+        marginBottom: "0",
+      }}
+    >
+      {/* Section header */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+          marginBottom: "1.25rem",
+          paddingBottom: "1rem",
+          borderBottom: "1px solid var(--border, #e5e7eb)",
+        }}
+      >
+        <span
+          style={{
+            display: "inline-flex",
+            width: "28px",
+            height: "28px",
+            borderRadius: "50%",
+            backgroundColor: "var(--accent)",
+            color: "var(--accent-foreground, #fff)",
+            fontSize: "0.75rem",
+            fontWeight: "700",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+          }}
+        >
+          {num}
+        </span>
+        <h3
+          style={{
+            fontSize: "1rem",
+            fontWeight: "700",
+            color: "var(--foreground)",
+            margin: 0,
+          }}
+        >
+          {title}
+        </h3>
+      </div>
+      {children}
+    </div>
+  );
+}
 
+// Responsive 2-column grid that collapses to 1 column below 600px
+function FGrid({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
+      gap: "1rem",
+    }}>
+      {children}
+    </div>
+  );
+}
+
+// Individual field with label
+function FField({ label, required, span2, children }: {
+  label: string; required?: boolean; span2?: boolean; children: React.ReactNode
+}) {
+  return (
+    <div style={span2 ? { gridColumn: "1 / -1" } : {}}>
+      <label style={{
+        display: "block", fontSize: "0.8rem", fontWeight: "600",
+        color: "var(--foreground)", marginBottom: "0.375rem",
+      }}>
+        {label}
+        {required && <span style={{ color: "var(--accent)", marginLeft: "2px" }}>*</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
 export default function InstituitionApply() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [autoFill, setAutoFill] = useState(true);
+  const [formData, setFormData] = useState<Record<string, any>>(
+    autoFill ? { ...demoData } : {}
+  );
+  const [selectedSupport, setSelectedSupport] = useState<string[]>(
+    autoFill ? demoData.supportTypes : []
+  );
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  borderRadius: "8px",
+  border: "1.5px solid #d1d5db",
+  background: "#ffffff",
+  padding: "0.65rem 0.875rem",
+  fontSize: "0.875rem",
+  color: "var(--foreground)",
+  outline: "none",
+  fontFamily: "inherit",
+  boxSizing: "border-box",
+  appearance: "auto",
+};
+  const handleAutoFillToggle = () => {
+    const next = !autoFill;
+    setAutoFill(next);
+    if (next) { setFormData({ ...demoData }); setSelectedSupport(demoData.supportTypes); }
+    else      { setFormData({});              setSelectedSupport([]); }
+  };
+
+  const handleChange = (field: string, value: string) =>
+    setFormData(prev => ({ ...prev, [field]: value }));
+
+  const toggleSupport = (val: string) =>
+    setSelectedSupport(prev =>
+      prev.includes(val) ? prev.filter(v => v !== val) : [...prev, val]
+    );
+
+  const scrollToForm = (prefill?: string) => {
+    if (prefill)
+      setSelectedSupport(prev => prev.includes(prefill) ? prev : [...prev, prefill]);
+    document.getElementById("request-form")?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
