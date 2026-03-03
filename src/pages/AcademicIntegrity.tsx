@@ -311,9 +311,11 @@ export default function AcademicIntegrityPage() {
                   ))}
                 </div>
                 <Button className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2" asChild>
-                  <Link to="/publeesh">
-                    Explore Research Intelligence <ArrowRight className="h-4 w-4" />
-                  </Link>
+             <Button className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2" asChild>
+  <a href="#" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+    Explore Research Intelligence <ArrowRight className="h-4 w-4" />
+  </a>
+</Button>
                 </Button>
               </div>
             </section>
