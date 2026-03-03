@@ -148,9 +148,16 @@ export default function InstituitionApply() {
   const toggleDeclaration = (i: number) =>
     setDeclarations(prev => prev.map((v, idx) => idx === i ? !v : v));
 
-  const next = () => setCurrentStep(s => Math.min(s + 1, STEPS.length));
-  const prev = () => setCurrentStep(s => Math.max(s - 1, 1));
-
+//   const next = () => setCurrentStep(s => Math.min(s + 1, STEPS.length));
+const next = () => {
+  setCurrentStep(s => Math.min(s + 1, STEPS.length));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+//   const prev = () => setCurrentStep(s => Math.max(s - 1, 1));
+const prev = () => {
+  setCurrentStep(s => Math.max(s - 1, 1));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
