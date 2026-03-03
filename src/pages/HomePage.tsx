@@ -75,6 +75,14 @@ const pillars = [
     linkLabel: "Learn More",
     link: "/about#enablement",
   },
+  {
+    icon: Puzzle,
+    title: "Research Intelligence Layer",
+    description:
+      "AI-powered research productivity integrated within Afrika Scholar, providing structured drafting support, thesis and dissertation frameworks, literature review organization, citation and referencing assistance, and access to global datasets including WHO, World Bank, IMF, UNESCO, OECD, and FAO — enabling comparative research intelligence while upholding academic integrity. CTA- Explore Research Intelligence",
+    linkLabel: "Learn More",
+    link: "/explore",
+  },
 ];
 
 export default function HomePage() {
@@ -285,7 +293,7 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
               for Africa
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
             {pillars.map((pillar, index) => (
               <Card
                 key={pillar.title}
