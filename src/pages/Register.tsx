@@ -1,69 +1,110 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { User, Mail, Lock, ArrowRight, Eye, EyeOff, BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Layout } from "@/components/layout";
+import { Link, useNavigate } from "react-router-dom";
+import { User, Mail, Lock, ArrowRight, Eye, EyeOff, AlertCircle, CheckCircle } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 export default function Register() {
-  const [showPassword, setShowPassword]        = useState(false);
-  const [showConfirm,  setShowConfirm]         = useState(false);
-  const [formData, setFormData]                = useState({ username: "", email: "", password: "", confirm: "" });
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm,  setShowConfirm]  = useState(false);
+  const [isLoading,    setIsLoading]    = useState(false);
+  const [error,        setError]        = useState("");
+  const [success,      setSuccess]      = useState(false);
 
-  const handleChange = (field: string, value: string) =>
+  const [formData, setFormData] = useState({
+    username: "", email: "", password: "", confirm: "",
+  });
+
+  const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // handle registration
+    if (error) setError("");
   };
-  const inputInner: React.CSSProperties = {
-  width: "100%",
-  borderRadius: "8px",
-  border: "1.5px solid #d1d5db",
-  background: "#ffffff",
-  padding: "0.65rem 0.875rem",
-  fontSize: "0.875rem",
-  color: "var(--foreground)",
-  outline: "none",
-  fontFamily: "inherit",
-  boxSizing: "border-box",
-};
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    // Client-side validation
+    if (formData.password !== formData.confirm) {
+      setError("Passwords do not match.");
+      return;
+    }
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: formData.username.trim(),
+          email:    formData.email.trim().toLowerCase(),
+          password: formData.password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Registration failed. Please try again.");
+        return;
+      }
+
+      // Persist token + user
+      localStorage.setItem("as_token", data.token);
+      localStorage.setItem("as_user",  JSON.stringify(data.user));
+
+      setSuccess(true);
+      setTimeout(() => navigate("/publeesh"), 1500);
+
+    } catch {
+      setError("Unable to connect to the server. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // ── Success screen ───────────────────────────────────────────────────────
+  if (success) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--background)" }}>
+        <div style={{ textAlign: "center", padding: "2rem" }}>
+          <div style={{ width: 64, height: 64, borderRadius: "50%", background: "rgba(34,197,94,0.1)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.25rem" }}>
+            <CheckCircle size={32} style={{ color: "#22c55e" }} />
+          </div>
+          <h2 style={{ fontSize: "1.5rem", fontWeight: 800, fontFamily: "Georgia, serif", color: "var(--foreground)", margin: "0 0 0.5rem" }}>
+            Account Created!
+          </h2>
+          <p style={{ fontSize: "0.875rem", color: "var(--muted-foreground)" }}>
+            Redirecting to your dashboard...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
-      {/* Full-page centred layout */}
-      <div
-        style={{
-          minHeight: "calc(100vh - 80px)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "2rem 1rem",
-          background: "var(--background)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Decorative background circles */}
+      <div style={{
+        minHeight: "calc(100vh - 80px)", display: "flex", alignItems: "center",
+        justifyContent: "center", padding: "2rem 1rem",
+        background: "var(--background)", position: "relative", overflow: "hidden",
+      }}>
+        {/* Decorative circles */}
         <div style={{ position: "absolute", top: "-120px", right: "-120px", width: 400, height: 400, borderRadius: "50%", background: "var(--accent)", opacity: 0.04, pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: "-80px", left: "-80px",  width: 300, height: 300, borderRadius: "50%", background: "var(--primary)", opacity: 0.06, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: "-80px", left: "-80px", width: 300, height: 300, borderRadius: "50%", background: "var(--primary)", opacity: 0.06, pointerEvents: "none" }} />
 
         {/* Card */}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: 460,
-            background: "var(--card, #fff)",
-            border: "1px solid var(--border, #e5e7eb)",
-            borderRadius: 20,
-            padding: "2.5rem 2rem",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
+        <div style={{
+          width: "100%", maxWidth: 460,
+          background: "var(--card, #fff)", border: "1px solid var(--border, #e5e7eb)",
+          borderRadius: 20, padding: "2.5rem 2rem",
+          boxShadow: "0 8px 40px rgba(0,0,0,0.08)", position: "relative", zIndex: 1,
+        }}>
           {/* Logo + heading */}
           <div style={{ textAlign: "center", marginBottom: "2rem" }}>
             <Link to="/">
@@ -77,6 +118,18 @@ export default function Register() {
             </p>
           </div>
 
+          {/* Error banner */}
+          {error && (
+            <div style={{
+              display: "flex", alignItems: "center", gap: "0.5rem",
+              background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.25)",
+              borderRadius: 8, padding: "0.75rem 1rem", marginBottom: "1.25rem",
+            }}>
+              <AlertCircle size={15} style={{ color: "#ef4444", flexShrink: 0 }} />
+              <span style={{ fontSize: "0.83rem", color: "#ef4444" }}>{error}</span>
+            </div>
+          )}
+
           {/* Form */}
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
 
@@ -86,12 +139,10 @@ export default function Register() {
               <div style={inputWrap}>
                 <User size={15} style={iconStyle} />
                 <input
-                  type="text"
-                  placeholder="Choose a username"
+                  type="text" placeholder="Choose a username"
                   value={formData.username}
                   onChange={e => handleChange("username", e.target.value)}
-                  required
-                  style={inputInner}
+                  required disabled={isLoading} style={inputInner}
                 />
               </div>
             </div>
@@ -102,12 +153,10 @@ export default function Register() {
               <div style={inputWrap}>
                 <Mail size={15} style={iconStyle} />
                 <input
-                  type="email"
-                  placeholder="you@example.com"
+                  type="email" placeholder="you@example.com"
                   value={formData.email}
                   onChange={e => handleChange("email", e.target.value)}
-                  required
-                  style={inputInner}
+                  required disabled={isLoading} style={inputInner}
                 />
               </div>
             </div>
@@ -115,7 +164,10 @@ export default function Register() {
             {/* Password */}
             <div>
               <label style={labelStyle}>
-                PASSWORD <span style={{ fontWeight: 400, color: "var(--muted-foreground)", textTransform: "none", fontSize: "0.7rem" }}>(min. 6 characters)</span>
+                PASSWORD{" "}
+                <span style={{ fontWeight: 400, color: "var(--muted-foreground)", textTransform: "none", fontSize: "0.7rem" }}>
+                  (min. 6 characters)
+                </span>
               </label>
               <div style={inputWrap}>
                 <Lock size={15} style={iconStyle} />
@@ -124,11 +176,10 @@ export default function Register() {
                   placeholder="Create a strong password"
                   value={formData.password}
                   onChange={e => handleChange("password", e.target.value)}
-                  required
-                  minLength={6}
+                  required minLength={6} disabled={isLoading}
                   style={{ ...inputInner, paddingRight: "2.5rem" }}
                 />
-                <button type="button" onClick={() => setShowPassword(v => !v)} style={eyeBtn} aria-label="Toggle password">
+                <button type="button" onClick={() => setShowPassword(v => !v)} style={eyeBtn}>
                   {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
@@ -144,11 +195,10 @@ export default function Register() {
                   placeholder="Repeat your password"
                   value={formData.confirm}
                   onChange={e => handleChange("confirm", e.target.value)}
-                  required
-                  minLength={6}
+                  required minLength={6} disabled={isLoading}
                   style={{ ...inputInner, paddingRight: "2.5rem" }}
                 />
-                <button type="button" onClick={() => setShowConfirm(v => !v)} style={eyeBtn} aria-label="Toggle confirm password">
+                <button type="button" onClick={() => setShowConfirm(v => !v)} style={eyeBtn}>
                   {showConfirm ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
@@ -165,30 +215,34 @@ export default function Register() {
               </span>
             </label>
 
-                   <button
-  type="submit"
-  style={{
-    marginTop: "0.5rem",
-    width: "100%",
-    padding: "0.85rem",
-    borderRadius: 10,
-    border: "none",
-    color: "#fff",
-    fontSize: "0.95rem",
-    fontWeight: 700,
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "0.5rem",
-    transition: "opacity 0.15s",
-  }}
-  onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-  className="bg-[#381b92] hover:bg-[#2d1578]"
->
-Create Account <ArrowRight size={17} />
-</button>
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              style={{
+                marginTop: "0.5rem", width: "100%", padding: "0.85rem",
+                borderRadius: 10, border: "none", color: "#fff",
+                fontSize: "0.95rem", fontWeight: 700,
+                cursor: isLoading ? "not-allowed" : "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                gap: "0.5rem", opacity: isLoading ? 0.72 : 1, transition: "opacity 0.15s",
+              }}
+              onMouseEnter={e => { if (!isLoading) e.currentTarget.style.opacity = "0.88"; }}
+              onMouseLeave={e => { if (!isLoading) e.currentTarget.style.opacity = "1"; }}
+              className="bg-[#381b92]"
+            >
+              {isLoading ? (
+                <>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                    style={{ animation: "spin 0.8s linear infinite" }}>
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                  </svg>
+                  Creating Account...
+                </>
+              ) : (
+                <>Create Account <ArrowRight size={17} /></>
+              )}
+            </button>
           </form>
 
           {/* Divider */}
@@ -201,15 +255,9 @@ Create Account <ArrowRight size={17} />
           <Link
             to="/login"
             style={{
-              display: "block",
-              textAlign: "center",
-              padding: "0.75rem",
-              borderRadius: 10,
-              border: "1.5px solid var(--border, #e5e7eb)",
-              fontSize: "0.875rem",
-              fontWeight: 600,
-              color: "var(--foreground)",
-              textDecoration: "none",
+              display: "block", textAlign: "center", padding: "0.75rem", borderRadius: 10,
+              border: "1.5px solid var(--border, #e5e7eb)", fontSize: "0.875rem",
+              fontWeight: 600, color: "var(--foreground)", textDecoration: "none",
               transition: "border-color 0.15s",
             }}
             onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--accent)")}
@@ -219,58 +267,42 @@ Create Account <ArrowRight size={17} />
           </Link>
         </div>
       </div>
+
+      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }
 
-// ─── Shared input styles ──────────────────────────────────────────────────────
+// ─── Styles ───────────────────────────────────────────────────────────────────
 
 const labelStyle: React.CSSProperties = {
-  display: "block",
-  fontSize: "0.7rem",
-  fontWeight: 700,
-  letterSpacing: "0.08em",
-  color: "var(--muted-foreground)",
-  marginBottom: "0.4rem",
-  textTransform: "uppercase",
+  display: "block", fontSize: "0.7rem", fontWeight: 700,
+  letterSpacing: "0.08em", color: "var(--muted-foreground)",
+  marginBottom: "0.4rem", textTransform: "uppercase",
 };
 
 const inputWrap: React.CSSProperties = {
-  position: "relative",
-  display: "flex",
-  alignItems: "center",
+  position: "relative", display: "flex", alignItems: "center",
 };
 
 const iconStyle: React.CSSProperties = {
-  position: "absolute",
-  left: "0.875rem",
-  color: "var(--muted-foreground)",
-  pointerEvents: "none",
-  flexShrink: 0,
+  position: "absolute", left: "0.875rem",
+  color: "var(--muted-foreground)", pointerEvents: "none", flexShrink: 0,
 };
 
 const inputInner: React.CSSProperties = {
-  width: "100%",
-  borderRadius: 10,
+  width: "100%", borderRadius: 10,
   border: "1.5px solid var(--border, #e5e7eb)",
   background: "var(--background, #fff)",
   padding: "0.75rem 0.875rem 0.75rem 2.5rem",
-  fontSize: "0.875rem",
-  color: "var(--foreground)",
-  outline: "none",
-  fontFamily: "inherit",
-  boxSizing: "border-box",
-  transition: "border-color 0.15s",
+  fontSize: "0.875rem", color: "var(--foreground)",
+  outline: "none", fontFamily: "inherit",
+  boxSizing: "border-box", transition: "border-color 0.15s",
 };
 
 const eyeBtn: React.CSSProperties = {
-  position: "absolute",
-  right: "0.875rem",
-  background: "none",
-  border: "none",
-  cursor: "pointer",
-  color: "var(--muted-foreground)",
-  padding: 0,
-  display: "flex",
-  alignItems: "center",
+  position: "absolute", right: "0.875rem",
+  background: "none", border: "none", cursor: "pointer",
+  color: "var(--muted-foreground)", padding: 0,
+  display: "flex", alignItems: "center",
 };
