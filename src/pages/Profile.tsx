@@ -10,25 +10,7 @@ import {
 import { Layout } from "@/components/layout";
 import { useAuth } from "@/context/AuthContext";
 
-// ─── Mock profile data ────────────────────────────────────────────────────────
-
-const mockProfile = {
-  username:     "dr.amara.osei",
-  displayName:  "Dr. Amara Osei",
-  email:        "a.osei@uni-accra.edu.gh",
-  phone:        "+233 24 567 8901",
-  role:         "researcher",
-  title:        "Senior Research Fellow",
-  institution:  "University of Accra",
-  department:   "Department of Economics",
-  country:      "Ghana",
-  city:         "Accra",
-  website:      "https://www.uni-accra.edu.gh/osei",
-  orcid:        "0000-0002-1234-5678",
-  bio:          "Senior research fellow specialising in African economic development, fintech policy, and public health financing. Author of 14 peer-reviewed publications across 6 African journals.",
-  researchInterests: ["Economic Development", "Fintech Policy", "Public Health Financing", "Digital Agriculture"],
-  joinedDate:   "January 2025",
-};
+// mockProfile removed — real data comes from AuthContext + localStorage below
 
 const stats = [
   { icon: FileText,    label: "Submissions",  value: 6  },
@@ -113,7 +95,32 @@ function Field({ label, value, editing, field, onChange, icon: Icon }: {
 
 export default function Profile() {
   const { user } = useAuth();
-  const [profile, setProfile]       = useState(mockProfile);
+
+  // Merge auth user data with any extra profile fields saved locally
+  const savedExtra = (() => {
+    try { return JSON.parse(localStorage.getItem("as_profile_extra") || "{}"); }
+    catch { return {}; }
+  })();
+
+  const [profile, setProfile] = useState({
+    username:          user?.username     || "",
+    displayName:       savedExtra.displayName  || user?.username || "",
+    email:             user?.email        || "",
+    phone:             savedExtra.phone        || "",
+    role:              user?.role         || "researcher",
+    title:             savedExtra.title        || "",
+    institution:       savedExtra.institution  || "",
+    department:        savedExtra.department   || "",
+    country:           savedExtra.country      || "",
+    city:              savedExtra.city         || "",
+    website:           savedExtra.website      || "",
+    orcid:             savedExtra.orcid        || "",
+    bio:               savedExtra.bio          || "",
+    researchInterests: savedExtra.researchInterests || [],
+    joinedDate:        user?.createdAt
+      ? new Date(user.createdAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
+      : "—",
+  });
   const [editingBasic, setEditingBasic]   = useState(false);
   const [editingAbout, setEditingAbout]   = useState(false);
   const [editingContact, setEditingContact] = useState(false);
@@ -124,6 +131,21 @@ export default function Profile() {
     setProfile(prev => ({ ...prev, [field]: value }));
 
   const handleSave = () => {
+    // Persist all editable extra fields (not username/email/role — those come from auth)
+    const extra = {
+      displayName:       profile.displayName,
+      phone:             profile.phone,
+      title:             profile.title,
+      institution:       profile.institution,
+      department:        profile.department,
+      country:           profile.country,
+      city:              profile.city,
+      website:           profile.website,
+      orcid:             profile.orcid,
+      bio:               profile.bio,
+      researchInterests: profile.researchInterests,
+    };
+    localStorage.setItem("as_profile_extra", JSON.stringify(extra));
     setEditingBasic(false);
     setEditingAbout(false);
     setEditingContact(false);
