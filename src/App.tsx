@@ -52,6 +52,7 @@ import ExistingJournal from "./pages/ExistingJournal";
 import InstitutionAccess from "./pages/InstituitionAccess";
 import CallsForPapers from "./pages/CallsForPapers";
 import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 const queryClient = new QueryClient();
 
@@ -84,6 +85,7 @@ const App = () => (
           <Route path="/advisory" element={<AdvisoryPage />} />
           <Route path="/advisory/request" element={<AdvisoryRequestPage />} />
           <Route path="/instituition" element={<Institution />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route
