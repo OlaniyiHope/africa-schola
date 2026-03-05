@@ -6,7 +6,7 @@ import logo from "@/assets/logo.png";
 export default function Login() {
   const navigate  = useNavigate();
   const location  = useLocation();
-  const from      = (location.state as any)?.from || "/dashboard";
+  const from      = (location.state as any)?.from || "/publeesh";
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading,    setIsLoading]    = useState(false);
