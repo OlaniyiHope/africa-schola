@@ -53,6 +53,8 @@ import InstitutionAccess from "./pages/InstituitionAccess";
 import CallsForPapers from "./pages/CallsForPapers";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Policies from "./pages/Policies";
+import SubmitJournal from "./pages/SubmitJournal";
 
 const queryClient = new QueryClient();
 
@@ -88,6 +90,7 @@ const App = () => (
           <Route path="/terms" element={<Terms />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/submit-journal" element={<SubmitJournal />} />
           <Route
             path="/advisory/transcripts"
             element={<TranscriptAdvisoryPage />}
@@ -109,6 +112,7 @@ const App = () => (
           <Route path="/instituitional-access" element={<InstitutionAccess />} />
           <Route path="/propose" element={<Propose />} />
           <Route path="/governance" element={<Gov />} />
+          <Route path="/policies" element={<Policies />} />
           <Route path="/standards" element={<Standards />} />
           <Route path="/framework/author-guidelines" element={<AuthorGuidelinesPage />} />
           <Route path="/framework/peer-review" element={<PeerReviewPage />} />
