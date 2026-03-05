@@ -39,7 +39,7 @@ const footerLinks = {
 
     { label: "Join Network", href: "/network/apply" },
     { label: "For Institutions", href: "/network#institutions" },
-    { label: "Publish", href: "/publishing/submit" },
+    // { label: "Publish", href: "/publishing/submit" },
   ],
 };
 
@@ -225,13 +225,13 @@ export function Footer() {
               >
                 <Facebook className="h-5 w-5" />
               </a>
-              <a
+              {/* <a
                 href="#"
                 className="p-2 hover:bg-primary-foreground/10 rounded-full transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
-              </a>
+              </a> */}
               <a
                 href="#"
                 className="p-2 hover:bg-primary-foreground/10 rounded-full transition-colors"
@@ -239,13 +239,13 @@ export function Footer() {
               >
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a
+              {/* <a
                 href="#"
                 className="p-2 hover:bg-primary-foreground/10 rounded-full transition-colors"
                 aria-label="YouTube"
               >
                 <Youtube className="h-5 w-5" />
-              </a>
+              </a> */}
               <a
               href="https://instagram.com/afrika_scholar"
   target="_blank"
