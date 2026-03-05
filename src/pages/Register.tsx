@@ -17,6 +17,19 @@ export default function Register() {
     e.preventDefault();
     // handle registration
   };
+  const inputInner: React.CSSProperties = {
+  width: "100%",
+  borderRadius: "8px",
+  border: "1.5px solid #d1d5db",
+  background: "#ffffff",
+  padding: "0.65rem 0.875rem",
+  fontSize: "0.875rem",
+  color: "var(--foreground)",
+  outline: "none",
+  fontFamily: "inherit",
+  boxSizing: "border-box",
+};
+
 
   return (
     <div>
@@ -152,31 +165,30 @@ export default function Register() {
               </span>
             </label>
 
-            {/* Submit */}
-            <button
-              type="submit"
-              style={{
-                marginTop: "0.5rem",
-                width: "100%",
-                padding: "0.85rem",
-                borderRadius: 10,
-                border: "none",
-                background: "var(--accent)",
-                color: "var(--accent-foreground, #fff)",
-                fontSize: "0.95rem",
-                fontWeight: 700,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-                transition: "opacity 0.15s",
-              }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
-              onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-            >
-              Create Account <ArrowRight size={17} />
-            </button>
+                   <button
+  type="submit"
+  style={{
+    marginTop: "0.5rem",
+    width: "100%",
+    padding: "0.85rem",
+    borderRadius: 10,
+    border: "none",
+    color: "#fff",
+    fontSize: "0.95rem",
+    fontWeight: 700,
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.5rem",
+    transition: "opacity 0.15s",
+  }}
+  onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+  className="bg-[#381b92] hover:bg-[#2d1578]"
+>
+Create Account <ArrowRight size={17} />
+</button>
           </form>
 
           {/* Divider */}
