@@ -107,7 +107,7 @@ export default function Profile() {
     displayName:       savedExtra.displayName  || user?.username || "",
     email:             user?.email        || "",
     phone:             savedExtra.phone        || "",
-    role:              user?.role         || "researcher",
+ 
     title:             savedExtra.title        || "",
     institution:       savedExtra.institution  || "",
     department:        savedExtra.department   || "",
@@ -117,9 +117,7 @@ export default function Profile() {
     orcid:             savedExtra.orcid        || "",
     bio:               savedExtra.bio          || "",
     researchInterests: savedExtra.researchInterests || [],
-    joinedDate:        user?.createdAt
-      ? new Date(user.createdAt).toLocaleDateString("en-US", { month: "long", year: "numeric" })
-      : "—",
+
   });
   const [editingBasic, setEditingBasic]   = useState(false);
   const [editingAbout, setEditingAbout]   = useState(false);
@@ -257,12 +255,8 @@ export default function Profile() {
                     {profile.title} · {profile.institution}
                   </p>
                   <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
-                    <span style={{ fontSize: "0.68rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", background: "rgba(56,27,146,0.08)", color: "#381b92", borderRadius: 4, padding: "0.2rem 0.5rem" }}>
-                      {profile.role}
-                    </span>
-                    <span style={{ fontSize: "0.72rem", color: "var(--muted-foreground)", display: "flex", alignItems: "center", gap: "0.25rem" }}>
-                      <Clock size={11} /> Member since {profile.joinedDate}
-                    </span>
+                    
+                  
                   </div>
                 </div>
 
