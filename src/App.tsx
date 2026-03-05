@@ -56,6 +56,7 @@ import Terms from "./pages/Terms";
 import Policies from "./pages/Policies";
 import SubmitJournal from "./pages/SubmitJournal";
 import Submissions from "./pages/Submissions";
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -92,6 +93,7 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard/submissions" element={<Submissions />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/dashboard/profile" element={<Profile />} />
           <Route path="/submit-journal" element={<SubmitJournal />} />
           <Route
             path="/advisory/transcripts"
