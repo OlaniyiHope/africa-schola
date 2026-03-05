@@ -285,9 +285,9 @@ export function Header() {
   // Guard: go to /publeesh if logged in, else redirect to login with a return path
   const handlePubleesh = () => {
     if (isAuthenticated) {
-      navigate("/publeesh");
+      navigate("/publeesh-ai");
     } else {
-      navigate("/login", { state: { from: "/publeesh" } });
+      navigate("/login", { state: { from: "/publeesh-ai" } });
     }
   };
 
@@ -355,7 +355,7 @@ export function Header() {
 
           {/* Publeesh — auth guarded */}
           <Button className="bg-accent hover:bg-accent/90" onClick={handlePubleesh}>
-            Publeesh
+            Publeesh Ai
           </Button>
 
           <Button className="bg-accent hover:bg-accent/90" style={{ backgroundColor: "#381b92" }} asChild>
@@ -404,7 +404,7 @@ export function Header() {
                 className="w-full bg-accent hover:bg-accent/90"
                 onClick={() => { setMobileMenuOpen(false); handlePubleesh(); }}
               >
-                Publeesh
+                Publeesh Ai
               </Button>
 
               <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" style={{ backgroundColor: "#381b92" }} asChild>

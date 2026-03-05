@@ -97,7 +97,7 @@ const pillars = [
       "Global instituitional dataset access",
       "Comparative research intelligence tool",
     ],
-    link: "/publeesh",
+    link: "/publeesh-ai",
   },
 ];
 

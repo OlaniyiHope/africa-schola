@@ -103,7 +103,7 @@ export default function AcademicIntegrityPage() {
             Responsible AI & Research Integrity
           </h1>
           <p className="text-lg text-primary-foreground/80 max-w-2xl mb-6 leading-relaxed">
-            Afrika Scholar integrates AI-powered research intelligence through Publeesh to enhance scholarly productivity while preserving academic rigour. Our AI systems are designed to support structure, clarity, and research efficiency — not to replace independent scholarship, peer review, or institutional supervision.
+            Afrika Scholar integrates AI-powered research intelligence through Publeesh Ai to enhance scholarly productivity while preserving academic rigour. Our AI systems are designed to support structure, clarity, and research efficiency — not to replace independent scholarship, peer review, or institutional supervision.
           </p>
           <p className="text-sm font-semibold text-accent">
             Responsible AI usage is a core principle of our governance model.
@@ -187,7 +187,7 @@ export default function AcademicIntegrityPage() {
                 </div>
                 <div className="bg-secondary/50 rounded-xl p-5 border-l-4 border-accent">
                   <p className="text-sm font-medium text-foreground">
-                    All manuscripts undergo standard peer review processes in accordance with journal policies — regardless of whether Publeesh tools were used in preparation.
+                    All manuscripts undergo standard peer review processes in accordance with journal policies — regardless of whether Publeesh Ai tools were used in preparation.
                   </p>
                 </div>
               </div>
@@ -224,7 +224,7 @@ export default function AcademicIntegrityPage() {
               <SectionHeader number="4" title="Dataset Transparency & Responsible Data Usage" />
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Publeesh provides structured access to institutional datasets from globally recognised organisations. These datasets are intended to support comparative research and structured analysis within scholarly workflows.
+                  Publeesh Ai provides structured access to institutional datasets from globally recognised organisations. These datasets are intended to support comparative research and structured analysis within scholarly workflows.
                 </p>
 
                 <div className="overflow-hidden rounded-xl border">

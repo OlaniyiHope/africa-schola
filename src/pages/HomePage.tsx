@@ -208,7 +208,7 @@ const visibleDisciplines = disciplines.slice(tabOffset, tabOffset + VISIBLE_TABS
                   className="border border-white hover:border-accent hover:bg-primary-foreground/10 text-primary-foreground"
                   asChild
                 >
-                  <Link to="/publeesh">Explore Research Intelligence</Link>
+                  <Link to="/publeesh-ai">Explore Research Intelligence</Link>
                 </Button>
               </div>
             </div>

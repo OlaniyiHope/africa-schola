@@ -19,7 +19,7 @@ const footerLinks = {
     { label: "About Us", href: "/about" },
 
     { label: "Blog", href: "/blog" },
-    { label: "Publeesh", href: "/publeesh" },
+    { label: "Publeesh Ai", href: "/publeesh-ai" },
     { label: "Compliance", href: "/compliance" },
    
   ],

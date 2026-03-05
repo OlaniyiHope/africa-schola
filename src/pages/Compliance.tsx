@@ -147,7 +147,7 @@ const aiDeclarations = [
   {
     icon: ShieldCheck,
     heading: "Users remain fully responsible",
-    desc: "Every scholar, student, or researcher using Publeesh retains full responsibility for the academic integrity, accuracy, and originality of their submitted work.",
+    desc: "Every scholar, student, or researcher using Publeesh Ai retains full responsibility for the academic integrity, accuracy, and originality of their submitted work.",
   },
   {
     icon: AlertTriangle,
@@ -259,7 +259,7 @@ export default function CompliancePage() {
             Peer review is the cornerstone of our journals — never compromised, never accelerated for commercial reasons, and always conducted by qualified independent experts. Our multi-model review system (single-blind, double-blind, and open review) is designed to ensure that research is evaluated on merit alone.
           </p>
           <p>
-            Artificial intelligence, through our Publeesh platform, enhances the research workflow — supporting structured drafting, citation guidance, and global data access. It does not replace scholarship, generate academic conclusions, or provide any advantage in the peer review process.
+            Artificial intelligence, through our Publeesh Ai platform, enhances the research workflow — supporting structured drafting, citation guidance, and global data access. It does not replace scholarship, generate academic conclusions, or provide any advantage in the peer review process.
           </p>
           <p>
             Every Afrika Scholar journal is built to meet the indexing criteria of DOAJ, Scopus, Web of Science, and AJOL from inception. Governance is not an afterthought — it is central to how the platform operates.
@@ -349,7 +349,7 @@ export default function CompliancePage() {
           </div>
           <div className="text-center">
             <Button className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2" asChild>
-              <Link to="/publeesh">
+              <Link to="/publeesh-ai">
                 Explore Research Intelligence <ChevronRight className="h-4 w-4" />
               </Link>
             </Button>

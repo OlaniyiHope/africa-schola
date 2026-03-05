@@ -173,7 +173,7 @@ export default function Publeesh() {
           <div className="animate-fade-up text-primary-foreground">
             {/* Eyebrow */}
             <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">
-              Publeesh
+              Publeesh Ai
             </p>
 
   <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6">
@@ -188,7 +188,7 @@ export default function Publeesh() {
             </p>
 
             <p className="text-base text-primary-foreground/75 mb-10 max-w-xl leading-relaxed">
-              Publeesh is Afrika Scholar's AI-powered research intelligence platform, designed to
+              Publeesh Ai is Afrika Scholar's AI-powered research intelligence platform, designed to
               support scholars, students, researchers, and institutions with structured research
               workflows, global data access, and responsible AI-assisted drafting tools.
             </p>
@@ -199,7 +199,7 @@ export default function Publeesh() {
                   asChild
                 >
                   <Link to="https://publeesh.ng/">
-                    Explore Publeesh
+                    Explore Publeesh Ai
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
@@ -221,7 +221,7 @@ export default function Publeesh() {
           {/* Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              What is Publeesh?
+              What is Publeesh Ai? 
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               A research enablement tool integrated within Afrika Scholar's academic infrastructure — built for serious academic use, not automated academic substitution.
@@ -373,7 +373,7 @@ export default function Publeesh() {
           {/* Bottom CTA */}
           <div className="text-center mt-14">
             <p className="text-muted-foreground mb-5 max-w-xl mx-auto">
-              Publeesh transforms the research process — from a writing assistant into a global research intelligence platform.
+              Publeesh Ai transforms the research process — from a writing assistant into a global research intelligence platform.
             </p>
           
           </div>
@@ -396,13 +396,13 @@ export default function Publeesh() {
           {/* Header */}
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-wider text-accent font-semibold mb-2">
-              How Publeesh Fits Into Afrika Scholar
+              How Publeesh Ai Fits Into Afrika Scholar
             </p>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Pan-African Academic Publishing, Research &<br className="hidden md:block" /> University Enablement Infrastructure
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              with AI-Powered Research Intelligence. Publishing remains the primary pillar — Publeesh strengthens it.
+              with AI-Powered Research Intelligence. Publishing remains the primary pillar — Publeesh Ai strengthens it.
             </p>
           </div>
 
@@ -416,7 +416,7 @@ export default function Publeesh() {
                   <div className="p-2 rounded-lg bg-accent/10 text-accent">
                     <Layers className="h-5 w-5" />
                   </div>
-                  <CardTitle className="text-xl">Publeesh Strengthens Publishing</CardTitle>
+                  <CardTitle className="text-xl">Publeesh Ai Strengthens Publishing</CardTitle>
                 </div>
                 <CardDescription>
                   AI enhances scholarship — it does not replace it.
@@ -449,7 +449,7 @@ export default function Publeesh() {
                   <div className="p-2 rounded-lg bg-accent/10 text-accent">
                     <Users className="h-5 w-5" />
                   </div>
-                  <CardTitle className="text-xl">Who Publeesh Is For</CardTitle>
+                  <CardTitle className="text-xl">Who Publeesh Ai Is For</CardTitle>
                 </div>
                 <CardDescription>
                   Designed for every stage of academic research.
@@ -496,12 +496,12 @@ export default function Publeesh() {
               <div>
                 <h3 className="text-xl font-bold mb-1">Academic Integrity & Responsible Use</h3>
                 <p className="text-muted-foreground mb-5 text-sm">
-                  Publeesh is designed as a research support system. Users are responsible for ensuring compliance with university academic integrity policies, journal submission standards, and ethical research guidelines.
+                  Publeesh Ai is designed as a research support system. Users are responsible for ensuring compliance with university academic integrity policies, journal submission standards, and ethical research guidelines.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Publeesh does not:</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Publeesh Ai does not:</p>
                     <ul className="space-y-2">
                       {[
                         "Replace independent scholarship",
@@ -618,7 +618,7 @@ export default function Publeesh() {
                   <div className="h-10 w-10 rounded-lg bg-accent/20 flex items-center justify-center">
                     <LayoutDashboard className="h-5 w-5 text-accent" />
                   </div>
-                  <CardTitle className="text-primary-foreground text-xl">Publeesh Dashboard Features</CardTitle>
+                  <CardTitle className="text-primary-foreground text-xl">Publeesh Ai Dashboard Features</CardTitle>
                 </div>
                 <CardDescription className="text-primary-foreground/60">
                   Designed for structured workflow, not chaos.
@@ -699,7 +699,7 @@ export default function Publeesh() {
           {/* ── Why Publeesh Matters ── */}
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10">
-              <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground mb-3">Why Publeesh Matters</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-primary-foreground mb-3">Why Publeesh Ai Matters</h3>
               <p className="text-primary-foreground/70 max-w-xl mx-auto">
                 Without compromising academic integrity.
               </p>
@@ -726,7 +726,7 @@ export default function Publeesh() {
               </div>
               {/* Empowerment */}
               <div className="rounded-xl bg-accent/10 border border-accent/30 p-6">
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-4">Publeesh empowers scholars to:</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-4">Publeesh Ai empowers scholars to:</p>
                 <ul className="space-y-3">
                   {[
                     { verb: "Work smarter", rest: "with structured AI-assisted workflows" },
@@ -763,7 +763,7 @@ export default function Publeesh() {
               The Future of Research Intelligence in Africa
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              As Afrika Scholar expands its publishing infrastructure and institutional partnerships, Publeesh will evolve.
+              As Afrika Scholar expands its publishing infrastructure and institutional partnerships, Publeesh Ai will evolve.
             </p>
           </div>
 
@@ -846,7 +846,7 @@ export default function Publeesh() {
                     Ready to Enhance Your Research Workflow?
                   </h3>
                   <p className="text-primary-foreground/70 max-w-lg mx-auto">
-                    Join scholars and institutions already building smarter, more credible research with Publeesh.
+                    Join scholars and institutions already building smarter, more credible research with Publeesh Ai.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
@@ -862,7 +862,7 @@ export default function Publeesh() {
                     className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
                     asChild
                   >
-                    <Link to="/publishing/subscribe">Subscribe to Publeesh</Link>
+                    <Link to="/publishing/subscribe">Subscribe to Publeesh Ai</Link>
                   </Button>
                   <Button
                     size="lg"

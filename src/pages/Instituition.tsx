@@ -398,7 +398,7 @@ const inputStyle: React.CSSProperties = {
                                 className="border border-white hover:border-accent hover:bg-primary-foreground/10 text-primary-foreground"
                                 asChild
                               >
-                                <Link to="/publeesh">  Become an Institutional Partner </Link>
+                                <Link to="/publeesh-ai">  Become an Institutional Partner </Link>
                               </Button><br></br>
           
             </div>

@@ -41,7 +41,7 @@ export function PubleeshSection() {
             </p>
             <div className="flex flex-wrap gap-3">
               <Button className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2" asChild>
-                <Link to="/publeesh">
+                <Link to="/publeesh-ai">
                   Explore Research Intelligence <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>

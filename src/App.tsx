@@ -71,7 +71,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/request-submitted" element={<Thanks />} />
-          <Route path="/publeesh" element={<Publeesh />} />
+          <Route path="/publeesh-ai" element={<Publeesh />} />
           <Route path="/schedule-a-call" element={<Schedule />} />
           <Route path="/schedule-a-call/confirm" element={<Confirm />} />
           <Route path="/about" element={<AboutPage />} />

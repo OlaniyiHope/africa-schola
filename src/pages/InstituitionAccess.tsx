@@ -227,7 +227,7 @@ export default function InstitutionAccess() {
             </p>
             <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
               <Button variant="outline" asChild>
-                <Link to="/publeesh">Back to Publeesh</Link>
+                <Link to="/publeesh-ai">Back to Publeesh Ai</Link>
               </Button>
               <Button className="bg-accent hover:bg-accent/90" asChild>
                 <Link to="/publeesh/pricing">View Plans <ArrowRight size={15} style={{ marginLeft: 6 }} /></Link>
@@ -248,7 +248,7 @@ export default function InstitutionAccess() {
           <nav style={{ display: "flex", alignItems: "center", gap: "0.35rem", fontSize: "0.82rem", color: "#6b7280" }}>
             <Link to="/" style={{ color: "#6b7280", textDecoration: "none" }} className="hover:text-foreground">Home</Link>
             <ChevronRight size={13} />
-            <Link to="/publeesh" style={{ color: "#6b7280", textDecoration: "none" }} className="hover:text-foreground">Publeesh</Link>
+            <Link to="/publeesh-ai" style={{ color: "#6b7280", textDecoration: "none" }} className="hover:text-foreground">Publeesh Ai</Link>
             <ChevronRight size={13} />
             <span style={{ color: "#111827", fontWeight: 600 }}>Institutional Access</span>
           </nav>
@@ -272,13 +272,13 @@ export default function InstitutionAccess() {
         <div className="container-section relative py-24 md:py-32 text-primary-foreground">
           <div className="max-w-3xl">
             <p className="text-sm uppercase tracking-wider text-accent font-semibold mb-4">
-                  Publeesh for Institutions
+                  Publeesh Ai for Institutions
             </p>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-up">
                  Request Institutional Access
             </h1>
             <p className="text-lg text-primary-foreground/80 mb-4 max-w-2xl">
-              Publeesh Institutional Access provides organization-wide AI research intelligence tools including structured drafting support, citations, datasets, and research instrument tools — designed for responsible academic use.
+              Publeesh Ai Institutional Access provides organization-wide AI research intelligence tools including structured drafting support, citations, datasets, and research instrument tools — designed for responsible academic use.
             </p>
       
     
@@ -476,7 +476,7 @@ export default function InstitutionAccess() {
                     style={{ width: 16, height: 16, marginTop: 2, accentColor: "var(--accent)", flexShrink: 0 }}
                   />
                   <span style={{ fontSize: "0.85rem", color: "#374151", lineHeight: 1.55 }}>
-                    I understand Publeesh supports academic integrity and does not replace independent scholarship.
+                    I understand Publeesh Ai supports academic integrity and does not replace independent scholarship.
                   </span>
                 </label>
                 {errors.compliance && (

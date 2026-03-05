@@ -58,7 +58,7 @@ const conflictDisclosures = [
 ];
 
 const revenueStreams = [
-  { label: "Research Intelligence subscriptions", note: "Publeesh platform access tiers" },
+  { label: "Research Intelligence subscriptions", note: "Publeesh Ai platform access tiers" },
   { label: "Institutional licensing", note: "Journal hosting & network memberships" },
   { label: "Optional premium publishing features", note: "Enhanced visibility & formatting" },
   { label: "Network coordination fees", note: "Partner institution onboarding" },
