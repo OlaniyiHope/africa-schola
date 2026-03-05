@@ -51,6 +51,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ExistingJournal from "./pages/ExistingJournal";
 import InstitutionAccess from "./pages/InstituitionAccess";
 import CallsForPapers from "./pages/CallsForPapers";
+import Privacy from "./pages/Privacy";
 
 const queryClient = new QueryClient();
 
@@ -75,6 +76,7 @@ const App = () => (
           <Route path="/schedule-a-call" element={<Schedule />} />
           <Route path="/schedule-a-call/confirm" element={<Confirm />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/network" element={<NetworkPage />} />
           <Route path="/network/apply" element={<NetworkApplicationPage />} />
