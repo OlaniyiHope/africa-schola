@@ -55,6 +55,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Policies from "./pages/Policies";
 import SubmitJournal from "./pages/SubmitJournal";
+import Submissions from "./pages/Submissions";
 
 const queryClient = new QueryClient();
 
@@ -89,6 +90,7 @@ const App = () => (
           <Route path="/instituition" element={<Institution />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/dashboard/submissions" element={<Submissions />} />
           <Route path="/login" element={<Login />} />
           <Route path="/submit-journal" element={<SubmitJournal />} />
           <Route
