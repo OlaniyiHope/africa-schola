@@ -62,6 +62,7 @@ import MyPublications from "./pages/MyPublications";
 import SettingsPage from "./pages/Setting";
 import Onboarding from "./pages/Onboarding";
 import PublesshDash from "./pages/PubleeshDash";
+import GeneratePaper from "./pages/Generate";
 
 const queryClient = new QueryClient();
 
@@ -93,6 +94,7 @@ const App = () => (
           <Route path="/instituition/apply" element={<InstituitionApply />} />
           <Route path="/advisory" element={<AdvisoryPage />} />
           <Route path="/advisory/request" element={<AdvisoryRequestPage />} />
+          <Route path="/dashboard/generate" element={<GeneratePaper />} />
           <Route path="/instituition" element={<Institution />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/register" element={<Register />} />
