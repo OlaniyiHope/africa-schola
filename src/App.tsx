@@ -60,6 +60,8 @@ import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import MyPublications from "./pages/MyPublications";
 import SettingsPage from "./pages/Setting";
+import Onboarding from "./pages/Onboarding";
+import PublesshDash from "./pages/PubleeshDash";
 
 const queryClient = new QueryClient();
 
@@ -97,6 +99,7 @@ const App = () => (
           <Route path="/dashboard/submissions" element={<Submissions />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/publeesh" element={<PublesshDash />} />
           <Route path="/dashboard/publications" element={<MyPublications />} />
           <Route path="/dashboard/profile" element={<Profile />} />
           <Route path="/dashboard/settings" element={<SettingsPage />} />
@@ -109,6 +112,7 @@ const App = () => (
           <Route path="/compliance" element={<CompliancePage />} />
           <Route path="/framework/academic-integrity" element={<AcademicIntegrityPage />} />
           <Route path="/framework/governance" element={<GovernancePage />} />
+          <Route path="/onboarding" element={<Onboarding />} />
           <Route
             path="/advisory/study-in-africa"
             element={<StudyInAfricaPage />}

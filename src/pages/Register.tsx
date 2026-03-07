@@ -427,7 +427,7 @@ export default function Register() {
       localStorage.setItem("as_user",  JSON.stringify(data.user));
 
       setSuccess(true);
-      setTimeout(() => navigate("/publeesh"), 1500);
+      setTimeout(() => navigate("/login"), 1500);
 
     } catch {
       setError("Unable to connect to the server. Please try again.");
