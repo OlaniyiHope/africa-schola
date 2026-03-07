@@ -347,12 +347,13 @@
 //     </div>
 //   );
 // }
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout";
 import {
   LayoutGrid, List, FileText, Eye, BookOpen, Quote,
-  Search, X, Download, Building2, Calendar, Tag,
+  Search, X, Download, Building2, Copy, CheckCircle,
 } from "lucide-react";
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
@@ -428,53 +429,144 @@ const journals = [
 
 type Journal = typeof journals[0];
 
-const allTags = ["All", "Environmental Science", "Education Technology", "Public Health", "Finance & Economics", "Health Informatics", "Agricultural Science"];
+const allTags = [
+  "All", "Environmental Science", "Education Technology",
+  "Public Health", "Finance & Economics", "Health Informatics", "Agricultural Science",
+];
+
+// ─── Shared helpers ───────────────────────────────────────────────────────────
+
+const MODAL_CSS = `
+  @keyframes fadeIn  { from { opacity:0 } to { opacity:1 } }
+  @keyframes slideUp { from { opacity:0; transform:translate(-50%,calc(-50% + 16px)) } to { opacity:1; transform:translate(-50%,-50%) } }
+`;
+
+function Backdrop({ onClose }: { onClose: () => void }) {
+  return <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", zIndex: 100, backdropFilter: "blur(3px)", animation: "fadeIn 0.15s ease" }} />;
+}
+
+function CloseBtn({ onClose }: { onClose: () => void }) {
+  return (
+    <button onClick={onClose}
+      style={{ width: 32, height: 32, borderRadius: "50%", border: "1.5px solid #e5e7eb", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0, color: "#6b7280", transition: "background 0.15s" }}
+      onMouseEnter={e => (e.currentTarget.style.background = "#f3f4f6")}
+      onMouseLeave={e => (e.currentTarget.style.background = "#fff")}
+    ><X size={15} /></button>
+  );
+}
+
+// ─── Cite Modal ───────────────────────────────────────────────────────────────
+
+const CITE_STYLES = ["APA 7th", "MLA", "Chicago", "Harvard"] as const;
+type CiteStyle = typeof CITE_STYLES[number];
+
+function buildCitation(j: Journal, style: CiteStyle): string {
+  const doi = `https://doi.org/10.1234/as.${j.year}.${String(j.id).padStart(3, "0")}`;
+
+  const toSurnameFirst = (raw: string) =>
+    raw.split(",").map((p, i) => {
+      const t = p.trim().split(" ");
+      const init = t.filter(x => /^[A-Z]\.$/.test(x)).join(" ");
+      const sur  = t.filter(x => !/^[A-Z]\.$/.test(x)).join(" ");
+      if (!sur) return p.trim();
+      return i === raw.split(",").length - 1 && raw.split(",").length > 1
+        ? `& ${sur}, ${init}` : `${sur}, ${init}`;
+    }).join(", ");
+
+  const toNormal = (raw: string) =>
+    raw.split(",").map((p, i) => {
+      const t = p.trim().split(" ");
+      const init = t.filter(x => /^[A-Z]\.$/.test(x)).join(" ");
+      const sur  = t.filter(x => !/^[A-Z]\.$/.test(x)).join(" ");
+      if (!sur) return p.trim();
+      return i === 0 ? `${sur}, ${init}` : `${init} ${sur}`;
+    }).join(", ");
+
+  switch (style) {
+    case "APA 7th":
+      return `${toSurnameFirst(j.authors)} (${j.year}). ${j.title}. ${j.journal}, 1(1), 1–18.\n${doi}`;
+    case "MLA":
+      return `${toNormal(j.authors)}. "${j.title}." ${j.journal}, vol. 1, no. 1, ${j.year}, pp. 1–18.\nDOI: ${doi}`;
+    case "Chicago":
+      return `${j.authors}. "${j.title}." ${j.journal} 1, no. 1 (${j.year}): 1–18.\n${doi}`;
+    case "Harvard":
+      return `${j.authors} (${j.year}) '${j.title}', ${j.journal}, 1(1), pp. 1–18.\ndoi: ${doi}`;
+  }
+}
+
+function CiteModal({ journal, onClose }: { journal: Journal; onClose: () => void }) {
+  const [style, setStyle]   = useState<CiteStyle>("APA 7th");
+  const [copied, setCopied] = useState(false);
+  const citation = buildCitation(journal, style);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(citation).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    });
+  };
+
+  return (
+    <>
+      <style>{MODAL_CSS}</style>
+      <Backdrop onClose={onClose} />
+      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "min(560px, calc(100vw - 2rem))", background: "#fff", borderRadius: 16, boxShadow: "0 24px 80px rgba(0,0,0,0.2)", zIndex: 101, overflow: "hidden", animation: "slideUp 0.2s ease" }}>
+
+        {/* Header */}
+        <div style={{ padding: "1.375rem 1.5rem 1.125rem", borderBottom: "1px solid #f3f4f6", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
+          <div style={{ flex: 1 }}>
+            <h2 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#111827", margin: "0 0 0.3rem" }}>Cite This Article</h2>
+            <p style={{ fontSize: "0.78rem", color: "#6b7280", margin: 0, lineHeight: 1.4 }}>{journal.title}</p>
+          </div>
+          <CloseBtn onClose={onClose} />
+        </div>
+
+        {/* Citation style tabs */}
+        <div style={{ display: "flex", borderBottom: "1px solid #e5e7eb", padding: "0 1.5rem" }}>
+          {CITE_STYLES.map(s => (
+            <button key={s} onClick={() => { setStyle(s); setCopied(false); }}
+              style={{ padding: "0.625rem 0.875rem", fontSize: "0.78rem", fontWeight: 600, cursor: "pointer", border: "none", background: "none", borderBottom: style === s ? "2.5px solid #381b92" : "2.5px solid transparent", color: style === s ? "#381b92" : "#6b7280", transition: "color 0.15s", marginBottom: "-1px" }}
+            >{s}</button>
+          ))}
+        </div>
+
+        {/* Citation box */}
+        <div style={{ padding: "1.25rem 1.5rem 0" }}>
+          <div style={{ background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: 10, padding: "1rem 1.125rem" }}>
+            <pre style={{ fontSize: "0.82rem", fontFamily: "'Courier New', Courier, monospace", color: "#1f2937", margin: 0, whiteSpace: "pre-wrap", lineHeight: 1.75 }}>
+              {citation}
+            </pre>
+          </div>
+        </div>
+
+        {/* Copy button */}
+        <div style={{ padding: "1.125rem 1.5rem 1.5rem" }}>
+          <button onClick={handleCopy}
+            style={{ width: "100%", padding: "0.75rem 1rem", borderRadius: 10, border: `1.5px solid ${copied ? "#bbf7d0" : "#e5e7eb"}`, background: copied ? "#f0fdf4" : "#fff", color: copied ? "#16a34a" : "#374151", fontSize: "0.875rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", transition: "all 0.2s" }}
+          >
+            {copied ? <><CheckCircle size={15} /> Citation Copied!</> : <><Copy size={15} /> Copy Citation</>}
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}
 
 // ─── Abstract Modal ───────────────────────────────────────────────────────────
 
-function AbstractModal({ journal, onClose }: { journal: Journal; onClose: () => void }) {
+function AbstractModal({ journal, onClose, onCite }: { journal: Journal; onClose: () => void; onCite: () => void }) {
   return (
     <>
-      {/* Backdrop */}
-      <div
-        onClick={onClose}
-        style={{
-          position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)",
-          zIndex: 100, backdropFilter: "blur(3px)",
-          animation: "fadeIn 0.15s ease",
-        }}
-      />
+      <style>{MODAL_CSS}</style>
+      <Backdrop onClose={onClose} />
+      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "min(720px, calc(100vw - 2rem))", maxHeight: "calc(100vh - 4rem)", background: "#fff", borderRadius: 16, boxShadow: "0 24px 80px rgba(0,0,0,0.2)", zIndex: 101, display: "flex", flexDirection: "column", animation: "slideUp 0.2s ease", overflow: "hidden" }}>
 
-      {/* Modal */}
-      <div style={{
-        position: "fixed", top: "50%", left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "min(720px, calc(100vw - 2rem))",
-        maxHeight: "calc(100vh - 4rem)",
-        background: "#fff", borderRadius: 16,
-        boxShadow: "0 24px 80px rgba(0,0,0,0.2)",
-        zIndex: 101, display: "flex", flexDirection: "column",
-        animation: "slideUp 0.2s ease",
-        overflow: "hidden",
-      }}>
-
-        {/* Modal header */}
+        {/* Header */}
         <div style={{ padding: "1.5rem 1.75rem 1.25rem", borderBottom: "1px solid #f3f4f6", flexShrink: 0 }}>
           <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
-            <h2 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#111827", fontFamily: "Georgia, serif", margin: 0, lineHeight: 1.4, flex: 1 }}>
-              {journal.title}
-            </h2>
-            <button
-              onClick={onClose}
-              style={{ width: 32, height: 32, borderRadius: "50%", border: "1.5px solid #e5e7eb", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0, color: "#6b7280", transition: "all 0.15s" }}
-              onMouseEnter={e => { e.currentTarget.style.background = "#f3f4f6"; e.currentTarget.style.borderColor = "#d1d5db"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.borderColor = "#e5e7eb"; }}
-            >
-              <X size={15} />
-            </button>
+            <h2 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#111827", fontFamily: "Georgia, serif", margin: 0, lineHeight: 1.4, flex: 1 }}>{journal.title}</h2>
+            <CloseBtn onClose={onClose} />
           </div>
-
-          {/* Authors · Journal · Year */}
           <p style={{ fontSize: "0.83rem", color: "#6b7280", margin: "0.5rem 0 0.875rem" }}>
             {journal.authors}
             <span style={{ margin: "0 0.35rem", color: "#d1d5db" }}>·</span>
@@ -482,21 +574,15 @@ function AbstractModal({ journal, onClose }: { journal: Journal; onClose: () => 
             <span style={{ margin: "0 0.35rem", color: "#d1d5db" }}>·</span>
             {journal.year}
           </p>
-
-          {/* Tags */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
             {journal.tags.map(tag => (
-              <span key={tag} style={{ fontSize: "0.72rem", fontWeight: 600, padding: "0.2rem 0.65rem", borderRadius: 999, background: "#f3f4f6", border: "1px solid #e5e7eb", color: "#374151" }}>
-                {tag}
-              </span>
+              <span key={tag} style={{ fontSize: "0.72rem", fontWeight: 600, padding: "0.2rem 0.65rem", borderRadius: 999, background: "#f3f4f6", border: "1px solid #e5e7eb", color: "#374151" }}>{tag}</span>
             ))}
           </div>
         </div>
 
-        {/* Modal body — scrollable */}
+        {/* Body */}
         <div style={{ padding: "1.5rem 1.75rem", overflowY: "auto", flex: 1 }}>
-
-          {/* Institution */}
           <div style={{ display: "flex", alignItems: "flex-start", gap: "0.6rem", marginBottom: "1.25rem" }}>
             <Building2 size={15} style={{ color: "#9ca3af", flexShrink: 0, marginTop: 2 }} />
             <div>
@@ -504,74 +590,70 @@ function AbstractModal({ journal, onClose }: { journal: Journal; onClose: () => 
               <p style={{ fontSize: "0.875rem", color: "#374151", margin: 0, fontWeight: 500 }}>{journal.institution}</p>
             </div>
           </div>
-
-          {/* Abstract */}
           <div>
             <p style={{ fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", color: "#9ca3af", margin: "0 0 0.625rem" }}>Abstract</p>
-            <p style={{ fontSize: "0.9rem", color: "#1f2937", lineHeight: 1.75, margin: 0 }}>
-              {journal.abstract}
-            </p>
+            <p style={{ fontSize: "0.9rem", color: "#1f2937", lineHeight: 1.75, margin: 0 }}>{journal.abstract}</p>
           </div>
         </div>
 
-        {/* Modal footer */}
+        {/* Footer */}
         <div style={{ padding: "1rem 1.75rem", borderTop: "1px solid #f3f4f6", display: "flex", alignItems: "center", gap: "0.625rem", flexWrap: "wrap", flexShrink: 0, background: "#fafafa" }}>
-          <a
-            href={`/publications/${journal.slug}.pdf`}
-            style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.6rem 1.125rem", borderRadius: 8, background: "#381b92", color: "#fff", fontSize: "0.83rem", fontWeight: 700, textDecoration: "none", border: "none", cursor: "pointer", transition: "opacity 0.15s" }}
+          <a href={`/publications/${journal.slug}.pdf`}
+            style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.6rem 1.125rem", borderRadius: 8, background: "#381b92", color: "#fff", fontSize: "0.83rem", fontWeight: 700, textDecoration: "none", transition: "opacity 0.15s" }}
             onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
             onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-          >
-            <Download size={14} /> Download PDF
-          </a>
-          <Link
-            to={`/publications/${journal.slug}`}
-            style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.6rem 1.125rem", borderRadius: 8, background: "#fff", color: "#374151", fontSize: "0.83rem", fontWeight: 600, textDecoration: "none", border: "1.5px solid #e5e7eb", cursor: "pointer", transition: "border-color 0.15s" }}
+          ><Download size={14} /> Download PDF</a>
+          <Link to={`/publications/${journal.slug}`}
+            style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.6rem 1.125rem", borderRadius: 8, background: "#fff", color: "#374151", fontSize: "0.83rem", fontWeight: 600, textDecoration: "none", border: "1.5px solid #e5e7eb", transition: "border-color 0.15s" }}
             onMouseEnter={e => (e.currentTarget.style.borderColor = "#381b92")}
             onMouseLeave={e => (e.currentTarget.style.borderColor = "#e5e7eb")}
-          >
-            <BookOpen size={14} /> View Full Article
-          </Link>
+          ><BookOpen size={14} /> View Full Article</Link>
           <button
+            onClick={() => { onClose(); setTimeout(onCite, 60); }}
             style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: "0.6rem 1.125rem", borderRadius: 8, background: "#fff", color: "#374151", fontSize: "0.83rem", fontWeight: 600, border: "1.5px solid #e5e7eb", cursor: "pointer", transition: "border-color 0.15s" }}
             onMouseEnter={e => (e.currentTarget.style.borderColor = "#381b92")}
             onMouseLeave={e => (e.currentTarget.style.borderColor = "#e5e7eb")}
-          >
-            <Quote size={14} /> Cite
-          </button>
+          ><Quote size={14} /> Cite</button>
         </div>
       </div>
-
-      <style>{`
-        @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translate(-50%, calc(-50% + 16px)); } to { opacity: 1; transform: translate(-50%, -50%); } }
-      `}</style>
     </>
   );
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
+type ModalType = "abstract" | "cite" | null;
+
 export default function ExistingJournals() {
-  const [view,        setView]        = useState<"cards" | "list">("cards");
-  const [search,      setSearch]      = useState("");
-  const [activeTag,   setActiveTag]   = useState("All");
-  const [modalJournal, setModalJournal] = useState<Journal | null>(null);
+  const [view,          setView]          = useState<"cards" | "list">("cards");
+  const [search,        setSearch]        = useState("");
+  const [activeTag,     setActiveTag]     = useState("All");
+  const [activeJournal, setActiveJournal] = useState<Journal | null>(null);
+  const [activeModal,   setActiveModal]   = useState<ModalType>(null);
+
+  const openModal  = (j: Journal, type: ModalType) => { setActiveJournal(j); setActiveModal(type); };
+  const closeModal = () => { setActiveModal(null); setActiveJournal(null); };
 
   const filtered = journals.filter(j => {
-    const matchSearch =
-      j.title.toLowerCase().includes(search.toLowerCase()) ||
-      j.authors.toLowerCase().includes(search.toLowerCase()) ||
-      j.journal.toLowerCase().includes(search.toLowerCase());
-    const matchTag = activeTag === "All" || j.tags.includes(activeTag);
-    return matchSearch && matchTag;
+    const q = search.toLowerCase();
+    return (
+      (j.title.toLowerCase().includes(q) || j.authors.toLowerCase().includes(q) || j.journal.toLowerCase().includes(q)) &&
+      (activeTag === "All" || j.tags.includes(activeTag))
+    );
   });
 
   return (
     <Layout>
-      {/* Abstract modal */}
-      {modalJournal && (
-        <AbstractModal journal={modalJournal} onClose={() => setModalJournal(null)} />
+      {/* ── Modals ───────────────────────────────────────────────────── */}
+      {activeJournal && activeModal === "abstract" && (
+        <AbstractModal
+          journal={activeJournal}
+          onClose={closeModal}
+          onCite={() => openModal(activeJournal, "cite")}
+        />
+      )}
+      {activeJournal && activeModal === "cite" && (
+        <CiteModal journal={activeJournal} onClose={closeModal} />
       )}
 
       {/* ── Page Header ──────────────────────────────────────────────── */}
@@ -586,16 +668,18 @@ export default function ExistingJournals() {
                 Browse published articles on the Afrika Scholar platform.
               </p>
             </div>
-            <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
               {(["cards", "list"] as const).map(v => (
-                <button key={v} onClick={() => setView(v)} style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.5rem 1rem", borderRadius: 8, fontSize: "0.85rem", fontWeight: 600, cursor: "pointer", border: "1.5px solid var(--border)", background: view === v ? "var(--primary)" : "var(--background)", color: view === v ? "var(--primary-foreground)" : "var(--foreground)", transition: "all 0.15s" }}>
+                <button key={v} onClick={() => setView(v)}
+                  style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.5rem 1rem", borderRadius: 8, fontSize: "0.85rem", fontWeight: 600, cursor: "pointer", border: "1.5px solid var(--border)", background: view === v ? "var(--primary)" : "var(--background)", color: view === v ? "var(--primary-foreground)" : "var(--foreground)", transition: "all 0.15s" }}
+                >
                   {v === "cards" ? <><LayoutGrid size={15} /> Cards</> : <><List size={15} /> List</>}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Search + filters */}
+          {/* Search + tag filters */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", alignItems: "center", paddingBottom: "1rem" }}>
             <div style={{ position: "relative", minWidth: 220, flex: "1 1 220px", maxWidth: 360 }}>
               <Search size={14} style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", color: "var(--muted-foreground)", pointerEvents: "none" }} />
@@ -607,9 +691,7 @@ export default function ExistingJournals() {
               {allTags.map(tag => (
                 <button key={tag} onClick={() => setActiveTag(tag)}
                   style={{ padding: "0.35rem 0.85rem", borderRadius: 999, fontSize: "0.78rem", fontWeight: 600, cursor: "pointer", border: "1.5px solid", borderColor: activeTag === tag ? "var(--accent)" : "var(--border)", background: activeTag === tag ? "var(--accent)" : "var(--background)", color: activeTag === tag ? "#fff" : "var(--muted-foreground)", transition: "all 0.15s" }}
-                >
-                  {tag}
-                </button>
+                >{tag}</button>
               ))}
             </div>
           </div>
@@ -618,7 +700,6 @@ export default function ExistingJournals() {
 
       {/* ── Results ──────────────────────────────────────────────────── */}
       <div className="container-section" style={{ padding: "2rem var(--container-padding, 1rem)" }}>
-
         {filtered.length === 0 && (
           <div style={{ textAlign: "center", padding: "5rem 1rem", color: "var(--muted-foreground)" }}>
             <Search size={40} style={{ margin: "0 auto 1rem", opacity: 0.2 }} />
@@ -631,13 +712,23 @@ export default function ExistingJournals() {
 
         {view === "cards" && filtered.length > 0 && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 420px), 1fr))", gap: "1.25rem" }}>
-            {filtered.map(j => <JournalCard key={j.id} journal={j} onOpenModal={() => setModalJournal(j)} />)}
+            {filtered.map(j => (
+              <JournalCard key={j.id} journal={j}
+                onAbstract={() => openModal(j, "abstract")}
+                onCite={() => openModal(j, "cite")}
+              />
+            ))}
           </div>
         )}
 
         {view === "list" && filtered.length > 0 && (
           <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {filtered.map(j => <JournalListRow key={j.id} journal={j} onOpenModal={() => setModalJournal(j)} />)}
+            {filtered.map(j => (
+              <JournalListRow key={j.id} journal={j}
+                onAbstract={() => openModal(j, "abstract")}
+                onCite={() => openModal(j, "cite")}
+              />
+            ))}
           </div>
         )}
       </div>
@@ -647,10 +738,9 @@ export default function ExistingJournals() {
 
 // ─── Journal Card ─────────────────────────────────────────────────────────────
 
-function JournalCard({ journal, onOpenModal }: { journal: Journal; onOpenModal: () => void }) {
+function JournalCard({ journal, onAbstract, onCite }: { journal: Journal; onAbstract: () => void; onCite: () => void }) {
   return (
-    <div
-      style={{ background: "#fff", border: "1.5px solid #d1d5db", borderRadius: 12, padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.875rem", transition: "box-shadow 0.2s" }}
+    <div style={{ background: "#fff", border: "1.5px solid #d1d5db", borderRadius: 12, padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.875rem", transition: "box-shadow 0.2s" }}
       onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 4px 18px rgba(0,0,0,0.08)")}
       onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}
     >
@@ -663,34 +753,30 @@ function JournalCard({ journal, onOpenModal }: { journal: Journal; onOpenModal: 
           <p style={{ fontSize: "0.82rem", color: "#6b7280", margin: 0 }}>{journal.authors}</p>
         </div>
       </div>
-
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", alignItems: "center" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
         {journal.tags.map(tag => (
           <span key={tag} style={{ fontSize: "0.75rem", fontWeight: 500, padding: "0.25rem 0.7rem", borderRadius: 6, background: "#f9fafb", color: "#374151", border: "1px solid #d1d5db" }}>{tag}</span>
         ))}
         <span style={{ fontSize: "0.75rem", fontWeight: 500, padding: "0.25rem 0.7rem", borderRadius: 6, background: "#f9fafb", color: "#374151", border: "1px solid #d1d5db" }}>{journal.year}</span>
       </div>
-
       <div style={{ fontSize: "0.83rem", color: "#111827", lineHeight: 1.7 }}>
         <div><strong>Journal:</strong> <span style={{ color: "#4b5563", fontWeight: 400 }}>{journal.journal}</span></div>
         <div><strong>Institution:</strong> <span style={{ color: "#4b5563", fontWeight: 400 }}>{journal.institution}</span></div>
       </div>
-
-      <ActionButtons slug={journal.slug} onOpenModal={onOpenModal} />
+      <ActionButtons slug={journal.slug} onAbstract={onAbstract} onCite={onCite} />
     </div>
   );
 }
 
 // ─── Journal List Row ─────────────────────────────────────────────────────────
 
-function JournalListRow({ journal, onOpenModal }: { journal: Journal; onOpenModal: () => void }) {
+function JournalListRow({ journal, onAbstract, onCite }: { journal: Journal; onAbstract: () => void; onCite: () => void }) {
   return (
-    <div
-      style={{ background: "var(--card, #fff)", border: "1px solid var(--border, #e5e7eb)", borderRadius: 12, padding: "1.25rem 1.5rem", display: "flex", gap: "1rem", alignItems: "flex-start", transition: "box-shadow 0.2s" }}
+    <div style={{ background: "var(--card,#fff)", border: "1px solid var(--border,#e5e7eb)", borderRadius: 12, padding: "1.25rem 1.5rem", display: "flex", gap: "1rem", alignItems: "flex-start", transition: "box-shadow 0.2s" }}
       onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.07)")}
       onMouseLeave={e => (e.currentTarget.style.boxShadow = "none")}
     >
-      <div style={{ width: 40, height: 40, borderRadius: 9, background: "var(--secondary, #f4f4f5)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+      <div style={{ width: 40, height: 40, borderRadius: 9, background: "var(--secondary,#f4f4f5)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
         <BookOpen size={18} style={{ color: "var(--muted-foreground)" }} />
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -709,7 +795,7 @@ function JournalListRow({ journal, onOpenModal }: { journal: Journal; onOpenModa
         </div>
       </div>
       <div style={{ flexShrink: 0 }}>
-        <ActionButtons slug={journal.slug} onOpenModal={onOpenModal} compact />
+        <ActionButtons slug={journal.slug} onAbstract={onAbstract} onCite={onCite} compact />
       </div>
     </div>
   );
@@ -717,41 +803,17 @@ function JournalListRow({ journal, onOpenModal }: { journal: Journal; onOpenModa
 
 // ─── Action Buttons ───────────────────────────────────────────────────────────
 
-function ActionButtons({ slug, compact, onOpenModal }: { slug: string; compact?: boolean; onOpenModal: () => void }) {
-  const btn: React.CSSProperties = {
-    display: "inline-flex", alignItems: "center", gap: "0.4rem",
-    padding: compact ? "0.38rem 0.7rem" : "0.42rem 0.9rem",
-    borderRadius: 7, fontSize: "0.8rem", fontWeight: 500, cursor: "pointer",
-    border: "1.5px solid #d1d5db", background: "#fff", color: "#374151",
-    fontFamily: "inherit", textDecoration: "none", transition: "border-color 0.15s, color 0.15s",
-    whiteSpace: "nowrap",
-  };
-
-  const hover = (e: React.MouseEvent) => {
-    (e.currentTarget as HTMLElement).style.borderColor = "var(--accent, #ea580c)";
-    (e.currentTarget as HTMLElement).style.color = "var(--accent, #ea580c)";
-  };
-  const unhover = (e: React.MouseEvent) => {
-    (e.currentTarget as HTMLElement).style.borderColor = "#d1d5db";
-    (e.currentTarget as HTMLElement).style.color = "#374151";
-  };
+function ActionButtons({ slug, compact, onAbstract, onCite }: { slug: string; compact?: boolean; onAbstract: () => void; onCite: () => void }) {
+  const btn: React.CSSProperties = { display: "inline-flex", alignItems: "center", gap: "0.4rem", padding: compact ? "0.38rem 0.7rem" : "0.42rem 0.9rem", borderRadius: 7, fontSize: "0.8rem", fontWeight: 500, cursor: "pointer", border: "1.5px solid #d1d5db", background: "#fff", color: "#374151", fontFamily: "inherit", textDecoration: "none", transition: "border-color 0.15s, color 0.15s", whiteSpace: "nowrap" };
+  const h = (e: React.MouseEvent) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--accent,#ea580c)"; (e.currentTarget as HTMLElement).style.color = "var(--accent,#ea580c)"; };
+  const u = (e: React.MouseEvent) => { (e.currentTarget as HTMLElement).style.borderColor = "#d1d5db"; (e.currentTarget as HTMLElement).style.color = "#374151"; };
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "0.25rem" }}>
-      <a href={`/publications/${slug}.pdf`} style={btn} onMouseEnter={hover} onMouseLeave={unhover}>
-        <FileText size={13} /> PDF
-      </a>
-      {/* Abstract — opens modal */}
-      <button style={btn} onMouseEnter={hover} onMouseLeave={unhover} onClick={onOpenModal}>
-        <Eye size={13} /> Abstract
-      </button>
-      {/* View Article — also opens modal (same as in screenshot) */}
-      <button style={btn} onMouseEnter={hover} onMouseLeave={unhover} onClick={onOpenModal}>
-        <BookOpen size={13} /> View Article
-      </button>
-      <button style={btn} onMouseEnter={hover} onMouseLeave={unhover}>
-        <Quote size={13} /> Cite
-      </button>
+      <a href={`/publications/${slug}.pdf`} style={btn} onMouseEnter={h} onMouseLeave={u}><FileText size={13} /> PDF</a>
+      <button style={btn} onMouseEnter={h} onMouseLeave={u} onClick={onAbstract}><Eye size={13} /> Abstract</button>
+      <button style={btn} onMouseEnter={h} onMouseLeave={u} onClick={onAbstract}><BookOpen size={13} /> View Article</button>
+      <button style={btn} onMouseEnter={h} onMouseLeave={u} onClick={onCite}><Quote size={13} /> Cite</button>
     </div>
   );
 }
