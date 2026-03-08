@@ -198,8 +198,8 @@ export default function Publeesh() {
                   className="bg-accent hover:bg-accent/90"
                   asChild
                 >
-                  <Link to="https://publeesh.ng/">
-                    Explore Publeesh Ai
+                  <Link to="/dashboard/publeesh">
+                  Start Publeeshing
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
