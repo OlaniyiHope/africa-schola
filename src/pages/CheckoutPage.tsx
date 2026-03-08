@@ -53,7 +53,7 @@ export default function CheckoutPage() {
       await loadPaystack();
 
       // 1. Initialize on backend
-      const initRes = await fetch("/api/payments/initialize", {
+      const initRes = await fetch("/api/sch-initialize", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export default function CheckoutPage() {
         callback: async (response: { reference: string }) => {
           // 3. Verify on backend
           try {
-            const verRes  = await fetch(`/api/payments/verify/${response.reference}`);
+            const verRes  = await fetch(`/api/sch/verify/${response.reference}`);
             const verData = await verRes.json();
             if (verData.success) {
               setStep("success");

@@ -218,7 +218,7 @@ export default function Onboarding() {
               </label>
               <select value={data.country} onChange={e => setData(prev => ({ ...prev, country: e.target.value }))}
                 style={{ ...inputStyle, cursor: "pointer" }}>
-                <option value="" disabled>e.g. Nigeria</option>
+                <option value="" disabled>Enter your country</option>
                 {AFRICAN_COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
