@@ -1,14 +1,45 @@
-import { useSearchParams, Link } from "react-router-dom";
-import { Lock, ArrowLeft, CreditCard, BookOpen } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useSearchParams, Link, useNavigate } from "react-router-dom";
+import { Lock, ArrowLeft, CreditCard, BookOpen, Loader2, CheckCircle, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Layout } from "@/components/layout";
 import { publications } from "@/data/publications";
+import { useAuth } from "@/context/AuthContext";
 
 export default function ArticlePreviewPage() {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
   const pubId = searchParams.get("id");
   const publication = publications.find((p) => p.id === pubId) || publications[0];
+
+  const [hasAccess,     setHasAccess]     = useState(false);
+  const [accessLoading, setAccessLoading] = useState(true);
+
+  // On mount: check if this user already has paid access
+  useEffect(() => {
+    if (!user?.email || !publication?.id) {
+      setAccessLoading(false);
+      return;
+    }
+    fetch(`/api/payments/access?email=${encodeURIComponent(user.email)}&articleId=${publication.id}`)
+      .then(r => r.json())
+      .then(data => setHasAccess(data.hasAccess || false))
+      .catch(() => {})
+      .finally(() => setAccessLoading(false));
+  }, [user?.email, publication?.id]);
+
+  const handlePurchaseClick = () => {
+    if (!user) {
+      // Not logged in → redirect to login, come back after
+      navigate(`/login?redirect=${encodeURIComponent(`/article-preview?id=${pubId}`)}`);
+    } else {
+      // Logged in → go to dedicated checkout page
+      navigate(`/checkout?id=${pubId}`);
+    }
+  };
 
   return (
     <Layout>
@@ -21,6 +52,7 @@ export default function ArticlePreviewPage() {
             </Link>
           </Button>
 
+          {/* Article meta */}
           <div className="mb-8">
             <span className="text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded-full">
               {publication.discipline}
@@ -34,32 +66,28 @@ export default function ArticlePreviewPage() {
             </p>
           </div>
 
-          {/* Abstract - Free Preview */}
+          {/* Abstract — always free */}
           <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="text-xl">Abstract</CardTitle>
-            </CardHeader>
+            <CardHeader><CardTitle className="text-xl">Abstract</CardTitle></CardHeader>
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">{publication.abstract}</p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {publication.keywords.map((kw) => (
-                  <span key={kw} className="text-xs bg-secondary px-3 py-1 rounded-full">
-                    {kw}
-                  </span>
+                  <span key={kw} className="text-xs bg-secondary px-3 py-1 rounded-full">{kw}</span>
                 ))}
               </div>
             </CardContent>
           </Card>
 
-          {/* Blurred preview content */}
+          {/* Full article body */}
           <div className="relative">
-            <div className="blur-sm select-none pointer-events-none">
+            <div className={hasAccess ? "" : "blur-sm select-none pointer-events-none"}>
               <h2 className="text-2xl font-bold mb-4">1. Introduction</h2>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-muted-foreground mb-6">
                 The growing need for comprehensive research frameworks in {publication.discipline.toLowerCase()} across the African continent has been widely acknowledged in recent academic discourse. This study builds upon existing literature while introducing novel methodological approaches that address the unique socio-economic and cultural contexts present in African research environments...
               </p>
               <h2 className="text-2xl font-bold mb-4">2. Literature Review</h2>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-muted-foreground mb-6">
                 Previous studies have explored various dimensions of this topic, including cross-institutional collaboration frameworks and evidence-based policy recommendations. However, significant gaps remain in understanding the practical implementation challenges faced by researchers and institutions across the continent...
               </p>
               <h2 className="text-2xl font-bold mb-4">3. Methodology</h2>
@@ -69,28 +97,81 @@ export default function ArticlePreviewPage() {
             </div>
 
             {/* Payment overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-transparent flex items-center justify-center">
-              <Card className="max-w-md w-full shadow-2xl border-accent/20">
-                <CardContent className="p-8 text-center">
-                  <div className="h-16 w-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                    <Lock className="h-8 w-8 text-accent" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2">Full Article Access</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Purchase access to read the complete article including methodology, results, and discussion.
-                  </p>
-                  <div className="text-3xl font-bold text-accent mb-6">$9.99</div>
-                  <Button size="lg" className="w-full bg-accent hover:bg-accent/90 mb-3">
-                    <CreditCard className="mr-2 h-5 w-5" />
-                    Purchase Full Access
-                  </Button>
-                  <p className="text-xs text-muted-foreground">
-                    One-time payment • Instant access • PDF download included
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+            {!hasAccess && !accessLoading && (
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-transparent flex items-center justify-center">
+                <Card className="max-w-md w-full shadow-2xl border-accent/20">
+                  <CardContent className="p-8 text-center">
+                    <div className="h-16 w-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                      <Lock className="h-8 w-8 text-accent" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2">Full Article Access</h3>
+                    <p className="text-muted-foreground mb-6">
+                      Purchase access to read the complete article including methodology, results, and discussion.
+                    </p>
+                    <div className="text-3xl font-bold text-accent mb-2">$9.99</div>
+                    <p className="text-xs text-muted-foreground mb-6">
+                      One-time payment · Instant access · PDF download included
+                    </p>
+
+                    <Button
+                      size="lg"
+                      className="w-full bg-accent hover:bg-accent/90 mb-4"
+                      onClick={handlePurchaseClick}
+                    >
+                      <CreditCard className="mr-2 h-5 w-5" />
+                      {user ? "Proceed to Checkout" : "Sign In to Purchase"}
+                    </Button>
+
+                    <div style={{ display: "flex", justifyContent: "center", gap: "1.25rem" }}>
+                      {[
+                        { icon: ShieldCheck, label: "Secure payment" },
+                        { icon: BookOpen,    label: "Instant access"  },
+                      ].map(({ icon: Icon, label }) => (
+                        <span key={label} style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "#6b7280" }}>
+                          <Icon size={13} /> {label}
+                        </span>
+                      ))}
+                    </div>
+
+                    {!user && (
+                      <p className="text-xs text-muted-foreground mt-4">
+                        Don't have an account?{" "}
+                        <Link
+                          to={`/register?redirect=${encodeURIComponent(`/article-preview?id=${pubId}`)}`}
+                          className="text-accent underline font-semibold"
+                        >
+                          Create one free
+                        </Link>
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {accessLoading && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Loader2 className="h-8 w-8 animate-spin text-accent" />
+              </div>
+            )}
           </div>
+
+          {/* Access granted banner */}
+          {hasAccess && (
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 12, padding: "1rem 1.25rem", marginTop: "2rem" }}>
+              <CheckCircle size={20} style={{ color: "#16a34a", flexShrink: 0 }} />
+              <div>
+                <p style={{ fontSize: "0.875rem", fontWeight: 700, color: "#15803d", margin: 0 }}>Full access granted</p>
+                <p style={{ fontSize: "0.78rem", color: "#16a34a", margin: 0 }}>You have purchased access to this article.</p>
+              </div>
+              <a
+                href={`/publications/${publication.id}.pdf`}
+                style={{ marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "0.8rem", fontWeight: 700, color: "#15803d", textDecoration: "none", background: "#dcfce7", borderRadius: 8, padding: "0.45rem 0.875rem", border: "1px solid #bbf7d0" }}
+              >
+                <BookOpen size={14} /> Download PDF
+              </a>
+            </div>
+          )}
         </div>
       </section>
     </Layout>

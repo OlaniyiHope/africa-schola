@@ -63,6 +63,7 @@ import SettingsPage from "./pages/Setting";
 import Onboarding from "./pages/Onboarding";
 import PublesshDash from "./pages/PubleeshDash";
 import GeneratePaper from "./pages/Generate";
+import CheckoutPage from "./pages/CheckoutPage";
 
 const queryClient = new QueryClient();
 
@@ -135,6 +136,7 @@ const App = () => (
           <Route path="/framework/editorial-independence" element={<EditorialIndependencePage />} />
           <Route path="/framework/ethics" element={<EthicsPage />} />
           <Route path="/framework/open-access" element={<OpenAccessPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/framework/retraction-policy" element={<RetractionPolicyPage />} />
           <Route
             path="/publishing/start-journal"
