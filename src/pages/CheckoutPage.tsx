@@ -44,72 +44,74 @@ export default function CheckoutPage() {
   }, [user]);
 
   // ── Launch Paystack popup ──────────────────────────────────────────────────
-  const handlePay = async () => {
-    if (!user) return;
-    try {
-      setStep("paying");
-      setErrMsg("");
+const handlePay = async () => {
+  if (!user) return;
+  try {
+    setStep("paying");
+    setErrMsg("");
 
-      await loadPaystack();
+    await loadPaystack();
 
-      // 1. Initialize on backend
-      const initRes = await fetch("/api/sch-initialize", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("as_token")}`,
-        },
-        body: JSON.stringify({
-          email: user.email,
-          articleId: publication.id,
-          articleTitle: publication.title,
-        }),
-      });
+    // 1. Initialize on backend
+    const initRes = await fetch("/api/sch-initialize", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("as_token")}`,
+      },
+      body: JSON.stringify({
+        email: user.email,
+        articleId: publication.id,
+        articleTitle: publication.title,
+      }),
+    });
 
-      const initData = await initRes.json();
+    const initData = await initRes.json();
 
-      if (!initData.success) {
-        if (initData.alreadyPaid) { setStep("success"); return; }
-        throw new Error(initData.message || "Initialization failed");
-      }
+    if (!initData.success) {
+      if (initData.alreadyPaid) { setStep("success"); return; }
+      throw new Error(initData.message || "Initialization failed");
+    }
 
-      // 2. Open Paystack popup
-      const handler = (window as any).PaystackPop.setup({
-        key:      import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
-        email:    user.email,
-    amount: 150000, // $9.99 in cents
-        currency: "NGN",
-        ref:      initData.data.reference,
-        metadata: { articleId: publication.id, articleTitle: publication.title },
+    // 2. Open Paystack popup
+    const handler = (window as any).PaystackPop.setup({
+      key:      import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
+      email:    user.email,
+      amount:   150000, // ₦1,500 in kobo
+      currency: "NGN",
+      ref:      initData.data.reference,
+      metadata: { articleId: publication.id, articleTitle: publication.title },
 
-        onClose: () => {
-          setStep("review"); // user closed popup without paying
-        },
+      onClose: () => {
+        setStep("review");
+      },
 
-        callback: async (response: { reference: string }) => {
-          // 3. Verify on backend
-          try {
-            const verRes  = await fetch(`/api/sch/verify/${response.reference}`);
-            const verData = await verRes.json();
+      // ✅ NOT async — use .then() instead of await
+      callback: (response: { reference: string }) => {
+        fetch(`/api/sch/verify/${response.reference}`)
+          .then(r => r.json())
+          .then(verData => {
             if (verData.success) {
               setStep("success");
             } else {
-              throw new Error(verData.message || "Verification failed");
+              setErrMsg(verData.message || "Verification failed");
+              setStep("error");
             }
-          } catch (e: any) {
-            setErrMsg(e.message);
+          })
+          .catch(() => {
+            setErrMsg("Could not verify payment. Please refresh.");
             setStep("error");
-          }
-        },
-      });
+          });
+      },
+    });
 
-      handler.openIframe();
+    handler.openIframe();
 
-    } catch (e: any) {
-      setErrMsg(e.message || "Something went wrong");
-      setStep("error");
-    }
-  };
+  } catch (e: any) {
+    setErrMsg(e.message || "Something went wrong");
+    setStep("error");
+  }
+};
 
   // ─── Success screen ──────────────────────────────────────────────────────
 
