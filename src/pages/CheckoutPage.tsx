@@ -226,7 +226,7 @@ export default function CheckoutPage() {
               >
                 {step === "paying"
                   ? <><Loader2 size={18} style={{ animation: "spin 0.8s linear infinite" }} /> Opening secure payment...</>
-                  : <><Lock size={18} /> Pay $9.99 Securely</>
+                  : <><Lock size={18} /> Pay ₦15,000 Securely</>
                 }
               </button>
 
@@ -254,8 +254,8 @@ export default function CheckoutPage() {
 
               {/* Line items */}
               {[
-                { label: "Article access", value: "$9.99" },
-                { label: "Tax",            value: "$0.00" },
+                { label: "Article access", value: "₦15,000" },
+                { label: "Tax",            value: "₦0.00" },
               ].map(({ label, value }) => (
                 <div key={label} style={{ display: "flex", justifyContent: "space-between", fontSize: "0.83rem", color: "#6b7280", marginBottom: "0.5rem" }}>
                   <span>{label}</span><span>{value}</span>
@@ -263,7 +263,7 @@ export default function CheckoutPage() {
               ))}
 
               <div style={{ borderTop: "1.5px solid #e5e7eb", marginTop: "0.75rem", paddingTop: "0.75rem", display: "flex", justifyContent: "space-between", fontWeight: 800, fontSize: "1rem", color: "#111827" }}>
-                <span>Total</span><span style={{ color: "#ea580c" }}>$9.99</span>
+                <span>Total</span><span style={{ color: "#ea580c" }}>₦15,000</span>
               </div>
 
               {/* What you get */}
