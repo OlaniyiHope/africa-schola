@@ -77,8 +77,8 @@ export default function CheckoutPage() {
       const handler = (window as any).PaystackPop.setup({
         key:      import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
         email:    user.email,
-        amount:   999, // $9.99 in cents
-        currency: "USD",
+    amount: 150000, // $9.99 in cents
+        currency: "NGN",
         ref:      initData.data.reference,
         metadata: { articleId: publication.id, articleTitle: publication.title },
 
