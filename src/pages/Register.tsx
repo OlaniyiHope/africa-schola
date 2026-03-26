@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   User, Mail, Lock, ArrowRight, Eye, EyeOff,
-  AlertCircle, CheckCircle, GraduationCap, BookOpen,
-  FlaskConical, Building2, Briefcase, Gift,
+  AlertCircle, CheckCircle, GraduationCap,
+  FlaskConical, Briefcase,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -12,28 +11,16 @@ import logo from "@/assets/logo.png";
 
 const ROLES = [
   {
-    value: "academic",
-    label: "Academic / Lecturer",
-    icon: GraduationCap,
-    desc: "University faculty, professors & lecturers",
-  },
-  {
-    value: "student",
-    label: "Student",
-    icon: BookOpen,
-    desc: "Undergraduate, postgraduate & PhD students",
-  },
-  {
     value: "researcher",
     label: "Researcher",
     icon: FlaskConical,
     desc: "Independent or institutional researchers",
   },
   {
-    value: "institution",
-    label: "Institution",
-    icon: Building2,
-    desc: "Universities, research centres & organisations",
+    value: "academic",
+    label: "Academic / Lecturer",
+    icon: GraduationCap,
+    desc: "University faculty, professors & lecturers",
   },
   {
     value: "professional",
@@ -43,27 +30,23 @@ const ROLES = [
   },
 ];
 
-// ─── Steps ────────────────────────────────────────────────────────────────────
-
-type Step = "role" | "details";
+type Step = "details" | "role";
 
 export default function Register() {
   const navigate = useNavigate();
-  const [step,         setStep]        = useState<Step>("role");
+  const [step,         setStep]        = useState<Step>("details");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm,  setShowConfirm]  = useState(false);
   const [isLoading,    setIsLoading]    = useState(false);
   const [error,        setError]        = useState("");
   const [success,      setSuccess]      = useState(false);
-  const [showReferral, setShowReferral] = useState(false);
+  const [activeRole,   setActiveRole]   = useState("");
 
   const [formData, setFormData] = useState({
-    role:         "",
-    username:     "",
-    email:        "",
-    password:     "",
-    confirm:      "",
-    referralCode: "",
+    username: "",
+    email:    "",
+    password: "",
+    confirm:  "",
   });
 
   const handleChange = (field: string, value: string) => {
@@ -71,13 +54,8 @@ export default function Register() {
     if (error) setError("");
   };
 
-  const handleRoleSelect = (role: string) => {
-    handleChange("role", role);
-    // short delay so user sees the selection highlight before moving on
-    setTimeout(() => setStep("details"), 180);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  // ── Step 1 → Step 2 ────────────────────────────────────────────────────────
+  const handleDetailsNext = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -90,18 +68,22 @@ export default function Register() {
       return;
     }
 
+    setStep("role");
+  };
+
+  // ── Final submit (called when role card is clicked) ────────────────────────
+  const handleRoleSubmit = async (role: string) => {
+    setActiveRole(role);
+    setError("");
     setIsLoading(true);
 
     try {
-      const body: Record<string, string> = {
+      const body = {
         username: formData.username.trim(),
         email:    formData.email.trim().toLowerCase(),
         password: formData.password,
-        role:     formData.role,
+        role,
       };
-      if (formData.referralCode.trim()) {
-        body.referralCode = formData.referralCode.trim().toUpperCase();
-      }
 
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/sch-register`, {
         method: "POST",
@@ -113,6 +95,8 @@ export default function Register() {
 
       if (!res.ok) {
         setError(data.message || "Registration failed. Please try again.");
+        setIsLoading(false);
+        setActiveRole("");
         return;
       }
 
@@ -124,12 +108,12 @@ export default function Register() {
 
     } catch {
       setError("Unable to connect to the server. Please try again.");
-    } finally {
       setIsLoading(false);
+      setActiveRole("");
     }
   };
 
-  // ── Success screen ──────────────────────────────────────────────────────────
+  // ── Success screen ─────────────────────────────────────────────────────────
   if (success) {
     return (
       <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--background)" }}>
@@ -148,8 +132,6 @@ export default function Register() {
     );
   }
 
-  const selectedRole = ROLES.find(r => r.value === formData.role);
-
   return (
     <div>
       <div style={{
@@ -163,14 +145,13 @@ export default function Register() {
 
         {/* Card */}
         <div style={{
-          width: "100%", maxWidth: step === "role" ? 560 : 480,
+          width: "100%", maxWidth: 480,
           background: "var(--card, #fff)", border: "1px solid var(--border, #e5e7eb)",
           borderRadius: 20, padding: "2.5rem 2rem",
           boxShadow: "0 8px 40px rgba(0,0,0,0.08)", position: "relative", zIndex: 1,
-          transition: "max-width 0.3s ease",
         }}>
 
-          {/* Logo */}
+          {/* Logo + heading */}
           <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
             <Link to="/">
               <img src={logo} alt="Afrika Scholar" style={{ height: 44, margin: "0 auto 1rem", display: "block" }} />
@@ -178,122 +159,45 @@ export default function Register() {
 
             {/* Step indicator */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", marginBottom: "1.25rem" }}>
-              {(["role", "details"] as Step[]).map((s, i) => (
+              {(["details", "role"] as Step[]).map((s, i) => (
                 <div key={s} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                   <div style={{
                     width: 28, height: 28, borderRadius: "50%", display: "flex",
                     alignItems: "center", justifyContent: "center",
                     fontSize: "0.75rem", fontWeight: 800,
-                    background: step === s ? "var(--accent)" : (i === 0 && step === "details") ? "#381b92" : "#f3f4f6",
-                    color: (step === s || (i === 0 && step === "details")) ? "#fff" : "var(--muted-foreground)",
+                    background: step === s
+                      ? "var(--accent)"
+                      : (i === 0 && step === "role") ? "#381b92" : "#f3f4f6",
+                    color: (step === s || (i === 0 && step === "role")) ? "#fff" : "var(--muted-foreground)",
                     transition: "all 0.2s",
                   }}>
-                    {i === 0 && step === "details" ? <CheckCircle size={13} /> : i + 1}
+                    {i === 0 && step === "role" ? <CheckCircle size={13} /> : i + 1}
                   </div>
                   <span style={{ fontSize: "0.72rem", fontWeight: 600, color: step === s ? "var(--foreground)" : "var(--muted-foreground)" }}>
-                    {s === "role" ? "Choose Role" : "Your Details"}
+                    {s === "details" ? "Your Details" : "Choose Role"}
                   </span>
                   {i === 0 && (
-                    <div style={{ width: 32, height: 1.5, background: step === "details" ? "#381b92" : "#e5e7eb", borderRadius: 2, transition: "background 0.3s" }} />
+                    <div style={{ width: 32, height: 1.5, background: step === "role" ? "#381b92" : "#e5e7eb", borderRadius: 2, transition: "background 0.3s" }} />
                   )}
                 </div>
               ))}
             </div>
 
             <h1 style={{ fontSize: "1.6rem", fontWeight: 800, fontFamily: "Georgia, serif", color: "var(--foreground)", margin: "0 0 0.3rem" }}>
-              {step === "role" ? (
-                <>Join as a <span style={{ color: "var(--accent)" }}>Researcher</span></>
-              ) : (
-                <>Create your <span style={{ color: "var(--accent)" }}>Account</span></>
-              )}
+              {step === "details"
+                ? <>Create your <span style={{ color: "var(--accent)" }}>Account</span></>
+                : <>What best <span style={{ color: "var(--accent)" }}>describes you?</span></>}
             </h1>
             <p style={{ fontSize: "0.875rem", color: "var(--muted-foreground)", margin: 0 }}>
-              {step === "role"
-                ? "Select the role that best describes you"
-                : `Signing up as ${selectedRole?.label}`}
+              {step === "details"
+                ? "Join Afrika Scholar Today"
+                : "Tap a role to complete your registration"}
             </p>
           </div>
 
-          {/* ── STEP 1: Role Picker ───────────────────────────────────────── */}
-          {step === "role" && (
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-              {ROLES.map(({ value, label, icon: Icon, desc }) => (
-                <button
-                  key={value}
-                  onClick={() => handleRoleSelect(value)}
-                  style={{
-                    display: "flex", alignItems: "center", gap: "1rem",
-                    padding: "0.875rem 1rem", borderRadius: 12, cursor: "pointer",
-                    border: formData.role === value
-                      ? "2px solid var(--accent)"
-                      : "2px solid var(--border, #e5e7eb)",
-                    background: formData.role === value
-                      ? "rgba(234,88,12,0.04)" : "var(--card, #fff)",
-                    textAlign: "left", transition: "all 0.15s", width: "100%",
-                  }}
-                  onMouseEnter={e => {
-                    if (formData.role !== value) {
-                      e.currentTarget.style.borderColor = "rgba(234,88,12,0.4)";
-                      e.currentTarget.style.background = "rgba(234,88,12,0.02)";
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (formData.role !== value) {
-                      e.currentTarget.style.borderColor = "var(--border, #e5e7eb)";
-                      e.currentTarget.style.background = "var(--card, #fff)";
-                    }
-                  }}
-                >
-                  <div style={{
-                    width: 42, height: 42, borderRadius: 10, flexShrink: 0,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    background: formData.role === value ? "rgba(234,88,12,0.1)" : "#f3f4f6",
-                    transition: "background 0.15s",
-                  }}>
-                    <Icon size={20} style={{ color: formData.role === value ? "var(--accent)" : "#6b7280" }} />
-                  </div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--foreground)", margin: 0, lineHeight: 1.2 }}>
-                      {label}
-                    </p>
-                    <p style={{ fontSize: "0.75rem", color: "var(--muted-foreground)", margin: "0.2rem 0 0", lineHeight: 1.4 }}>
-                      {desc}
-                    </p>
-                  </div>
-                  {formData.role === value && (
-                    <CheckCircle size={18} style={{ color: "var(--accent)", flexShrink: 0 }} />
-                  )}
-                </button>
-              ))}
-
-              <div style={{ marginTop: "0.5rem", textAlign: "center" }}>
-                <span style={{ fontSize: "0.78rem", color: "var(--muted-foreground)" }}>
-                  Already have an account?{" "}
-                  <Link to="/login" style={{ color: "var(--accent)", fontWeight: 700, textDecoration: "none" }}>Sign in</Link>
-                </span>
-              </div>
-            </div>
-          )}
-
-          {/* ── STEP 2: Details Form ──────────────────────────────────────── */}
+          {/* ── STEP 1: Details ─────────────────────────────────────────── */}
           {step === "details" && (
             <>
-              {/* Back + role chip */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem" }}>
-                <button
-                  onClick={() => { setStep("role"); setError(""); }}
-                  style={{ background: "none", border: "none", cursor: "pointer", fontSize: "0.8rem", fontWeight: 600, color: "var(--muted-foreground)", padding: 0, display: "flex", alignItems: "center", gap: "0.3rem" }}
-                >
-                  ← Back
-                </button>
-                {selectedRole && (
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem", background: "rgba(234,88,12,0.08)", border: "1px solid rgba(234,88,12,0.2)", color: "var(--accent)", borderRadius: 999, padding: "0.25rem 0.75rem", fontSize: "0.75rem", fontWeight: 700 }}>
-                    <selectedRole.icon size={12} /> {selectedRole.label}
-                  </span>
-                )}
-              </div>
-
-              {/* Error banner */}
               {error && (
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.25)", borderRadius: 8, padding: "0.75rem 1rem", marginBottom: "1.25rem" }}>
                   <AlertCircle size={15} style={{ color: "#ef4444", flexShrink: 0 }} />
@@ -301,18 +205,18 @@ export default function Register() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <form onSubmit={handleDetailsNext} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 
-                {/* Username */}
+                {/* Full Name */}
                 <div>
-                  <label style={labelStyle}>USERNAME</label>
+                  <label style={labelStyle}>FULL NAME</label>
                   <div style={inputWrap}>
                     <User size={15} style={iconStyle} />
                     <input
-                      type="text" placeholder="Choose a username"
+                      type="text" placeholder="Your full name"
                       value={formData.username}
                       onChange={e => handleChange("username", e.target.value)}
-                      required minLength={3} disabled={isLoading} style={inputInner}
+                      required minLength={3} style={inputInner}
                     />
                   </div>
                 </div>
@@ -326,7 +230,7 @@ export default function Register() {
                       type="email" placeholder="you@example.com"
                       value={formData.email}
                       onChange={e => handleChange("email", e.target.value)}
-                      required disabled={isLoading} style={inputInner}
+                      required style={inputInner}
                     />
                   </div>
                 </div>
@@ -346,7 +250,7 @@ export default function Register() {
                       placeholder="Create a strong password"
                       value={formData.password}
                       onChange={e => handleChange("password", e.target.value)}
-                      required minLength={6} disabled={isLoading}
+                      required minLength={6}
                       style={{ ...inputInner, paddingRight: "2.5rem" }}
                     />
                     <button type="button" onClick={() => setShowPassword(v => !v)} style={eyeBtn}>
@@ -365,45 +269,13 @@ export default function Register() {
                       placeholder="Repeat your password"
                       value={formData.confirm}
                       onChange={e => handleChange("confirm", e.target.value)}
-                      required minLength={6} disabled={isLoading}
+                      required minLength={6}
                       style={{ ...inputInner, paddingRight: "2.5rem" }}
                     />
                     <button type="button" onClick={() => setShowConfirm(v => !v)} style={eyeBtn}>
                       {showConfirm ? <EyeOff size={15} /> : <Eye size={15} />}
                     </button>
                   </div>
-                </div>
-
-                {/* Referral code (collapsible) */}
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => setShowReferral(v => !v)}
-                    style={{ background: "none", border: "none", cursor: "pointer", padding: 0, display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.78rem", fontWeight: 600, color: "var(--muted-foreground)" }}
-                  >
-                    <Gift size={13} style={{ color: showReferral ? "var(--accent)" : "var(--muted-foreground)" }} />
-                    {showReferral ? "Remove referral code" : "Have a referral code? (optional)"}
-                  </button>
-
-                  {showReferral && (
-                    <div style={{ marginTop: "0.5rem" }}>
-                      <div style={inputWrap}>
-                        <Gift size={15} style={iconStyle} />
-                        <input
-                          type="text"
-                          placeholder="e.g. JOHN-A3K9F"
-                          value={formData.referralCode}
-                          onChange={e => handleChange("referralCode", e.target.value.toUpperCase())}
-                          disabled={isLoading}
-                          style={{ ...inputInner, letterSpacing: "0.08em", textTransform: "uppercase" }}
-                          maxLength={12}
-                        />
-                      </div>
-                      <p style={{ fontSize: "0.7rem", color: "var(--muted-foreground)", margin: "0.3rem 0 0" }}>
-                        Enter the code shared by a colleague or fellow researcher.
-                      </p>
-                    </div>
-                  )}
                 </div>
 
                 {/* Terms */}
@@ -417,43 +289,29 @@ export default function Register() {
                   </span>
                 </label>
 
-                {/* Submit */}
+                {/* Next button */}
                 <button
                   type="submit"
-                  disabled={isLoading}
                   style={{
                     marginTop: "0.25rem", width: "100%", padding: "0.85rem",
                     borderRadius: 10, border: "none", color: "#fff",
-                    fontSize: "0.95rem", fontWeight: 700,
-                    cursor: isLoading ? "not-allowed" : "pointer",
+                    fontSize: "0.95rem", fontWeight: 700, cursor: "pointer",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    gap: "0.5rem", opacity: isLoading ? 0.72 : 1,
-                    transition: "opacity 0.15s", background: "#381b92",
+                    gap: "0.5rem", background: "#381b92", transition: "opacity 0.15s",
                   }}
-                  onMouseEnter={e => { if (!isLoading) e.currentTarget.style.opacity = "0.88"; }}
-                  onMouseLeave={e => { if (!isLoading) e.currentTarget.style.opacity = "1"; }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                 >
-                  {isLoading ? (
-                    <>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
-                        style={{ animation: "spin 0.8s linear infinite" }}>
-                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                      </svg>
-                      Creating Account...
-                    </>
-                  ) : (
-                    <>Create Account <ArrowRight size={17} /></>
-                  )}
+                  Continue <ArrowRight size={17} />
                 </button>
               </form>
 
-              {/* Divider + sign in link */}
+              {/* Sign in link */}
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", margin: "1.25rem 0 1rem" }}>
                 <div style={{ flex: 1, height: 1, background: "var(--border, #e5e7eb)" }} />
                 <span style={{ fontSize: "0.75rem", color: "var(--muted-foreground)", whiteSpace: "nowrap" }}>Already have an account?</span>
                 <div style={{ flex: 1, height: 1, background: "var(--border, #e5e7eb)" }} />
               </div>
-
               <Link
                 to="/login"
                 style={{ display: "block", textAlign: "center", padding: "0.75rem", borderRadius: 10, border: "1.5px solid var(--border, #e5e7eb)", fontSize: "0.875rem", fontWeight: 600, color: "var(--foreground)", textDecoration: "none", transition: "border-color 0.15s" }}
@@ -462,6 +320,88 @@ export default function Register() {
               >
                 Sign In Instead
               </Link>
+            </>
+          )}
+
+          {/* ── STEP 2: Role Picker ──────────────────────────────────────── */}
+          {step === "role" && (
+            <>
+              {/* Back */}
+              <button
+                onClick={() => { setStep("details"); setError(""); setActiveRole(""); }}
+                style={{ background: "none", border: "none", cursor: "pointer", fontSize: "0.8rem", fontWeight: 600, color: "var(--muted-foreground)", padding: 0, display: "flex", alignItems: "center", gap: "0.3rem", marginBottom: "1.25rem" }}
+              >
+                ← Back
+              </button>
+
+              {/* Error */}
+              {error && (
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.25)", borderRadius: 8, padding: "0.75rem 1rem", marginBottom: "1.25rem" }}>
+                  <AlertCircle size={15} style={{ color: "#ef4444", flexShrink: 0 }} />
+                  <span style={{ fontSize: "0.83rem", color: "#ef4444" }}>{error}</span>
+                </div>
+              )}
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                {ROLES.map(({ value, label, icon: Icon, desc }) => {
+                  const isActive = activeRole === value && isLoading;
+                  return (
+                    <button
+                      key={value}
+                      onClick={() => !isLoading && handleRoleSubmit(value)}
+                      disabled={isLoading}
+                      style={{
+                        display: "flex", alignItems: "center", gap: "1rem",
+                        padding: "1rem 1.1rem", borderRadius: 14,
+                        cursor: isLoading ? "not-allowed" : "pointer",
+                        border: isActive
+                          ? "2px solid var(--accent)"
+                          : "2px solid var(--border, #e5e7eb)",
+                        background: isActive ? "rgba(234,88,12,0.04)" : "var(--card, #fff)",
+                        textAlign: "left", transition: "all 0.15s", width: "100%",
+                        opacity: isLoading && !isActive ? 0.45 : 1,
+                      }}
+                      onMouseEnter={e => {
+                        if (!isLoading) {
+                          e.currentTarget.style.borderColor = "rgba(234,88,12,0.5)";
+                          e.currentTarget.style.background = "rgba(234,88,12,0.03)";
+                        }
+                      }}
+                      onMouseLeave={e => {
+                        if (!isActive) {
+                          e.currentTarget.style.borderColor = "var(--border, #e5e7eb)";
+                          e.currentTarget.style.background = "var(--card, #fff)";
+                        }
+                      }}
+                    >
+                      <div style={{
+                        width: 46, height: 46, borderRadius: 12, flexShrink: 0,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        background: isActive ? "rgba(234,88,12,0.12)" : "#f3f4f6",
+                        transition: "background 0.15s",
+                      }}>
+                        {isActive ? (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5"
+                            style={{ animation: "spin 0.8s linear infinite" }}>
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                          </svg>
+                        ) : (
+                          <Icon size={22} style={{ color: "#6b7280" }} />
+                        )}
+                      </div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <p style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--foreground)", margin: 0, lineHeight: 1.2 }}>
+                          {label}
+                        </p>
+                        <p style={{ fontSize: "0.78rem", color: "var(--muted-foreground)", margin: "0.25rem 0 0", lineHeight: 1.4 }}>
+                          {desc}
+                        </p>
+                      </div>
+                      <ArrowRight size={16} style={{ color: "var(--muted-foreground)", flexShrink: 0 }} />
+                    </button>
+                  );
+                })}
+              </div>
             </>
           )}
         </div>
@@ -491,10 +431,8 @@ const iconStyle: React.CSSProperties = {
 
 const inputInner: React.CSSProperties = {
   width: "100%", borderRadius: 10,
-border: "1px solid black",
+  border: "1px solid black", borderStyle: "solid",
   background: "var(--background, #fff)",
-    borderStyle: "solid", 
-
   padding: "0.75rem 0.875rem 0.75rem 2.5rem",
   fontSize: "0.875rem", color: "var(--foreground)",
   outline: "none", fontFamily: "inherit",
