@@ -9,45 +9,46 @@ import {
 } from "lucide-react";
 import { Layout } from "@/components/layout";
 import { useAuth } from "@/context/AuthContext";
+import { useArticles } from "@/hooks/useApi";
 
 // ─── Mock Data ────────────────────────────────────────────────────────────────
 
-const publications = [
-  {
-    id: "PUB-001",
-    title: "Public Health Interventions in East Africa: Evidence from Five Countries",
-    journal: "African Journal of Economic Studies",
-    volume: "Vol. 12, No. 3",
-    year: "2026",
-    doi: "10.1234/ajes.2026.001",
-    type: "Research Article",
-    pages: "pp. 45–68",
-    citations: 12,
-    downloads: 348,
-    views: 1204,
-    abstract: "This study examines the effectiveness of public health interventions across five East African countries, analysing outcomes from 2018–2024. Using a mixed-methods approach, we identify key success factors and barriers to implementation at the community level.",
-    keywords: ["Public Health", "East Africa", "Health Policy", "Intervention Studies"],
-    openAccess: true,
-    publishedDate: "2026-01-30",
-  },
-  {
-    id: "PUB-002",
-    title: "Digital Financial Inclusion and Poverty Reduction in Sub-Saharan Africa",
-    journal: "Journal of African Finance & Economics",
-    volume: "Vol. 8, No. 1",
-    year: "2025",
-    doi: "10.5678/jafe.2025.014",
-    type: "Review Article",
-    pages: "pp. 12–34",
-    citations: 35,
-    downloads: 892,
-    views: 3401,
-    abstract: "A systematic review of 47 studies on digital financial services and their impact on poverty alleviation in Sub-Saharan Africa, covering mobile money, digital banking, and microfinance platforms from 2015–2024.",
-    keywords: ["Fintech", "Financial Inclusion", "Poverty", "Sub-Saharan Africa", "Mobile Money"],
-    openAccess: true,
-    publishedDate: "2025-06-15",
-  },
-];
+// const publications = [
+//   {
+//     id: "PUB-001",
+//     title: "Public Health Interventions in East Africa: Evidence from Five Countries",
+//     journal: "African Journal of Economic Studies",
+//     volume: "Vol. 12, No. 3",
+//     year: "2026",
+//     doi: "10.1234/ajes.2026.001",
+//     type: "Research Article",
+//     pages: "pp. 45–68",
+//     citations: 12,
+//     downloads: 348,
+//     views: 1204,
+//     abstract: "This study examines the effectiveness of public health interventions across five East African countries, analysing outcomes from 2018–2024. Using a mixed-methods approach, we identify key success factors and barriers to implementation at the community level.",
+//     keywords: ["Public Health", "East Africa", "Health Policy", "Intervention Studies"],
+//     openAccess: true,
+//     publishedDate: "2026-01-30",
+//   },
+//   {
+//     id: "PUB-002",
+//     title: "Digital Financial Inclusion and Poverty Reduction in Sub-Saharan Africa",
+//     journal: "Journal of African Finance & Economics",
+//     volume: "Vol. 8, No. 1",
+//     year: "2025",
+//     doi: "10.5678/jafe.2025.014",
+//     type: "Review Article",
+//     pages: "pp. 12–34",
+//     citations: 35,
+//     downloads: 892,
+//     views: 3401,
+//     abstract: "A systematic review of 47 studies on digital financial services and their impact on poverty alleviation in Sub-Saharan Africa, covering mobile money, digital banking, and microfinance platforms from 2015–2024.",
+//     keywords: ["Fintech", "Financial Inclusion", "Poverty", "Sub-Saharan Africa", "Mobile Money"],
+//     openAccess: true,
+//     publishedDate: "2025-06-15",
+//   },
+// ];
 
 const filterTabs = [
   { key: "all",              label: "All" },
@@ -157,8 +158,10 @@ export default function MyPublications() {
   const { user } = useAuth();
   const [activeFilter, setActiveFilter] = useState("all");
   const [search, setSearch]             = useState("");
-  const [expanded, setExpanded]         = useState<string | null>(null);
+const [expanded, setExpanded] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+const { data, loading } = useArticles({ per_page: 50 });
+const publications = data?.items ?? [];
 
   const filtered = publications.filter(p => {
     const matchesFilter = activeFilter === "all" || p.type === activeFilter;
@@ -278,7 +281,7 @@ export default function MyPublications() {
             <StatCard icon={Download}   label="Total Downloads"  value={totalDownloads}                                   color="#0891b2" />
             <StatCard icon={Eye}        label="Total Views"      value={totalViews}                                       color="#d97706" />
             <StatCard icon={Award}      label="H-Index"          value={3}                                                color="#16a34a" />
-            <StatCard icon={TrendingUp} label="Avg. Citations"   value={(totalCitations / publications.length).toFixed(1)} color="#ea580c" />
+            <StatCard icon={TrendingUp} label="Avg. Citations"   value={publications.length ? (totalCitations / publications.length).toFixed(1) : "0"} color="#ea580c" />
           </div>
 
           {/* Publications list */}
@@ -356,7 +359,7 @@ export default function MyPublications() {
                           <span style={{ fontSize: "0.68rem", fontWeight: 700, background: "#f3f4f6", color: "#374151", borderRadius: 4, padding: "0.15rem 0.5rem" }}>
                             {pub.type}
                           </span>
-                          {pub.openAccess && (
+{pub.open_access && (
                             <span style={{ fontSize: "0.68rem", fontWeight: 700, background: "rgba(8,145,178,0.08)", color: "#0891b2", border: "1px solid rgba(8,145,178,0.2)", borderRadius: 4, padding: "0.15rem 0.5rem", display: "inline-flex", alignItems: "center", gap: "0.25rem" }}>
                               <Globe size={9} /> Open Access
                             </span>
@@ -388,7 +391,7 @@ export default function MyPublications() {
                           <MetricPill icon={Quote}    value={pub.citations}     label="citations"  color="#7c3aed" />
                           <MetricPill icon={Download} value={pub.downloads}     label="downloads"  color="#0891b2" />
                           <MetricPill icon={Eye}      value={pub.views}         label="views"      color="#d97706" />
-                          <MetricPill icon={Calendar} value={pub.publishedDate} label=""           />
+<MetricPill icon={Calendar} value={pub.published_date} label="" />
                         </div>
                       </div>
 
