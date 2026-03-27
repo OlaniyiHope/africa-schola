@@ -229,7 +229,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body.referralCode = data.referralCode.trim().toUpperCase();
       }
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/sch-register`, {
+      const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-register`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify(body),
@@ -255,7 +255,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/sch-login`, {
+      const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-login`, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({

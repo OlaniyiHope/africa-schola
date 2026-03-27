@@ -85,7 +85,7 @@ export default function Register() {
         role,
       };
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/sch-register`, {
+      const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

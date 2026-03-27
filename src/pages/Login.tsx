@@ -34,7 +34,7 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/sch-login`, {
+      const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

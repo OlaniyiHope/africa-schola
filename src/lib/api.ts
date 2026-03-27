@@ -4,7 +4,7 @@
 //  Update VITE_API_URL in your .env files to match your server.
 // ============================================================
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8001/api';
+const BASE_URL = import.meta.env.VITE_PHP_API_URL ?? 'http://localhost:8001/api';
 
 // ---- Generic fetch wrapper ----
 async function apiFetch<T>(
