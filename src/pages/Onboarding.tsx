@@ -9,11 +9,11 @@ type Intent = "publeesh" | "publish" | "network" | null;
 type OnboardingData = { intent: Intent; country: string; institution: string; disciplines: string[]; };
 
 const INTENTS = [
-  { value: "publeesh" as Intent, icon: BookOpen, label: "Use Publeesh",    desc: "AI-powered research intelligence",        route: "/dashboard/publeesh",
-    benefits: ["AI research assistant for African scholarship", "Smart literature discovery & summaries", "Personalised research feed & alerts"] },
-  { value: "publish"  as Intent, icon: Globe,    label: "Publish Paper",    desc: "Submit your manuscript for publication",   route: "/dashboard",
+  { value: "publeesh" as Intent, icon: BookOpen, label: "Researcher",    desc: "Conduct Research, Publish Paper, and collaborate academically",        route: "/dashboard/publeesh",
+    benefits: ["Conduct Research, Publish Paper, and collaborate academically", "Smart literature discovery & summaries", "Personalised research feed & alerts"] },
+  { value: "publish"  as Intent, icon: Globe,    label: "Academic / Lecturer",    desc: "Teach, Supervise Research and participate in scholarly publishing",   route: "/dashboard/publeesh",
     benefits: ["Submit manuscripts to peer-reviewed journals", "Track submission status in real-time", "Manage revisions and reviewer feedback"] },
-  { value: "network"  as Intent, icon: Users,    label: "Join Network",     desc: "Connect with researchers across Africa",  route: "/dashboard/network",
+  { value: "network"  as Intent, icon: Users,    label: "Professional",     desc: "Apply research knowledge within industry, policy or professional environment",  route: "/dashboard/publeesh",
     benefits: ["Discover researchers across African institutions", "Collaborate on research projects", "Find co-authors and mentors in your field"] },
 ];
 
@@ -108,7 +108,7 @@ export default function Onboarding() {
         {step === 1 && (
           <Card>
             <h2 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#1f2937", textAlign: "center", margin: "0 0 1.25rem", fontFamily: "Georgia, serif" }}>
-              What brings you here?
+              Tell us about yourself
             </h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem", marginBottom: "1.25rem" }}>
               {INTENTS.map(({ value, icon: Icon, label, desc }) => (
