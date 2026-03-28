@@ -62,18 +62,65 @@ export default function Onboarding() {
   const toggleDiscipline = (d: string) =>
     setData(prev => ({ ...prev, disciplines: prev.disciplines.includes(d) ? prev.disciplines.filter(x => x !== d) : [...prev.disciplines, d] }));
 
-  const handleFinish = () => {
-    localStorage.setItem("as_onboarding", JSON.stringify(data));
-    try {
-      const stored = localStorage.getItem("as_user");
-      if (stored) {
-        const user = JSON.parse(stored);
-        Object.assign(user, { country: data.country, institution: data.institution, disciplines: data.disciplines, intent: data.intent });
-        localStorage.setItem("as_user", JSON.stringify(user));
-      }
-    } catch {}
-    navigate(INTENTS.find(i => i.value === data.intent)?.route ?? "/dashboard");
-  };
+ const intentToRole: Record<string, string> = {
+  publeesh: "researcher",
+  publish:  "academic",
+  network:  "professional",
+};
+
+const handleFinish = async () => {
+  if (!canStep3) return;
+
+  const token = localStorage.getItem("as_token");
+  const role  = intentToRole[data.intent!];
+
+  try {
+    const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-onboarding`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        role,
+        institution: data.institution.trim(),
+        fieldOfStudy: data.disciplines.join(", "),
+        country: data.country,
+        interests: data.disciplines,
+      }),
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      console.error("Onboarding failed:", result.message);
+      return;
+    }
+
+    // Update localStorage with the saved role
+    const stored = localStorage.getItem("as_user");
+    if (stored) {
+      const user = JSON.parse(stored);
+      localStorage.setItem("as_user", JSON.stringify({
+        ...user,
+        role,
+        profileComplete: true,
+      }));
+    }
+
+    // Navigate to the right dashboard
+    const routeMap: Record<string, string> = {
+      researcher:   "/dashboard/researcher",
+      academic:     "/dashboard/academic",
+      professional: "/dashboard/professional",
+    };
+
+    navigate(routeMap[role] ?? "/dashboard");
+
+  } catch (err) {
+    console.error("Onboarding error:", err);
+  }
+};
 
   const canStep1 = data.intent !== null;
   const canStep3 = data.country.trim() !== "" && data.disciplines.length > 0;

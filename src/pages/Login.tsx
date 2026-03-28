@@ -22,55 +22,125 @@ export default function Login() {
     if (error) setError("");
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setError("");
 
-    if (!formData.email || !formData.password) {
-      setError("Email and password are required.");
+  //   if (!formData.email || !formData.password) {
+  //     setError("Email and password are required.");
+  //     return;
+  //   }
+
+  //   setIsLoading(true);
+
+  //   try {
+  //     const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-login`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         email:    formData.email.trim().toLowerCase(),
+  //         password: formData.password,
+  //       }),
+  //     });
+
+  //     const data = await res.json();
+
+  //     if (!res.ok) {
+  //       setError(data.message || "Invalid email or password.");
+  //       return;
+  //     }
+
+  //     // ── Hand off to AuthContext ──────────────────────────────────────────
+  //     await login({ email: formData.email, password: formData.password });
+
+  //     // Also store token (AuthContext stores user; we keep token separately)
+  //     localStorage.setItem("as_token", data.token);
+  //     if (rememberMe) {
+  //       localStorage.setItem("as_token", data.token);
+  //     } else {
+  //       sessionStorage.setItem("as_token", data.token);
+  //     }
+
+  //     navigate(from, { replace: true });
+
+  //   } catch (err: any) {
+  //     // If AuthContext threw, it already set its own error — mirror it here
+  //     setError(err?.message || "Unable to connect to the server. Please try again.");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError("");
+
+  if (!formData.email || !formData.password) {
+    setError("Email and password are required.");
+    return;
+  }
+
+  setIsLoading(true);
+
+  try {
+    const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email:    formData.email.trim().toLowerCase(),
+        password: formData.password,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.message || "Invalid email or password.");
+      setIsLoading(false);
       return;
     }
 
-    setIsLoading(true);
-
-    try {
-      const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email:    formData.email.trim().toLowerCase(),
-          password: formData.password,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Invalid email or password.");
-        return;
-      }
-
-      // ── Hand off to AuthContext ──────────────────────────────────────────
-      await login({ email: formData.email, password: formData.password });
-
-      // Also store token (AuthContext stores user; we keep token separately)
+    // Store token
+    if (rememberMe) {
       localStorage.setItem("as_token", data.token);
-      if (rememberMe) {
-        localStorage.setItem("as_token", data.token);
-      } else {
-        sessionStorage.setItem("as_token", data.token);
-      }
-
-      navigate(from, { replace: true });
-
-    } catch (err: any) {
-      // If AuthContext threw, it already set its own error — mirror it here
-      setError(err?.message || "Unable to connect to the server. Please try again.");
-    } finally {
-      setIsLoading(false);
+    } else {
+      sessionStorage.setItem("as_token", data.token);
     }
-  };
+    localStorage.setItem("as_user", JSON.stringify(data.user));
 
+    // ── Route based on role & profile completion ──────────────────────────
+    const role            = data.user?.role;
+    const profileComplete = data.user?.profileComplete;
+
+    const roleDashboardMap: Record<string, string> = {
+      researcher:   "/dashboard/researcher",
+      academic:     "/dashboard/academic",
+      professional: "/dashboard/professional",
+    };
+
+    let destination: string;
+
+    if (!role || !profileComplete) {
+      // No role yet or onboarding not done → send to onboarding
+      destination = "/auth/onboarding";
+    } else {
+      // Has a role → go to their specific dashboard
+      destination = roleDashboardMap[role] ?? "/dashboard/researcher";
+    }
+
+    // Respect redirect (e.g. from a protected route) only if it's a dashboard path
+    const intendedFrom = (location.state as any)?.from;
+    if (intendedFrom && intendedFrom !== "/auth/onboarding") {
+      destination = intendedFrom;
+    }
+
+    navigate(destination, { replace: true });
+
+  } catch (err: any) {
+    setError(err?.message || "Unable to connect to the server. Please try again.");
+  } finally {
+    setIsLoading(false);
+  }
+};
   return (
     <div>
       <div style={{
