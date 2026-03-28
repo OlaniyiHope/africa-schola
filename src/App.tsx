@@ -64,6 +64,9 @@ import Onboarding from "./pages/Onboarding";
 import PublesshDash from "./pages/PubleeshDash";
 import GeneratePaper from "./pages/Generate";
 import CheckoutPage from "./pages/CheckoutPage";
+import ResearcherDashboard from "./pages/ResearcherDashboard";
+import AcademicDashboard from "./pages/AcademicDashboard";
+import ProfessionalDashboard from "./pages/ProfessionalDashboard";
 
 const queryClient = new QueryClient();
 
@@ -103,6 +106,9 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/publeesh" element={<PublesshDash />} />
+          <Route path="/dashboard/researcher" element={<ResearcherDashboard />} />
+          <Route path="/dashboard/academic" element={<AcademicDashboard />} />
+          <Route path="/dashboard/professional" element={<ProfessionalDashboard />} />
           <Route path="/dashboard/publications" element={<MyPublications />} />
           <Route path="/dashboard/profile" element={<Profile />} />
           <Route path="/dashboard/settings" element={<SettingsPage />} />

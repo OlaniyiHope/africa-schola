@@ -9,11 +9,11 @@ type Intent = "publeesh" | "publish" | "network" | null;
 type OnboardingData = { intent: Intent; country: string; institution: string; disciplines: string[]; };
 
 const INTENTS = [
-  { value: "publeesh" as Intent, icon: BookOpen, label: "Researcher",    desc: "Conduct Research, Publish Paper, and collaborate academically",        route: "/dashboard/publeesh",
+  { value: "publeesh" as Intent, icon: BookOpen, label: "Researcher",    desc: "Conduct Research, Publish Paper, and collaborate academically",        route: "/dashboard/researcher",
     benefits: ["Conduct Research, Publish Paper, and collaborate academically", "Smart literature discovery & summaries", "Personalised research feed & alerts"] },
-  { value: "publish"  as Intent, icon: Globe,    label: "Academic / Lecturer",    desc: "Teach, Supervise Research and participate in scholarly publishing",   route: "/dashboard/publeesh",
+  { value: "publish"  as Intent, icon: Globe,    label: "Academic / Lecturer",    desc: "Teach, Supervise Research and participate in scholarly publishing",   route: "/dashboard/academic",
     benefits: ["Submit manuscripts to peer-reviewed journals", "Track submission status in real-time", "Manage revisions and reviewer feedback"] },
-  { value: "network"  as Intent, icon: Users,    label: "Professional",     desc: "Apply research knowledge within industry, policy or professional environment",  route: "/dashboard/publeesh",
+  { value: "network"  as Intent, icon: Users,    label: "Professional",     desc: "Apply research knowledge within industry, policy or professional environment",  route: "/dashboard/professional",
     benefits: ["Discover researchers across African institutions", "Collaborate on research projects", "Find co-authors and mentors in your field"] },
 ];
 
