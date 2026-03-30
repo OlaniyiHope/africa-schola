@@ -4,7 +4,7 @@ import {
   User, Mail, Lock, ArrowRight, Eye, EyeOff, AlertCircle, Mail as MailIcon,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
-
+import { useAuth } from "@/context/AuthContext";
 type Screen = "form" | "verify";
 
 export default function Register() {
@@ -15,7 +15,7 @@ export default function Register() {
   const [isLoading,    setIsLoading]    = useState(false);
   const [error,        setError]        = useState("");
   const [resendSent,   setResendSent]   = useState(false);
-
+const { register: registerUser } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     email:    "",
@@ -29,51 +29,83 @@ export default function Register() {
   };
 
   // ── Register & go to verify screen ────────────────────────────────────────
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setError("");
 
-    if (formData.password !== formData.confirm) {
-      setError("Passwords do not match.");
-      return;
-    }
-    if (formData.password.length < 6) {
-      setError("Password must be at least 6 characters.");
-      return;
-    }
+  //   if (formData.password !== formData.confirm) {
+  //     setError("Passwords do not match.");
+  //     return;
+  //   }
+  //   if (formData.password.length < 6) {
+  //     setError("Password must be at least 6 characters.");
+  //     return;
+  //   }
 
-    setIsLoading(true);
+  //   setIsLoading(true);
 
-    try {
-      const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: formData.username.trim(),
-          email:    formData.email.trim().toLowerCase(),
-          password: formData.password,
-        }),
-      });
+  //   try {
+  //     const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/sch-register`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         username: formData.username.trim(),
+  //         email:    formData.email.trim().toLowerCase(),
+  //         password: formData.password,
+  //       }),
+  //     });
 
-      const data = await res.json();
+  //     const data = await res.json();
 
-      if (!res.ok) {
-        setError(data.message || "Registration failed. Please try again.");
-        setIsLoading(false);
-        return;
-      }
+  //     if (!res.ok) {
+  //       setError(data.message || "Registration failed. Please try again.");
+  //       setIsLoading(false);
+  //       return;
+  //     }
 
-      localStorage.setItem("as_token", data.token);
-      localStorage.setItem("as_user",  JSON.stringify(data.user));
+  //     localStorage.setItem("as_token", data.token);
+  //     localStorage.setItem("as_user",  JSON.stringify(data.user));
 
-      setScreen("verify");
+  //     setScreen("verify");
 
-    } catch {
-      setError("Unable to connect to the server. Please try again.");
-      setIsLoading(false);
-    }
-  };
+  //   } catch {
+  //     setError("Unable to connect to the server. Please try again.");
+  //     setIsLoading(false);
+  //   }
+  // };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError("");
 
+  if (formData.password !== formData.confirm) {
+    setError("Passwords do not match.");
+    return;
+  }
+  if (formData.password.length < 6) {
+    setError("Password must be at least 6 characters.");
+    return;
+  }
+
+  setIsLoading(true);
+
+  try {
+    await registerUser({
+      username: formData.username.trim(),
+      email:    formData.email.trim().toLowerCase(),
+      password: formData.password,
+      role:     "researcher", // default — onboarding will set the real role
+    });
+
+    // AuthContext already saved token + user to localStorage
+    // and set isAuthenticated = true
+    setScreen("verify");
+
+  } catch (err: any) {
+    setError(err?.message || "Registration failed. Please try again.");
+  } finally {
+    setIsLoading(false);
+  }
+};
   // ── Resend verification email ──────────────────────────────────────────────
   const handleResend = async () => {
     setResendSent(false);
