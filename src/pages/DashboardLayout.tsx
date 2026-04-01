@@ -3,58 +3,400 @@ import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard, BookOpen, Send, Library, Radar, Users,
   Building2, BookMarked, GraduationCap, Briefcase, CreditCard,
-  Settings, ChevronRight, Menu, X, Bell, Search, LogOut,
+  Settings, ChevronRight, ChevronDown, Menu, X, Bell, Search, LogOut,
+  FileText, FolderOpen, Lightbulb, ClipboardList, Globe, Bookmark,
+  Download, User, Handshake, BarChart3, Database, Compass, MapPin,
+  FileUp, Wallet, Activity, Receipt,
 } from "lucide-react";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type Role = "researcher" | "academic" | "professional";
+
+interface NavChild {
+  icon: any;
+  label: string;
+  to: string;
+}
+
+interface NavItem {
+  icon: any;
+  label: string;
+  to: string;
+  children?: NavChild[];
+}
 
 // ─── Nav configs per role ─────────────────────────────────────────────────────
 
-const NAV_CONFIG = {
+const NAV_CONFIG: Record<Role, NavItem[]> = {
   researcher: [
-    { icon: LayoutDashboard, label: "Dashboard",               to: "/dashboard/researcher" },
-    { icon: BookMarked,      label: "My Research",             to: "/dashboard/researcher/research" },
-    { icon: Send,            label: "Publishing",              to: "/dashboard/researcher/publishing" },
-    { icon: Library,         label: "Library",                 to: "/dashboard/researcher/library" },
-    { icon: Radar,           label: "Research Intelligence",   to: "/dashboard/researcher/intelligence" },
-    { icon: Users,           label: "Network",                 to: "/dashboard/researcher/network" },
-    { icon: Users,           label: "Community",               to: "/dashboard/researcher/community" },
-    { icon: CreditCard,      label: "Billing & Credits",       to: "/dashboard/researcher/billing" },
-    { icon: Settings,        label: "Account",                 to: "/dashboard/researcher/account" },
+    { icon: LayoutDashboard, label: "Dashboard", to: "/dashboard/researcher" },
+    {
+      icon: BookMarked, label: "My Research", to: "/dashboard/researcher/research",
+      children: [
+        { icon: FileText,    label: "My Papers",         to: "/dashboard/researcher/research/papers" },
+        { icon: FolderOpen,  label: "Research Projects", to: "/dashboard/researcher/research/projects" },
+        { icon: BookOpen,    label: "Reading List",      to: "/dashboard/researcher/research/reading-list" },
+        { icon: Lightbulb,   label: "Pro Tips",          to: "/dashboard/researcher/research/pro-tips" },
+      ],
+    },
+    {
+      icon: Send, label: "Publishing", to: "/dashboard/researcher/publishing",
+      children: [
+        { icon: Globe,         label: "Publishing Overview", to: "/dashboard/researcher/publishing" },
+        { icon: Send,          label: "Submit Manuscript",   to: "/dashboard/researcher/publishing/submit" },
+        { icon: ClipboardList, label: "My Submissions",      to: "/dashboard/researcher/publishing/submissions" },
+        { icon: FileText,      label: "Peer Reviews",        to: "/dashboard/researcher/publishing/reviews" },
+      ],
+    },
+    {
+      icon: Library, label: "Library", to: "/dashboard/researcher/library",
+      children: [
+        { icon: BookOpen,  label: "Overview",              to: "/dashboard/researcher/library" },
+        { icon: FileText,  label: "Purchased Papers",      to: "/dashboard/researcher/library/purchased" },
+        { icon: Bookmark,  label: "Saved Articles",        to: "/dashboard/researcher/library/saved" },
+        { icon: Download,  label: "Download History",      to: "/dashboard/researcher/library/downloads" },
+        { icon: FolderOpen,label: "Reading Lists",         to: "/dashboard/researcher/library/lists" },
+        { icon: Globe,     label: "Journal Subscriptions", to: "/dashboard/researcher/library/subscriptions" },
+      ],
+    },
+    {
+      icon: Radar, label: "Research Intelligence", to: "/dashboard/researcher/intelligence",
+      children: [
+        { icon: Database,  label: "Dataset Explorer",  to: "/dashboard/researcher/intelligence/explorer" },
+        { icon: BarChart3, label: "Dataset Analyzer",  to: "/dashboard/researcher/intelligence/explorer" },
+        { icon: Compass,   label: "Intelligence Hub",  to: "/dashboard/researcher/intelligence/explorer" },
+      ],
+    },
+    {
+      icon: Users, label: "Network", to: "/dashboard/researcher/network",
+      children: [
+        { icon: Globe,         label: "Overview",      to: "/dashboard/researcher/network" },
+        { icon: Briefcase,     label: "Opportunities", to: "/dashboard/researcher/network/opportunities" },
+        { icon: ClipboardList, label: "Applications",  to: "/dashboard/researcher/network/applications" },
+        { icon: Users,         label: "Directory",     to: "/dashboard/researcher/network/directory" },
+        { icon: Handshake,     label: "Engagements",   to: "/dashboard/researcher/network/engagements" },
+      ],
+    },
+    {
+      icon: Users, label: "Community", to: "/dashboard/researcher/community",
+      children: [
+        { icon: Users,     label: "Feed",                    to: "/dashboard/researcher/community" },
+        { icon: Users,     label: "Discussions",             to: "/dashboard/researcher/community/discussions" },
+        { icon: Users,     label: "Researchers",             to: "/dashboard/researcher/community/researchers" },
+        { icon: Handshake, label: "Collaboration Requests",  to: "/dashboard/researcher/community/collaborations" },
+        { icon: User,      label: "My Activity",             to: "/dashboard/researcher/community/activity" },
+      ],
+    },
+    {
+      icon: CreditCard, label: "Billing & Credits", to: "/dashboard/researcher/billing",
+      children: [
+        { icon: CreditCard, label: "Subscription",      to: "/dashboard/researcher/billing" },
+        { icon: Wallet,     label: "Credits",           to: "/dashboard/researcher/billing/credits" },
+        { icon: Activity,   label: "Usage",             to: "/dashboard/researcher/billing/usage" },
+        { icon: CreditCard, label: "Payment Methods",   to: "/dashboard/researcher/billing/payment-methods" },
+        { icon: Receipt,    label: "Invoices",          to: "/dashboard/researcher/billing/invoices" },
+      ],
+    },
+    {
+      icon: Settings, label: "Account", to: "/dashboard/researcher/account",
+      children: [
+        { icon: User,     label: "Profile",       to: "/dashboard/researcher/account/profile" },
+        { icon: Settings, label: "Settings",      to: "/dashboard/researcher/account/settings" },
+        { icon: Bell,     label: "Notifications", to: "/dashboard/researcher/account/notifications" },
+      ],
+    },
   ],
+
   academic: [
-    { icon: LayoutDashboard, label: "Dashboard",               to: "/dashboard/academic" },
-    { icon: BookMarked,      label: "My Research",             to: "/dashboard/academic/research" },
-    { icon: Send,            label: "Publishing",              to: "/dashboard/academic/publishing" },
-    { icon: Library,         label: "Library",                 to: "/dashboard/academic/library" },
-    { icon: Users,           label: "Network",                 to: "/dashboard/academic/network" },
-    { icon: Building2,       label: "Institutions",            to: "/dashboard/academic/institutions" },
-    { icon: Radar,           label: "Research Intelligence",   to: "/dashboard/academic/intelligence" },
-    { icon: Users,           label: "Community",               to: "/dashboard/academic/community" },
-    { icon: CreditCard,      label: "Billing & Credits",       to: "/dashboard/academic/billing" },
-    { icon: Settings,        label: "Account",                 to: "/dashboard/academic/account" },
+    { icon: LayoutDashboard, label: "Dashboard", to: "/dashboard/academic" },
+    {
+      icon: BookMarked, label: "My Research", to: "/dashboard/academic/research",
+      children: [
+        { icon: FileText,    label: "My Papers",         to: "/dashboard/academic/research/papers" },
+        { icon: FolderOpen,  label: "Research Projects", to: "/dashboard/academic/research/projects" },
+        { icon: BookOpen,    label: "Reading List",      to: "/dashboard/academic/research/reading-list" },
+        { icon: Lightbulb,   label: "Pro Tips",          to: "/dashboard/academic/research/pro-tips" },
+      ],
+    },
+    {
+      icon: Send, label: "Publishing", to: "/dashboard/academic/publishing",
+      children: [
+        { icon: Globe,         label: "Publishing Overview", to: "/dashboard/academic/publishing" },
+        { icon: Send,          label: "Submit Manuscript",   to: "/dashboard/academic/publishing/submit" },
+        { icon: ClipboardList, label: "My Submissions",      to: "/dashboard/academic/publishing/submissions" },
+        { icon: FileText,      label: "Peer Reviews",        to: "/dashboard/academic/publishing/reviews" },
+      ],
+    },
+    {
+  icon: Library, label: "Library", to: "/dashboard/academic/library",
+  children: [
+    { icon: BookOpen,   label: "Overview",              to: "/dashboard/academic/library" },
+    { icon: FileText,   label: "Purchased Papers",      to: "/dashboard/academic/library?tab=purchased" },
+    { icon: Bookmark,   label: "Saved Articles",        to: "/dashboard/academic/library?tab=saved" },
+    { icon: Download,   label: "Download History",      to: "/dashboard/academic/library?tab=downloads" },
+    { icon: FolderOpen, label: "Reading Lists",         to: "/dashboard/academic/library?tab=lists" },
+    { icon: Globe,      label: "Journal Subscriptions", to: "/dashboard/academic/library?tab=subscriptions" },
   ],
+},
+    {
+      icon: Users, label: "Network", to: "/dashboard/academic/network",
+      children: [
+        { icon: Globe,         label: "Overview",      to: "/dashboard/academic/network" },
+        { icon: Briefcase,     label: "Opportunities", to: "/dashboard/academic/network/opportunities" },
+        { icon: ClipboardList, label: "Applications",  to: "/dashboard/academic/network/applications" },
+        { icon: Users,         label: "Directory",     to: "/dashboard/academic/network/directory" },
+        { icon: Handshake,     label: "Engagements",   to: "/dashboard/academic/network/engagements" },
+      ],
+    },
+    {
+      icon: Building2, label: "Institutions", to: "/dashboard/academic/institutions",
+      children: [
+        { icon: Building2,     label: "Overview",                to: "/dashboard/academic/institutions" },
+        { icon: Handshake,     label: "Partnership Requests",    to: "/dashboard/academic/institutions/partnerships" },
+        { icon: GraduationCap, label: "Lecturer Requests",       to: "/dashboard/academic/institutions/lecturer-requests" },
+        { icon: Users,         label: "Research Collaboration",  to: "/dashboard/academic/institutions/collaboration" },
+        { icon: BookOpen,      label: "Curriculum & Validation", to: "/dashboard/academic/institutions/curriculum" },
+        { icon: Compass,       label: "Advisory Support",        to: "/dashboard/academic/institutions/advisory" },
+        { icon: ClipboardList, label: "My Requests",             to: "/dashboard/academic/institutions/my-requests" },
+      ],
+    },
+    {
+      icon: Radar, label: "Research Intelligence", to: "/dashboard/academic/intelligence",
+      children: [
+        { icon: Database,  label: "Dataset Explorer", to: "/dashboard/academic/intelligence/explorer" },
+        { icon: BarChart3, label: "Dataset Analyzer", to: "/dashboard/academic/intelligence/explorer" },
+        { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/academic/intelligence/explorer" },
+      ],
+    },
+    {
+      icon: Users, label: "Community", to: "/dashboard/academic/community",
+      children: [
+        { icon: Users,     label: "Feed",                   to: "/dashboard/academic/community" },
+        { icon: Users,     label: "Discussions",            to: "/dashboard/academic/community/discussions" },
+        { icon: Users,     label: "Researchers",            to: "/dashboard/academic/community/researchers" },
+        { icon: Handshake, label: "Collaboration Requests", to: "/dashboard/academic/community/collaborations" },
+        { icon: User,      label: "My Activity",            to: "/dashboard/academic/community/activity" },
+      ],
+    },
+    {
+      icon: CreditCard, label: "Billing & Credits", to: "/dashboard/academic/billing",
+      children: [
+        { icon: CreditCard, label: "Subscription",    to: "/dashboard/academic/billing" },
+        { icon: Wallet,     label: "Credits",         to: "/dashboard/academic/billing/credits" },
+        { icon: Activity,   label: "Usage",           to: "/dashboard/academic/billing/usage" },
+        { icon: CreditCard, label: "Payment Methods", to: "/dashboard/academic/billing/payment-methods" },
+        { icon: Receipt,    label: "Invoices",        to: "/dashboard/academic/billing/invoices" },
+      ],
+    },
+    {
+      icon: Settings, label: "Account", to: "/dashboard/academic/account",
+      children: [
+        { icon: User,     label: "Profile",       to: "/dashboard/academic/account/profile" },
+        { icon: Settings, label: "Settings",      to: "/dashboard/academic/account/settings" },
+        { icon: Bell,     label: "Notifications", to: "/dashboard/academic/account/notifications" },
+      ],
+    },
+  ],
+
   professional: [
-    { icon: LayoutDashboard, label: "Dashboard",               to: "/dashboard/professional" },
-    { icon: Users,           label: "Network",                 to: "/dashboard/professional/network" },
-    { icon: Building2,       label: "Institutions",            to: "/dashboard/professional/institutions" },
-    { icon: Library,         label: "Library",                 to: "/dashboard/professional/library" },
-    { icon: Users,           label: "Community",               to: "/dashboard/professional/community" },
-    { icon: GraduationCap,   label: "Academic Advisory",       to: "/dashboard/professional/advisory" },
-    { icon: Radar,           label: "Research Intelligence",   to: "/dashboard/professional/intelligence" },
-    { icon: CreditCard,      label: "Billing & Credits",       to: "/dashboard/professional/billing" },
-    { icon: Settings,        label: "Account",                 to: "/dashboard/professional/account" },
+    { icon: LayoutDashboard, label: "Dashboard", to: "/dashboard/professional" },
+    {
+      icon: Users, label: "Network", to: "/dashboard/professional/network",
+      children: [
+        { icon: Globe,         label: "Overview",      to: "/dashboard/professional/network" },
+        { icon: Briefcase,     label: "Opportunities", to: "/dashboard/professional/network/opportunities" },
+        { icon: ClipboardList, label: "Applications",  to: "/dashboard/professional/network/applications" },
+        { icon: Users,         label: "Directory",     to: "/dashboard/professional/network/directory" },
+        { icon: Handshake,     label: "Engagements",   to: "/dashboard/professional/network/engagements" },
+      ],
+    },
+    {
+      icon: Building2, label: "Institutions", to: "/dashboard/professional/institutions",
+      children: [
+        { icon: Building2,     label: "Overview",                to: "/dashboard/professional/institutions" },
+        { icon: Handshake,     label: "Partnership Requests",    to: "/dashboard/professional/institutions/partnerships" },
+        { icon: Users,         label: "Research Collaboration",  to: "/dashboard/professional/institutions/collaboration" },
+        { icon: Compass,       label: "Advisory Support",        to: "/dashboard/professional/institutions/advisory" },
+        { icon: ClipboardList, label: "My Requests",             to: "/dashboard/professional/institutions/my-requests" },
+      ],
+    },
+    {
+      icon: Library, label: "Library", to: "/dashboard/professional/library",
+      children: [
+        { icon: BookOpen,   label: "Overview",              to: "/dashboard/professional/library" },
+        { icon: FileText,   label: "Purchased Papers",      to: "/dashboard/professional/library/purchased" },
+        { icon: Bookmark,   label: "Saved Articles",        to: "/dashboard/professional/library/saved" },
+        { icon: Download,   label: "Download History",      to: "/dashboard/professional/library/downloads" },
+        { icon: FolderOpen, label: "Reading Lists",         to: "/dashboard/professional/library/lists" },
+      ],
+    },
+    {
+      icon: Users, label: "Community", to: "/dashboard/professional/community",
+      children: [
+        { icon: Users,     label: "Feed",                   to: "/dashboard/professional/community" },
+        { icon: Users,     label: "Discussions",            to: "/dashboard/professional/community/discussions" },
+        { icon: Handshake, label: "Collaboration Requests", to: "/dashboard/professional/community/collaborations" },
+        { icon: User,      label: "My Activity",            to: "/dashboard/professional/community/activity" },
+      ],
+    },
+    {
+      icon: GraduationCap, label: "Academic Advisory", to: "/dashboard/professional/advisory",
+      children: [
+        { icon: Compass,       label: "Advisory Overview",  to: "/dashboard/professional/advisory" },
+        { icon: FileText,      label: "Transcript Requests",to: "/dashboard/professional/advisory/transcripts" },
+        { icon: GraduationCap, label: "Degree Advisory",    to: "/dashboard/professional/advisory/degree" },
+        { icon: Globe,         label: "Study in Africa",    to: "/dashboard/professional/advisory/study-africa" },
+        { icon: MapPin,        label: "Academic Pathways",  to: "/dashboard/professional/advisory/pathways" },
+        { icon: ClipboardList, label: "My Cases",           to: "/dashboard/professional/advisory/cases" },
+        { icon: FileUp,        label: "Documents",          to: "/dashboard/professional/advisory/documents" },
+      ],
+    },
+    {
+      icon: Radar, label: "Research Intelligence", to: "/dashboard/professional/intelligence",
+      children: [
+        { icon: Database,  label: "Dataset Explorer", to: "/dashboard/professional/intelligence/explorer" },
+        { icon: BarChart3, label: "Dataset Analyzer", to: "/dashboard/professional/intelligence/explorer" },
+        { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/professional/intelligence/explorer" },
+      ],
+    },
+    {
+      icon: CreditCard, label: "Billing & Credits", to: "/dashboard/professional/billing",
+      children: [
+        { icon: CreditCard, label: "Subscription",    to: "/dashboard/professional/billing" },
+        { icon: Wallet,     label: "Credits",         to: "/dashboard/professional/billing/credits" },
+        { icon: Activity,   label: "Usage",           to: "/dashboard/professional/billing/usage" },
+        { icon: CreditCard, label: "Payment Methods", to: "/dashboard/professional/billing/payment-methods" },
+        { icon: Receipt,    label: "Invoices",        to: "/dashboard/professional/billing/invoices" },
+      ],
+    },
+    {
+      icon: Settings, label: "Account", to: "/dashboard/professional/account",
+      children: [
+        { icon: User,     label: "Profile",       to: "/dashboard/professional/account/profile" },
+        { icon: Settings, label: "Settings",      to: "/dashboard/professional/account/settings" },
+        { icon: Bell,     label: "Notifications", to: "/dashboard/professional/account/notifications" },
+      ],
+    },
   ],
 };
 
-const ROLE_LABEL: Record<string, string> = {
-  researcher: "Researcher",
-  academic: "Academic",
+const ROLE_LABEL: Record<Role, string> = {
+  researcher:   "Researcher",
+  academic:     "Academic",
   professional: "Professional",
 };
 
+// ─── Nav Item with optional dropdown ─────────────────────────────────────────
+
+function NavItemRow({ item }: { item: NavItem }) {
+  const location = useLocation();
+
+  // Determine if this item or any child is active
+  const isChildActive = item.children?.some(c =>
+    location.pathname === c.to || location.pathname.startsWith(c.to + "/")
+  ) ?? false;
+  const isSelfActive = !item.children && (
+    location.pathname === item.to || location.pathname.startsWith(item.to + "/")
+  );
+  const isActive = isSelfActive || isChildActive;
+
+  const [open, setOpen] = useState(isChildActive);
+
+  if (!item.children) {
+    return (
+      <Link
+        to={item.to}
+        style={{
+          display: "flex", alignItems: "center", gap: "0.65rem",
+          padding: "0.6rem 0.875rem", borderRadius: 8, marginBottom: "0.1rem",
+          textDecoration: "none", transition: "all 0.15s",
+          background: isActive ? "rgba(234,88,12,0.15)" : "transparent",
+          color: isActive ? "#ea580c" : "rgba(255,255,255,0.65)",
+          fontWeight: isActive ? 700 : 500,
+          fontSize: "0.855rem",
+        }}
+        onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "#fff"; } }}
+        onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "rgba(255,255,255,0.65)"; } }}
+      >
+        <item.icon size={15} style={{ flexShrink: 0 }} />
+        <span style={{ flex: 1 }}>{item.label}</span>
+      </Link>
+    );
+  }
+
+  return (
+    <div style={{ marginBottom: "0.1rem" }}>
+      {/* Parent row — clicking toggles dropdown */}
+      <button
+        onClick={() => setOpen(v => !v)}
+        style={{
+          width: "100%", display: "flex", alignItems: "center", gap: "0.65rem",
+          padding: "0.6rem 0.875rem", borderRadius: 8,
+          background: isActive ? "rgba(234,88,12,0.10)" : "transparent",
+          color: isActive ? "#ea580c" : "rgba(255,255,255,0.65)",
+          fontWeight: isActive ? 700 : 500, fontSize: "0.855rem",
+          border: "none", cursor: "pointer", transition: "all 0.15s",
+          textAlign: "left",
+        }}
+        onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "#fff"; } }}
+        onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = isActive ? "rgba(234,88,12,0.10)" : "transparent"; e.currentTarget.style.color = isActive ? "#ea580c" : "rgba(255,255,255,0.65)"; } }}
+      >
+        <item.icon size={15} style={{ flexShrink: 0 }} />
+        <span style={{ flex: 1 }}>{item.label}</span>
+        <ChevronDown
+          size={13}
+          style={{
+            flexShrink: 0,
+            transition: "transform 0.2s",
+            transform: open ? "rotate(0deg)" : "rotate(-90deg)",
+            opacity: 0.6,
+          }}
+        />
+      </button>
+
+      {/* Children */}
+      {open && (
+        <div style={{
+          marginLeft: "1.25rem",
+          paddingLeft: "0.75rem",
+          borderLeft: "1px solid rgba(255,255,255,0.08)",
+          marginTop: "0.15rem",
+          marginBottom: "0.25rem",
+        }}>
+          {item.children.map(child => {
+            const childActive = location.pathname === child.to || location.pathname.startsWith(child.to + "/");
+            return (
+              <Link
+                key={child.to}
+                to={child.to}
+                style={{
+                  display: "flex", alignItems: "center", gap: "0.55rem",
+                  padding: "0.45rem 0.75rem", borderRadius: 6,
+                  marginBottom: "0.05rem", textDecoration: "none",
+                  transition: "all 0.15s",
+                  background: childActive ? "rgba(234,88,12,0.15)" : "transparent",
+                  color: childActive ? "#ea580c" : "rgba(255,255,255,0.5)",
+                  fontWeight: childActive ? 600 : 400,
+                  fontSize: "0.815rem",
+                }}
+                onMouseEnter={e => { if (!childActive) { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "rgba(255,255,255,0.85)"; } }}
+                onMouseLeave={e => { if (!childActive) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "rgba(255,255,255,0.5)"; } }}
+              >
+                <child.icon size={13} style={{ flexShrink: 0 }} />
+                {child.label}
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 
-function Sidebar({ role, onClose }: { role: "researcher" | "academic" | "professional"; onClose?: () => void }) {
-  const location = useLocation();
+function Sidebar({ role, onClose }: { role: Role; onClose?: () => void }) {
   const nav = NAV_CONFIG[role];
   const stored = localStorage.getItem("as_user");
   const user = stored ? JSON.parse(stored) : null;
@@ -86,29 +428,9 @@ function Sidebar({ role, onClose }: { role: "researcher" | "academic" | "profess
 
       {/* Nav */}
       <nav style={{ flex: 1, overflowY: "auto", padding: "0.5rem 0.75rem" }}>
-        {nav.map(({ icon: Icon, label, to }) => {
-          const active = location.pathname === to;
-          return (
-            <Link
-              key={to} to={to} onClick={onClose}
-              style={{
-                display: "flex", alignItems: "center", gap: "0.65rem",
-                padding: "0.6rem 0.875rem", borderRadius: 8, marginBottom: "0.1rem",
-                textDecoration: "none", transition: "all 0.15s",
-                background: active ? "rgba(234,88,12,0.15)" : "transparent",
-                color: active ? "#ea580c" : "rgba(255,255,255,0.65)",
-                fontWeight: active ? 700 : 500,
-                fontSize: "0.855rem",
-              }}
-              onMouseEnter={e => { if (!active) { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.color = "#fff"; } }}
-              onMouseLeave={e => { if (!active) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "rgba(255,255,255,0.65)"; } }}
-            >
-              <Icon size={15} style={{ flexShrink: 0 }} />
-              {label}
-              {active && <ChevronRight size={12} style={{ marginLeft: "auto", opacity: 0.7 }} />}
-            </Link>
-          );
-        })}
+        {nav.map(item => (
+          <NavItemRow key={item.to} item={item} />
+        ))}
       </nav>
 
       {/* User footer */}
@@ -141,12 +463,12 @@ function Sidebar({ role, onClose }: { role: "researcher" | "academic" | "profess
 
 // ─── Mobile Drawer ────────────────────────────────────────────────────────────
 
-function MobileDrawer({ open, role, onClose }: { open: boolean; role: "researcher" | "academic" | "professional"; onClose: () => void }) {
+function MobileDrawer({ open, role, onClose }: { open: boolean; role: Role; onClose: () => void }) {
   if (!open) return null;
   return (
     <>
       <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 40 }} />
-      <div style={{ position: "fixed", left: 0, top: 0, bottom: 0, width: 248, zIndex: 50 }}>
+      <div style={{ position: "fixed", left: 0, top: 0, bottom: 0, width: 260, zIndex: 50 }}>
         <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", justifyContent: "flex-end", padding: "0.75rem", background: "#0f1623" }}>
             <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.5)", display: "flex" }}>
@@ -205,7 +527,7 @@ export default function DashboardLayout({
   children,
   credits,
 }: {
-  role: "researcher" | "academic" | "professional";
+  role: Role;
   children: React.ReactNode;
   credits?: number;
 }) {
@@ -216,7 +538,7 @@ export default function DashboardLayout({
       {/* Desktop Sidebar */}
       <aside
         className="hidden md:flex"
-        style={{ width: 240, flexShrink: 0, flexDirection: "column", overflow: "hidden" }}
+        style={{ width: 248, flexShrink: 0, flexDirection: "column", overflow: "hidden" }}
       >
         <Sidebar role={role} />
       </aside>

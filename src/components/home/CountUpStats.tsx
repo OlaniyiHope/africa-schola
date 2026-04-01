@@ -1,5 +1,6 @@
 import { useCountUp } from "@/hooks/useCountUp";
 
+
 interface Stat {
   value: number;
   suffix: string;
