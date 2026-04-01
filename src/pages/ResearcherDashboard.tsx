@@ -1,20 +1,20 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Brain, FileText, Database, Globe, ArrowUpRight,
   CheckCircle, AlertCircle, RefreshCw, Eye,
   Calendar, Zap, ChevronRight, Plus, Award,
-  BookOpen, Send, TrendingUp,
+  BookOpen, TrendingUp,
 } from "lucide-react";
-import DashboardLayout from "./DashboardLayout";
+import DashboardLayout from "@/pages/DashboardLayout";
+import { useAuth } from "@/context/AuthContext";
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
 
 const submissions = [
-  { id: "SUB-005", title: "Fintech Adoption in Nigerian Markets",          journal: "African Journal of Finance",          status: "under_review",       date: "2026-01-28" },
-  { id: "SUB-003", title: "Indigenous Knowledge Systems in Education",     journal: "Journal of African Development",      status: "submitted",           date: "2026-02-01" },
-  { id: "SUB-002", title: "Renewable Energy Policy in Sub-Saharan Africa", journal: "African Journal of Economic Studies", status: "revision_requested",  date: "2026-01-10" },
-  { id: "SUB-004", title: "Public Health Interventions in East Africa",    journal: "African Journal of Economic Studies", status: "accepted",            date: "2025-12-20" },
+  { id: "SUB-005", title: "Fintech Adoption in Nigerian Markets",          journal: "African Journal of Finance",          status: "under_review",      date: "2026-01-28" },
+  { id: "SUB-003", title: "Indigenous Knowledge Systems in Education",     journal: "Journal of African Development",      status: "submitted",         date: "2026-02-01" },
+  { id: "SUB-002", title: "Renewable Energy Policy in Sub-Saharan Africa", journal: "African Journal of Economic Studies", status: "revision_requested", date: "2026-01-10" },
+  { id: "SUB-004", title: "Public Health Interventions in East Africa",    journal: "African Journal of Economic Studies", status: "accepted",           date: "2025-12-20" },
 ];
 
 const statusConfig: Record<string, { label: string; color: string; bg: string }> = {
@@ -26,10 +26,10 @@ const statusConfig: Record<string, { label: string; color: string; bg: string }>
 };
 
 const quickActions = [
-  { icon: Brain,    label: "Generate Paper",    to: "/dashboard/researcher/generate",  color: "#381b92", bg: "rgba(56,27,146,0.08)" },
-  { icon: BookOpen, label: "Browse Journals",   to: "/dashboard/researcher/journals",  color: "#d97706", bg: "rgba(217,119,6,0.08)" },
-  { icon: Database, label: "Explore Datasets",  to: "/dashboard/researcher/datasets",  color: "#16a34a", bg: "rgba(22,163,74,0.08)" },
-  { icon: Globe,    label: "Calls for Papers",  to: "/dashboard/researcher/calls",     color: "#0891b2", bg: "rgba(8,145,178,0.08)" },
+  { icon: Brain,    label: "Generate Paper",   to: "/dashboard/researcher/generate",             color: "#381b92", bg: "rgba(56,27,146,0.08)" },
+  { icon: BookOpen, label: "Browse Journals",  to: "/dashboard/researcher/publishing",           color: "#d97706", bg: "rgba(217,119,6,0.08)" },
+  { icon: Database, label: "Explore Datasets", to: "/dashboard/researcher/intelligence/explorer", color: "#16a34a", bg: "rgba(22,163,74,0.08)" },
+  { icon: Globe,    label: "Calls for Papers", to: "/dashboard/researcher/publishing",           color: "#0891b2", bg: "rgba(8,145,178,0.08)" },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -37,15 +37,23 @@ const quickActions = [
 function StatusBadge({ status }: { status: string }) {
   const cfg = statusConfig[status] ?? statusConfig.submitted;
   return (
-    <span style={{ background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.color}30`, borderRadius: 999, padding: "0.2rem 0.6rem", fontSize: "0.7rem", fontWeight: 700, whiteSpace: "nowrap" }}>
+    <span style={{
+      background: cfg.bg, color: cfg.color,
+      border: `1px solid ${cfg.color}30`, borderRadius: 999,
+      padding: "0.2rem 0.6rem", fontSize: "0.7rem", fontWeight: 700, whiteSpace: "nowrap",
+    }}>
       {cfg.label}
     </span>
   );
 }
 
-function StatCard({ icon: Icon, label, value, sub, color, to }: { icon: React.ElementType; label: string; value: number | string; sub?: string; color: string; to?: string }) {
+function StatCard({ icon: Icon, label, value, sub, color, to }: {
+  icon: React.ElementType; label: string; value: number | string;
+  sub?: string; color: string; to?: string;
+}) {
   const content = (
-    <div style={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 14, padding: "1.25rem", transition: "box-shadow 0.15s, transform 0.15s", cursor: to ? "pointer" : "default" }}
+    <div
+      style={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 14, padding: "1.25rem", transition: "box-shadow 0.15s, transform 0.15s", cursor: to ? "pointer" : "default" }}
       onMouseEnter={e => { if (to) { (e.currentTarget as HTMLDivElement).style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-1px)"; } }}
       onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.boxShadow = "none"; (e.currentTarget as HTMLDivElement).style.transform = "none"; }}
     >
@@ -66,16 +74,15 @@ function StatCard({ icon: Icon, label, value, sub, color, to }: { icon: React.El
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 export default function ResearcherDashboard() {
-  const stored = localStorage.getItem("as_user");
-  const user = stored ? JSON.parse(stored) : null;
-  const name = user?.username || "Researcher";
+  const { user } = useAuth();
+  const name = user?.username || user?.email || "Researcher";
   const initials = name.slice(0, 2).toUpperCase();
 
   const h = new Date().getHours();
   const greeting = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
 
   return (
-    <DashboardLayout role="researcher" credits={55}>
+    <DashboardLayout role="researcher">
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
 
         {/* Welcome Banner */}
@@ -88,14 +95,18 @@ export default function ResearcherDashboard() {
           <div style={{ position: "absolute", bottom: -20, left: "40%", width: 120, height: 120, borderRadius: "50%", background: "#381b92", opacity: 0.3 }} />
           <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <div style={{ width: 52, height: 52, borderRadius: "50%", background: "#ea580c", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem", fontWeight: 800, flexShrink: 0 }}>{initials}</div>
+              <div style={{ width: 52, height: 52, borderRadius: "50%", background: "#ea580c", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem", fontWeight: 800, flexShrink: 0 }}>
+                {initials}
+              </div>
               <div>
                 <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.55)", margin: "0 0 0.2rem" }}>{greeting},</p>
                 <h1 style={{ fontSize: "clamp(1rem,3vw,1.4rem)", fontWeight: 800, fontFamily: "Georgia, serif", color: "#fff", margin: 0 }}>{name} 👋</h1>
                 <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.45)", margin: "0.2rem 0 0" }}>Manage your research, publishing, and intelligence tools.</p>
               </div>
             </div>
-            <Link to="/dashboard/researcher/generate" style={{ display: "flex", alignItems: "center", gap: "0.5rem", background: "#ea580c", color: "#fff", border: "none", borderRadius: 10, padding: "0.7rem 1.25rem", fontSize: "0.875rem", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap", transition: "opacity 0.15s" }}
+            <Link
+              to="/dashboard/researcher/research/papers"
+              style={{ display: "flex", alignItems: "center", gap: "0.5rem", background: "#ea580c", color: "#fff", border: "none", borderRadius: 10, padding: "0.7rem 1.25rem", fontSize: "0.875rem", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap", transition: "opacity 0.15s" }}
               onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
               onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
             >
@@ -104,10 +115,12 @@ export default function ResearcherDashboard() {
           </div>
         </div>
 
-        {/* Research Identity Card */}
+        {/* Identity Card */}
         <div style={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 14, padding: "1.25rem 1.5rem", marginBottom: "1.75rem", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#ea580c", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 800, flexShrink: 0 }}>{initials}</div>
+            <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#ea580c", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.85rem", fontWeight: 800, flexShrink: 0 }}>
+              {initials}
+            </div>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <span style={{ fontSize: "0.95rem", fontWeight: 700, color: "#1f2937" }}>{name}</span>
@@ -117,21 +130,18 @@ export default function ResearcherDashboard() {
             </div>
           </div>
           <div style={{ display: "flex", gap: "0.75rem" }}>
-            <Link to="/dashboard/researcher/profile" style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.5rem 1rem", borderRadius: 8, border: "1px solid #e5e7eb", fontSize: "0.8rem", fontWeight: 600, color: "#374151", textDecoration: "none", background: "#fff" }}>
-              <Eye size={14} /> View
-            </Link>
-            <Link to="/dashboard/researcher/profile/edit" style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.5rem 1rem", borderRadius: 8, border: "1px solid #e5e7eb", fontSize: "0.8rem", fontWeight: 600, color: "#374151", textDecoration: "none", background: "#fff" }}>
-              Edit
+            <Link to="/dashboard/researcher/account/profile" style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.5rem 1rem", borderRadius: 8, border: "1px solid #e5e7eb", fontSize: "0.8rem", fontWeight: 600, color: "#374151", textDecoration: "none", background: "#fff" }}>
+              <Eye size={14} /> View Profile
             </Link>
           </div>
         </div>
 
         {/* Stats */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(155px, 1fr))", gap: "1rem", marginBottom: "1.75rem" }}>
-          <StatCard icon={FileText}    label="Total Submissions" value={6}  color="#381b92" to="/dashboard/researcher/submissions" sub="↑ 2 this month" />
-          <StatCard icon={RefreshCw}   label="Under Review"      value={2}  color="#d97706" to="/dashboard/researcher/submissions" />
-          <StatCard icon={AlertCircle} label="Needs Revision"    value={1}  color="#ea580c" to="/dashboard/researcher/revisions"   sub="Action needed" />
-          <StatCard icon={CheckCircle} label="Accepted"          value={1}  color="#16a34a" to="/dashboard/researcher/published" />
+          <StatCard icon={FileText}    label="Total Submissions" value={6}  color="#381b92" to="/dashboard/researcher/publishing/submissions" sub="↑ 2 this month" />
+          <StatCard icon={RefreshCw}   label="Under Review"      value={2}  color="#d97706" to="/dashboard/researcher/publishing/submissions" />
+          <StatCard icon={AlertCircle} label="Needs Revision"    value={1}  color="#ea580c" to="/dashboard/researcher/publishing/submissions" sub="Action needed" />
+          <StatCard icon={CheckCircle} label="Accepted"          value={1}  color="#16a34a" to="/dashboard/researcher/publishing/submissions" />
           <StatCard icon={Eye}         label="Total Citations"   value={47} color="#0891b2" />
           <StatCard icon={Award}       label="H-Index"           value={3}  color="#7c3aed" />
         </div>
@@ -146,8 +156,9 @@ export default function ResearcherDashboard() {
               <h2 style={{ fontSize: "0.9rem", fontWeight: 700, color: "#1f2937", margin: "0 0 1rem" }}>Quick Actions</h2>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.75rem" }}>
                 {quickActions.map(({ icon: Icon, label, to, color, bg }) => (
-                  <Link key={to} to={to} style={{ textDecoration: "none" }}>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem", padding: "1rem 0.5rem", borderRadius: 12, background: bg, border: `1px solid ${color}20`, textAlign: "center", transition: "transform 0.15s" }}
+                  <Link key={to + label} to={to} style={{ textDecoration: "none" }}>
+                    <div
+                      style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem", padding: "1rem 0.5rem", borderRadius: 12, background: bg, border: `1px solid ${color}20`, textAlign: "center", transition: "transform 0.15s" }}
                       onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-2px)")}
                       onMouseLeave={e => (e.currentTarget.style.transform = "none")}
                     >
@@ -163,7 +174,7 @@ export default function ResearcherDashboard() {
             <div style={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 14, overflow: "hidden" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1rem 1.25rem", borderBottom: "1px solid #f3f4f6" }}>
                 <h2 style={{ fontSize: "0.9rem", fontWeight: 700, color: "#1f2937", margin: 0 }}>Recent Submissions</h2>
-                <Link to="/dashboard/researcher/submissions" style={{ fontSize: "0.78rem", fontWeight: 600, color: "#ea580c", textDecoration: "none", display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                <Link to="/dashboard/researcher/publishing/submissions" style={{ fontSize: "0.78rem", fontWeight: 600, color: "#ea580c", textDecoration: "none", display: "flex", alignItems: "center", gap: "0.25rem" }}>
                   View all <ChevronRight size={13} />
                 </Link>
               </div>
@@ -171,16 +182,18 @@ export default function ResearcherDashboard() {
                 <table style={{ width: "100%", borderCollapse: "collapse" }}>
                   <thead>
                     <tr style={{ background: "#f9fafb" }}>
-                      {["ID", "Title", "Status", "Date"].map(h => (
-                        <th key={h} style={{ padding: "0.65rem 1rem", textAlign: "left", fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#6b7280", whiteSpace: "nowrap" }}>{h}</th>
+                      {["ID", "Title", "Status", "Date"].map(col => (
+                        <th key={col} style={{ padding: "0.65rem 1rem", textAlign: "left", fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#6b7280", whiteSpace: "nowrap" }}>{col}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {submissions.map(sub => (
-                      <tr key={sub.id} style={{ borderTop: "1px solid #f3f4f6" }}
+                      <tr
+                        key={sub.id}
+                        style={{ borderTop: "1px solid #f3f4f6" }}
                         onMouseEnter={e => (e.currentTarget.style.background = "#fafafa")}
-                        onMouseLeave={e => (e.currentTarget.style.background = "none")}
+                        onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
                       >
                         <td style={{ padding: "0.875rem 1rem", fontSize: "0.78rem", fontWeight: 700, color: "#ea580c", whiteSpace: "nowrap" }}>{sub.id}</td>
                         <td style={{ padding: "0.875rem 1rem", maxWidth: 240 }}>
@@ -232,7 +245,7 @@ export default function ResearcherDashboard() {
                 </div>
                 <h3 style={{ fontSize: "1rem", fontWeight: 800, color: "#fff", margin: "0 0 0.4rem", fontFamily: "Georgia, serif" }}>Publeesh AI</h3>
                 <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.6)", margin: "0 0 1rem", lineHeight: 1.5 }}>Generate research papers, slides and datasets with AI.</p>
-                <Link to="/dashboard/researcher/generate" style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", background: "#ea580c", color: "#fff", borderRadius: 8, padding: "0.55rem 1rem", fontSize: "0.8rem", fontWeight: 700, textDecoration: "none" }}>
+                <Link to="/dashboard/researcher/research/papers" style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", background: "#ea580c", color: "#fff", borderRadius: 8, padding: "0.55rem 1rem", fontSize: "0.8rem", fontWeight: 700, textDecoration: "none" }}>
                   Generate Paper <ArrowUpRight size={13} />
                 </Link>
               </div>
@@ -245,7 +258,7 @@ export default function ResearcherDashboard() {
               </div>
               <h3 style={{ fontSize: "0.9rem", fontWeight: 700, color: "#1f2937", margin: "0 0 0.4rem" }}>Unlock Full Access</h3>
               <p style={{ fontSize: "0.78rem", color: "#6b7280", margin: "0 0 1rem", lineHeight: 1.5 }}>Get unlimited paper generation, dataset access, and more.</p>
-              <Link to="/pricing" style={{ display: "block", background: "#381b92", color: "#fff", borderRadius: 8, padding: "0.65rem", fontSize: "0.83rem", fontWeight: 700, textDecoration: "none" }}>
+              <Link to="/dashboard/researcher/billing" style={{ display: "block", background: "#381b92", color: "#fff", borderRadius: 8, padding: "0.65rem", fontSize: "0.83rem", fontWeight: 700, textDecoration: "none" }}>
                 View Plans
               </Link>
             </div>
