@@ -369,14 +369,14 @@ import Policies from "./pages/Policies";
 import SubmitJournal from "./pages/SubmitJournal";
 import Submissions from "./pages/Submissions";
 import Profile from "./pages/Profile";
-import Dashboard from "./pages/Dashboard";
+
 import MyPublications from "./pages/MyPublications";
 import SettingsPage from "./pages/Setting";
 import Onboarding from "./pages/Onboarding";
 import PublesshDash from "./pages/PubleeshDash";
 import GeneratePaper from "./pages/Generate";
 import CheckoutPage from "./pages/CheckoutPage";
-import ResearcherDashboard from "./pages/ResearcherDashboard";
+
 import AcademicDashboard from "./pages/AcademicDashboard";
 import ProfessionalDashboard from "./pages/ProfessionalDashboard";
 import MyPapers from "./pages/dashboard/MyPapers";
@@ -436,6 +436,8 @@ import DegreeAdvisoryPage from "./pages/dashboard/advisory/DegreeAdvisoryPage";
 import AcademicPathwaysPage from "./pages/dashboard/advisory/AcademicPathwaysPage";
 import MyCasesPage from "./pages/dashboard/advisory/MyCasesPage";
 import DocumentUploadsPage from "./pages/dashboard/advisory/DocumentUploadsPage";
+import ResearcherDashboard from "./pages/home/ResearcherDashboard";
+import Dashboards from "./pages/Dashboards";
 
 const queryClient = new QueryClient();
 
@@ -490,12 +492,12 @@ const App = () => (
               <Route path="/onboarding" element={<P><Onboarding /></P>} />
 
               {/* ── Root dashboard ── */}
-              <Route path="/dashboard" element={<P><Dashboard /></P>} />
+              <Route path="/dashboard" element={<P><Dashboards /></P>} />
 
               {/* ════════════════════════════════════════════════
                   RESEARCHER ROUTES
               ════════════════════════════════════════════════ */}
-              <Route path="/dashboard/researcher" element={<P><ResearcherDashboard /></P>} />
+              <Route path="/dashboard/researcher" element={<P><Dashboards /></P>} />
 
               {/* My Research */}
               <Route path="/dashboard/researcher/research/papers"       element={<P><MyPapers /></P>} />
@@ -511,7 +513,6 @@ const App = () => (
 
               {/* Library */}
               <Route path="/dashboard/researcher/library"                element={<P><LibraryPage /></P>} />
-
               {/* Intelligence */}
               <Route path="/dashboard/researcher/intelligence/explorer"  element={<P><DatasetExplorer /></P>} />
               <Route path="/dashboard/researcher/intelligence/analyzer"  element={<P><DatasetAnalyzer /></P>} />
