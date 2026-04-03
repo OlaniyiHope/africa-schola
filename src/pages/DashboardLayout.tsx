@@ -40,17 +40,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: Lightbulb,   label: "Pro Tips",          to: "/dashboard/researcher/research/pro-tips" },
       ],
     },
-    {
-      icon: Send, label: "Publishing", to: "/dashboard/researcher/publishing",
-      children: [
-        { icon: Globe,         label: "Publishing Overview", to: "/dashboard/researcher/publishing" },
-        { icon: Send,          label: "Submit Manuscript",   to: "/dashboard/researcher/publishing/submit" },
-        { icon: ClipboardList, label: "My Submissions",      to: "/dashboard/researcher/publishing/submissions" },
-        { icon: FileText,      label: "Peer Reviews",        to: "/dashboard/researcher/publishing/reviews" },
-      ],
-    },
-
-        {
+         {
   icon: Library, label: "Library", to: "/dashboard/researcher/library",
   children: [
     { icon: BookOpen,   label: "Overview",              to: "/dashboard/researcher/library" },
@@ -61,6 +51,17 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
     { icon: Globe,      label: "Journal Subscriptions", to: "/dashboard/researcher/library?tab=subscriptions" },
   ],
 },
+    {
+      icon: Send, label: "Publishing", to: "/dashboard/researcher/publishing",
+      children: [
+        { icon: Globe,         label: "Publishing Overview", to: "/dashboard/researcher/publishing" },
+        { icon: Send,          label: "Submit Manuscript",   to: "/dashboard/researcher/publishing/submit" },
+        { icon: ClipboardList, label: "My Submissions",      to: "/dashboard/researcher/publishing/submissions" },
+        { icon: FileText,      label: "Peer Reviews",        to: "/dashboard/researcher/publishing/reviews" },
+      ],
+    },
+
+   
 
 //   {
 //   icon: Radar, label: "Research Intelligence", to: "/dashboard/researcher/intelligence",

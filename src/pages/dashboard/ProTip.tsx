@@ -59,11 +59,11 @@ const glossary = [
 ];
 
 const tools = [
-  { name: "Generate Paper", desc: "AI-powered paper generator", link: "/dashboard/generate-paper" },
-  { name: "Dataset Explorer", desc: "Generate structured datasets", link: "/dashboard/data/explorer" },
-  { name: "Dataset Analyzer", desc: "Statistical analysis tools", link: "/dashboard/data/analyzer" },
-  { name: "Instrument Studio", desc: "Build research instruments", link: "/dashboard/instrument-studio" },
-  { name: "Intelligence Hub", desc: "Journal & conference recommendations", link: "/dashboard/intelligence" },
+  { name: "Generate Paper", desc: "AI-powered paper generator", link: "/dashboard/researcher/intelligence/generate-paper" },
+  { name: "Dataset Explorer", desc: "Generate structured datasets", link: "/dashboard/researcher/intelligence/explorer" },
+  { name: "Dataset Analyzer", desc: "Statistical analysis tools", link: "/dashboard/researcher/intelligence/analyzer" },
+  { name: "Instrument Studio", desc: "Build research instruments", link: "/dashboard/researcher/instrument-studio" },
+  { name: "Intelligence Hub", desc: "Journal & conference recommendations", link: "/dashboard/researcher/intelligence" },
 ];
 
 const ProTip = () => {
