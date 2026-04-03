@@ -62,7 +62,7 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
             <h1 className="text-2xl font-bold text-foreground">My Papers</h1>
             <p className="text-sm text-muted-foreground mt-1">View and manage all your generated research papers.</p>
           </div>
-          <Link to="/dashboard/generate-paper">
+          <Link to="/dashboard/researcher/intelligence/generate-paper">
             <Button  size="sm" className="gap-1"><Plus className="h-3 w-3" /> Generate Paper</Button>
           </Link>
         </div>
@@ -71,7 +71,7 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
           <div className="bg-card rounded-xl border border-border p-12 text-center">
             <FileText className="h-10 w-10 mx-auto text-muted-foreground/40" />
             <p className="text-sm text-muted-foreground mt-3">No papers generated yet.</p>
-            <Link to="/dashboard/generate-paper" className="text-sm text-accent font-medium hover:underline mt-1 inline-flex items-center gap-1">
+            <Link to="/dashboard/researcher/intelligence/generate-paper" className="text-sm text-accent font-medium hover:underline mt-1 inline-flex items-center gap-1">
               Generate your first paper <ArrowRight className="h-3 w-3" />
             </Link>
           </div>

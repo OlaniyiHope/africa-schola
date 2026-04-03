@@ -188,7 +188,7 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
                       </div>
                     )}
                     <div className="flex gap-2 mt-3">
-                      <Link to="/dashboard/library">
+                      <Link to="/dashboard/researcher/library">
                         <Button  size="sm" className="text-xs gap-1">
                           <Plus className="h-3 w-3" /> Add from Library
                         </Button>
