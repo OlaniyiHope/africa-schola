@@ -513,6 +513,7 @@ const App = () => (
 
               {/* Library */}
               <Route path="/dashboard/researcher/library"                element={<P><LibraryPage /></P>} />
+              
               {/* Intelligence */}
               <Route path="/dashboard/researcher/intelligence/explorer"  element={<P><DatasetExplorer /></P>} />
               <Route path="/dashboard/researcher/intelligence/analyzer"  element={<P><DatasetAnalyzer /></P>} />

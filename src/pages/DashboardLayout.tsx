@@ -49,17 +49,19 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: FileText,      label: "Peer Reviews",        to: "/dashboard/researcher/publishing/reviews" },
       ],
     },
-    {
-      icon: Library, label: "Library", to: "/dashboard/researcher/library",
-      children: [
-        { icon: BookOpen,  label: "Overview",              to: "/dashboard/researcher/library" },
-        { icon: FileText,  label: "Purchased Papers",      to: "/dashboard/researcher/library/purchased" },
-        { icon: Bookmark,  label: "Saved Articles",        to: "/dashboard/researcher/library/saved" },
-        { icon: Download,  label: "Download History",      to: "/dashboard/researcher/library/downloads" },
-        { icon: FolderOpen,label: "Reading Lists",         to: "/dashboard/researcher/library/lists" },
-        { icon: Globe,     label: "Journal Subscriptions", to: "/dashboard/researcher/library/subscriptions" },
-      ],
-    },
+
+        {
+  icon: Library, label: "Library", to: "/dashboard/researcher/library",
+  children: [
+    { icon: BookOpen,   label: "Overview",              to: "/dashboard/researcher/library" },
+    { icon: FileText,   label: "Purchased Papers",      to: "/dashboard/researcher/library?tab=purchased" },
+    { icon: Bookmark,   label: "Saved Articles",        to: "/dashboard/researcher/library?tab=saved" },
+    { icon: Download,   label: "Download History",      to: "/dashboard/researcher/library?tab=downloads" },
+    { icon: FolderOpen, label: "Reading Lists",         to: "/dashboard/researcher/library?tab=lists" },
+    { icon: Globe,      label: "Journal Subscriptions", to: "/dashboard/researcher/library?tab=subscriptions" },
+  ],
+},
+
     {
       icon: Radar, label: "Research Intelligence", to: "/dashboard/researcher/intelligence",
       children: [
