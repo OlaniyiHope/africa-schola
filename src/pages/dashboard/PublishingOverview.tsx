@@ -104,10 +104,10 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
 
             {/* Quick Actions */}
             <div className="flex flex-wrap gap-3">
-              <Link to="/dashboard/publishing/submit">
+              <Link to="/publishing/submit">
                 <Button  className="gap-2"><Plus className="h-4 w-4" />Submit New Manuscript</Button>
               </Link>
-              <Link to="/dashboard/publishing/submissions">
+              <Link to="/publishing/submissions">
                 <Button  className="gap-2"><ArrowRight className="h-4 w-4" />View All Submissions</Button>
               </Link>
             </div>
