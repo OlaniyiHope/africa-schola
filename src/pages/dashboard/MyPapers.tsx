@@ -91,10 +91,10 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <Link to="/dashboard/generate-paper">
+                  <Link to="/dashboard/researcher/intelligence/generate-paper">
                     <Button variant="outline" size="sm" className="text-xs gap-1"><Edit className="h-3 w-3" /> Edit</Button>
                   </Link>
-                  <Link to="/dashboard/publishing/submit">
+                  <Link to="/dashboard/researcher/publishing/submit">
                     <Button  size="sm" className="text-xs gap-1"><Send className="h-3 w-3" /> Submit</Button>
                   </Link>
                   <Button variant="outline" size="sm" className="text-xs gap-1" onClick={() => toast({ title: "Download started", description: "Your paper is being exported as .docx" })}>

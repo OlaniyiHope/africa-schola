@@ -73,7 +73,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
 //   ],
 // },
 {
-  icon: Radar, label: "Research Intelligence", to: "/dashboard/researcher/intelligence",
+  icon: Radar, label: "Research Intelligence (Publeesh AI)", to: "/dashboard/researcher/intelligence",
   children: [
     { icon: FileText,  label: "Generate Paper",    to: "/dashboard/researcher/intelligence/generate-paper" },
     { icon: Database,  label: "Dataset Explorer",  to: "/dashboard/researcher/intelligence/explorer" },
