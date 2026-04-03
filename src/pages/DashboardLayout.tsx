@@ -6,7 +6,7 @@ import {
   Settings, ChevronRight, ChevronDown, Menu, X, Bell, Search, LogOut,
   FileText, FolderOpen, Lightbulb, ClipboardList, Globe, Bookmark,
   Download, User, Handshake, BarChart3, Database, Compass, MapPin,
-  FileUp, Wallet, Activity, Receipt,
+  FileUp, Wallet, Activity, Receipt,   PlusCircle, Wand2, Monitor, Wrench
 } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -62,13 +62,32 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
   ],
 },
 
-  {
+//   {
+//   icon: Radar, label: "Research Intelligence", to: "/dashboard/researcher/intelligence",
+//   children: [
+//     { icon: FileText,  label: "Generate Paper",    to: "/dashboard/researcher/intelligence/generate-paper" },
+//     { icon: Database,  label: "Dataset Explorer",  to: "/dashboard/researcher/intelligence/explorer" },
+//     { icon: BarChart3, label: "Dataset Analyzer",  to: "/dashboard/researcher/intelligence/analyzer" },
+//     { icon: Compass,   label: "Intelligence Hub",  to: "/dashboard/researcher/intelligence/hub" },
+    
+//   ],
+// },
+{
   icon: Radar, label: "Research Intelligence", to: "/dashboard/researcher/intelligence",
   children: [
     { icon: FileText,  label: "Generate Paper",    to: "/dashboard/researcher/intelligence/generate-paper" },
     { icon: Database,  label: "Dataset Explorer",  to: "/dashboard/researcher/intelligence/explorer" },
     { icon: BarChart3, label: "Dataset Analyzer",  to: "/dashboard/researcher/intelligence/analyzer" },
     { icon: Compass,   label: "Intelligence Hub",  to: "/dashboard/researcher/intelligence/hub" },
+
+  ],
+},
+{
+  icon: Wrench, label: "Instrument Studio", to: "/dashboard/researcher/instrument-studio",
+  children: [
+    { icon: PlusCircle, label: "Create Instrument",  to: "/dashboard/researcher/instrument-studio/create" },
+    { icon: Wand2,      label: "AI Paper Generator", to: "/dashboard/researcher/instrument-studio/paper-generator" },
+    { icon: Monitor,    label: "AI Slide Builder",   to: "/dashboard/researcher/instrument-studio/slide-builder" },
   ],
 },
     {
