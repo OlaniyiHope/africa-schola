@@ -62,14 +62,15 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
   ],
 },
 
-    {
-      icon: Radar, label: "Research Intelligence", to: "/dashboard/researcher/intelligence",
-      children: [
-        { icon: Database,  label: "Dataset Explorer",  to: "/dashboard/researcher/intelligence/explorer" },
-        { icon: BarChart3, label: "Dataset Analyzer",  to: "/dashboard/researcher/intelligence/explorer" },
-        { icon: Compass,   label: "Intelligence Hub",  to: "/dashboard/researcher/intelligence/explorer" },
-      ],
-    },
+  {
+  icon: Radar, label: "Research Intelligence", to: "/dashboard/researcher/intelligence",
+  children: [
+    { icon: FileText,  label: "Generate Paper",    to: "/dashboard/researcher/intelligence/generate-paper" },
+    { icon: Database,  label: "Dataset Explorer",  to: "/dashboard/researcher/intelligence/explorer" },
+    { icon: BarChart3, label: "Dataset Analyzer",  to: "/dashboard/researcher/intelligence/analyzer" },
+    { icon: Compass,   label: "Intelligence Hub",  to: "/dashboard/researcher/intelligence/hub" },
+  ],
+},
     {
       icon: Users, label: "Network", to: "/dashboard/researcher/network",
       children: [

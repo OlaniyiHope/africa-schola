@@ -438,6 +438,7 @@ import MyCasesPage from "./pages/dashboard/advisory/MyCasesPage";
 import DocumentUploadsPage from "./pages/dashboard/advisory/DocumentUploadsPage";
 import ResearcherDashboard from "./pages/home/ResearcherDashboard";
 import Dashboards from "./pages/Dashboards";
+import GeneratePapers from "./pages/dashboard/GeneratePapers";
 
 const queryClient = new QueryClient();
 
@@ -514,11 +515,11 @@ const App = () => (
               {/* Library */}
               <Route path="/dashboard/researcher/library"                element={<P><LibraryPage /></P>} />
               
-              {/* Intelligence */}
-              <Route path="/dashboard/researcher/intelligence/explorer"  element={<P><DatasetExplorer /></P>} />
-              <Route path="/dashboard/researcher/intelligence/analyzer"  element={<P><DatasetAnalyzer /></P>} />
-              <Route path="/dashboard/researcher/intelligence/hub"       element={<P><IntelligenceHub /></P>} />
-
+          {/* Intelligence */}
+<Route path="/dashboard/researcher/intelligence/generate-paper" element={<P><GeneratePapers /></P>} />
+<Route path="/dashboard/researcher/intelligence/explorer"       element={<P><DatasetExplorer /></P>} />
+<Route path="/dashboard/researcher/intelligence/analyzer"       element={<P><DatasetAnalyzer /></P>} />
+<Route path="/dashboard/researcher/intelligence/hub"            element={<P><IntelligenceHub /></P>} />
               {/* Network */}
               <Route path="/dashboard/researcher/network"                element={<P><NetworkOverviewPage /></P>} />
               <Route path="/dashboard/researcher/network/opportunities"  element={<P><OpportunitiesPage /></P>} />

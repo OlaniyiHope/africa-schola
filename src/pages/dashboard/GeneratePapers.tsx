@@ -76,7 +76,7 @@ const topicIdeas = [
   "The role of indigenous knowledge systems in sustainable development",
 ];
 
-const GeneratePaper = () => {
+const GeneratePapers = () => {
   const { unlockModule } = useModuleUnlocksContext();
   useEffect(() => { unlockModule("my_research"); unlockModule("publeesh_ai"); }, [unlockModule]);
   const [selectedStandards, setSelectedStandards] = useState<string[]>(["APA 7th Edition", "IMRAD Structure", "25+ Citations"]);
@@ -314,4 +314,4 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
   );
 };
 
-export default GeneratePaper;
+export default GeneratePapers;
