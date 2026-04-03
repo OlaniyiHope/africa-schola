@@ -570,6 +570,11 @@ const App = () => (
               <Route path="/dashboard/academic/intelligence/analyzer"  element={<P><DatasetAnalyzer /></P>} />
               <Route path="/dashboard/academic/intelligence/hub"       element={<P><IntelligenceHub /></P>} />
 
+{/* Instrument Studio */}
+<Route path="/dashboard/researcher/instrument-studio"                         element={<P><InstrumentStudio /></P>} />
+<Route path="/dashboard/researcher/instrument-studio/create"                  element={<P><InstrumentStudio /></P>} />
+<Route path="/dashboard/researcher/instrument-studio/paper-generator"         element={<P><SavedPapers /></P>} />
+<Route path="/dashboard/researcher/instrument-studio/slide-builder"           element={<P><AISlideBuilder /></P>} />
               {/* Network */}
               <Route path="/dashboard/academic/network"                element={<P><NetworkOverviewPage /></P>} />
               <Route path="/dashboard/academic/network/opportunities"  element={<P><OpportunitiesPage /></P>} />
