@@ -182,7 +182,7 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
                     </div>
                     <div className="flex items-center gap-2">
                       <Badge variant="outline" className="text-[10px]">{test.type}</Badge>
-                      <Link to="/dashboard/data/analyzer">
+                      <Link to="/dashboard/researcher/intelligence/analyzer">
                         <Button variant="ghost" size="sm" className="text-xs gap-1"><ArrowRight className="h-3 w-3" /> Run Test</Button>
                       </Link>
                     </div>
