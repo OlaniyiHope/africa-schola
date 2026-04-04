@@ -129,6 +129,7 @@ import DocumentUploadsPage from "./pages/dashboard/advisory/DocumentUploadsPage"
 import ResearcherDashboard from "./pages/home/ResearcherDashboard";
 import Dashboards from "./pages/Dashboards";
 import GeneratePapers from "./pages/dashboard/GeneratePapers";
+import PricingPage from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
@@ -176,6 +177,7 @@ const App = () => (
 
               {/* ── Public-only routes ── */}
               <Route path="/" element={<HomePage />} />
+              <Route path="/publeesh/pricing" element={<PricingPage />} />
               <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
               <Route path="/register" element={<Register />} />
 

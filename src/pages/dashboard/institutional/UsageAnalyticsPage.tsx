@@ -1,10 +1,12 @@
-import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import DashboardLayout from "@/pages/DashboardLayout";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BarChart3, Users2, FileText, Clock, TrendingUp, Download } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { useAuth } from "@/context/AuthContext";
 
 const METRICS = [
   { label: "Monthly Active Users", value: 14, change: "+3", icon: Users2, bg: "bg-accent/10", color: "text-accent" },
@@ -33,9 +35,11 @@ export default function UsageAnalyticsPage() {
   const handleExport = () => {
     toast.success("Analytics report exported successfully");
   };
+ const { user }              = useAuth();
+const role = (user?.role as "researcher" | "academic" | "professional") ?? "academic";
 
   return (
-    <DashboardLayout>
+ <DashboardLayout role={role}>
       <div className="max-w-6xl mx-auto space-y-6">
         <div className="flex items-center justify-between">
           <div>
