@@ -751,15 +751,15 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: ClipboardList, label: "My Submissions",      to: "/dashboard/researcher/publishing/submissions" },
         { icon: FileText,      label: "Peer Reviews",        to: "/dashboard/researcher/publishing/reviews" },
         // ── nested Editor Workspace ──
-        {
-          icon: PenLine, label: "Editor Workspace", to: "/dashboard/researcher/publishing/journals",
-          children: [
-            { icon: BookOpen,  label: "Journal Management",  to: "/dashboard/researcher/publishing/journals" },
-            { icon: GitBranch, label: "Editorial Workflow",  to: "/dashboard/researcher/publishing/workflow" },
-            { icon: UserCheck, label: "Reviewer Assignment", to: "/dashboard/researcher/publishing/reviewer-assignment" },
-            { icon: BarChart2, label: "Editorial Analytics", to: "/dashboard/researcher/publishing/editorial-analytics" },
-          ],
-        },
+        // {
+        //   icon: PenLine, label: "Editor Workspace", to: "/dashboard/researcher/publishing/journals",
+        //   children: [
+        //     { icon: BookOpen,  label: "Journal Management",  to: "/dashboard/researcher/publishing/journals" },
+        //     { icon: GitBranch, label: "Editorial Workflow",  to: "/dashboard/researcher/publishing/workflow" },
+        //     { icon: UserCheck, label: "Reviewer Assignment", to: "/dashboard/researcher/publishing/reviewer-assignment" },
+        //     { icon: BarChart2, label: "Editorial Analytics", to: "/dashboard/researcher/publishing/editorial-analytics" },
+        //   ],
+        // },
       ],
     },
     {
