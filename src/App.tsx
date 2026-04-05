@@ -248,7 +248,7 @@ const App = () => (
 
               {/* Account */}
               <Route path="/dashboard/researcher/account/profile"        element={<P><ProfilePage /></P>} />
-              <Route path="/dashboard/researcher/settings"       element={<P><SettingsPage /></P>} />
+              <Route path="/dashboard/researcher/settings"       element={<P><Settings /></P>} />
 
               {/* ════════════════════════════════════════════════
                   ACADEMIC ROUTES
@@ -320,7 +320,7 @@ const App = () => (
 
               {/* Account */}
               <Route path="/dashboard/academic/account/profile"         element={<P><ProfilePage /></P>} />
-              <Route path="/dashboard/academic/settings"        element={<P><SettingsPage /></P>} />
+              <Route path="/dashboard/academic/settings"        element={<P><Settings /></P>} />
               <Route path="/dashboard/academic/message"                 element={<P><MessagesPage /></P>} />
 
               {/* ════════════════════════════════════════════════
