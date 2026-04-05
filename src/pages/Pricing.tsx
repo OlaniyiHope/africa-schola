@@ -291,9 +291,9 @@ const plans = [
 ];
 
 const creditPacks = [
-  { name: "+5 Paper Credits", price: "₦7,500" },
-  { name: "+10 Dataset Credits", price: "₦5,000" },
-  { name: "+5 Analysis Credits", price: "₦6,000" },
+  { name: "+500 Paper Credits", price: "₦7,500" },
+  { name: "+1000 Dataset Credits", price: "₦5,000" },
+  { name: "+500 Analysis Credits", price: "₦6,000" },
 ];
 
 const PricingPage = () => {

@@ -130,6 +130,7 @@ import ResearcherDashboard from "./pages/home/ResearcherDashboard";
 import Dashboards from "./pages/Dashboards";
 import GeneratePapers from "./pages/dashboard/GeneratePapers";
 import PricingPage from "./pages/Pricing";
+import EditorialAnalyticsPage from "./pages/dashboard/EditorialAnalyticsPage";
 
 const queryClient = new QueryClient();
 
@@ -203,6 +204,12 @@ const App = () => (
               <Route path="/dashboard/researcher/publishing/submit"      element={<P><SubmitManuscript /></P>} />
               <Route path="/dashboard/researcher/publishing/submissions" element={<P><TrackSubmissions /></P>} />
               <Route path="/dashboard/researcher/publishing/reviews"     element={<P><PeerReviewsPage /></P>} />
+
+
+<Route path="/dashboard/researcher/publishing/journals"             element={<P><JournalManagement/></P>} />
+<Route path="/dashboard/researcher/publishing/workflow"             element={<P><EditorialWorkflow /></P>} />
+<Route path="/dashboard/researcher/publishing/reviewer-assignment"  element={<P><ReviewerAssignmentPage /></P>} />
+<Route path="/dashboard/researcher/publishing/editorial-analytics"  element={<P><EditorialAnalyticsPage /></P>} />
 
               {/* Library */}
               <Route path="/dashboard/researcher/library"                element={<P><LibraryPage /></P>} />

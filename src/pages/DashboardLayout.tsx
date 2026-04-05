@@ -6,7 +6,7 @@ import {
   Settings, ChevronRight, ChevronDown, Menu, X, Bell, Search, LogOut,
   FileText, FolderOpen, Lightbulb, ClipboardList, Globe, Bookmark,
   Download, User, Handshake, BarChart3, Database, Compass, MapPin,
-  FileUp, Wallet, Activity, Receipt,   PlusCircle, Wand2, Monitor, Wrench
+  FileUp, Wallet, Activity, Receipt,   PlusCircle, Wand2, Monitor, Wrench, PenLine, GitBranch, UserCheck, BarChart2 
 } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -60,6 +60,18 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: FileText,      label: "Peer Reviews",        to: "/dashboard/researcher/publishing/reviews" },
       ],
     },
+
+
+    {
+  icon: PenLine, label: "Editor Workspace", to: "/dashboard/researcher/publishing/journals",
+  children: [
+    { icon: BookOpen,    label: "Journal Management",  to: "/dashboard/researcher/publishing/journals" },
+    { icon: GitBranch,   label: "Editorial Workflow",  to: "/dashboard/researcher/publishing/workflow" },
+    { icon: UserCheck,   label: "Reviewer Assignment", to: "/dashboard/researcher/publishing/reviewer-assignment" },
+    { icon: BarChart2,   label: "Editorial Analytics", to: "/dashboard/researcher/publishing/editorial-analytics" },
+  ],
+},
+
 
    
 

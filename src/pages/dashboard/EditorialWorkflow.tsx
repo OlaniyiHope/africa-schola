@@ -251,12 +251,12 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
             </p>
           </div>
           <div className="flex gap-2 flex-shrink-0">
-            <Link to="/dashboard/publishing/journals">
+            <Link to="/dashboard/researcher/publishing/journals">
               <Button variant="outline" size="sm" className="gap-1.5 text-xs">
                 <BookOpen className="h-3.5 w-3.5" /> Journal Management
               </Button>
             </Link>
-            <Link to="/dashboard/publishing/editorial-analytics">
+            <Link to="/dashboard/researcher/publishing/editorial-analytics">
               <Button variant="outline" size="sm" className="gap-1.5 text-xs">
                 <BarChart3 className="h-3.5 w-3.5" /> Analytics
               </Button>
