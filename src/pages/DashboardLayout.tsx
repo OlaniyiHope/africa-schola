@@ -730,9 +730,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: FolderOpen, label: "Research Projects", to: "/dashboard/researcher/research/projects" },
         { icon: BookOpen,   label: "Reading List",      to: "/dashboard/researcher/research/reading-list" },
         { icon: Lightbulb,  label: "Pro Tips",          to: "/dashboard/researcher/research/pro-tips" },
-      ],
-    },
-    {
+          {
       icon: Library, label: "Library", to: "/dashboard/researcher/library",
       children: [
         { icon: BookOpen,   label: "Overview",              to: "/dashboard/researcher/library" },
@@ -743,6 +741,9 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: Globe,      label: "Journal Subscriptions", to: "/dashboard/researcher/library?tab=subscriptions" },
       ],
     },
+      ],
+    },
+  
     {
       icon: Send, label: "Publishing", to: "/dashboard/researcher/publishing",
       children: [
