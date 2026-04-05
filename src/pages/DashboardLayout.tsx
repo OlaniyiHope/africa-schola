@@ -823,25 +823,14 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
 
   academic: [
     { icon: LayoutDashboard, label: "Dashboard", to: "/dashboard/academic" },
-    {
+   {
       icon: BookMarked, label: "My Research", to: "/dashboard/academic/research",
       children: [
         { icon: FileText,   label: "My Papers",         to: "/dashboard/academic/research/papers" },
         { icon: FolderOpen, label: "Research Projects", to: "/dashboard/academic/research/projects" },
         { icon: BookOpen,   label: "Reading List",      to: "/dashboard/academic/research/reading-list" },
         { icon: Lightbulb,  label: "Pro Tips",          to: "/dashboard/academic/research/pro-tips" },
-      ],
-    },
-    {
-      icon: Send, label: "Publishing", to: "/dashboard/academic/publishing",
-      children: [
-        { icon: Globe,         label: "Publishing Overview", to: "/dashboard/academic/publishing" },
-        { icon: Send,          label: "Submit Manuscript",   to: "/dashboard/academic/publishing/submit" },
-        { icon: ClipboardList, label: "My Submissions",      to: "/dashboard/academic/publishing/submissions" },
-        { icon: FileText,      label: "Peer Reviews",        to: "/dashboard/academic/publishing/reviews" },
-      ],
-    },
-    {
+          {
       icon: Library, label: "Library", to: "/dashboard/academic/library",
       children: [
         { icon: BookOpen,   label: "Overview",              to: "/dashboard/academic/library" },
@@ -852,6 +841,29 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: Globe,      label: "Journal Subscriptions", to: "/dashboard/academic/library?tab=subscriptions" },
       ],
     },
+      ],
+    },
+ 
+    {
+      icon: Send, label: "Publishing", to: "/dashboard/academic/publishing",
+      children: [
+        { icon: Globe,         label: "Publishing Overview", to: "/dashboard/academic/publishing" },
+        { icon: Send,          label: "Submit Manuscript",   to: "/dashboard/academic/publishing/submit" },
+        { icon: ClipboardList, label: "My Submissions",      to: "/dashboard/academic/publishing/submissions" },
+        { icon: FileText,      label: "Peer Reviews",        to: "/dashboard/academic/publishing/reviews" },
+        
+        {
+          icon: PenLine, label: "Editor Workspace", to: "/dashboard/academic/publishing/journals",
+          children: [
+            { icon: BookOpen,  label: "Journal Management",  to: "/dashboard/academic/publishing/journals" },
+            { icon: GitBranch, label: "Editorial Workflow",  to: "/dashboard/academic/publishing/workflow" },
+            { icon: UserCheck, label: "Reviewer Assignment", to: "/dashboard/academic/publishing/reviewer-assignment" },
+            { icon: BarChart2, label: "Editorial Analytics", to: "/dashboard/academic/publishing/editorial-analytics" },
+          ],
+        },
+      ],
+    },
+  
     {
       icon: Users, label: "Network", to: "/dashboard/academic/network",
       children: [
@@ -862,24 +874,22 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: Handshake,     label: "Engagements",   to: "/dashboard/academic/network/engagements" },
       ],
     },
-    {
-      icon: Building2, label: "Institutions", to: "/dashboard/academic/institutions",
-      children: [
-        { icon: Building2,     label: "Overview",                to: "/dashboard/academic/institutions" },
-        { icon: Handshake,     label: "Partnership Requests",    to: "/dashboard/academic/institutions/partnerships" },
-        { icon: GraduationCap, label: "Lecturer Requests",       to: "/dashboard/academic/institutions/lecturer-requests" },
-        { icon: Users,         label: "Research Collaboration",  to: "/dashboard/academic/institutions/collaboration" },
-        { icon: BookOpen,      label: "Curriculum & Validation", to: "/dashboard/academic/institutions/curriculum" },
-        { icon: Compass,       label: "Advisory Support",        to: "/dashboard/academic/institutions/advisory" },
-        { icon: ClipboardList, label: "My Requests",             to: "/dashboard/academic/institutions/my-requests" },
-      ],
-    },
+ 
+    
     {
       icon: Radar, label: "Research Intelligence", to: "/dashboard/academic/intelligence",
       children: [
         { icon: Database,  label: "Dataset Explorer", to: "/dashboard/academic/intelligence/explorer" },
         { icon: BarChart3, label: "Dataset Analyzer", to: "/dashboard/academic/intelligence/explorer" },
         { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/academic/intelligence/explorer" },
+            {
+      icon: Wrench, label: "Instrument Studio", to: "/dashboard/researcher/instrument-studio",
+      children: [
+        { icon: PlusCircle, label: "Create Instrument",  to: "/dashboard/researcher/instrument-studio/create" },
+        { icon: Wand2,      label: "AI Paper Generator", to: "/dashboard/researcher/instrument-studio/paper-generator" },
+        { icon: Monitor,    label: "AI Slide Builder",   to: "/dashboard/researcher/instrument-studio/slide-builder" },
+      ],
+    },
       ],
     },
     {
