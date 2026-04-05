@@ -262,12 +262,12 @@ const navItems = [
 
 const userMenuItems = [
   { icon: LayoutDashboard, label: "Dashboard",       to: "/dashboard" },
-  { icon: User,            label: "My Profile",      to: "/dashboard/profile" },
-  { icon: PenLine,         label: "My Submissions",  to: "/dashboard/submissions" },
-  { icon: BookOpen,        label: "My Publications", to: "/dashboard/publications" },
-  { icon: FileText,        label: "Post a Paper",    to: "/publishing/submit" },
-  { icon: Bell,            label: "Notifications",   to: "/dashboard/notifications" },
-  { icon: Settings,        label: "Settings",        to: "/dashboard/settings" },
+  { icon: User,            label: "My Profile",      to: "/dashboard/researcher/account/profile" },
+  { icon: PenLine,         label: "My Submissions",  to: "/dashboard/researcher/publishing/submissions" },
+  { icon: BookOpen,        label: "My Publications", to: "/dashboard/researcher/publishing" },
+  { icon: FileText,        label: "Post a Paper",    to: "/dashboard/researcher/research/papers" },
+  { icon: Bell,            label: "Notifications",   to: "/dashboard/researcher/notifications" },
+  { icon: Settings,        label: "Settings",        to: "/dashboard/researcher/settings" },
 ];
 
 // ─── UserDropdown ─────────────────────────────────────────────────────────────

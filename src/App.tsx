@@ -133,6 +133,7 @@ import PricingPage from "./pages/Pricing";
 import EditorialAnalyticsPage from "./pages/dashboard/EditorialAnalyticsPage";
 import SubscriptionPage from "./pages/dashboard/Subscription";
 import Settings from "./pages/dashboard/Settings";
+import NotificationsPage from "./pages/dashboard/NotificationsPage";
 
 const queryClient = new QueryClient();
 
@@ -213,6 +214,7 @@ const App = () => (
 <Route path="/dashboard/researcher/publishing/workflow"             element={<P><EditorialWorkflow /></P>} />
 <Route path="/dashboard/researcher/publishing/reviewer-assignment"  element={<P><ReviewerAssignmentPage /></P>} />
 <Route path="/dashboard/researcher/publishing/editorial-analytics"  element={<P><EditorialAnalyticsPage /></P>} />
+<Route path="/dashboard/researcher/notifications"  element={<P><NotificationsPage /></P>} />
 
               {/* Library */}
               <Route path="/dashboard/researcher/library"                element={<P><LibraryPage /></P>} />
