@@ -879,15 +879,16 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
     {
       icon: Radar, label: "Research Intelligence", to: "/dashboard/academic/intelligence",
       children: [
+        { icon: FileText,  label: "Generate Paper",   to: "/dashboard/academic/intelligence/generate-paper" },
         { icon: Database,  label: "Dataset Explorer", to: "/dashboard/academic/intelligence/explorer" },
-        { icon: BarChart3, label: "Dataset Analyzer", to: "/dashboard/academic/intelligence/explorer" },
-        { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/academic/intelligence/explorer" },
+        { icon: BarChart3, label: "Dataset Analyzer", to: "/dashboard/academic/intelligence/analyzer" },
+        { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/reseaacademicrcher/intelligence/hub" },
             {
-      icon: Wrench, label: "Instrument Studio", to: "/dashboard/researcher/instrument-studio",
+      icon: Wrench, label: "Instrument Studio", to: "/dashboard/academic/instrument-studio",
       children: [
-        { icon: PlusCircle, label: "Create Instrument",  to: "/dashboard/researcher/instrument-studio/create" },
-        { icon: Wand2,      label: "AI Paper Generator", to: "/dashboard/researcher/instrument-studio/paper-generator" },
-        { icon: Monitor,    label: "AI Slide Builder",   to: "/dashboard/researcher/instrument-studio/slide-builder" },
+        { icon: PlusCircle, label: "Create Instrument",  to: "/dashboard/academic/instrument-studio/create" },
+        { icon: Wand2,      label: "AI Paper Generator", to: "/dashboard/academic/instrument-studio/paper-generator" },
+        { icon: Monitor,    label: "AI Slide Builder",   to: "/dashboard/academic/instrument-studio/slide-builder" },
       ],
     },
       ],
@@ -915,8 +916,8 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
     {
       icon: Settings, label: "Account", to: "/dashboard/academic/account",
       children: [
-        { icon: User,     label: "Profile",       to: "/dashboard/academic/account/profile" },
-        { icon: Settings, label: "Settings",      to: "/dashboard/academic/account/settings" },
+       { icon: User,     label: "Profile",       to: "/dashboard/academic/account/profile" },
+        { icon: Settings, label: "Settings",      to: "/dashboard/academic/settings" },
         { icon: Bell,     label: "Notifications", to: "/dashboard/academic/account/notifications" },
       ],
     },

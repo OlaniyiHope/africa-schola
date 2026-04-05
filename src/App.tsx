@@ -248,7 +248,7 @@ const App = () => (
 
               {/* Account */}
               <Route path="/dashboard/researcher/account/profile"        element={<P><ProfilePage /></P>} />
-              <Route path="/dashboard/researcher/account/settings"       element={<P><SettingsPage /></P>} />
+              <Route path="/dashboard/researcher/settings"       element={<P><SettingsPage /></P>} />
 
               {/* ════════════════════════════════════════════════
                   ACADEMIC ROUTES
@@ -266,6 +266,14 @@ const App = () => (
               <Route path="/dashboard/academic/publishing/submit"      element={<P><SubmitManuscript /></P>} />
               <Route path="/dashboard/academic/publishing/submissions" element={<P><TrackSubmissions /></P>} />
               <Route path="/dashboard/academic/publishing/reviews"     element={<P><PeerReviewsPage /></P>} />
+
+
+
+<Route path="/dashboard/academic/publishing/journals"             element={<P><JournalManagement/></P>} />
+<Route path="/dashboard/academic/publishing/workflow"             element={<P><EditorialWorkflow /></P>} />
+<Route path="/dashboard/academic/publishing/reviewer-assignment"  element={<P><ReviewerAssignmentPage /></P>} />
+<Route path="/dashboard/academic/publishing/editorial-analytics"  element={<P><EditorialAnalyticsPage /></P>} />
+<Route path="/dashboard/academic/notifications"  element={<P><NotificationsPage /></P>} />
 
               {/* Library — single page, tabs driven by ?tab= */}
               <Route path="/dashboard/academic/library" element={<P><LibraryPage /></P>} />
@@ -312,7 +320,7 @@ const App = () => (
 
               {/* Account */}
               <Route path="/dashboard/academic/account/profile"         element={<P><ProfilePage /></P>} />
-              <Route path="/dashboard/academic/account/settings"        element={<P><SettingsPage /></P>} />
+              <Route path="/dashboard/academic/settings"        element={<P><SettingsPage /></P>} />
               <Route path="/dashboard/academic/message"                 element={<P><MessagesPage /></P>} />
 
               {/* ════════════════════════════════════════════════
