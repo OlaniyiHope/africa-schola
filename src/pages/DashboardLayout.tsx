@@ -918,7 +918,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
       children: [
        { icon: User,     label: "Profile",       to: "/dashboard/academic/account/profile" },
         { icon: Settings, label: "Settings",      to: "/dashboard/academic/settings" },
-        { icon: Bell,     label: "Notifications", to: "/dashboard/academic/account/notifications" },
+        { icon: Bell,     label: "Notifications", to: "/dashboard/academic/notifications" },
       ],
     },
   ],
@@ -999,7 +999,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
       children: [
         { icon: User,     label: "Profile",       to: "/dashboard/professional/account/profile" },
         { icon: Settings, label: "Settings",      to: "/dashboard/professional/account/settings" },
-        { icon: Bell,     label: "Notifications", to: "/dashboard/professional/account/notifications" },
+        { icon: Bell,     label: "Notifications", to: "/dashboard/professional/notifications" },
       ],
     },
   ],
@@ -1269,7 +1269,7 @@ function TopBar({ onMenuClick, credits, role }: { onMenuClick: () => void; credi
         </button>
 
         {/* Bell */}
-        <Link to={`/dashboard/${role}/account/notifications`} style={{ position: "relative", display: "flex", color: "#6b7280", padding: 2 }}>
+        <Link to={`/dashboard/${role}/notifications`} style={{ position: "relative", display: "flex", color: "#6b7280", padding: 2 }}>
           <Bell size={18} />
           <span style={{ position: "absolute", top: -3, right: -4, minWidth: 16, height: 16, borderRadius: 8, background: "#ea580c", border: "2px solid #fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.55rem", fontWeight: 800, color: "#fff", padding: "0 3px" }}>3</span>
         </Link>
