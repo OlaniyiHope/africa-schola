@@ -132,6 +132,7 @@ import GeneratePapers from "./pages/dashboard/GeneratePapers";
 import PricingPage from "./pages/Pricing";
 import EditorialAnalyticsPage from "./pages/dashboard/EditorialAnalyticsPage";
 import SubscriptionPage from "./pages/dashboard/Subscription";
+import Settings from "./pages/dashboard/Settings";
 
 const queryClient = new QueryClient();
 
@@ -199,6 +200,7 @@ const App = () => (
               <Route path="/dashboard/researcher/research/projects"     element={<P><ResearchProjectsPage /></P>} />
               <Route path="/dashboard/researcher/research/reading-list" element={<P><ReadingListsPage /></P>} />
               <Route path="/dashboard/researcher/research/pro-tips"     element={<P><ProTip /></P>} />
+              <Route path="/dashboard/researcher/settings"     element={<P><Settings /></P>} />
 
               {/* Publishing */}
               <Route path="/dashboard/researcher/publishing"             element={<P><PublishingOverview /></P>} />

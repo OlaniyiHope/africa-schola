@@ -181,9 +181,9 @@ import { useModuleUnlocksContext } from "@/context/ModuleUnlocksContext";
 import ResearchActivitySection from "../dashboard/ResearchActivitySection";
 
 const quickActions = [
-  { icon: FileText, title: "Generate Paper", desc: "Start writing", link: "/dashboard/generate-paper" },
-  { icon: Upload, title: "Upload Dataset", desc: "Add data", link: "/dashboard/data/explorer" },
-  { icon: PlusCircle, title: "Create Instrument", desc: "Build tools", link: "/dashboard/instrument-studio" },
+  { icon: FileText, title: "Generate Paper", desc: "Start writing", link: "/dashboard/researcher/intelligence/generate-pape" },
+  { icon: Upload, title: "Upload Dataset", desc: "Add data", link: "/dashboard/researcher/intelligence/explorer" },
+  { icon: PlusCircle, title: "Create Instrument", desc: "Build tools", link: "/dashboard/researcher/instrument-studio/create" },
 ];
 
 const researchTools = [
@@ -239,8 +239,19 @@ export default function ResearcherDashboard() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="text-xs gap-1"><Eye className="h-3 w-3" /> View</Button>
-          <Button variant="outline" size="sm" className="text-xs">Edit</Button>
+          
+<div className="flex items-center gap-2">
+  <Link to="/dashboard/researcher/account/profile">
+    <Button variant="outline" size="sm" className="text-xs gap-1">
+      <Eye className="h-3 w-3" /> View
+    </Button>
+  </Link>
+   <Link to="/dashboard/researcher/settings">
+     <Button variant="outline" size="sm" className="text-xs">Edit</Button>
+   </Link>
+
+</div>
+        
         </div>
       </div>
 
@@ -287,7 +298,7 @@ export default function ResearcherDashboard() {
           ))}
         </div>
         <div className="flex justify-center mt-4">
-          <Link to="/dashboard/billing">
+          <Link to="/dashboard/researcher/publishing/subscription">
             <Button variant="outline" size="sm" className="text-xs border-orange-500 text-orange-500">
               View Subscription Plans
             </Button>
@@ -302,13 +313,13 @@ export default function ResearcherDashboard() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-foreground">My Papers</h2>
-          <Link to="/dashboard/my-papers">
+          <Link to="/dashboard/researcher/research/papers">
             <Button variant="ghost" size="sm" className="text-xs gap-1">View All <ArrowRight className="h-3 w-3" /></Button>
           </Link>
         </div>
         <div className="space-y-3">
           {recentPapers.map((paper) => (
-            <Link key={paper.id} to="/dashboard/my-papers" className="bg-card rounded-xl border border-border p-4 flex items-center justify-between hover:shadow-sm transition-shadow block">
+            <Link key={paper.id} to="/dashboard/researcher/research/papers" className="bg-card rounded-xl border border-border p-4 flex items-center justify-between hover:shadow-sm transition-shadow block">
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm font-semibold text-foreground truncate">{paper.title}</h3>
                 <div className="flex items-center gap-3 mt-1">
@@ -327,7 +338,7 @@ export default function ResearcherDashboard() {
         <h2 className="text-lg font-bold text-foreground mb-4">Peer Review Requests</h2>
         <div className="bg-card rounded-xl border border-border divide-y divide-border">
           {peerReviews.map((r, i) => (
-            <Link key={i} to="/dashboard/publishing/reviews" className="flex items-center justify-between px-5 py-3.5 hover:bg-secondary/50 transition-colors">
+            <Link key={i} to="/dashboard/researcher/publishing/reviews" className="flex items-center justify-between px-5 py-3.5 hover:bg-secondary/50 transition-colors">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-foreground truncate">{r.title}</p>
                 <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">

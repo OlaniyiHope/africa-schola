@@ -11,10 +11,10 @@ interface ActivityCard {
 
 // TODO: Replace with real data from database
 const activityCards: ActivityCard[] = [
-  { icon: FileText, label: "Draft Papers", count: 2, color: "bg-muted text-muted-foreground", link: "/dashboard/my-papers?status=draft" },
-  { icon: Send, label: "Submitted", count: 1, color: "bg-primary/10 text-primary", link: "/dashboard/publishing/track?status=submitted" },
-  { icon: Clock, label: "Under Review", count: 1, color: "bg-amber-500/10 text-amber-600", link: "/dashboard/publishing/track?status=review" },
-  { icon: CheckCircle, label: "Published", count: 0, color: "bg-afrika-green/10 text-afrika-green", link: "/dashboard/my-papers?status=published" },
+  { icon: FileText, label: "Draft Papers", count: 2, color: "bg-muted text-muted-foreground", link: "/dashboard/researcher/research/papers?status=draft" },
+  { icon: Send, label: "Submitted", count: 1, color: "bg-primary/10 text-primary", link: "/dashboard/researcher/publishing/track?status=submitted" },
+  { icon: Clock, label: "Under Review", count: 1, color: "bg-amber-500/10 text-amber-600", link: "/dashboard/researcher/publishing/track?status=review" },
+  { icon: CheckCircle, label: "Published", count: 0, color: "bg-afrika-green/10 text-afrika-green", link: "/dashboard/researcher/research/my-papers?status=published" },
 ];
 
 interface Props {
