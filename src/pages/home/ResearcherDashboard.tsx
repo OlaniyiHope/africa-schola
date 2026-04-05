@@ -255,10 +255,10 @@ export default function ResearcherDashboard() {
             Access Afrika Scholar's Publeesh AI tools for structured research drafting, literature enhancement, global datasets, and analytics.
           </p>
           <div className="flex gap-3 mt-1">
-            <Link to="/dashboard/billing">
+            <Link to="/dashboard/researcher/publishing/subscription">
               <Button variant="outline" size="sm" className="text-xs border-orange-500 text-orange-500">View Plans</Button>
             </Link>
-            <Link to="/dashboard/billing">
+            <Link to="/dashboard/researcher/publishing/subscription">
               <Button size="sm" className="text-xs bg-orange-500 hover:bg-orange-600 text-white">Start Free Trial</Button>
             </Link>
           </div>

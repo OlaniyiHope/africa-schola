@@ -131,6 +131,7 @@ import Dashboards from "./pages/Dashboards";
 import GeneratePapers from "./pages/dashboard/GeneratePapers";
 import PricingPage from "./pages/Pricing";
 import EditorialAnalyticsPage from "./pages/dashboard/EditorialAnalyticsPage";
+import SubscriptionPage from "./pages/dashboard/Subscription";
 
 const queryClient = new QueryClient();
 
@@ -219,6 +220,7 @@ const App = () => (
 <Route path="/dashboard/researcher/intelligence/explorer"       element={<P><DatasetExplorer /></P>} />
 <Route path="/dashboard/researcher/intelligence/analyzer"       element={<P><DatasetAnalyzer /></P>} />
 <Route path="/dashboard/researcher/intelligence/hub"            element={<P><IntelligenceHub /></P>} />
+<Route path="/dashboard/researcher/publishing/subscription"            element={<P><SubscriptionPage /></P>} />
               {/* Network */}
               <Route path="/dashboard/researcher/network"                element={<P><NetworkOverviewPage /></P>} />
               <Route path="/dashboard/researcher/network/opportunities"  element={<P><OpportunitiesPage /></P>} />
