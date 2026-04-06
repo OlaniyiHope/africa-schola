@@ -260,8 +260,7 @@ const App = () => (
               {/* ════════════════════════════════════════════════
                   ACADEMIC ROUTES
               ════════════════════════════════════════════════ */}
-              <Route path="/dashboard/academic" element={<P><AcademicDashboard /></P>} />
-
+              <Route path="/dashboard/academic" element={<P><Dashboards /></P>} />
               {/* My Research */}
               <Route path="/dashboard/academic/research/papers"       element={<P><MyPapers /></P>} />
               <Route path="/dashboard/academic/research/projects"     element={<P><ResearchProjectsPage /></P>} />
