@@ -236,7 +236,7 @@ export default function ResearcherDashboard() {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-sm font-semibold text-foreground">lekller</span>
-              <Badge className="text-[10px] bg-orange-100 text-orange-700">Researcher</Badge>
+              <Badge className="text-[10px] bg-orange-100 text-orange-700">Academic</Badge>
             </div>
             <p className="text-xs text-muted-foreground mt-0.5">Not specified · Not specified</p>
           </div>
