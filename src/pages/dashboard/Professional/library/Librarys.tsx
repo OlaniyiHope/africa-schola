@@ -342,7 +342,7 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
               Start building your library by saving articles, purchasing papers, or creating reading lists.
             </p>
             <div className="flex gap-3 justify-center flex-wrap">
-              <Link to="/dashboard/intelligence">
+              <Link to="/dashboard/professional/intelligence/hub">
                 <Button  size="sm" className="gap-1.5">
                   <Search className="h-3.5 w-3.5" /> Explore Research Intelligence
                 </Button>
