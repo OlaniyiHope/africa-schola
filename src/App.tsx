@@ -229,6 +229,8 @@ const App = () => (
 <Route path="/dashboard/researcher/intelligence/explorer"       element={<P><DatasetExplorer /></P>} />
 <Route path="/dashboard/researcher/intelligence/analyzer"       element={<P><DatasetAnalyzer /></P>} />
 <Route path="/dashboard/researcher/intelligence/hub"            element={<P><IntelligenceHub /></P>} />
+
+
 <Route path="/dashboard/researcher/publishing/subscription"            element={<P><SubscriptionPage /></P>} />
               {/* Network */}
               <Route path="/dashboard/researcher/network"                element={<P><NetworkOverviewPage /></P>} />
@@ -283,6 +285,7 @@ const App = () => (
               {/* Library — single page, tabs driven by ?tab= */}
               <Route path="/dashboard/academic/library" element={<P><LibraryPage /></P>} />
 
+<Route path="/dashboard/academic/publishing/subscription"            element={<P><SubscriptionPage /></P>} />
               {/* Intelligence */}
               <Route path="/dashboard/academic/intelligence/explorer"  element={<P><DatasetExplorer /></P>} />
               <Route path="/dashboard/academic/intelligence/analyzer"  element={<P><DatasetAnalyzer /></P>} />
@@ -350,6 +353,7 @@ const App = () => (
               {/* Library */}
               <Route path="/dashboard/professional/library" element={<P><LibraryPage /></P>} />
 
+<Route path="/dashboard/professional/publishing/subscription"            element={<P><SubscriptionPage /></P>} />
               {/* Community */}
               <Route path="/dashboard/professional/community"                element={<P><CommunityPage /></P>} />
               <Route path="/dashboard/professional/community/discussions"    element={<P><CommunityDiscussionsPage /></P>} />
