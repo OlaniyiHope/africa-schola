@@ -139,6 +139,7 @@ import Opportunities from "./pages/dashboard/Professional/network/Opportunities"
 import Application from "./pages/dashboard/Professional/network/Application";
 import Directory from "./pages/dashboard/Professional/network/Directory";
 import Engagement from "./pages/dashboard/Professional/network/Engagement";
+import Librarys from "./pages/dashboard/Professional/library/Librarys";
 
 const queryClient = new QueryClient();
 
@@ -351,7 +352,7 @@ const App = () => (
               <Route path="/dashboard/professional/institutions/my-requests"        element={<P><MyInstitutionalRequestsPage /></P>} />
 
               {/* Library */}
-              <Route path="/dashboard/professional/library" element={<P><LibraryPage /></P>} />
+              <Route path="/dashboard/professional/library" element={<P><Librarys /></P>} />
 
 <Route path="/dashboard/professional/publishing/subscription"            element={<P><SubscriptionPage /></P>} />
               {/* Community */}

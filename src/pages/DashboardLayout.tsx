@@ -194,7 +194,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
       ],
     },
     {
-      icon: Radar, label: "Research Intelligence", to: "/dashboard/academic/intelligence",
+      icon: Radar, label: "Research Intelligence (Publeesh AI)", to: "/dashboard/academic/intelligence",
       children: [
         { icon: FileText,  label: "Generate Paper",   to: "/dashboard/academic/intelligence/generate-paper" },
         { icon: Database,  label: "Dataset Explorer", to: "/dashboard/academic/intelligence/explorer" },
@@ -265,11 +265,13 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
     {
       icon: Library, label: "Library", to: "/dashboard/professional/library",
       children: [
-        { icon: BookOpen,   label: "Overview",         to: "/dashboard/professional/library" },
-        { icon: FileText,   label: "Purchased Papers", to: "/dashboard/professional/library/purchased" },
-        { icon: Bookmark,   label: "Saved Articles",   to: "/dashboard/professional/library/saved" },
-        { icon: Download,   label: "Download History", to: "/dashboard/professional/library/downloads" },
-        { icon: FolderOpen, label: "Reading Lists",    to: "/dashboard/professional/library/lists" },
+
+            { icon: BookOpen,   label: "Overview",              to: "/dashboard/professional/library" },
+        { icon: FileText,   label: "Purchased Papers",      to: "/dashboard/professional/library?tab=purchased" },
+        { icon: Bookmark,   label: "Saved Articles",        to: "/dashboard/professional/library?tab=saved" },
+        { icon: Download,   label: "Download History",      to: "/dashboard/professional/library?tab=downloads" },
+        { icon: FolderOpen, label: "Reading Lists",         to: "/dashboard/professional/library?tab=lists" },
+        { icon: Globe,      label: "Journal Subscriptions", to: "/dashboard/professional/library?tab=subscriptions" },
       ],
     },
     {
@@ -294,7 +296,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
       ],
     },
     {
-      icon: Radar, label: "Research Intelligence", to: "/dashboard/professional/intelligence",
+      icon: Radar, label: "Research Intelligence (Publeesh AI)", to: "/dashboard/professional/intelligence",
       children: [
         { icon: FileText,  label: "Generate Paper",   to: "/dashboard/professional/intelligence/generate-paper" },
         { icon: Database,  label: "Dataset Explorer", to: "/dashboard/professional/intelligence/explorer" },
