@@ -199,7 +199,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: FileText,  label: "Generate Paper",   to: "/dashboard/academic/intelligence/generate-paper" },
         { icon: Database,  label: "Dataset Explorer", to: "/dashboard/academic/intelligence/explorer" },
         { icon: BarChart3, label: "Dataset Analyzer", to: "/dashboard/academic/intelligence/analyzer" },
-        { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/reseaacademicrcher/intelligence/hub" },
+        { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/academic/intelligence/hub" },
             {
       icon: Wrench, label: "Instrument Studio", to: "/dashboard/academic/instrument-studio",
       children: [
@@ -245,7 +245,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
     {
       icon: Users, label: "Network", to: "/dashboard/professional/network",
       children: [
-        { icon: Globe,         label: "Overview",      to: "/dashboard/professional/network" },
+        { icon: Globe,         label: "Overview",      to: "/dashboard/professional/network-overview" },
         { icon: Briefcase,     label: "Opportunities", to: "/dashboard/professional/network/opportunities" },
         { icon: ClipboardList, label: "Applications",  to: "/dashboard/professional/network/applications" },
         { icon: Users,         label: "Directory",     to: "/dashboard/professional/network/directory" },
@@ -296,9 +296,10 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
     {
       icon: Radar, label: "Research Intelligence", to: "/dashboard/professional/intelligence",
       children: [
+        { icon: FileText,  label: "Generate Paper",   to: "/dashboard/professional/intelligence/generate-paper" },
         { icon: Database,  label: "Dataset Explorer", to: "/dashboard/professional/intelligence/explorer" },
-        { icon: BarChart3, label: "Dataset Analyzer", to: "/dashboard/professional/intelligence/explorer" },
-        { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/professional/intelligence/explorer" },
+        { icon: BarChart3, label: "Dataset Analyzer", to: "/dashboard/professional/intelligence/analyzer" },
+        { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/professional/intelligence/hub" },
             {
       icon: Wrench, label: "Instrument Studio", to: "/dashboard/professional/instrument-studio",
       children: [

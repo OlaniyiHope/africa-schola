@@ -134,6 +134,11 @@ import EditorialAnalyticsPage from "./pages/dashboard/EditorialAnalyticsPage";
 import SubscriptionPage from "./pages/dashboard/Subscription";
 import Settings from "./pages/dashboard/Settings";
 import NotificationsPage from "./pages/dashboard/NotificationsPage";
+import NetworkOverview from "./pages/dashboard/Professional/NetworkOverview";
+import Opportunities from "./pages/dashboard/Professional/network/Opportunities";
+import Application from "./pages/dashboard/Professional/network/Application";
+import Directory from "./pages/dashboard/Professional/network/Directory";
+import Engagement from "./pages/dashboard/Professional/network/Engagement";
 
 const queryClient = new QueryClient();
 
@@ -329,11 +334,11 @@ const App = () => (
               <Route path="/dashboard/professional" element={<P><ProfessionalDashboard /></P>} />
 
               {/* Network */}
-              <Route path="/dashboard/professional/network"                element={<P><NetworkOverviewPage /></P>} />
-              <Route path="/dashboard/professional/network/opportunities"  element={<P><OpportunitiesPage /></P>} />
-              <Route path="/dashboard/professional/network/applications"   element={<P><NetworkApplicationsPage /></P>} />
-              <Route path="/dashboard/professional/network/directory"      element={<P><DirectoryPage /></P>} />
-              <Route path="/dashboard/professional/network/engagements"    element={<P><NetworkEngagementsPage /></P>} />
+              <Route path="/dashboard/professional/network-overview"                element={<P><NetworkOverview /></P>} />
+              <Route path="/dashboard/professional/network/opportunities"  element={<P><Opportunities /></P>} />
+              <Route path="/dashboard/professional/network/applications"   element={<P><Application /></P>} />
+              <Route path="/dashboard/professional/network/directory"      element={<P><Directory /></P>} />
+              <Route path="/dashboard/professional/network/engagements"    element={<P><Engagement /></P>} />
 
               {/* Institutions */}
               <Route path="/dashboard/professional/institutions"                    element={<P><InstitutionalPartnershipsOverview /></P>} />
