@@ -289,10 +289,10 @@ const App = () => (
               <Route path="/dashboard/academic/intelligence/hub"       element={<P><IntelligenceHub /></P>} />
 
 {/* Instrument Studio */}
-<Route path="/dashboard/researcher/instrument-studio"                         element={<P><InstrumentStudio /></P>} />
-<Route path="/dashboard/researcher/instrument-studio/create"                  element={<P><InstrumentStudio /></P>} />
-<Route path="/dashboard/researcher/instrument-studio/paper-generator"         element={<P><SavedPapers /></P>} />
-<Route path="/dashboard/researcher/instrument-studio/slide-builder"           element={<P><AISlideBuilder /></P>} />
+<Route path="/dashboard/academic/instrument-studio"                         element={<P><InstrumentStudio /></P>} />
+<Route path="/dashboard/academic/instrument-studio/create"                  element={<P><InstrumentStudio /></P>} />
+<Route path="/dashboard/academic/instrument-studio/paper-generator"         element={<P><SavedPapers /></P>} />
+<Route path="/dashboard/academic/instrument-studio/slide-builder"           element={<P><AISlideBuilder /></P>} />
               {/* Network */}
               <Route path="/dashboard/academic/network"                element={<P><NetworkOverviewPage /></P>} />
               <Route path="/dashboard/academic/network/opportunities"  element={<P><OpportunitiesPage /></P>} />
@@ -369,7 +369,10 @@ const App = () => (
               <Route path="/dashboard/professional/intelligence/explorer"    element={<P><DatasetExplorer /></P>} />
               <Route path="/dashboard/professional/intelligence/analyzer"    element={<P><DatasetAnalyzer /></P>} />
               <Route path="/dashboard/professional/intelligence/hub"         element={<P><IntelligenceHub /></P>} />
-
+<Route path="/dashboard/professional/instrument-studio"                         element={<P><InstrumentStudio /></P>} />
+<Route path="/dashboard/professional/instrument-studio/create"                  element={<P><InstrumentStudio /></P>} />
+<Route path="/dashboard/professional/instrument-studio/paper-generator"         element={<P><SavedPapers /></P>} />
+<Route path="/dashboard/professional/instrument-studio/slide-builder"           element={<P><AISlideBuilder /></P>} />
               {/* Billing */}
               <Route path="/dashboard/professional/billing"                  element={<P><BillingPage /></P>} />
               <Route path="/dashboard/professional/billing/credits"          element={<P><BillingCreditsPage /></P>} />
