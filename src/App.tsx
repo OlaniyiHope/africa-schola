@@ -380,6 +380,7 @@ const App = () => (
               {/* Account */}
               <Route path="/dashboard/professional/account/profile"          element={<P><ProfilePage /></P>} />
               <Route path="/dashboard/professional/account/settings"         element={<P><SettingsPage /></P>} />
+              <Route path="/dashboard/professional/notifications"  element={<P><NotificationsPage /></P>} />
 
               {/* ── Legacy / shared dashboard routes ── */}
               <Route path="/dashboard/submissions"  element={<P><Submissions /></P>} />
