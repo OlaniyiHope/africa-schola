@@ -299,6 +299,14 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
         { icon: Database,  label: "Dataset Explorer", to: "/dashboard/professional/intelligence/explorer" },
         { icon: BarChart3, label: "Dataset Analyzer", to: "/dashboard/professional/intelligence/explorer" },
         { icon: Compass,   label: "Intelligence Hub", to: "/dashboard/professional/intelligence/explorer" },
+            {
+      icon: Wrench, label: "Instrument Studio", to: "/dashboard/professional/instrument-studio",
+      children: [
+        { icon: PlusCircle, label: "Create Instrument",  to: "/dashboard/professional/instrument-studio/create" },
+        { icon: Wand2,      label: "AI Paper Generator", to: "/dashboard/professional/instrument-studio/paper-generator" },
+        { icon: Monitor,    label: "AI Slide Builder",   to: "/dashboard/professional/instrument-studio/slide-builder" },
+      ],
+    },
       ],
     },
     {
@@ -315,7 +323,7 @@ const NAV_CONFIG: Record<Role, NavItem[]> = {
       icon: Settings, label: "Account", to: "/dashboard/professional/account",
       children: [
         { icon: User,     label: "Profile",       to: "/dashboard/professional/account/profile" },
-        { icon: Settings, label: "Settings",      to: "/dashboard/professional/account/settings" },
+        { icon: Settings, label: "Settings",      to: "/dashboard/professional/settings" },
         { icon: Bell,     label: "Notifications", to: "/dashboard/professional/notifications" },
       ],
     },
