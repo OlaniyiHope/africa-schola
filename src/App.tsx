@@ -287,6 +287,7 @@ const App = () => (
 
 <Route path="/dashboard/academic/publishing/subscription"            element={<P><SubscriptionPage /></P>} />
               {/* Intelligence */}
+              <Route path="/dashboard/academic/intelligence/generate-paper" element={<P><GeneratePapers /></P>} />
               <Route path="/dashboard/academic/intelligence/explorer"  element={<P><DatasetExplorer /></P>} />
               <Route path="/dashboard/academic/intelligence/analyzer"  element={<P><DatasetAnalyzer /></P>} />
               <Route path="/dashboard/academic/intelligence/hub"       element={<P><IntelligenceHub /></P>} />
@@ -370,6 +371,7 @@ const App = () => (
               <Route path="/dashboard/professional/advisory/documents"       element={<P><DocumentUploadsPage /></P>} />
 
               {/* Intelligence */}
+              <Route path="/dashboard/professional/intelligence/generate-paper" element={<P><GeneratePapers /></P>} />
               <Route path="/dashboard/professional/intelligence/explorer"    element={<P><DatasetExplorer /></P>} />
               <Route path="/dashboard/professional/intelligence/analyzer"    element={<P><DatasetAnalyzer /></P>} />
               <Route path="/dashboard/professional/intelligence/hub"         element={<P><IntelligenceHub /></P>} />
