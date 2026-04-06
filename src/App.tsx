@@ -334,8 +334,8 @@ const App = () => (
               {/* ════════════════════════════════════════════════
                   PROFESSIONAL ROUTES
               ════════════════════════════════════════════════ */}
-              <Route path="/dashboard/professional" element={<P><ProfessionalDashboard /></P>} />
-
+              {/* <Route path="/dashboard/professional" element={<P><ProfessionalDashboard /></P>} /> */}
+   <Route path="/dashboard/professional" element={<P><Dashboards /></P>} />
               {/* Network */}
               <Route path="/dashboard/professional/network-overview"                element={<P><NetworkOverview /></P>} />
               <Route path="/dashboard/professional/network/opportunities"  element={<P><Opportunities /></P>} />
