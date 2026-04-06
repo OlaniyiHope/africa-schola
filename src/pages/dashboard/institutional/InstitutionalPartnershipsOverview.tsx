@@ -13,12 +13,12 @@ import {
 import { useAuth } from "@/context/AuthContext";
 
 const serviceCards = [
-  { title: "Request Lecturer Support", desc: "Find academic lecturers and instructors for programs.", icon: GraduationCap, link: "/dashboard/institutional/lecturer-requests", color: "text-accent", bg: "bg-accent/10" },
-  { title: "Request Research Collaboration", desc: "Partner with academics for joint research projects.", icon: Handshake, link: "/dashboard/institutional/research-collaboration", color: "text-primary", bg: "bg-primary/10" },
-  { title: "Curriculum Development", desc: "Request curriculum design or academic program support.", icon: BookOpen, link: "/dashboard/institutional/curriculum", color: "text-afrika-green", bg: "bg-afrika-green/10" },
-  { title: "Academic Validation", desc: "Request peer review, validation, and academic verification.", icon: Shield, link: "/dashboard/institutional/curriculum", color: "text-afrika-orange", bg: "bg-afrika-orange-light" },
-  { title: "Policy Advisory", desc: "Engage academic experts for policy advisory.", icon: Compass, link: "/dashboard/institutional/advisory-support", color: "text-accent", bg: "bg-accent/10" },
-  { title: "Institution Partnership", desc: "Partner with the Afrika Scholar network.", icon: Building2, link: "/dashboard/institutional/partnership-requests", color: "text-primary", bg: "bg-primary/10" },
+  { title: "Request Lecturer Support", desc: "Find academic lecturers and instructors for programs.", icon: GraduationCap, link: "/dashboard/academic/institutions/lecturer-requests", color: "text-accent", bg: "bg-accent/10" },
+  { title: "Request Research Collaboration", desc: "Partner with academics for joint research projects.", icon: Handshake, link: "/dashboard/academic/institutions/collaboration", color: "text-primary", bg: "bg-primary/10" },
+  { title: "Curriculum Development", desc: "Request curriculum design or academic program support.", icon: BookOpen, link: "/dashboard/academic/institutions/curriculum", color: "text-afrika-green", bg: "bg-afrika-green/10" },
+  { title: "Academic Validation", desc: "Request peer review, validation, and academic verification.", icon: Shield, link: "/dashboard/academic/institutions/curriculum", color: "text-afrika-orange", bg: "bg-afrika-orange-light" },
+  { title: "Policy Advisory", desc: "Engage academic experts for policy advisory.", icon: Compass, link: "/dashboard/academic/institutions/advisory", color: "text-accent", bg: "bg-accent/10" },
+  { title: "Institution Partnership", desc: "Partner with the Afrika Scholar network.", icon: Building2, link: "/dashboard/academic/institutions/my-requests", color: "text-primary", bg: "bg-primary/10" },
 ];
 
 const overviewMetrics = [
