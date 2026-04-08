@@ -412,7 +412,7 @@ export function Header() {
 
   const handlePubleesh = () => {
     if (isAuthenticated) navigate("/publeesh-ai");
-    else navigate("/login", { state: { from: "/publeesh-ai" } });
+    else navigate("/publeesh-ai", { state: { from: "/publeesh-ai" } });
   };
 
   return (

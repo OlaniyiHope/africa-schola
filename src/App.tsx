@@ -140,6 +140,7 @@ import Application from "./pages/dashboard/Professional/network/Application";
 import Directory from "./pages/dashboard/Professional/network/Directory";
 import Engagement from "./pages/dashboard/Professional/network/Engagement";
 import Librarys from "./pages/dashboard/Professional/library/Librarys";
+import LabRegister from "./pages/LabRegister";
 
 const queryClient = new QueryClient();
 
@@ -187,6 +188,7 @@ const App = () => (
 
               {/* ── Public-only routes ── */}
               <Route path="/" element={<HomePage />} />
+              <Route path="/lab" element={<LabRegister />} />
               <Route path="/publeesh/pricing" element={<PricingPage />} />
               <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
               <Route path="/register" element={<Register />} />
