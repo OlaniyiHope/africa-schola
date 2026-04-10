@@ -141,6 +141,7 @@ import Directory from "./pages/dashboard/Professional/network/Directory";
 import Engagement from "./pages/dashboard/Professional/network/Engagement";
 import Librarys from "./pages/dashboard/Professional/library/Librarys";
 import LabRegister from "./pages/LabRegister";
+import SubscriptionPages from "./pages/dashboard/Professional/SubscriptionPage";
 
 const queryClient = new QueryClient();
 
@@ -356,7 +357,7 @@ const App = () => (
               {/* Library */}
               <Route path="/dashboard/professional/library" element={<P><Librarys /></P>} />
 
-<Route path="/dashboard/professional/publishing/subscription"            element={<P><SubscriptionPage /></P>} />
+<Route path="/dashboard/professional/publishing/subscription"            element={<P><SubscriptionPages /></P>} />
               {/* Community */}
               <Route path="/dashboard/professional/community"                element={<P><CommunityPage /></P>} />
               <Route path="/dashboard/professional/community/discussions"    element={<P><CommunityDiscussionsPage /></P>} />

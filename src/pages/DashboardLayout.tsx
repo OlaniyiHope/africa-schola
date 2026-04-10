@@ -496,10 +496,7 @@ function Sidebar({ role }: { role: Role }) {
     <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "#391b96", color: "#fff" }}>
       <div style={{ padding: "1.25rem 1.5rem 1rem", borderBottom: "1px solid rgba(255,255,255,0.07)", flexShrink: 0 }}>
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: "1.3rem", fontWeight: 800, letterSpacing: "-0.02em" }}>
-            <span style={{ color: "#ea580c" }}>Afrika</span>
-            <span style={{ color: "#fff" }}>Scholar</span>
-          </span>
+          <img src="/src/logo.png" alt="AfrikaScholar" style={{ height: 36, objectFit: "contain" }} />
         </Link>
       </div>
       <nav style={{ flex: 1, overflowY: "auto", padding: "0.5rem 0.75rem" }}>
