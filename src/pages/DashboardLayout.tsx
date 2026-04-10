@@ -493,7 +493,7 @@ function Sidebar({ role }: { role: Role }) {
   const username = user?.username || "User";
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "#0f1623", color: "#fff" }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", background: "#391b96", color: "#fff" }}>
       <div style={{ padding: "1.25rem 1.5rem 1rem", borderBottom: "1px solid rgba(255,255,255,0.07)", flexShrink: 0 }}>
         <Link to="/" style={{ textDecoration: "none" }}>
           <span style={{ fontSize: "1.3rem", fontWeight: 800, letterSpacing: "-0.02em" }}>
@@ -531,7 +531,7 @@ function MobileDrawer({ open, role, onClose }: { open: boolean; role: Role; onCl
       <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 40 }} />
       <div style={{ position: "fixed", left: 0, top: 0, bottom: 0, width: 260, zIndex: 50 }}>
         <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", justifyContent: "flex-end", padding: "0.75rem", background: "#0f1623" }}>
+          <div style={{ display: "flex", justifyContent: "flex-end", padding: "0.75rem", background: "#391b96" }}>
             <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.5)", display: "flex" }}>
               <X size={18} />
             </button>
