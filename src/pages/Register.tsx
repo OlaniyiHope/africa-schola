@@ -93,7 +93,8 @@ const handleSubmit = async (e: React.FormEvent) => {
       username: formData.username.trim(),
       email:    formData.email.trim().toLowerCase(),
       password: formData.password,
-      role:     "researcher", // default — onboarding will set the real role
+        role:     "researcher",
+      // default — onboarding will set the real role
     });
 
     // AuthContext already saved token + user to localStorage
