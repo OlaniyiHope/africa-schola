@@ -151,6 +151,11 @@ import Communitys from "./pages/dashboard/Professional/Communitys";
 import ProfLecture from "./pages/dashboard/Professional/ProfLecture";
 import InstOver from "./pages/dashboard/Professional/InstOver";
 import Curriculums from "./pages/dashboard/Professional/Curriculum";
+import ProTrans from "./pages/dashboard/Professional/ProTrans";
+import ProAd from "./pages/dashboard/Professional/ProAd";
+import Studys from "./pages/dashboard/Professional/Study";
+import ProMessage from "./pages/dashboard/Professional/ProMessage";
+import MyCasess from "./pages/dashboard/Professional/MyCases";
 
 const queryClient = new QueryClient();
 
@@ -378,14 +383,14 @@ const App = () => (
               <Route path="/dashboard/professional/community/activity"       element={<P><CommunityMyActivityPage /></P>} />
 
               {/* Academic Advisory */}
-              <Route path="/dashboard/professional/advisory"                 element={<P><AdvisoryOverviewPage /></P>} />
-              <Route path="/dashboard/professional/advisory/transcripts"     element={<P><TranscriptRequestsPage /></P>} />
+              <Route path="/dashboard/professional/advisory"                 element={<P><ProAd /></P>} />
+              <Route path="/dashboard/professional/advisory/transcripts"     element={<P><ProTrans /></P>} />
               <Route path="/dashboard/professional/advisory/degree"          element={<P><DegreeAdvisoryPage /></P>} />
-              <Route path="/dashboard/professional/advisory/study-africa"    element={<P><StudyInAfricaPage /></P>} />
+              <Route path="/dashboard/professional/advisory/study-africa"    element={<P><Studys /></P>} />
               <Route path="/dashboard/professional/advisory/pathways"        element={<P><AcademicPathwaysPage /></P>} />
-              <Route path="/dashboard/professional/advisory/cases"           element={<P><MyCasesPage /></P>} />
+              <Route path="/dashboard/professional/advisory/cases"           element={<P><MyCasess /></P>} />
               <Route path="/dashboard/professional/advisory/documents"       element={<P><DocumentUploadsPage /></P>} />
-
+             <Route path="/dashboard/professional/messages"                 element={<P><ProMessage /></P>} />
               {/* Intelligence */}
               <Route path="/dashboard/professional/intelligence/generate-paper" element={<P><GeneratePapers /></P>} />
               <Route path="/dashboard/professional/intelligence/explorer"    element={<P><DatasetExplorer /></P>} />
