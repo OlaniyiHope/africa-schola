@@ -148,6 +148,9 @@ import GeneratePaperss from "./pages/dashboard/Professional/GeneratePaperss";
 import Opportunity from "./pages/dashboard/Professional/Opportunity";
 import Directorys from "./pages/dashboard/Professional/Directory";
 import Communitys from "./pages/dashboard/Professional/Communitys";
+import ProfLecture from "./pages/dashboard/Professional/ProfLecture";
+import InstOver from "./pages/dashboard/Professional/InstOver";
+import Curriculums from "./pages/dashboard/Professional/Curriculum";
 
 const queryClient = new QueryClient();
 
@@ -354,7 +357,7 @@ const App = () => (
               <Route path="/dashboard/professional/network/engagements"    element={<P><Engagement /></P>} />
 
               {/* Institutions */}
-              <Route path="/dashboard/professional/institutions"                    element={<P><InstitutionalPartnershipsOverview /></P>} />
+              <Route path="/dashboard/professional/institutions"                    element={<P><InstOver /></P>} />
               <Route path="/dashboard/professional/institutions/partnerships"       element={<P><PartnershipRequestsPage /></P>} />
               <Route path="/dashboard/professional/institutions/collaboration"      element={<P><ResearchCollaborationPage /></P>} />
               <Route path="/dashboard/professional/institutions/advisory"           element={<P><AdvisorySupportPage /></P>} />
@@ -367,6 +370,7 @@ const App = () => (
 
 <Route path="/dashboard/professional/publishing/subscription"            element={<P><SubscriptionPages /></P>} />
  <Route path="/dashboard/professional/network/directory"      element={<P><Directorys /></P>} />
+  <Route path="/dashboard/professional/institutions/curriculum"             element={<P><Curriculums /></P>} />
               {/* Community */}
               <Route path="/dashboard/professional/community"                element={<P><Communitys /></P>} />
               <Route path="/dashboard/professional/community/discussions"    element={<P><CommunityDiscussionsPage /></P>} />
@@ -391,6 +395,7 @@ const App = () => (
 <Route path="/dashboard/professional/instrument-studio/create"                  element={<P><InstrumentStudio /></P>} />
 <Route path="/dashboard/professional/instrument-studio/paper-generator"         element={<P><SavedPapers /></P>} />
 <Route path="/dashboard/professional/instrument-studio/slide-builder"           element={<P><AISlideBuilder /></P>} />
+<Route path="/dashboard/professional/institutions/lecturer-requests"      element={<P><ProfLecture /></P>} />
               {/* Billing */}
               <Route path="/dashboard/professional/billing"                  element={<P><BillingPage /></P>} />
               <Route path="/dashboard/professional/billing/credits"          element={<P><BillingCreditsPage /></P>} />
