@@ -65,7 +65,7 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
                 <Search className="h-4 w-4" /> Browse Academics
               </Button>
             </Link>
-            <Link to="/dashboard/network/opportunities">
+            <Link to="/dashboard/professional/network/opportunities">
               <Button className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground">
                 <Plus className="h-4 w-4" /> Post Opportunity
               </Button>

@@ -145,6 +145,7 @@ import SubscriptionPages from "./pages/dashboard/Professional/SubscriptionPage";
 import MyPaperss from "./pages/dashboard/Professional/MyPaperss";
 import SubmitManuscripts from "./pages/dashboard/Professional/SubmitManuscripts";
 import GeneratePaperss from "./pages/dashboard/Professional/GeneratePaperss";
+import Opportunity from "./pages/dashboard/Professional/Opportunity";
 
 const queryClient = new QueryClient();
 
@@ -360,6 +361,7 @@ const App = () => (
   <Route path="/dashboard/professional/intelligence/generate-paper" element={<P><GeneratePaperss /></P>} />
               {/* Library */}
               <Route path="/dashboard/professional/library" element={<P><Librarys /></P>} />
+                 <Route path="/dashboard/professional/network/opportunities"  element={<P><Opportunity /></P>} />
 
 <Route path="/dashboard/professional/publishing/subscription"            element={<P><SubscriptionPages /></P>} />
               {/* Community */}
