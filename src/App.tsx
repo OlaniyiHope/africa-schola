@@ -156,6 +156,7 @@ import ProAd from "./pages/dashboard/Professional/ProAd";
 import Studys from "./pages/dashboard/Professional/Study";
 import ProMessage from "./pages/dashboard/Professional/ProMessage";
 import MyCasess from "./pages/dashboard/Professional/MyCases";
+import Demo from "./pages/Demo";
 
 const queryClient = new QueryClient();
 
@@ -205,6 +206,7 @@ const App = () => (
               <Route path="/" element={<HomePage />} />
               <Route path="/lab" element={<LabRegister />} />
               <Route path="/publeesh/pricing" element={<PricingPage />} />
+              <Route path="/publeesh/institutional-demo" element={<Demo />} />
               <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
               <Route path="/register" element={<Register />} />
 

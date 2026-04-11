@@ -851,7 +851,7 @@ export default function Publeesh() {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
                   <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
-                    <Link to="/publications">
+                    <Link to="/login">
                       Access Research Intelligence
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
@@ -862,7 +862,7 @@ export default function Publeesh() {
                     className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
                     asChild
                   >
-                    <Link to="/publishing/subscribe">Subscribe to Publeesh Ai</Link>
+                    <Link to="/publeesh/pricing">Subscribe to Publeesh Ai</Link>
                   </Button>
                   <Button
                     size="lg"
@@ -870,7 +870,7 @@ export default function Publeesh() {
                     className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
                     asChild
                   >
-                    <Link to="/advisory">Request Institutional Access</Link>
+                    <Link to="/instituitional-access">Request Institutional Access</Link>
                   </Button>
                 </div>
 
