@@ -870,7 +870,7 @@ export default function Publeesh() {
                     className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
                     asChild
                   >
-                    <Link to="/advisory">Request Institutional Demo</Link>
+                    <Link to="/advisory">Request Institutional Access</Link>
                   </Button>
                 </div>
 
