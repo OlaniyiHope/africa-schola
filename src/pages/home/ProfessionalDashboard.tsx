@@ -409,7 +409,7 @@ export default function ProfessionalDashboard() {
                   <span className="font-medium text-foreground">{(subscription.dataset_credits_total - subscription.dataset_credits_used).toLocaleString()}</span>
                 </div>
               </div>
-              <Link to="/dashboard/billing">
+              <Link to="/dashboard/professional/publishing/subscription">
                 <Button size="sm" className="w-full text-xs">Manage Billing</Button>
               </Link>
             </div>
@@ -432,7 +432,7 @@ export default function ProfessionalDashboard() {
                   <span className="font-medium text-foreground">0</span>
                 </div>
               </div>
-              <Link to="/dashboard/billing">
+              <Link to="/dashboard/professional/publishing/subscription">
                 <Button variant="outline" size="sm" className="w-full text-xs border-orange-500 text-orange-500">Manage Billing</Button>
               </Link>
             </div>
