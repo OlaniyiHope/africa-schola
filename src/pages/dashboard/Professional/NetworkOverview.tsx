@@ -60,7 +60,7 @@ const role = (user?.role as "researcher" | "academic" | "professional") ?? "acad
             </p>
           </div>
           <div className="flex gap-2">
-            <Link to="/dashboard/network/directory">
+            <Link to="/dashboard/professional/network/directory">
               <Button variant="outline" className="gap-2">
                 <Search className="h-4 w-4" /> Browse Academics
               </Button>

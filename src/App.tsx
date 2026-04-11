@@ -146,6 +146,8 @@ import MyPaperss from "./pages/dashboard/Professional/MyPaperss";
 import SubmitManuscripts from "./pages/dashboard/Professional/SubmitManuscripts";
 import GeneratePaperss from "./pages/dashboard/Professional/GeneratePaperss";
 import Opportunity from "./pages/dashboard/Professional/Opportunity";
+import Directorys from "./pages/dashboard/Professional/Directory";
+import Communitys from "./pages/dashboard/Professional/Communitys";
 
 const queryClient = new QueryClient();
 
@@ -364,8 +366,9 @@ const App = () => (
                  <Route path="/dashboard/professional/network/opportunities"  element={<P><Opportunity /></P>} />
 
 <Route path="/dashboard/professional/publishing/subscription"            element={<P><SubscriptionPages /></P>} />
+ <Route path="/dashboard/professional/network/directory"      element={<P><Directorys /></P>} />
               {/* Community */}
-              <Route path="/dashboard/professional/community"                element={<P><CommunityPage /></P>} />
+              <Route path="/dashboard/professional/community"                element={<P><Communitys /></P>} />
               <Route path="/dashboard/professional/community/discussions"    element={<P><CommunityDiscussionsPage /></P>} />
               <Route path="/dashboard/professional/community/collaborations" element={<P><CommunityCollaborationsPage /></P>} />
               <Route path="/dashboard/professional/community/activity"       element={<P><CommunityMyActivityPage /></P>} />

@@ -198,6 +198,7 @@ import CommunityPreview from "./CommunityPreview";
 import { useSubscriptionContext } from "@/context/SubscriptionContext";
 import { useModuleUnlocksContext } from "@/context/ModuleUnlocksContext";
 import ResearchActivitySection from "../dashboard/ResearchActivitySection";
+import Preview from "../dashboard/Professional/Preview";
 
 
 
@@ -386,7 +387,7 @@ export default function ProfessionalDashboard() {
       {/* Community + Subscription */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
-          <CommunityPreview />
+          <Preview />
         </div>
         <div>
           {isActive && subscription ? (
