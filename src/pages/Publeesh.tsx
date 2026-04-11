@@ -676,7 +676,7 @@ export default function Publeesh() {
                 </ul>
                 <div className="flex flex-col gap-3">
                   <Button className="w-full bg-accent hover:bg-accent/90" asChild>
-                    <Link to="/publishing/subscribe">
+                    <Link to="/publeesh/pricing">
                       View Subscription Plans
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
