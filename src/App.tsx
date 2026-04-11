@@ -142,6 +142,9 @@ import Engagement from "./pages/dashboard/Professional/network/Engagement";
 import Librarys from "./pages/dashboard/Professional/library/Librarys";
 import LabRegister from "./pages/LabRegister";
 import SubscriptionPages from "./pages/dashboard/Professional/SubscriptionPage";
+import MyPaperss from "./pages/dashboard/Professional/MyPaperss";
+import SubmitManuscripts from "./pages/dashboard/Professional/SubmitManuscripts";
+import GeneratePaperss from "./pages/dashboard/Professional/GeneratePaperss";
 
 const queryClient = new QueryClient();
 
@@ -353,7 +356,8 @@ const App = () => (
               <Route path="/dashboard/professional/institutions/collaboration"      element={<P><ResearchCollaborationPage /></P>} />
               <Route path="/dashboard/professional/institutions/advisory"           element={<P><AdvisorySupportPage /></P>} />
               <Route path="/dashboard/professional/institutions/my-requests"        element={<P><MyInstitutionalRequestsPage /></P>} />
-
+  <Route path="/dashboard/professional/research/papers"       element={<P><MyPaperss /></P>} />
+  <Route path="/dashboard/professional/intelligence/generate-paper" element={<P><GeneratePaperss /></P>} />
               {/* Library */}
               <Route path="/dashboard/professional/library" element={<P><Librarys /></P>} />
 
@@ -388,7 +392,7 @@ const App = () => (
               <Route path="/dashboard/professional/billing/usage"            element={<P><BillingUsagePage /></P>} />
               <Route path="/dashboard/professional/billing/payment-methods"  element={<P><PaymentMethodsPage /></P>} />
               <Route path="/dashboard/professional/billing/invoices"         element={<P><BillingInvoicesPage /></P>} />
-
+  <Route path="/dashboard/professional/publishing/submit"      element={<P><SubmitManuscripts /></P>} />
               {/* Account */}
               <Route path="/dashboard/professional/account/profile"          element={<P><ProfilePage /></P>} />
               <Route path="/dashboard/professional/settings"         element={<P><Settings /></P>} />
