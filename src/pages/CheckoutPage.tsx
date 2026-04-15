@@ -256,7 +256,7 @@ const handlePay = async () => {
 
               {/* Line items */}
               {[
-                { label: "Article access", value: "₦15,000" },
+                { label: "Article access", value: "₦100" },
                 { label: "Tax",            value: "₦0.00" },
               ].map(({ label, value }) => (
                 <div key={label} style={{ display: "flex", justifyContent: "space-between", fontSize: "0.83rem", color: "#6b7280", marginBottom: "0.5rem" }}>
@@ -265,7 +265,7 @@ const handlePay = async () => {
               ))}
 
               <div style={{ borderTop: "1.5px solid #e5e7eb", marginTop: "0.75rem", paddingTop: "0.75rem", display: "flex", justifyContent: "space-between", fontWeight: 800, fontSize: "1rem", color: "#111827" }}>
-                <span>Total</span><span style={{ color: "#ea580c" }}>₦15,000</span>
+                <span>Total</span><span style={{ color: "#ea580c" }}>₦100</span>
               </div>
 
               {/* What you get */}
