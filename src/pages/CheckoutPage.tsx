@@ -989,19 +989,35 @@ export default function CheckoutPage() {
       setStep("paying");
       setErrMsg("");
 
-      const initRes = await fetch("/api/sch-initialize", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("as_token")}`,
-        },
-        body: JSON.stringify({
-          email: user.email,
-          articleId: publication.id,
-          articleTitle: publication.title,
-        }),
-      });
+      // const initRes = await fetch("/api/sch-initialize", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${localStorage.getItem("as_token")}`,
+      //   },
+      //   body: JSON.stringify({
+      //     email: user.email,
+      //     articleId: publication.id,
+      //     articleTitle: publication.title,
+      //   }),
+      // });
 
+
+      const initRes = await fetch(
+  `${import.meta.env.VITE_NODE_API_URL}/api/sch-initialize`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("as_token")}`,
+    },
+    body: JSON.stringify({
+      email: user.email,
+      articleId: publication.id,
+      articleTitle: publication.title,
+    }),
+  }
+);
       const initData = await initRes.json();
 
       if (!initData.success) {
@@ -1028,7 +1044,9 @@ export default function CheckoutPage() {
           clearInterval(pollTimer);
           setStep("paying");
           try {
-            const verRes = await fetch(`/api/sch/verify/${reference}`);
+           const verRes = await fetch(
+  `${import.meta.env.VITE_NODE_API_URL}/api/sch/verify/${reference}`
+);
             const verData = await verRes.json();
             if (verData.success) {
               addPurchased(publication.id); // ← mark as purchased
