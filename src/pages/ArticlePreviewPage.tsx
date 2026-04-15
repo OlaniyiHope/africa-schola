@@ -108,7 +108,7 @@ export default function ArticlePreviewPage() {
                     <p className="text-muted-foreground mb-6">
                       Purchase access to read the complete article including methodology, results, and discussion.
                     </p>
-                    <div className="text-3xl font-bold text-accent mb-2">₦15,000</div>
+                    <div className="text-3xl font-bold text-accent mb-2">₦100</div>
                     <p className="text-xs text-muted-foreground mb-6">
                       One-time payment · Instant access · PDF download included
                     </p>
