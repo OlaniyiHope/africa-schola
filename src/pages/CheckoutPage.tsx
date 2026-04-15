@@ -228,7 +228,7 @@ const handlePay = async () => {
               >
                 {step === "paying"
                   ? <><Loader2 size={18} style={{ animation: "spin 0.8s linear infinite" }} /> Opening secure payment...</>
-                  : <><Lock size={18} /> Pay ₦15,000 Securely</>
+                  : <><Lock size={18} /> Pay ₦100 Securely</>
                 }
               </button>
 
