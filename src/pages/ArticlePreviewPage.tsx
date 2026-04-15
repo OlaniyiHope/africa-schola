@@ -24,7 +24,9 @@ export default function ArticlePreviewPage() {
       setAccessLoading(false);
       return;
     }
-    fetch(`/api/sch/access?email=${encodeURIComponent(user.email)}&articleId=${publication.id}`)
+fetch(
+  `${import.meta.env.VITE_NODE_API_URL}/api/sch/access?email=${encodeURIComponent(user.email)}&articleId=${publication.id}`
+)
       .then(r => r.json())
       .then(data => setHasAccess(data.hasAccess || false))
       .catch(() => {})
