@@ -559,7 +559,8 @@ function PublicationGridCard({ publication, onCite }: { publication: Publication
           </div>
           <div className="flex gap-2 pt-2">
             <Button size="sm" variant="outline" className="flex-1" asChild>
-              <Link to={`/article?id=${publication.id}`}><FileText className="h-4 w-4 mr-1" />Read <Lock className="h-3 w-3 ml-1" /></Link>
+              {/* <Link to={`/article?id=${publication.id}`}><FileText className="h-4 w-4 mr-1" />Read <Lock className="h-3 w-3 ml-1" /></Link> */}
+              <Link to={`/article?id=${publication.id}`}><FileText className="h-4 w-4 mr-1" />Read</Link>
             </Button>
             <Button size="sm" variant="outline" className="flex-1" onClick={() => onCite(publication)}>
               <Quote className="h-4 w-4 mr-1" /> Cite
