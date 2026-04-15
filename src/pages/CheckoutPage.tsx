@@ -337,72 +337,79 @@ export default function CheckoutPage() {
   }, [user]);
 
   // ── Launch Paystack popup ──────────────────────────────────────────────────
-  const handlePay = async () => {
-    if (!user) return;
-    try {
-      setStep("paying");
-      setErrMsg("");
+ const handlePay = async () => {
+  if (!user) return;
+  try {
+    setStep("paying");
+    setErrMsg("");
 
-      await loadPaystack();
+    const initRes = await fetch("/api/sch-initialize", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("as_token")}`,
+      },
+      body: JSON.stringify({
+        email: user.email,
+        articleId: publication.id,
+        articleTitle: publication.title,
+      }),
+    });
 
-      const initRes = await fetch("/api/sch-initialize", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("as_token")}`,
-        },
-        body: JSON.stringify({
-          email: user.email,
-          articleId: publication.id,
-          articleTitle: publication.title,
-        }),
-      });
+    const initData = await initRes.json();
 
-      const initData = await initRes.json();
-
-      if (!initData.success) {
-        if (initData.alreadyPaid) { setStep("success"); return; }
-        throw new Error(initData.message || "Initialization failed");
-      }
-
-      const handler = (window as any).PaystackPop.setup({
-        key:      import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
-        email:    user.email,
-        amount:   150000,
-        currency: "NGN",
-        ref:      initData.data.reference,
-        metadata: { articleId: publication.id, articleTitle: publication.title },
-
-        onClose: () => {
-          setStep("review");
-        },
-
-        callback: (response: { reference: string }) => {
-          fetch(`/api/sch/verify/${response.reference}`)
-            .then(r => r.json())
-            .then(verData => {
-              if (verData.success) {
-                setStep("success");
-              } else {
-                setErrMsg(verData.message || "Verification failed");
-                setStep("error");
-              }
-            })
-            .catch(() => {
-              setErrMsg("Could not verify payment. Please refresh.");
-              setStep("error");
-            });
-        },
-      });
-
-      handler.openIframe();
-
-    } catch (e: any) {
-      setErrMsg(e.message || "Something went wrong");
-      setStep("error");
+    if (!initData.success) {
+      if (initData.alreadyPaid) { setStep("success"); return; }
+      throw new Error(initData.message || "Initialization failed");
     }
-  };
 
+    const { reference, authorizationUrl } = initData.data;
+
+    // ✅ Open Paystack checkout in a centered popup window
+    const width  = 500;
+    const height = 600;
+    const left   = window.screenX + (window.innerWidth  - width)  / 2;
+    const top    = window.screenY + (window.innerHeight - height) / 2;
+
+    const popup = window.open(
+      authorizationUrl,
+      "paystack-checkout",
+      `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
+    );
+
+    if (!popup) {
+      // Popup was blocked — fall back to same-tab redirect
+      window.location.href = authorizationUrl;
+      return;
+    }
+
+    // ✅ Poll for popup closure then verify payment
+    const pollTimer = setInterval(async () => {
+      if (popup.closed) {
+        clearInterval(pollTimer);
+        setStep("paying"); // show loading while verifying
+
+        try {
+          const verRes  = await fetch(`/api/sch/verify/${reference}`);
+          const verData = await verRes.json();
+
+          if (verData.success) {
+            setStep("success");
+          } else {
+            // Popup was closed without paying — go back to review
+            setStep("review");
+          }
+        } catch {
+          setStep("review");
+        }
+      }
+    }, 800);
+
+  } catch (e: any) {
+    setErrMsg(e.message || "Something went wrong");
+    setStep("error");
+  }
+};
   // ─── Success screen ──────────────────────────────────────────────────────
 
   if (step === "success") {
