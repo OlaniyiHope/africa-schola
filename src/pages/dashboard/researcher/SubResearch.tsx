@@ -12,7 +12,7 @@ import { Check, Star, Building2, Sparkles, CreditCard, Landmark, Smartphone, Loa
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
-import { useSubscriptionContext } from "./SubscriptionContext";
+import { useSubscriptionContext } from "../SubscriptionContext";
 
 // ─── Load Paystack inline script ──────────────────────────────────────────────
 function loadPaystack(): Promise<void> {
@@ -48,10 +48,10 @@ const plans = [
     highlight: false,
   },
   {
-    name: "Academic",
+    name: "Reseacher",
     price: "₦100",
     period: "/month",
-    description: "Full academic tools for individual academic.",
+    description: "Full researche tools for individual researcher.",
     features: [
       "25 Paper Credits",
       "25 Dataset Credits",
@@ -62,7 +62,7 @@ const plans = [
       "Priority support",
     ],
     cta: "Subscribe Now",
-    planKey: "Academic",
+    planKey: "researcher",
     amountKobo: 10000, // ₦25,000 in kobo
     highlight: true,
   },
@@ -86,7 +86,7 @@ const plans = [
   },
 ];
 
-export default function SubscriptionPage() {
+export default function SubResearch() {
   const { user } = useAuth();
   const role = (user?.role as "researcher" | "academic" | "professional") ?? "academic";
   const { subscription, refetch } = useSubscriptionContext();

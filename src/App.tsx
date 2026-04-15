@@ -157,6 +157,7 @@ import Studys from "./pages/dashboard/Professional/Study";
 import ProMessage from "./pages/dashboard/Professional/ProMessage";
 import MyCasess from "./pages/dashboard/Professional/MyCases";
 import Demo from "./pages/Demo";
+import SubResearch from "./pages/dashboard/researcher/SubResearch";
 
 const queryClient = new QueryClient();
 
@@ -251,7 +252,7 @@ const App = () => (
 <Route path="/dashboard/researcher/intelligence/hub"            element={<P><IntelligenceHub /></P>} />
 
 
-<Route path="/dashboard/researcher/publishing/subscription"            element={<P><SubscriptionPage /></P>} />
+<Route path="/dashboard/researcher/publishing/subscription"            element={<P><SubResearch /></P>} />
               {/* Network */}
               <Route path="/dashboard/researcher/network"                element={<P><NetworkOverviewPage /></P>} />
               <Route path="/dashboard/researcher/network/opportunities"  element={<P><OpportunitiesPage /></P>} />
