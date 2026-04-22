@@ -4,7 +4,9 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Mail, Lock, ArrowRight, Eye, EyeOff, AlertCircle } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { useAuth } from "@/context/AuthContext";
-
+// Add these imports at the top
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Login() {
   const navigate          = useNavigate();
   const location          = useLocation();
@@ -142,22 +144,68 @@ export default function Login() {
 //   }
 // };
 
+// const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
+//   setError("");
+
+//   if (!formData.email || !formData.password) {
+//     setError("Email and password are required.");
+//     return;
+//   }
+
+//   setIsLoading(true);
+
+//   try {
+//     // Use AuthContext login — it handles fetch + setUser + localStorage
+//     await login({ email: formData.email, password: formData.password });
+
+//     // Read user from localStorage (just set by AuthContext)
+//     const stored = localStorage.getItem("as_user");
+//     const userData = stored ? JSON.parse(stored) : null;
+
+//     const roleDashboardMap: Record<string, string> = {
+//       researcher:   "/dashboard/researcher",
+//       academic:     "/dashboard/academic",
+//       professional: "/dashboard/professional",
+//       student:      "/dashboard/student",
+//       institution:  "/dashboard/institution",
+//     };
+
+//     const intendedFrom = (location.state as any)?.from;
+//     let destination = "/onboarding";
+
+//     if (userData?.role && userData?.profileComplete) {
+//       destination = roleDashboardMap[userData.role] ?? "/dashboard/researcher";
+//     }
+
+//     if (intendedFrom && intendedFrom !== "/onboarding") {
+//       destination = intendedFrom;
+//     }
+
+//     navigate(destination, { replace: true });
+
+//   } catch (err: any) {
+//     setError(err?.message || "Unable to connect to the server. Please try again.");
+//   } finally {
+//     setIsLoading(false);
+//   }
+// };
+
+
+// In handleSubmit, replace setError(...) calls with toast.error(...)
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
-  setError("");
 
   if (!formData.email || !formData.password) {
-    setError("Email and password are required.");
+    toast.error("Email and password are required.");
     return;
   }
 
   setIsLoading(true);
 
   try {
-    // Use AuthContext login — it handles fetch + setUser + localStorage
     await login({ email: formData.email, password: formData.password });
 
-    // Read user from localStorage (just set by AuthContext)
     const stored = localStorage.getItem("as_user");
     const userData = stored ? JSON.parse(stored) : null;
 
@@ -180,16 +228,27 @@ const handleSubmit = async (e: React.FormEvent) => {
       destination = intendedFrom;
     }
 
+    toast.success("Signed in successfully!");
     navigate(destination, { replace: true });
 
   } catch (err: any) {
-    setError(err?.message || "Unable to connect to the server. Please try again.");
+    toast.error(err?.message || "Invalid email or password. Please try again.");
   } finally {
     setIsLoading(false);
   }
 };
+
   return (
     <div>
+         <ToastContainer
+      position="top-right"
+      autoClose={4000}
+      hideProgressBar={false}
+      newestOnTop
+      closeOnClick
+      pauseOnHover
+      theme="colored"
+    />
       <div style={{
         minHeight: "calc(100vh - 80px)", display: "flex", alignItems: "center",
         justifyContent: "center", padding: "2rem 1rem",

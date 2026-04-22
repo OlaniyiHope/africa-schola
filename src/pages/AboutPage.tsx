@@ -493,7 +493,7 @@ export default function AboutPage() {
                 asChild
               >
                 <Link to="/publishing/submit">
-                  Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                  Submit Manuscipt <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             </div>

@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAuth } from "@/context/AuthContext"; // ✅ adjust path to match yours
 
 import { Layout } from "@/components/layout";
 import {
@@ -25,6 +26,17 @@ const features = [
 ];
 
 export default function Start() {
+ const { user } = useAuth();
+  const navigate = useNavigate();
+
+  // ✅ Guard: redirect to login if not authenticated
+  const handlePropose = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/propose");
+    }
+  };
   return (
     <Layout>
      {/* Hero */}
@@ -39,8 +51,12 @@ export default function Start() {
             standards and African research priorities.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 text-base px-8">
-              <Link to="/propose">Propose a Journal</Link>
+             <Button
+              size="lg"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 text-base px-8"
+              onClick={handlePropose}
+            >
+              Propose a Journal
             </Button>
             <Button asChild variant="outline" size="lg" className="border-primary-foreground/30 text-accent hover:bg-primary-foreground/10">
               <Link to="/standards">View Publishing Standards</Link>
@@ -102,8 +118,12 @@ export default function Start() {
             <p>We support <strong className="text-foreground">Africa-centric, globally credible</strong> scholarship.</p>
           </div>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 px-8">
-              <Link to="/propose">Propose a Journal</Link>
+             <Button
+              size="lg"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 text-base px-8"
+              onClick={handlePropose}
+            >
+              Propose a Journal
             </Button>
             <Button asChild variant="outline" size="lg">
               <Link to="/standards">View Publishing Standards</Link>

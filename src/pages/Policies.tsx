@@ -145,14 +145,26 @@ export default function Policies() {
   const toggleRetract = (val: string) =>
     setRetractReasons(prev => prev.includes(val) ? prev.filter(r => r !== val) : [...prev, val]);
 
-  const handleContinue = () => {
-    setState(prev => ({
-      ...prev,
-      policiesComplete: true,
-      policies: { reviewType, license, embargo, refStyle, plagiarismTool, aiDisclosure, dataSharing, retractReasons, authorGuidelines, ethicsStatement },
-    }));
-    navigate("/submit-journal"); // adjust to your next step route
-  };
+const handleContinue = () => {
+  setState(prev => ({
+    ...prev,
+    policiesComplete: true,   // ✅ matches JournalState
+    policiesAccepted: true,   // ✅ keep existing field too
+    policies: {               // ✅ saves full policies object
+      reviewType,
+      license,
+      embargo,
+      refStyle,
+      plagiarismTool,
+      aiDisclosure,
+      dataSharing,
+      retractReasons,
+      authorGuidelines,
+      ethicsStatement,
+    },
+  }));
+  navigate("/submit-journal");
+};
 
   return (
     <Layout>
