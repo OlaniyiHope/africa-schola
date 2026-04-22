@@ -158,6 +158,8 @@ import ProMessage from "./pages/dashboard/Professional/ProMessage";
 import MyCasess from "./pages/dashboard/Professional/MyCases";
 import Demo from "./pages/Demo";
 import SubResearch from "./pages/dashboard/researcher/SubResearch";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -210,6 +212,8 @@ const App = () => (
               <Route path="/publeesh/institutional-demo" element={<Demo />} />
               <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
               <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
 
               {/* ── Onboarding ── */}
               <Route path="/onboarding" element={<P><Onboarding /></P>} />
