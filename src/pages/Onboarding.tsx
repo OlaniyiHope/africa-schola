@@ -30,9 +30,75 @@ const AFRICAN_COUNTRIES = [
   "Nigeria","Kenya","South Africa","Ghana","Ethiopia","Tanzania","Uganda","Rwanda",
   "Senegal","Côte d'Ivoire","Cameroon","Zimbabwe","Zambia","Mozambique","Angola",
   "Sudan","Egypt","Morocco","Tunisia","Algeria","Botswana","Namibia","Malawi",
-  "Mali","Niger","Burkina Faso","Guinea","Benin","Togo","Sierra Leone","Other",
+  "Mali","Niger","Burkina Faso","Guinea","Benin","Togo","Sierra Leone",
 ];
 
+const ALL_COUNTRIES = [
+  ...AFRICAN_COUNTRIES,
+  "United States","United Kingdom","Canada","Australia","Germany","France","Netherlands",
+  "Sweden","Norway","Denmark","Finland","Switzerland","Belgium","Austria","Italy",
+  "Spain","Portugal","Brazil","India","China","Japan","South Korea","Singapore",
+  "New Zealand","Ireland","Poland","Czech Republic","Hungary","Romania","Greece",
+  "Turkey","Israel","Saudi Arabia","UAE","Qatar","Pakistan","Bangladesh","Indonesia",
+  "Malaysia","Philippines","Vietnam","Thailand","Argentina","Chile","Colombia","Mexico",
+  "Other",
+].filter((c, i, arr) => arr.indexOf(c) === i).sort(); // dedupe + sort
+
+const UNIVERSITIES = [
+  // ── Nigeria ──
+  "University of Lagos","University of Ibadan","Obafemi Awolowo University",
+  "Ahmadu Bello University","University of Nigeria Nsukka","Lagos State University",
+  "Covenant University","University of Benin","Federal University of Technology Akure",
+  "Bayero University Kano","University of Port Harcourt","Nnamdi Azikiwe University",
+  "University of Ilorin","Ladoke Akintola University of Technology",
+  // ── Kenya ──
+  "University of Nairobi","Kenyatta University","Strathmore University",
+  "Moi University","Jomo Kenyatta University of Agriculture and Technology",
+  "Egerton University","Maseno University",
+  // ── South Africa ──
+  "University of Cape Town","University of the Witwatersrand","Stellenbosch University",
+  "University of Pretoria","University of KwaZulu-Natal","Rhodes University",
+  "University of Johannesburg","University of the Western Cape",
+  // ── Ghana ──
+  "University of Ghana","Kwame Nkrumah University of Science and Technology",
+  "Ashesi University","University of Cape Coast","Ghana Institute of Management and Public Administration",
+  // ── Ethiopia ──
+  "Addis Ababa University","Jimma University","Bahir Dar University",
+  // ── Tanzania ──
+  "University of Dar es Salaam","Sokoine University of Agriculture","Muhimbili University",
+  // ── Uganda ──
+  "Makerere University","Kampala International University","Uganda Christian University",
+  // ── Rwanda ──
+  "University of Rwanda","African Leadership University","Carnegie Mellon University Africa",
+  // ── Senegal ──
+  "Cheikh Anta Diop University","Université Gaston Berger",
+  // ── Cameroon ──
+  "University of Yaoundé I","University of Buea","University of Douala",
+  // ── Egypt ──
+  "Cairo University","American University in Cairo","Alexandria University",
+  "Ain Shams University","Assiut University",
+  // ── Morocco ──
+  "Mohammed V University","University of Hassan II","Al Akhawayn University",
+  // ── Algeria ──
+  "University of Algiers","University of Science and Technology Houari Boumediene",
+  // ── Tunisia ──
+  "University of Tunis","University of Sfax",
+  // ── Zimbabwe ──
+  "University of Zimbabwe","National University of Science and Technology Zimbabwe",
+  // ── Global top universities ──
+  "Harvard University","MIT","Stanford University","University of Oxford",
+  "University of Cambridge","Yale University","Princeton University",
+  "Columbia University","University of Chicago","Johns Hopkins University",
+  "UCL","Imperial College London","University of Edinburgh","King's College London",
+  "University of Toronto","McGill University","University of British Columbia",
+  "Australian National University","University of Melbourne","University of Sydney",
+  "ETH Zurich","University of Amsterdam","Leiden University","Delft University of Technology",
+  "National University of Singapore","Nanyang Technological University",
+  "Peking University","Tsinghua University","University of Tokyo",
+  "Seoul National University","University of São Paulo","UNAM Mexico",
+  "University of Delhi","Indian Institute of Technology Bombay",
+  "Indian Institute of Science","University of Cape Town (UCT)",
+].sort();
 const intentToRole: Record<string, UserRole> = {
   publeesh: "researcher",
   publish:  "academic",
@@ -68,18 +134,45 @@ function Card({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-function CountrySearch({ value, onChange }: { value: string; onChange: (v: string) => void }) {
-  const [query,  setQuery]  = useState("");
-  const [open,   setOpen]   = useState(false);
+function CountrySearch({
+  value, onChange, countries,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  countries: string[];
+}) {
+  const [query,       setQuery]       = useState("");
+  const [open,        setOpen]        = useState(false);
+  const [customMode,  setCustomMode]  = useState(false);
+  const [customValue, setCustomValue] = useState("");
 
-  const filtered = AFRICAN_COUNTRIES.filter(c =>
-    c.toLowerCase().startsWith(query.toLowerCase())
+  const filtered = countries.filter(c =>
+    c.toLowerCase().includes(query.toLowerCase())
   );
 
   const select = (country: string) => {
+    if (country === "Other") {
+      setCustomMode(true);
+      setQuery("Other");
+      setOpen(false);
+      onChange(""); // clear until they type
+      return;
+    }
+    setCustomMode(false);
+    setCustomValue("");
     onChange(country);
     setQuery(country);
     setOpen(false);
+  };
+
+  // If user clears the input, exit custom mode
+  const handleQueryChange = (val: string) => {
+    setQuery(val);
+    setOpen(true);
+    if (customMode && val !== "Other") {
+      setCustomMode(false);
+    }
+    onChange("");
   };
 
   return (
@@ -89,17 +182,19 @@ function CountrySearch({ value, onChange }: { value: string; onChange: (v: strin
         Country <span style={{ color: "#ef4444" }}>*</span>
       </label>
 
+      {/* Main search input */}
       <input
         type="text"
         placeholder="Type to search country..."
         value={query}
-        onChange={e => { setQuery(e.target.value); setOpen(true); onChange(""); }}
-        onFocus={() => setOpen(true)}
+        onChange={e => handleQueryChange(e.target.value)}
+        onFocus={() => { if (!customMode) setOpen(true); }}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
         style={{ ...inputStyle, borderColor: open ? "#ea580c" : "#e5e7eb" }}
       />
 
-      {open && filtered.length > 0 && (
+      {/* Dropdown */}
+      {open && !customMode && filtered.length > 0 && (
         <div style={{
           position: "absolute", top: "100%", left: 0, right: 0, zIndex: 50,
           background: "#fff", border: "1.5px solid #ea580c",
@@ -115,21 +210,24 @@ function CountrySearch({ value, onChange }: { value: string; onChange: (v: strin
                 padding: "0.6rem 0.875rem",
                 fontSize: "0.85rem",
                 cursor: "pointer",
-                color: c === value ? "#ea580c" : "#1f2937",
-                fontWeight: c === value ? 700 : 400,
+                color: c === "Other" ? "#6b7280" : c === value ? "#ea580c" : "#1f2937",
+                fontWeight: c === value ? 700 : c === "Other" ? 600 : 400,
+                fontStyle: c === "Other" ? "italic" : "normal",
                 background: c === value ? "rgba(234,88,12,0.06)" : "transparent",
+                borderTop: c === "Other" ? "1px solid #e5e7eb" : "none",
                 transition: "background 0.1s",
               }}
               onMouseEnter={e => (e.currentTarget.style.background = "rgba(234,88,12,0.06)")}
               onMouseLeave={e => (e.currentTarget.style.background = c === value ? "rgba(234,88,12,0.06)" : "transparent")}
             >
-              {c}
+              {c === "Other" ? "✏️  Other (specify below)" : c}
             </div>
           ))}
         </div>
       )}
 
-      {open && query.length > 0 && filtered.length === 0 && (
+      {/* No results */}
+      {open && !customMode && query.length > 0 && filtered.length === 0 && (
         <div style={{
           position: "absolute", top: "100%", left: 0, right: 0, zIndex: 50,
           background: "#fff", border: "1.5px solid #e5e7eb",
@@ -137,6 +235,215 @@ function CountrySearch({ value, onChange }: { value: string; onChange: (v: strin
           padding: "0.75rem", fontSize: "0.82rem", color: "#6b7280", textAlign: "center",
         }}>
           No country found for "{query}"
+        </div>
+      )}
+
+      {/* "Other" — custom input */}
+      {customMode && (
+        <div style={{ marginTop: "0.5rem" }}>
+          <input
+            type="text"
+            placeholder="Please specify your country..."
+            value={customValue}
+            autoFocus
+            onChange={e => {
+              setCustomValue(e.target.value);
+              onChange(e.target.value.trim()); // live update so canStep3 works
+            }}
+            style={{
+              ...inputStyle,
+              borderColor: customValue ? "#ea580c" : "#e5e7eb",
+              fontSize: "0.85rem",
+            }}
+            onFocus={e => (e.currentTarget.style.borderColor = "#ea580c")}
+            onBlur={e => (e.currentTarget.style.borderColor = customValue ? "#ea580c" : "#e5e7eb")}
+          />
+          <p style={{ fontSize: "0.7rem", color: "#6b7280", margin: "0.3rem 0 0" }}>
+            Not in the list? Type your country above.{" "}
+            <span
+              style={{ color: "#ea580c", cursor: "pointer", fontWeight: 600 }}
+              onClick={() => { setCustomMode(false); setQuery(""); setCustomValue(""); onChange(""); }}
+            >
+              ← Back to list
+            </span>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function UniversitySearch({
+  value, onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [query,      setQuery]      = useState("");
+  const [open,       setOpen]       = useState(false);
+  const [customMode, setCustomMode] = useState(false);
+
+  // Only show dropdown when user has typed at least 2 chars
+  const filtered = query.length >= 2
+    ? UNIVERSITIES.filter(u => u.toLowerCase().includes(query.toLowerCase())).slice(0, 8)
+    : [];
+
+  const select = (uni: string) => {
+    if (uni === "__other__") {
+      setCustomMode(true);
+      setOpen(false);
+      return;
+    }
+    onChange(uni);
+    setQuery(uni);
+    setOpen(false);
+    setCustomMode(false);
+  };
+
+  const handleChange = (val: string) => {
+    setQuery(val);
+    setOpen(true);
+    setCustomMode(false);
+    onChange(val); // allow free-typed value to pass through
+  };
+
+  const reset = () => {
+    setQuery(""); setOpen(false); setCustomMode(false); onChange("");
+  };
+
+  return (
+    <div style={{ marginBottom: "1rem", position: "relative" }}>
+      <label style={labelStyle}>
+        <School size={11} style={{ display: "inline", marginRight: 4 }} />
+        Institution{" "}
+        <span style={{ fontSize: "0.69rem", fontWeight: 400, textTransform: "none", color: "#6b7280" }}>(Optional)</span>
+      </label>
+
+      <div style={{ position: "relative" }}>
+        <input
+          type="text"
+          placeholder="Search your university..."
+          value={query}
+          onChange={e => handleChange(e.target.value)}
+          onFocus={() => { if (query.length >= 2) setOpen(true); }}
+          onBlur={() => setTimeout(() => setOpen(false), 150)}
+          style={{
+            ...inputStyle,
+            borderColor: open ? "#ea580c" : "#e5e7eb",
+            paddingRight: query ? "2.25rem" : "0.875rem",
+          }}
+          onFocusCapture={e => (e.target.style.borderColor = "#ea580c")}
+        />
+        {/* Clear button */}
+        {query && (
+          <button
+            type="button"
+            onMouseDown={reset}
+            style={{
+              position: "absolute", right: "0.625rem", top: "50%",
+              transform: "translateY(-50%)", background: "none", border: "none",
+              cursor: "pointer", color: "#9ca3af", fontSize: "1rem", lineHeight: 1,
+              padding: 0,
+            }}
+          >×</button>
+        )}
+      </div>
+
+      {/* Hint */}
+      {query.length < 2 && !open && (
+        <p style={{ fontSize: "0.68rem", color: "#9ca3af", margin: "0.25rem 0 0" }}>
+          Type at least 2 characters to search
+        </p>
+      )}
+
+      {/* Dropdown */}
+      {open && filtered.length > 0 && (
+        <div style={{
+          position: "absolute", top: "100%", left: 0, right: 0, zIndex: 50,
+          background: "#fff", border: "1.5px solid #ea580c",
+          borderTop: "none", borderRadius: "0 0 10px 10px",
+          maxHeight: 220, overflowY: "auto",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+        }}>
+          {filtered.map(u => (
+            <div
+              key={u}
+              onMouseDown={() => select(u)}
+              style={{
+                padding: "0.6rem 0.875rem", fontSize: "0.84rem",
+                cursor: "pointer", color: u === value ? "#ea580c" : "#1f2937",
+                fontWeight: u === value ? 700 : 400,
+                background: u === value ? "rgba(234,88,12,0.06)" : "transparent",
+                transition: "background 0.1s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "rgba(234,88,12,0.06)")}
+              onMouseLeave={e => (e.currentTarget.style.background = u === value ? "rgba(234,88,12,0.06)" : "transparent")}
+            >
+              {u}
+            </div>
+          ))}
+          {/* "Not listed" option always at bottom */}
+          <div
+            onMouseDown={() => select("__other__")}
+            style={{
+              padding: "0.6rem 0.875rem", fontSize: "0.82rem",
+              cursor: "pointer", color: "#6b7280", fontWeight: 600,
+              fontStyle: "italic", borderTop: "1px solid #f3f4f6",
+              background: "transparent", transition: "background 0.1s",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = "#f9fafb")}
+            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+          >
+            ✏️  My university isn't listed
+          </div>
+        </div>
+      )}
+
+      {/* No results + not-listed */}
+      {open && query.length >= 2 && filtered.length === 0 && (
+        <div style={{
+          position: "absolute", top: "100%", left: 0, right: 0, zIndex: 50,
+          background: "#fff", border: "1.5px solid #e5e7eb",
+          borderTop: "none", borderRadius: "0 0 10px 10px",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+        }}>
+          <div style={{ padding: "0.75rem", fontSize: "0.82rem", color: "#6b7280", textAlign: "center" }}>
+            No match for "{query}"
+          </div>
+          <div
+            onMouseDown={() => select("__other__")}
+            style={{
+              padding: "0.6rem 0.875rem", fontSize: "0.82rem",
+              cursor: "pointer", color: "#ea580c", fontWeight: 600,
+              borderTop: "1px solid #f3f4f6", textAlign: "center",
+              transition: "background 0.1s",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = "rgba(234,88,12,0.04)")}
+            onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+          >
+            ✏️  Enter my university manually
+          </div>
+        </div>
+      )}
+
+      {/* Manual entry mode */}
+      {customMode && (
+        <div style={{ marginTop: "0.5rem" }}>
+          <input
+            type="text"
+            placeholder="Type your university name..."
+            autoFocus
+            onChange={e => { setQuery(e.target.value); onChange(e.target.value.trim()); }}
+            style={{ ...inputStyle, borderColor: "#ea580c", fontSize: "0.85rem" }}
+          />
+          <p style={{ fontSize: "0.7rem", color: "#6b7280", margin: "0.3rem 0 0" }}>
+            <span
+              style={{ color: "#ea580c", cursor: "pointer", fontWeight: 600 }}
+              onClick={() => { setCustomMode(false); setQuery(""); onChange(""); }}
+            >
+              ← Back to search
+            </span>
+          </p>
         </div>
       )}
     </div>
@@ -327,20 +634,21 @@ export default function Onboarding() {
     <CountrySearch
       value={data.country}
       onChange={country => setData(prev => ({ ...prev, country }))}
+      countries={
+        // Academics/Lecturers → Africa only; Researchers & Professionals → global
+        intentToRole[data.intent!] === "academic"
+          ? [...AFRICAN_COUNTRIES, "Other"]
+          : ALL_COUNTRIES
+      }
     />
 
     <div style={{ marginBottom: "1rem" }}>
-      <label style={labelStyle}>
-        <School size={11} style={{ display: "inline", marginRight: 4 }} />
-        Institution{" "}
-        <span style={{ fontSize: "0.69rem", fontWeight: 400, textTransform: "none", color: "#6b7280" }}>(Optional)</span>
-      </label>
-      <input type="text" placeholder="e.g. University of Lagos" value={data.institution}
-        onChange={e => setData(prev => ({ ...prev, institution: e.target.value }))}
-        style={inputStyle}
-        onFocus={e => (e.target.style.borderColor = "#ea580c")}
-        onBlur={e => (e.target.style.borderColor = "#e5e7eb")}
-      />
+    
+    {/* REPLACE this entire div block: */}
+<UniversitySearch
+  value={data.institution}
+  onChange={institution => setData(prev => ({ ...prev, institution }))}
+/>
     </div>
 
     <div style={{ marginBottom: "1.25rem" }}>
