@@ -19,20 +19,43 @@ export default function ArticlePreviewPage() {
   const [accessLoading, setAccessLoading] = useState(true);
 
   // On mount: check if this user already has paid access
-  useEffect(() => {
-    if (!user?.email || !publication?.id) {
-      setAccessLoading(false);
-      return;
-    }
-fetch(
-  `${import.meta.env.VITE_NODE_API_URL}/api/sch/access?email=${encodeURIComponent(user.email)}&articleId=${publication.id}`
-)
-      .then(r => r.json())
-      .then(data => setHasAccess(data.hasAccess || false))
-      .catch(() => {})
-      .finally(() => setAccessLoading(false));
-  }, [user?.email, publication?.id]);
+// Replace your existing useEffect with this:
+useEffect(() => {
+  if (!publication?.id) {
+    setAccessLoading(false);
+    return;
+  }
 
+  // 1. Check localStorage first (instant — set by PublicationsAccess page after payment)
+  const localKey = `article_access_${publication.id}`;
+  const localAccess = localStorage.getItem(localKey);
+  if (localAccess) {
+    setHasAccess(true);
+    setAccessLoading(false);
+    return;
+  }
+
+  // 2. No local cache → check backend (for returning users on a new device/browser)
+  if (!user?.email) {
+    setAccessLoading(false);
+    return;
+  }
+
+  fetch(
+    `${import.meta.env.VITE_NODE_API_URL}/api/sch/access?email=${encodeURIComponent(user.email)}&articleId=${publication.id}`
+  )
+    .then(r => r.json())
+    .then(data => {
+      if (data.hasAccess) {
+        setHasAccess(true);
+        // Cache it so future visits are instant
+        localStorage.setItem(localKey, JSON.stringify({ grantedAt: data.grantedAt }));
+      }
+    })
+    .catch(() => {})
+    .finally(() => setAccessLoading(false));
+
+}, [user?.email, publication?.id]);
   const handlePurchaseClick = () => {
     if (!user) {
       // Not logged in → redirect to login, come back after

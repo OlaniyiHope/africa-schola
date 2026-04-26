@@ -161,6 +161,7 @@ import SubResearch from "./pages/dashboard/researcher/SubResearch";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
+import PublicationsAccess from "./pages/PublicationsAccess";
 
 const queryClient = new QueryClient();
 
@@ -216,7 +217,7 @@ const App = () => (
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
-
+<Route path="/publications/access" element={<PublicationsAccess />} />
               {/* ── Onboarding ── */}
               <Route path="/onboarding" element={<P><Onboarding /></P>} />
 
