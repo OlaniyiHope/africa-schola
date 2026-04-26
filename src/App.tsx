@@ -160,6 +160,7 @@ import Demo from "./pages/Demo";
 import SubResearch from "./pages/dashboard/researcher/SubResearch";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import VerifyEmail from "./pages/VerifyEmail";
 
 const queryClient = new QueryClient();
 
@@ -207,6 +208,7 @@ const App = () => (
 
               {/* ── Public-only routes ── */}
               <Route path="/" element={<HomePage />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
               <Route path="/lab" element={<LabRegister />} />
               <Route path="/publeesh/pricing" element={<PricingPage />} />
               <Route path="/publeesh/institutional-demo" element={<Demo />} />

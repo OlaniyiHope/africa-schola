@@ -279,11 +279,11 @@ const handleSubmit = async (e: React.FormEvent) => {
 
             {/* Full Name */}
             <div>
-              <label style={labelStyle}>FULL NAME</label>
+              <label style={labelStyle}>USER NAME</label>
               <div style={inputWrap}>
                 <User size={15} style={iconStyle} />
                 <input
-                  type="text" placeholder="Your full name"
+                  type="text" placeholder="Your user name"
                   value={formData.username}
                   onChange={e => handleChange("username", e.target.value)}
                   required minLength={3} style={inputInner}

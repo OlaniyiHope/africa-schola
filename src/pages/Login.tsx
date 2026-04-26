@@ -208,7 +208,10 @@ const handleSubmit = async (e: React.FormEvent) => {
 
     const stored = localStorage.getItem("as_user");
     const userData = stored ? JSON.parse(stored) : null;
-
+  if (!userData) {
+      toast.error("Login failed. Please try again.");
+      return;
+    }
     const roleDashboardMap: Record<string, string> = {
       researcher:   "/dashboard/researcher",
       academic:     "/dashboard/academic",
