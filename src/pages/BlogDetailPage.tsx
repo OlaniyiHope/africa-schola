@@ -184,7 +184,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
+import { useState } from "react";
+import { toast } from "sonner";
 export default function BlogDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = blogPosts.find((p) => p.slug === slug);
@@ -205,6 +206,37 @@ export default function BlogDetailPage() {
     );
   }
 
+  const [bookmarked, setBookmarked] = useState(() => {
+  const saved = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+  return saved.includes(post.slug);
+});
+
+const handleBookmark = () => {
+  const saved = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+  let updated;
+  if (bookmarked) {
+    updated = saved.filter((s: string) => s !== post.slug);
+    toast.success("Removed from bookmarks");
+  } else {
+    updated = [...saved, post.slug];
+    toast.success("Article bookmarked!");
+  }
+  localStorage.setItem("bookmarks", JSON.stringify(updated));
+  setBookmarked(!bookmarked);
+};
+
+const handleShare = async () => {
+  if (navigator.share) {
+    await navigator.share({
+      title: post.title,
+      text: post.excerpt,
+      url: window.location.href,
+    });
+  } else {
+    await navigator.clipboard.writeText(window.location.href);
+    toast.success("Link copied to clipboard!");
+  }
+};
   return (
     <Layout>
       <style>{`
@@ -311,20 +343,25 @@ export default function BlogDetailPage() {
             </div>
 
             <div className="ml-auto flex items-center gap-3">
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full h-10 w-10"
-              >
-                <Share2 className="h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full h-10 w-10"
-              >
-                <Bookmark className="h-4 w-4" />
-              </Button>
+            <Button
+  variant="outline"
+  size="icon"
+  className="rounded-full h-10 w-10"
+  onClick={handleShare}
+>
+  <Share2 className="h-4 w-4" />
+</Button>
+
+<Button
+  variant="outline"
+  size="icon"
+  className={`rounded-full h-10 w-10 ${
+    bookmarked ? "bg-accent text-white border-accent" : ""
+  }`}
+  onClick={handleBookmark}
+>
+  <Bookmark className={`h-4 w-4 ${bookmarked ? "fill-current" : ""}`} />
+</Button>
             </div>
           </div>
         </div>
