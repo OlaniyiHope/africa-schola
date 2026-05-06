@@ -158,10 +158,35 @@ const prev = () => {
   setCurrentStep(s => Math.max(s - 1, 1));
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  const token = localStorage.getItem("as_token");
+  if (!token) {
+    alert("Please log in to submit.");
+    return;
+  }
+  try {
+    const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/institutions/submit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        ...formData,
+        supportTypes: selectedSupport,
+      }),
+    });
+    const data = await res.json();
+    if (!data.success) {
+      alert(data.message);
+      return;
+    }
     setIsSubmitted(true);
-  };
+  } catch (err) {
+    alert("Something went wrong. Please try again.");
+  }
+};
 
   // ── Success screen ──────────────────────────────────────────────────────────
   if (isSubmitted) {

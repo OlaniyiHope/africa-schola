@@ -387,7 +387,7 @@ const inputStyle: React.CSSProperties = {
             <div className="flex flex-row flex-wrap gap-3 items-center">
            <Button size="lg" className="bg-accent hover:bg-accent/90" asChild>
   <Link to="/instituition/apply">
-    Request Academic Support <ArrowRight className="ml-2 h-5 w-5" />
+    Request Institutional Support <ArrowRight className="ml-2 h-5 w-5" />
   </Link>
 </Button>
           

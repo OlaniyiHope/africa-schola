@@ -106,6 +106,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 4,
     title: "Digital Transformation in African Higher Education",
+    image: blog4,
     excerpt:
       "How technology is reshaping teaching, research, and administration in universities across the continent. We look at the shift towards hybrid learning models and the integration of AI in academic workflows.",
     content: `
@@ -131,6 +132,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 5,
     title: "The Role of Open Access in Sustainable Development",
+    image: blog5,
     excerpt:
       "Analyzing how free access to research accelerates progress towards UN Sustainable Development Goals in Africa. Case studies from various regional hubs show how open data can trigger localized industrial growth.",
     content: `
@@ -156,6 +158,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 6,
     title: "Funding Landscape for African Scholars: 2024 Report",
+    image: blog6,
     excerpt:
       "A comprehensive look at available grants, scholarships, and institutional funding opportunities currently available to African researchers. We break down the application success rates and strategic priorities of major donors.",
     content: `

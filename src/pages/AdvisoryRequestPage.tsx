@@ -146,11 +146,31 @@ export default function AdvisoryRequestPage() {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
-  const onSubmit = (data: FormData) => {
-    console.log("Advisory request submitted:", data);
+const onSubmit = async (data: FormData) => {
+  const token = localStorage.getItem("as_token");
+  if (!token) {
+    alert("Please log in to submit.");
+    return;
+  }
+  try {
+    const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/advisory/submit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
     setIsSubmitted(true);
-  };
-
+  } catch (err) {
+    alert("Something went wrong. Please try again.");
+  }
+};
   if (isSubmitted) {
     return (
       <Layout>

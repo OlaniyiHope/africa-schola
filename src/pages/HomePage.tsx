@@ -73,7 +73,7 @@ const pillars = [
     description:
       "A structured platform connecting verified academics to part-time lecturing roles, EdTech delivery, research and industry-linked projects, peer review and editorial work, curriculum development, and income-generating academic engagements.",
     linkLabel: "Learn More",
-    link: "/about#enablement",
+    link: "/network",
   },
 
 ];

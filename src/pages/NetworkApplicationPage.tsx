@@ -140,18 +140,38 @@ export default function NetworkApplicationPage() {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("Form submitted:", data);
-    setIsSubmitting(false);
+const onSubmit = async (data: FormData) => {
+  const token = localStorage.getItem("as_token");
+  if (!token) {
+    toast({ title: "Not logged in", description: "Please log in to apply.", variant: "destructive" });
+    return;
+  }
+  setIsSubmitting(true);
+  try {
+    const res = await fetch(`${import.meta.env.VITE_NODE_API_URL}/api/network/submit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json();
+    if (!result.success) {
+      toast({ title: "Submission failed", description: result.message, variant: "destructive" });
+      return;
+    }
     setIsSubmitted(true);
     toast({
       title: "Application Submitted!",
-      description: "We'll review your application and get back to you soon.",
+      description: `Your submission ID is ${result.submissionId}`,
     });
-  };
+  } catch (err) {
+    toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   if (isSubmitted) {
     return (
